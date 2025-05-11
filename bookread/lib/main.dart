@@ -1,6 +1,7 @@
+import 'package:bookread/profile.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const Profile());
 
 List<String> name = [
   "Hundred Loops of War",
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       home: Scaffold(
         drawer: Drawer(
+          backgroundColor: Colors.white,
           child: Column(
             children: [
               Expanded(
@@ -46,142 +48,102 @@ class MyApp extends StatelessWidget {
                       ListTile(
                         leading: const Icon(Icons.home),
                         title: const Text('Home'),
-                        onTap: () {
-                          // Navigate to Home Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.book),
                         title: const Text('My Books'),
-                        onTap: () {
-                          // Navigate to My Books Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.favorite),
                         title: const Text('Favorites'),
-                        onTap: () {
-                          // Navigate to Favorites Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.history),
                         title: const Text('History'),
-                        onTap: () {
-                          // Navigate to History Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.download),
                         title: const Text('Downloads'),
-                        onTap: () {
-                          // Navigate to Downloads Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.star),
                         title: const Text('Rate Us'),
-                        onTap: () {
-                          // Navigate to Rate Us Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.share),
                         title: const Text('Share'),
-                        onTap: () {
-                          // Navigate to Share Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.feedback),
                         title: const Text('Feedback'),
-                        onTap: () {
-                          // Navigate to Feedback Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.security),
                         title: const Text('Privacy Policy'),
-                        onTap: () {
-                          // Navigate to Privacy Policy Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.privacy_tip),
                         title: const Text('Terms of Service'),
-                        onTap: () {
-                          // Navigate to Terms of Service Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.language),
                         title: const Text('Language'),
-                        onTap: () {
-                          // Navigate to Language Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.notifications),
                         title: const Text('Notifications'),
-                        onTap: () {
-                          // Navigate to Notifications Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.account_circle),
                         title: const Text('Profile'),
-                        onTap: () {
-                          // Navigate to Profile Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.lock),
                         title: const Text('Change Password'),
-                        onTap: () {
-                          // Navigate to Change Password Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.bookmark),
                         title: const Text('Bookmarks'),
-                        onTap: () {
-                          // Navigate to Bookmarks Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.cloud_upload),
                         title: const Text('Upload Book'),
-                        onTap: () {
-                          // Navigate to Upload Book Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.settings),
                         title: const Text('Settings'),
-                        onTap: () {
-                          // Navigate to Settings Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.info),
                         title: const Text('About'),
-                        onTap: () {
-                          // Navigate to About Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.contact_page),
                         title: const Text('Contact Us'),
-                        onTap: () {
-                          // Navigate to Contact Us Page
-                        },
+                        onTap: () {},
                       ),
                       ListTile(
                         leading: const Icon(Icons.logout),
                         title: const Text('Logout'),
-                        onTap: () {
-                          // Handle Logout
-                        },
+                        onTap: () {},
                       ),
                     ],
                   ),
