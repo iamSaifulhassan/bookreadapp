@@ -1,7 +1,11 @@
-import 'package:bookread/profile.dart';
+import 'package:bookread/favourites.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const Profile());
+void main() {
+  runApp(
+    MaterialApp(home: FavouritesScreen(), debugShowCheckedModeBanner: false),
+  );
+}
 
 List<String> name = [
   "Hundred Loops of War",

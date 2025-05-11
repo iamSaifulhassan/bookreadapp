@@ -11,7 +11,6 @@ class Profile extends StatelessWidget {
         appBar: AppBar(title: const Text('Profile')),
         body: Column(
           children: [
-            // Profile Header
             Center(
               child: Container(
                 padding: const EdgeInsets.all(16.0),
@@ -35,7 +34,7 @@ class Profile extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Hours Read: 120', // Example hours read
+                          'Hours Read: 120',
                           style: TextStyle(fontSize: 14, color: Colors.black),
                         ),
                         Text(
