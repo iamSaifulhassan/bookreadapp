@@ -1,20 +1,21 @@
+import 'package:bookread/main.dart';
 import 'package:flutter/material.dart';
 
-class FavouritesScreen extends StatelessWidget {
-  final List<Map<String, String>> favouriteBooks = [
+class ToReadScreen extends StatelessWidget {
+  final List<Map<String, String>> toReadBooks = [
     {
       'title': 'Book 1',
-      'lastOpened': 'Last opened: 2 days ago',
+      'lastOpened': 'Added: 2 days ago',
       'image': 'https://via.placeholder.com/150',
     },
     {
       'title': 'Book 2',
-      'lastOpened': 'Last opened: 5 days ago',
+      'lastOpened': 'Added: 5 days ago',
       'image': 'https://via.placeholder.com/150',
     },
     {
       'title': 'Book 3',
-      'lastOpened': 'Last opened: 1 week ago',
+      'lastOpened': 'Added: 1 week ago',
       'image': 'https://via.placeholder.com/150',
     },
   ];
@@ -23,31 +24,35 @@ class FavouritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favourites'),
+        title: Text('To Read'),
         backgroundColor: Colors.deepPurple.shade400,
         foregroundColor: Colors.white,
       ),
+      drawer: const CustomDrawer(),
       body: ListView.builder(
-        itemCount: favouriteBooks.length,
+        itemCount: toReadBooks.length,
         itemBuilder: (context, index) {
-          final book = favouriteBooks[index];
+          final book = toReadBooks[index];
           return Card(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.network(
-                    book['image']!,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.broken_image, size: 100);
-                    },
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: Image.network(
+                      book['image']!,
+                      width: 80,
+                      height: 120, // Adjusted for a portrait-like aspect ratio
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(Icons.broken_image, size: 80);
+                      },
+                    ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 8),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,37 +64,31 @@ class FavouritesScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 4),
                         Text(
                           book['lastOpened']!,
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.bookmark),
+                              icon: Icon(Icons.check_circle_outline),
                               onPressed: () {
-                                // Handle unfavourite action
+                                // Handle mark as read action
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.watch_later_outlined),
+                              icon: Icon(Icons.delete_outline),
                               onPressed: () {
-                                // Handle read later action
+                                // Handle remove from list action
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.done_all),
+                              icon: Icon(Icons.add),
                               onPressed: () {
-                                // Handle read completely action
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.library_add_outlined),
-                              onPressed: () {
-                                // Handle collections action
+                                // Handle "Reading Now" action
                               },
                             ),
                             PopupMenuButton<String>(

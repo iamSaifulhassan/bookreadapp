@@ -1,10 +1,9 @@
 import 'package:bookread/favourites.dart';
+import 'package:bookread/toread.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MaterialApp(home: FavouritesScreen(), debugShowCheckedModeBanner: false),
-  );
+  runApp(MaterialApp(home: ToReadScreen(), debugShowCheckedModeBanner: false));
 }
 
 List<String> name = [
@@ -29,133 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       home: Scaffold(
-        drawer: Drawer(
-          backgroundColor: Colors.white,
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: const Text('Saif'),
-                        subtitle: const Text('ABC Dev.'),
-                        leading: const CircleAvatar(
-                          backgroundColor: Color.fromARGB(255, 44, 94, 4),
-                          child: Text(
-                            'S',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        leading: const Icon(Icons.home),
-                        title: const Text('Home'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.book),
-                        title: const Text('My Books'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.favorite),
-                        title: const Text('Favorites'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.history),
-                        title: const Text('History'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.download),
-                        title: const Text('Downloads'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.star),
-                        title: const Text('Rate Us'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.share),
-                        title: const Text('Share'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.feedback),
-                        title: const Text('Feedback'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.security),
-                        title: const Text('Privacy Policy'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.privacy_tip),
-                        title: const Text('Terms of Service'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.language),
-                        title: const Text('Language'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.notifications),
-                        title: const Text('Notifications'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.account_circle),
-                        title: const Text('Profile'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.lock),
-                        title: const Text('Change Password'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.bookmark),
-                        title: const Text('Bookmarks'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.cloud_upload),
-                        title: const Text('Upload Book'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.settings),
-                        title: const Text('Settings'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.info),
-                        title: const Text('About'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.contact_page),
-                        title: const Text('Contact Us'),
-                        onTap: () {},
-                      ),
-                      ListTile(
-                        leading: const Icon(Icons.logout),
-                        title: const Text('Logout'),
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        drawer: const CustomDrawer(),
         appBar: AppBar(
           title: const Text(
             'R.',
@@ -215,6 +88,138 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: Colors.white,
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListTile(
+                    title: const Text('Saif'),
+                    subtitle: const Text('ABC Dev.'),
+                    leading: const CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 44, 94, 4),
+                      child: Text('S', style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.home),
+                    title: const Text('Home'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.book),
+                    title: const Text('My Books'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.favorite),
+                    title: const Text('Favorites'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.history),
+                    title: const Text('History'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.download),
+                    title: const Text('Downloads'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.star),
+                    title: const Text('Rate Us'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.share),
+                    title: const Text('Share'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.feedback),
+                    title: const Text('Feedback'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.security),
+                    title: const Text('Privacy Policy'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.privacy_tip),
+                    title: const Text('Terms of Service'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.language),
+                    title: const Text('Language'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.notifications),
+                    title: const Text('Notifications'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.account_circle),
+                    title: const Text('Profile'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.lock),
+                    title: const Text('Change Password'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text('Bookmarks'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.cloud_upload),
+                    title: const Text('Upload Book'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text('Settings'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.info),
+                    title: const Text('About'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.contact_page),
+                    title: const Text('Contact Us'),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Logout'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
