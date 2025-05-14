@@ -45,7 +45,7 @@ class ToReadScreen extends StatelessWidget {
                     child: Image.network(
                       book['image']!,
                       width: 80,
-                      height: 120, // Adjusted for a portrait-like aspect ratio
+                      height: 150,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Icon(Icons.broken_image, size: 80);

@@ -1,9 +1,12 @@
+import 'package:bookread/downloads.dart';
 import 'package:bookread/favourites.dart';
 import 'package:bookread/toread.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(home: ToReadScreen(), debugShowCheckedModeBanner: false));
+  runApp(
+    MaterialApp(home: DownloadsScreen(), debugShowCheckedModeBanner: false),
+  );
 }
 
 List<String> name = [
