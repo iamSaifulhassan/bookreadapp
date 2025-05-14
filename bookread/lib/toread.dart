@@ -1,32 +1,38 @@
+import 'package:bookread/AppColors.dart';
 import 'package:bookread/main.dart';
 import 'package:flutter/material.dart';
 
 class ToReadScreen extends StatelessWidget {
   final List<Map<String, String>> toReadBooks = [
     {
-      'title': 'Book 1',
-      'lastOpened': 'Added: 2 days ago',
-      'image': 'https://via.placeholder.com/150',
+      'title': 'The Great Gatsby',
+      'lastOpened': 'Last opened: 2 days ago',
+      'image':
+          'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551144577i/18405._UX187_.jpg',
     },
     {
-      'title': 'Book 2',
-      'lastOpened': 'Added: 5 days ago',
-      'image': 'https://via.placeholder.com/150',
+      'title': 'To Kill a Mockingbird',
+      'lastOpened': 'Last opened: 5 days ago',
+      'image':
+          'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551144577i/18405._UX187_.jpg',
     },
     {
-      'title': 'Book 3',
-      'lastOpened': 'Added: 1 week ago',
-      'image': 'https://via.placeholder.com/150',
+      'title': '1984',
+      'lastOpened': 'Last opened: 1 week ago',
+      'image':
+          'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551144577i/18405._UX187_.jpg',
     },
   ];
+
+  ToReadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('To Read'),
-        backgroundColor: Colors.deepPurple.shade400,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.primary, // Using primary color for app bar
+        foregroundColor: AppColors.onPrimary, // White text on app bar
       ),
       drawer: const CustomDrawer(),
       body: ListView.builder(
@@ -34,25 +40,33 @@ class ToReadScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final book = toReadBooks[index];
           return Card(
-            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(12.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(8),
                     child: Image.network(
                       book['image']!,
                       width: 80,
-                      height: 150,
+                      height: 120,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
-                        return Icon(Icons.broken_image, size: 80);
+                        return Icon(
+                          Icons.broken_image,
+                          size: 80,
+                          color: AppColors.textSecondary,
+                        );
                       },
                     ),
                   ),
-                  SizedBox(width: 8),
+                  SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,33 +74,48 @@ class ToReadScreen extends StatelessWidget {
                         Text(
                           book['title']!,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
+                            color:
+                                AppColors
+                                    .textPrimary, // Text color from AppColors
                           ),
                         ),
-                        SizedBox(height: 4),
+                        SizedBox(height: 6),
                         Text(
                           book['lastOpened']!,
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.textSecondary,
+                          ), // Lighter text color
                         ),
-                        SizedBox(height: 8),
+                        SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.check_circle_outline),
+                              icon: Icon(
+                                Icons.check_circle_outline,
+                                color: AppColors.primary,
+                              ), // Primary color for icons
                               onPressed: () {
                                 // Handle mark as read action
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.delete_outline),
+                              icon: Icon(
+                                Icons.delete_outline,
+                                color: AppColors.error,
+                              ), // Red icon for delete
                               onPressed: () {
                                 // Handle remove from list action
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.add),
+                              icon: Icon(
+                                Icons.add,
+                                color: AppColors.success,
+                              ), // Green icon for add
                               onPressed: () {
                                 // Handle "Reading Now" action
                               },
@@ -110,7 +139,10 @@ class ToReadScreen extends StatelessWidget {
                                       child: Text('Edit'),
                                     ),
                                   ],
-                              icon: Icon(Icons.more_vert),
+                              icon: Icon(
+                                Icons.more_vert,
+                                color: AppColors.primary,
+                              ), // More options icon
                             ),
                           ],
                         ),

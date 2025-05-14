@@ -1,117 +1,147 @@
 import 'package:flutter/material.dart';
+import 'package:bookread/AppColors.dart';
 
 class FavouritesScreen extends StatelessWidget {
   final List<Map<String, String>> favouriteBooks = [
     {
-      'title': 'Book 1',
+      'title': 'The Great Gatsby',
       'lastOpened': 'Last opened: 2 days ago',
-      'image': 'https://via.placeholder.com/150',
+      'image':
+          'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551144577i/18405._UX187_.jpg',
     },
     {
-      'title': 'Book 2',
+      'title': 'To Kill a Mockingbird',
       'lastOpened': 'Last opened: 5 days ago',
-      'image': 'https://via.placeholder.com/150',
+      'image':
+          'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551144577i/18405._UX187_.jpg',
     },
     {
-      'title': 'Book 3',
+      'title': '1984',
       'lastOpened': 'Last opened: 1 week ago',
-      'image': 'https://via.placeholder.com/150',
+      'image':
+          'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1551144577i/18405._UX187_.jpg',
     },
   ];
 
+  FavouritesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favourites'),
-        backgroundColor: Colors.deepPurple.shade400,
-        foregroundColor: Colors.white,
+        title: const Text('Favourites'),
+        backgroundColor: theme.colorScheme.primary,
+        foregroundColor: theme.colorScheme.onPrimary,
+        elevation: 1,
       ),
       body: ListView.builder(
         itemCount: favouriteBooks.length,
         itemBuilder: (context, index) {
           final book = favouriteBooks[index];
           return Card(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            elevation: 2,
+            margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            color: theme.colorScheme.surface,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.network(
-                    book['image']!,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.broken_image, size: 100);
-                    },
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      book['image']!,
+                      width: 80,
+                      height: 100,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 80,
+                          height: 100,
+                          color: Colors.grey[300],
+                          child: const Icon(Icons.broken_image, size: 40),
+                        );
+                      },
+                    ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          book['title']!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 5),
+                        Text(book['title']!, style: theme.textTheme.titleLarge),
+                        const SizedBox(height: 4),
                         Text(
                           book['lastOpened']!,
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                          style: theme.textTheme.bodyMedium,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.bookmark),
-                              onPressed: () {
-                                // Handle unfavourite action
-                              },
+                              icon: const Icon(Icons.bookmark),
+                              onPressed: () {},
+                              tooltip: 'Unfavourite',
+                              color: theme.colorScheme.primary,
                             ),
                             IconButton(
-                              icon: Icon(Icons.watch_later_outlined),
-                              onPressed: () {
-                                // Handle read later action
-                              },
+                              icon: const Icon(Icons.watch_later_outlined),
+                              onPressed: () {},
+                              tooltip: 'Read Later',
+                              color: theme.colorScheme.secondary,
                             ),
                             IconButton(
-                              icon: Icon(Icons.done_all),
-                              onPressed: () {
-                                // Handle read completely action
-                              },
+                              icon: const Icon(Icons.done_all),
+                              onPressed: () {},
+                              tooltip: 'Mark as Read',
+                              color: theme.colorScheme.secondary,
                             ),
                             IconButton(
-                              icon: Icon(Icons.library_add_outlined),
-                              onPressed: () {
-                                // Handle collections action
-                              },
+                              icon: const Icon(Icons.library_add_outlined),
+                              onPressed: () {},
+                              tooltip: 'Add to Collection',
+                              color: theme.colorScheme.secondary,
                             ),
                             PopupMenuButton<String>(
                               onSelected: (value) {
-                                // Handle menu actions here
+                                switch (value) {
+                                  case 'shareFile':
+                                    // Add logic to share the file
+                                    break;
+                                  case 'moveToTrash':
+                                    // Add logic to move the file to trash
+                                    break;
+                                  case 'edit':
+                                    // Add logic to edit the file
+                                    break;
+                                  default:
+                                    // Handle unknown actions
+                                    break;
+                                }
                               },
                               itemBuilder:
                                   (context) => [
-                                    PopupMenuItem(
+                                    const PopupMenuItem(
                                       value: 'shareFile',
                                       child: Text('Share File'),
                                     ),
-                                    PopupMenuItem(
+                                    const PopupMenuItem(
                                       value: 'moveToTrash',
                                       child: Text('Move to Trash'),
                                     ),
-                                    PopupMenuItem(
+                                    const PopupMenuItem(
                                       value: 'edit',
                                       child: Text('Edit'),
                                     ),
                                   ],
-                              icon: Icon(Icons.more_vert),
+                              icon: const Icon(Icons.more_vert),
+                              color: theme.colorScheme.surface,
                             ),
                           ],
                         ),

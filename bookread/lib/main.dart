@@ -1,11 +1,27 @@
+import 'package:bookread/AppColors.dart';
+import 'package:bookread/Apptheme.dart';
+import 'package:bookread/Favourites.dart';
 import 'package:bookread/downloads.dart';
-import 'package:bookread/favourites.dart';
+import 'package:bookread/signin.dart';
+import 'package:bookread/signup.dart';
 import 'package:bookread/toread.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MaterialApp(home: DownloadsScreen(), debugShowCheckedModeBanner: false),
+    MaterialApp(
+      home: MyApp(), // Set the FavouritesScreen as the home screen
+      theme: AppTheme.lightTheme, // Use the light theme from AppTheme
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/signin': (context) => Signin(),
+        '/signup': (context) => Signup(),
+        '/favourites': (context) => FavouritesScreen(),
+        '/downloads': (context) => DownloadsScreen(),
+        '/toread': (context) => ToReadScreen(),
+        '/main': (context) => MyApp(),
+      },
+    ),
   );
 }
 
@@ -33,11 +49,10 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         drawer: const CustomDrawer(),
         appBar: AppBar(
-          title: const Text(
-            'R.',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          title: Center(
+            child: Image.asset('assets/images/App.png', height: 50),
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: AppColors.onPrimary,
         ),
         body: Column(
           children: [
