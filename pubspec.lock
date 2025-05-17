@@ -464,14 +464,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
-  phone_number:
-    dependency: "direct main"
-    description:
-      name: phone_number
-      sha256: "42cac4ca32146d83cc8a9c8432dc2d901d40334f0e2b02a3ec7d8237b80ebec3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   platform:
     dependency: transitive
     description:

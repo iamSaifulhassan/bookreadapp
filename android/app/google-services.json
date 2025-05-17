@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "395687345962",
+    "firebase_url": "https://thebookread-4a4f5-default-rtdb.firebaseio.com",
     "project_id": "thebookread-4a4f5",
     "storage_bucket": "thebookread-4a4f5.firebasestorage.app"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "395687345962-8n47s61kvfokr1bhp81k7km4knonqric.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.thebookread",
+            "certificate_hash": "ebb23b2bae04eac10ac4bdc6f9ee75c2f47823d9"
+          }
+        },
         {
           "client_id": "395687345962-s138js6776hqohu57b21tfod051jlkeb.apps.googleusercontent.com",
           "client_type": 3
