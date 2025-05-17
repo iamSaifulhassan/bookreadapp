@@ -45,7 +45,7 @@ class ToReadScreen extends StatelessWidget {
       ),
       drawer: const CustomDrawer(),
       body: Container(
-        color: colorScheme.background,
+        color: colorScheme.surface,
         child: ListView.builder(
           itemCount: toReadBooks.length,
           itemBuilder: (context, index) {
@@ -53,7 +53,7 @@ class ToReadScreen extends StatelessWidget {
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               elevation: 2,
-              color: colorScheme.surfaceVariant,
+              color: colorScheme.surfaceContainerHighest,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
                 side: BorderSide(

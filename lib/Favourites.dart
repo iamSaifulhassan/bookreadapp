@@ -38,7 +38,7 @@ class FavouritesScreen extends StatelessWidget {
       ),
       drawer: const CustomDrawer(), // Assuming you have a CustomDrawer widget),
       body: Container(
-        color: theme.colorScheme.background,
+        color: theme.colorScheme.surface,
         child: ListView.builder(
           itemCount: favouriteBooks.length,
           itemBuilder: (context, index) {
@@ -46,7 +46,7 @@ class FavouritesScreen extends StatelessWidget {
             return Card(
               elevation: 2,
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              color: theme.colorScheme.surfaceVariant,
+              color: theme.colorScheme.surfaceContainerHighest,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
                 side: BorderSide(

@@ -1,5 +1,7 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -46,11 +48,19 @@ class _SignupState extends State<Signup> {
     return null;
   }
 
-  void _handleSignUp() {
+  void _handleSignUp() async {
     if (_formKey.currentState!.validate()) {
+      final dbRef = FirebaseDatabase.instance.ref().child('users');
+      await dbRef.push().set({
+        'email': _emailController.text.trim(),
+        'phone': _phoneController.text.trim(),
+        'country': _selectedCountry,
+        'userType': _userType,
+      });
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Sign-up successful!')));
+      Navigator.pushNamed(context, '/signin');
     }
   }
 
@@ -487,8 +497,25 @@ class _SignupState extends State<Signup> {
                           // Sign In
                           Center(
                             child: GestureDetector(
-                              onTap:
-                                  () => Navigator.pushNamed(context, '/signin'),
+                              onTap: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  // Add user to Firebase Realtime Database
+                                  // (Assumes you have firebase_database and firebase_core set up)
+                                  final dbRef = FirebaseDatabase.instance
+                                      .ref()
+                                      .child('users');
+                                  await dbRef.push().set({
+                                    'email': _emailController.text.trim(),
+                                    'phone': _phoneController.text.trim(),
+                                    'country': _selectedCountry,
+                                    'userType': _userType,
+                                  });
+                                  Navigator.pushNamed(context, '/signin');
+                                } else {
+                                  // If form is not valid, just navigate (optional)
+                                  Navigator.pushNamed(context, '/signin');
+                                }
+                              },
                               child: const Text(
                                 'Already have an account? Sign In',
                                 style: TextStyle(

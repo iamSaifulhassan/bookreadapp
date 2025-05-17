@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Apptheme.dart'; // Import your theme if needed
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+
+// Import your theme if needed
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -39,14 +43,61 @@ class _SigninState extends State<Signin> {
     }
   }
 
+  Future<void> _handleGoogleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return; // User cancelled
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      Navigator.pushNamed(context, '/main');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Google sign-in successful!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Google sign-in failed: $e')));
+    }
+  }
+
+  Future<void> _handleFacebookSignIn() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+      if (result.status == LoginStatus.success) {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(result.accessToken!.token);
+        await FirebaseAuth.instance.signInWithCredential(
+          facebookAuthCredential,
+        );
+        Navigator.pushNamed(context, '/main');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Facebook sign-in successful!')),
+        );
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Facebook sign-in failed')));
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Facebook sign-in failed: $e')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final inputFillColor = const Color(0xFFF3F6FA);
 
-    bool _obscurePassword = true;
-    bool _rememberMe = false;
+    bool obscurePassword = true;
+    bool rememberMe = false;
 
     return StatefulBuilder(
       builder:
@@ -131,14 +182,14 @@ class _SigninState extends State<Signin> {
                                   fillColor: inputFillColor,
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      _obscurePassword
+                                      obscurePassword
                                           ? Icons.visibility_off
                                           : Icons.visibility,
                                       color: colorScheme.primary,
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        _obscurePassword = !_obscurePassword;
+                                        obscurePassword = !obscurePassword;
                                       });
                                     },
                                   ),
@@ -146,7 +197,7 @@ class _SigninState extends State<Signin> {
                                 style: theme.textTheme.bodyLarge?.copyWith(
                                   color: Colors.black87,
                                 ),
-                                obscureText: _obscurePassword,
+                                obscureText: obscurePassword,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Password is required';
@@ -159,7 +210,7 @@ class _SigninState extends State<Signin> {
                               Row(
                                 children: [
                                   Checkbox(
-                                    value: _rememberMe,
+                                    value: rememberMe,
                                     activeColor: colorScheme.primary,
                                     checkColor: colorScheme.onPrimary,
                                     side: BorderSide(
@@ -170,7 +221,7 @@ class _SigninState extends State<Signin> {
                                     ),
                                     onChanged: (value) {
                                       setState(() {
-                                        _rememberMe = value ?? false;
+                                        rememberMe = value ?? false;
                                       });
                                     },
                                   ),
@@ -232,9 +283,7 @@ class _SigninState extends State<Signin> {
                                   children: [
                                     // Google Button
                                     GestureDetector(
-                                      onTap: () {
-                                        // TODO: Implement Google sign-in
-                                      },
+                                      onTap: _handleGoogleSignIn,
                                       child: Container(
                                         width: 52,
                                         height: 52,
@@ -269,9 +318,7 @@ class _SigninState extends State<Signin> {
                                     const SizedBox(width: 24),
                                     // Facebook Button
                                     GestureDetector(
-                                      onTap: () {
-                                        // TODO: Implement Facebook sign-in
-                                      },
+                                      onTap: _handleFacebookSignIn,
                                       child: Container(
                                         width: 52,
                                         height: 52,

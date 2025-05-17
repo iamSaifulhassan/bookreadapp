@@ -1,6 +1,6 @@
 import 'package:bookread/main.dart';
 import 'package:flutter/material.dart';
-import 'Apptheme.dart'; // Import your theme if needed
+// Import your theme if needed
 
 class Profile extends StatelessWidget {
   const Profile({super.key});

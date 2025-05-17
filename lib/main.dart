@@ -1,4 +1,3 @@
-import 'package:bookread/AppColors.dart';
 import 'package:bookread/Apptheme.dart';
 import 'package:bookread/Favourites.dart';
 import 'package:bookread/Profile.dart';
@@ -7,8 +6,13 @@ import 'package:bookread/signin.dart';
 import 'package:bookread/signup.dart';
 import 'package:bookread/toread.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     MaterialApp(
       home: Signin(), // Set the FavouritesScreen as the home screen

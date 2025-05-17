@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "395687345962",
+    "project_id": "thebookread-4a4f5",
+    "storage_bucket": "thebookread-4a4f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395687345962:android:2dfb3964c9aa2816a2e853",
+        "android_client_info": {
+          "package_name": "com.example.thebookread"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395687345962-s138js6776hqohu57b21tfod051jlkeb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKWJ01U7n_ZpJhmi12n5OT8lN-ayGwf9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395687345962-s138js6776hqohu57b21tfod051jlkeb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "395687345962-jj5kfu3o28c1qi8lcsbr8cvqkgn3p7o3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.thebookread"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

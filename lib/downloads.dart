@@ -53,13 +53,13 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
       ),
       drawer: CustomDrawer(),
       body: Container(
-        color: colorScheme.background,
+        color: colorScheme.surface,
         child:
             _downloads.isEmpty
                 ? Center(
                   child: Text(
                     'No downloads found',
-                    style: TextStyle(color: colorScheme.onBackground),
+                    style: TextStyle(color: colorScheme.onSurface),
                   ),
                 )
                 : ListView.builder(

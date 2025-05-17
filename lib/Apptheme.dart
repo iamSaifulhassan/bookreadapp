@@ -14,8 +14,6 @@ class AppTheme {
       onSecondary: AppColors.onPrimary,
       error: AppColors.error,
       onError: AppColors.onError,
-      background: AppColors.backgroundLight,
-      onBackground: AppColors.onSurface,
       surface: AppColors.surface,
       onSurface: AppColors.onSurface,
     ),
@@ -64,8 +62,8 @@ class AppTheme {
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       side: BorderSide(color: AppColors.primary.withOpacity(0.35), width: 2),
-      fillColor: MaterialStatePropertyAll(AppColors.primary),
-      checkColor: MaterialStatePropertyAll(AppColors.onPrimary),
+      fillColor: WidgetStatePropertyAll(AppColors.primary),
+      checkColor: WidgetStatePropertyAll(AppColors.onPrimary),
     ),
     cardTheme: CardTheme(
       color: AppColors.surface,

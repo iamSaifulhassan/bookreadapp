@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bookread/AppColors.dart';
 
 class FavouritesScreen extends StatelessWidget {
   final List<Map<String, String>> favouriteBooks = [
