@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart';
 
 class GoogleSignInHelper {
-  static Future<UserCredential?> signInWithGoogle() async {
+  static Future<UserCredential?> signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       if (googleUser == null) return null; // User cancelled
@@ -12,7 +13,11 @@ class GoogleSignInHelper {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(
+        credential,
+      );
+      Navigator.pushNamed(context, '/main');
+      return userCredential;
     } catch (e) {
       rethrow;
     }

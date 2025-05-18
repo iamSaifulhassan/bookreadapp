@@ -18,7 +18,7 @@ class _SplashscreenState extends State<Splashscreen>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 400),
       vsync: this,
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);

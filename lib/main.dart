@@ -1,6 +1,7 @@
 import 'package:bookread/Apptheme.dart';
 import 'package:bookread/Favourites.dart';
 import 'package:bookread/Profile.dart';
+import 'package:bookread/Splashscreen.dart';
 import 'package:bookread/downloads.dart';
 import 'package:bookread/signin.dart';
 import 'package:bookread/signup.dart';
@@ -15,7 +16,7 @@ void main() async {
 
   runApp(
     MaterialApp(
-      home: Signin(), // Set the FavouritesScreen as the home screen
+      home: Splashscreen(), // Set the FavouritesScreen as the home screen
       theme: AppTheme.lightTheme, // Use the light theme from AppTheme
       debugShowCheckedModeBanner: false,
       routes: {

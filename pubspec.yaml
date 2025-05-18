@@ -39,10 +39,12 @@ dependencies:
   google_sign_in: ^6.2.1
   flutter_facebook_auth: ^6.1.1
   firebase_database: ^10.5.7
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.4.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -91,3 +93,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/App.png"
+  flutter_native_splash:
+    color: "#ffffff" # white background
+    image: assets/images/App_splash.png
+    android: true
+    ios: true
+    image_size: 600 # increase image size (default is 200, adjust as needed)
