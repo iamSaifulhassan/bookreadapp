@@ -56,7 +56,7 @@ class Profile extends StatelessWidget {
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 4.0,
                 ),
-                itemCount: 10, // Replace with the actual number of documents
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return Container(
                     padding: const EdgeInsets.all(8.0),

@@ -40,10 +40,7 @@ dependencies:
   flutter_facebook_auth: ^6.1.1
   firebase_database: ^10.5.7
   flutter_launcher_icons: ^0.14.3
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  flutter_bloc: ^9.1.1
   flutter_native_splash: ^2.4.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
