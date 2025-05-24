@@ -1,4 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- For Android 13+ (API 33+) -->
+
     <application
         android:label="thebookread"
         android:name="${applicationName}"

@@ -1,0 +1,13 @@
+// This file documents the PlatformFile constructor for file_picker 8.0.7
+// Source: https://pub.dev/documentation/file_picker/8.0.7/file_picker/PlatformFile-class.html
+//
+// PlatformFile({
+//   required String name,
+//   String? path,
+//   required int size,
+//   Uint8List? bytes,
+//   Stream<List<int>>? readStream,
+// })
+//
+// There is NO 'extension' named parameter in this version.
+// To get the extension, use file.name.split('.').last or similar logic.

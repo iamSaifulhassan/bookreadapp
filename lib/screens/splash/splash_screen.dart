@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../home/home_screen.dart'; // Import HomeScreen instead of PermissionGate
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,7 +14,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, '/signin');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
     });
   }
 

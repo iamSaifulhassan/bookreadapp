@@ -16,16 +16,14 @@ import 'package:bookread/screens/favourites/favourites_screen.dart';
 import 'package:bookread/screens/toread/toread_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  final user = FirebaseAuth.instance.currentUser;
   runApp(
     MaterialApp(
-      home: user != null ? const HomeScreen() : SplashScreen(),
+      home: SplashScreen(),
       theme: AppTheme.lightTheme, // Uses app-wide theme and color scheme
       debugShowCheckedModeBanner: false,
       routes: {

@@ -65,7 +65,7 @@ class AppTheme {
       fillColor: WidgetStatePropertyAll(AppColors.primary),
       checkColor: WidgetStatePropertyAll(AppColors.onPrimary),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: AppColors.surface,
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
