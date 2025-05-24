@@ -1,3 +1,4 @@
+import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -35,6 +36,7 @@ class FavouritesScreen extends StatelessWidget {
         foregroundColor: theme.colorScheme.onPrimary,
         elevation: 1,
       ),
+      drawer: CustomDrawer(),
       body: ListView.builder(
         itemCount: favouriteBooks.length,
         itemBuilder: (context, index) {
