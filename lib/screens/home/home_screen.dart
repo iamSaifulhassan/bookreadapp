@@ -7,6 +7,9 @@ import 'dart:io';
 // import 'package:pdf_render/pdf_render_widgets.dart';
 import 'dart:typed_data';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
+import '../book_content_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? defaultFolderPath;
@@ -25,8 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController? _dirController;
   static const String _folderPrefKey = 'bookread_folder_path';
   static const String _pickedFilesPrefKey = 'picked_book_files';
+  static const String _favouritesPrefKey = 'favourite_book_files';
+  static const String _readLaterPrefKey = 'readlater_book_files';
   bool _isGrid = false; // Add to state
   bool _loading = true;
+  bool _permissionDenied = false;
+  Set<String> favouritePaths = {};
+  Set<String> readLaterPaths = {};
 
   @override
   void initState() {
@@ -36,10 +44,108 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _initAll() async {
-    setState(() => _loading = true);
+    setState(() {
+      _loading = true;
+      _permissionDenied = false;
+    });
+
+    // Request appropriate storage permissions based on Android version
+    bool hasPermission = await _requestStoragePermission();
+
+    if (!hasPermission) {
+      setState(() {
+        _loading = false;
+        _permissionDenied = true;
+      });
+      return;
+    }
+
     await _loadSavedFolderPath();
     await _loadPickedBookFiles();
+    await _loadFavourites();
+    await _loadReadLater();
     setState(() => _loading = false);
+  }
+
+  Future<bool> _requestStoragePermission() async {
+    // Check Android version and request appropriate permissions
+    try {
+      // For Android 11+ (API 30+), we need MANAGE_EXTERNAL_STORAGE
+      if (await Permission.manageExternalStorage.isDenied) {
+        final status = await Permission.manageExternalStorage.request();
+        if (status.isGranted) return true;
+      }
+
+      // For Android 13+ (API 33+), request media permissions
+      if (await Permission.photos.isDenied) {
+        await Permission.photos.request();
+      }
+
+      // Fallback to traditional storage permission
+      final storageStatus = await Permission.storage.request();
+      if (storageStatus.isGranted) return true;
+
+      // Check if any permission is granted
+      return await Permission.manageExternalStorage.isGranted ||
+          await Permission.storage.isGranted ||
+          await Permission.photos.isGranted;
+    } catch (e) {
+      print('Permission error: $e');
+      // Fallback to basic storage permission
+      final status = await Permission.storage.request();
+      return status.isGranted;
+    }
+  }
+
+  Future<void> _loadFavourites() async {
+    final prefs = await SharedPreferences.getInstance();
+    favouritePaths = (prefs.getStringList(_favouritesPrefKey) ?? []).toSet();
+    setState(() {});
+  }
+
+  Future<void> _saveFavourites() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_favouritesPrefKey, favouritePaths.toList());
+  }
+
+  Future<void> _loadReadLater() async {
+    final prefs = await SharedPreferences.getInstance();
+    readLaterPaths = (prefs.getStringList(_readLaterPrefKey) ?? []).toSet();
+    setState(() {});
+  }
+
+  Future<void> _saveReadLater() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_readLaterPrefKey, readLaterPaths.toList());
+  }
+
+  Future<void> _toggleFavourite(String? path) async {
+    if (path == null) return;
+    setState(() {
+      if (favouritePaths.contains(path)) {
+        favouritePaths.remove(path);
+      } else {
+        favouritePaths.add(path);
+      }
+    });
+    await _saveFavourites();
+  }
+
+  Future<void> _toggleReadLater(String? path) async {
+    if (path == null) return;
+    setState(() {
+      if (readLaterPaths.contains(path)) {
+        readLaterPaths.remove(path);
+      } else {
+        readLaterPaths.add(path);
+      }
+    });
+    await _saveReadLater();
+  }
+
+  Future<void> _shareFile(String? path) async {
+    if (path == null) return;
+    await Share.shareXFiles([XFile(path)]);
   }
 
   Future<void> _loadSavedFolderPath() async {
@@ -58,12 +164,32 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _initCustomBooksDir([String? customPath]) async {
-    final booksDir =
-        customPath != null && customPath.isNotEmpty
-            ? Directory(customPath)
-            : Directory('/storage/emulated/0/bookread');
-    if (!(await booksDir.exists())) {
-      await booksDir.create(recursive: true);
+    late Directory booksDir;
+
+    if (customPath != null && customPath.isNotEmpty) {
+      booksDir = Directory(customPath);
+    } else {
+      // Use app's external storage directory for better compatibility
+      try {
+        final externalDir = Directory('/storage/emulated/0/Documents/BookRead');
+        booksDir = externalDir;
+      } catch (e) {
+        // Fallback to original path
+        booksDir = Directory('/storage/emulated/0/bookread');
+      }
+    }
+
+    try {
+      if (!(await booksDir.exists())) {
+        await booksDir.create(recursive: true);
+      }
+    } catch (e) {
+      print('Failed to create directory: $e');
+      // Create in a safer location
+      booksDir = Directory('/storage/emulated/0/Download/BookRead');
+      if (!(await booksDir.exists())) {
+        await booksDir.create(recursive: true);
+      }
     }
     // Remove picked files that now exist in the folder
     final newFiles =
@@ -138,24 +264,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadPickedBookFiles() async {
     final prefs = await SharedPreferences.getInstance();
     final paths = prefs.getStringList(_pickedFilesPrefKey) ?? [];
-    final List<PlatformFile> loaded = [];
-    for (final path in paths) {
-      final file = File(path);
-      if (await file.exists() && _isBookFile(path)) {
-        loaded.add(
-          PlatformFile(
-            name: path.split('/').last,
-            path: path,
-            size: file.lengthSync(),
-            bytes: null,
-            readStream: null,
-          ),
-        );
-      }
-    }
-    setState(() {
-      pickedBookFiles = loaded;
-    });
+    pickedBookFiles =
+        paths
+            .map(
+              (p) => PlatformFile(
+                name: p.split(Platform.pathSeparator).last,
+                path: p,
+                size: File(p).existsSync() ? File(p).lengthSync() : 0,
+              ),
+            )
+            .toList();
+    setState(() {});
   }
 
   Future<void> _savePickedBookFiles() async {
@@ -166,32 +285,6 @@ class _HomeScreenState extends State<HomeScreen> {
             .where((p) => p.isNotEmpty)
             .toList();
     await prefs.setStringList(_pickedFilesPrefKey, paths);
-  }
-
-  Future<void> _addPickedBookFile(PlatformFile file) async {
-    // Prevent duplicates by path (either in folder or already picked)
-    final displayedPaths = {
-      ...customBooks.map((f) => f.path),
-      ...pickedBookFiles.map((f) => f.path),
-    };
-    if (file.path == null ||
-        displayedPaths.contains(file.path) ||
-        pickedBookFiles.any((f) => f.name == file.name) ||
-        customBooks.map(_toPlatformFile).any((f) => f.name == file.name)) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('File already exists')));
-      return;
-    }
-    setState(() {
-      pickedBookFiles.add(file);
-      // Animate addition at the end
-      _listKey.currentState?.insertItem(
-        customBooks.length + pickedBookFiles.length - 1,
-        duration: const Duration(milliseconds: 250),
-      );
-    });
-    await _savePickedBookFiles();
   }
 
   String _getFileDate(String? path) {
@@ -231,7 +324,112 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('My Books'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text(
+                'Loading your books...',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    if (_permissionDenied) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('My Books'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.folder_off_outlined,
+                  size: 80,
+                  color: Colors.grey,
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  'Storage Access Required',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'This app needs storage permission to access and manage your book files.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Please enable storage permission in your device settings.',
+                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        await openAppSettings();
+                      },
+                      icon: const Icon(Icons.settings),
+                      label: const Text('Open Settings'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        setState(() {
+                          _loading = true;
+                        });
+                        await _initAll();
+                      },
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Retry'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
     }
     // Deduplicate displayedFiles by file name
     final Map<String, PlatformFile> fileMap = {};
@@ -497,53 +695,72 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
     if (isGrid) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
-        child: AspectRatio(
-          aspectRatio: 0.68,
-          child: Card(
-            elevation: 2,
-            margin: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: cover,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    file.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
+      return GestureDetector(
+        onTap: () {
+          if (file.path != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) => BookContentScreen(
+                      filePath: file.path!,
+                      fileName: file.name,
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    _getFileDate(file.path),
-                    style: const TextStyle(fontSize: 11, color: Colors.grey),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                  ),
-                  const Spacer(),
-                ],
+              ),
+            );
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: AspectRatio(
+            aspectRatio: 0.68,
+            child: Card(
+              elevation: 2,
+              margin: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 12,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: cover,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      file.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _getFileDate(file.path),
+                      style: const TextStyle(fontSize: 11, color: Colors.grey),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                    const Spacer(),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       );
-    }
+    } // <-- This closes the if (isGrid) block
 
     // --- LIST MODE ---
     return Padding(
@@ -552,99 +769,128 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 3,
         margin: const EdgeInsets.only(bottom: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(borderRadius: BorderRadius.circular(8), child: cover),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            file.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blueGrey[50],
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.blueGrey[100]!),
-                          ),
-                          child: Text(
-                            file.extension?.toUpperCase() ?? '',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blueGrey,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: () {
+            if (file.path != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => BookContentScreen(
+                        filePath: file.path!,
+                        fileName: file.name,
+                      ),
+                ),
+              );
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(borderRadius: BorderRadius.circular(8), child: cover),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              file.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.blueGrey[50],
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.blueGrey[100]!),
+                            ),
+                            child: Text(
+                              file.extension?.toUpperCase() ?? '',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _getFileDate(file.path),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _getFileDate(file.path),
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.bookmark_border, size: 20),
-                          tooltip: 'Read Later',
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.share, size: 20),
-                          tooltip: 'Share',
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete_outline, size: 20),
-                          tooltip: 'Delete',
-                          onPressed: () async {
-                            if (file.path != null && index != null) {
-                              final isPicked = index >= customBooks.length;
-                              if (isPicked) {
-                                setState(() {
-                                  final removed = pickedBookFiles.removeAt(
-                                    index - customBooks.length,
-                                  );
-                                  _listKey.currentState?.removeItem(
-                                    index,
-                                    (context, animation) => SizeTransition(
-                                      sizeFactor: animation,
-                                      child: _buildFileCardWithExt(
-                                        removed,
-                                        removed.extension ??
-                                            _getExt(File(removed.path ?? '')),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              readLaterPaths.contains(file.path)
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
+                              size: 20,
+                              color:
+                                  readLaterPaths.contains(file.path)
+                                      ? Colors.orange
+                                      : null,
+                            ),
+                            tooltip: 'Read Later',
+                            onPressed: () => _toggleReadLater(file.path),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.share, size: 20),
+                            tooltip: 'Share',
+                            onPressed: () => _shareFile(file.path),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete_outline, size: 20),
+                            tooltip: 'Remove from List',
+                            onPressed: () async {
+                              if (file.path != null && index != null) {
+                                final isPicked = index >= (customBooks.length);
+                                if (isPicked) {
+                                  // Remove from picked files list
+                                  setState(() {
+                                    final removed = pickedBookFiles.removeAt(
+                                      index - customBooks.length,
+                                    );
+                                    _listKey.currentState?.removeItem(
+                                      index,
+                                      (context, animation) => SizeTransition(
+                                        sizeFactor: animation,
+                                        child: _buildFileCardWithExt(
+                                          removed,
+                                          removed.extension ??
+                                              _getExt(File(removed.path ?? '')),
+                                        ),
                                       ),
-                                    ),
-                                    duration: const Duration(milliseconds: 300),
-                                  );
-                                });
-                                await _savePickedBookFiles();
-                              } else {
-                                try {
-                                  final f = File(file.path!);
-                                  if (await f.exists()) {
-                                    await f.delete();
+                                      duration: const Duration(
+                                        milliseconds: 300,
+                                      ),
+                                    );
+                                  });
+                                  await _savePickedBookFiles();
+                                } else {
+                                  // Remove from custom books list (don't delete physical file)
+                                  setState(() {
                                     final removed = customBooks.removeAt(index);
                                     _listKey.currentState?.removeItem(
                                       index,
@@ -659,32 +905,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                         milliseconds: 300,
                                       ),
                                     );
-                                    setState(() {});
-                                  }
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Failed to delete file: $e',
-                                      ),
-                                    ),
-                                  );
+                                  });
                                 }
                               }
-                            }
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.favorite_border, size: 20),
-                          tooltip: 'Favourites',
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ],
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              favouritePaths.contains(file.path)
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              size: 20,
+                              color:
+                                  favouritePaths.contains(file.path)
+                                      ? Colors.red
+                                      : null,
+                            ),
+                            tooltip:
+                                favouritePaths.contains(file.path)
+                                    ? 'Remove from Favourites'
+                                    : 'Add to Favourites',
+                            onPressed: () => _toggleFavourite(file.path),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -702,6 +951,34 @@ class _HomeScreenState extends State<HomeScreen> {
         await _addPickedBookFile(file);
       }
     }
+  }
+
+  Future<void> _addPickedBookFile(PlatformFile file) async {
+    // Prevent duplicates by path (either in folder or already picked)
+    final displayedPaths = <String>{
+      ...customBooks.map((f) => f.path),
+      ...pickedBookFiles.map(
+        (f) => f.path ?? '',
+      ), // Ensure only String, not String?
+    };
+    if (file.path == null ||
+        displayedPaths.contains(file.path) ||
+        pickedBookFiles.any((f) => f.name == file.name) ||
+        customBooks.map(_toPlatformFile).any((f) => f.name == file.name)) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('File already exists')));
+      return;
+    }
+    setState(() {
+      pickedBookFiles.add(file);
+      // Animate addition at the end
+      _listKey.currentState?.insertItem(
+        customBooks.length + pickedBookFiles.length - 1,
+        duration: const Duration(milliseconds: 250),
+      );
+    });
+    await _savePickedBookFiles();
   }
 }
 

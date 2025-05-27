@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,6 @@ Future<bool> checkPermission(
     ).showSnackBar(const SnackBar(content: Text("Permission is Granted")));
     return true;
   } else if (status.isPermanentlyDenied) {
-    // Show dialog to open app settings
     await showDialog(
       context: context,
       builder:

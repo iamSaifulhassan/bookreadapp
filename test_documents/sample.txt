@@ -1,0 +1,11 @@
+This is a sample text file for testing the book content screen.
+
+This sentence demonstrates the text-to-speech functionality. Each sentence should be highlighted when being read aloud.
+
+The rolling text buffer should show the previous, current, and next sentences. This helps users follow along with the reading.
+
+Text files are fully supported with sentence navigation and TTS controls. Users can click on any sentence to jump to that position.
+
+The implementation includes comprehensive error handling to prevent crashes. All file operations are wrapped in try-catch blocks for safety.
+
+This is the end of the sample text file. Thank you for testing the new book content screen functionality!

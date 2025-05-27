@@ -478,7 +478,7 @@ class _SignupState extends State<Signup> {
       final userRef = dbRef.child('users').child(key);
       final emailRef = dbRef.child('emails').child(key);
       // Debug: print the key being used
-      print('User key: ' + key);
+      print('User key: $key');
       // Use a transaction to ensure atomicity
       final result = await emailRef.runTransaction((currentData) {
         if (currentData == null) {
