@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import '../book_content_screen.dart';
 
 // BLoC State
 abstract class DownloadsState {}
@@ -96,7 +97,18 @@ class DownloadsScreen extends StatelessWidget {
                         style: TextStyle(color: colorScheme.onSurface),
                       ),
                       onTap: () {
-                        // TODO: Handle file tap (open/download)
+                        final fileName =
+                            file.path.split(Platform.pathSeparator).last;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => BookContentScreen(
+                                  filePath: file.path,
+                                  fileName: fileName,
+                                ),
+                          ),
+                        );
                       },
                     ),
                   );

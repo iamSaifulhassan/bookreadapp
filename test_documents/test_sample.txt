@@ -1,0 +1,11 @@
+This is a sample text file for testing the TheBookRead app. 
+
+This file contains multiple sentences to test the text-to-speech functionality and the rolling text buffer feature. Each sentence should be properly detected and can be read aloud using the TTS controls.
+
+The app should display this text content clearly. Users can navigate between sentences using the previous and next buttons. The current sentence should be highlighted when reading.
+
+The rolling text buffer shows three sentences at once: the previous sentence, the current sentence being read, and the next sentence that will be read. This helps users follow along with the reading.
+
+The TTS controls include play, pause, stop, previous sentence, and next sentence buttons. All controls should be responsive and work correctly with both PDF and text files.
+
+This is the final sentence in our test file. When the TTS reaches this sentence and finishes reading it, the playback should stop automatically.
