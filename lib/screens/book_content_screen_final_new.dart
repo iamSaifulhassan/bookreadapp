@@ -729,7 +729,10 @@ class _BookContentScreenState extends State<BookContentScreen>
 
     return Column(
       children: [
-        // Text Buffer (when toggled)
+        // Main PDF/Text Viewer (always visible)
+        Expanded(child: _buildMainViewer()),
+
+        // Text Buffer (when toggled) - Now positioned below PDF view
         AnimatedBuilder(
           animation: _textBufferHeight,
           builder: (context, child) {
@@ -739,9 +742,6 @@ class _BookContentScreenState extends State<BookContentScreen>
             );
           },
         ),
-
-        // Main PDF/Text Viewer (always visible)
-        Expanded(child: _buildMainViewer()),
 
         // TTS Controls (always visible but disabled if no sentences)
         _buildTTSControls(),
@@ -1287,7 +1287,7 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   Widget _buildBottomDocumentControls() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -1299,50 +1299,61 @@ class _BookContentScreenState extends State<BookContentScreen>
         ],
       ),
       child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            if (_isPdfFile) ...[
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (_isPdfFile) ...[
+                _buildBottomButton(
+                  icon: Icons.zoom_in,
+                  label: 'Zoom In',
+                  onTap: _zoomLevel < 3.0 ? _zoomIn : null,
+                ),
+                const SizedBox(width: 2),
+                _buildBottomButton(
+                  icon: Icons.zoom_out,
+                  label: 'Zoom Out',
+                  onTap: _zoomLevel > 0.5 ? _zoomOut : null,
+                ),
+                const SizedBox(width: 2),
+                _buildBottomButton(
+                  icon: Icons.center_focus_strong,
+                  label: 'Reset',
+                  onTap: _zoomLevel != 1.0 ? _resetZoom : null,
+                ),
+                const SizedBox(width: 2),
+              ],
               _buildBottomButton(
-                icon: Icons.zoom_in,
-                label: 'Zoom In',
-                onTap: _zoomLevel < 3.0 ? _zoomIn : null,
+                icon: _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                label: 'Bookmark',
+                onTap: _toggleBookmark,
+                isActive: _isBookmarked,
               ),
+              if (_bookmarkedPages.isNotEmpty) ...[
+                const SizedBox(width: 2),
+                _buildBottomButton(
+                  icon: Icons.bookmarks,
+                  label: 'Bookmarks',
+                  onTap: _showBookmarks,
+                ),
+              ],
+              const SizedBox(width: 2),
               _buildBottomButton(
-                icon: Icons.zoom_out,
-                label: 'Zoom Out',
-                onTap: _zoomLevel > 0.5 ? _zoomOut : null,
+                icon: Icons.camera_alt_outlined,
+                label: 'Snapshot',
+                onTap: _takeSnapshot,
               ),
-              _buildBottomButton(
-                icon: Icons.center_focus_strong,
-                label: 'Reset',
-                onTap: _zoomLevel != 1.0 ? _resetZoom : null,
-              ),
+              if (_isPdfFile) ...[
+                const SizedBox(width: 2),
+                _buildBottomButton(
+                  icon: Icons.my_location,
+                  label: 'Go to Page',
+                  onTap: _goToPage,
+                ),
+              ],
             ],
-            _buildBottomButton(
-              icon: _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-              label: 'Bookmark',
-              onTap: _toggleBookmark,
-              isActive: _isBookmarked,
-            ),
-            if (_bookmarkedPages.isNotEmpty)
-              _buildBottomButton(
-                icon: Icons.bookmarks,
-                label: 'Bookmarks',
-                onTap: _showBookmarks,
-              ),
-            _buildBottomButton(
-              icon: Icons.camera_alt_outlined,
-              label: 'Snapshot',
-              onTap: _takeSnapshot,
-            ),
-            if (_isPdfFile)
-              _buildBottomButton(
-                icon: Icons.my_location,
-                label: 'Go to Page',
-                onTap: _goToPage,
-              ),
-          ],
+          ),
         ),
       ),
     );
@@ -1358,7 +1369,7 @@ class _BookContentScreenState extends State<BookContentScreen>
       onTap: onTap,
       borderRadius: BorderRadius.circular(8),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
         decoration: BoxDecoration(
           color: isActive ? AppColors.primary.withOpacity(0.1) : null,
           borderRadius: BorderRadius.circular(8),
@@ -1372,23 +1383,25 @@ class _BookContentScreenState extends State<BookContentScreen>
           children: [
             Icon(
               icon,
-              size: 20,
+              size: 18,
               color:
                   onTap != null
                       ? (isActive ? AppColors.primary : Colors.grey[700])
                       : Colors.grey[400],
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               label,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 10,
                 color:
                     onTap != null
                         ? (isActive ? AppColors.primary : Colors.grey[700])
                         : Colors.grey[400],
                 fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
               ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

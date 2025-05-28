@@ -82,8 +82,7 @@ class _BookContentScreenState extends State<BookContentScreen>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-
-    _textBufferHeight = Tween<double>(begin: 0.0, end: 200.0).animate(
+    _textBufferHeight = Tween<double>(begin: 0.0, end: 150.0).animate(
       CurvedAnimation(
         parent: _textBufferController,
         curve: Curves.easeInOutCubic,
@@ -507,42 +506,86 @@ class _BookContentScreenState extends State<BookContentScreen>
       );
 
       if (byteData != null) {
-        // Here you could save to gallery or share
-        _showSnackBar('Snapshot captured successfully!');
-
-        // Optional: Show save dialog
-        _showSaveSnapshotDialog(byteData);
+        // Save snapshot to the same directory as the book
+        await _saveSnapshotToFile(byteData);
       }
     } catch (e) {
       _showSnackBar('Failed to capture snapshot: $e', isError: true);
     }
   }
 
-  void _showSaveSnapshotDialog(ByteData byteData) {
+  Future<void> _saveSnapshotToFile(ByteData byteData) async {
+    try {
+      // Get the directory where the book is located
+      final bookFile = File(widget.filePath);
+      final bookDirectory = bookFile.parent;
+
+      // Create filename with timestamp and page number
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final bookName = widget.fileName.replaceAll(
+        RegExp(r'\.[^.]+$'),
+        '',
+      ); // Remove extension
+      final fileName = '${bookName}_page${_currentPage}_$timestamp.png';
+
+      // Create the snapshot file path
+      final snapshotFile = File('${bookDirectory.path}/$fileName');
+
+      // Write the image data to file
+      final Uint8List pngBytes = byteData.buffer.asUint8List();
+      await snapshotFile.writeAsBytes(pngBytes);
+
+      // Show success message with file location
+      _showSnapshotSuccessDialog(snapshotFile.path);
+    } catch (e) {
+      _showSnackBar('Failed to save snapshot: $e', isError: true);
+    }
+  }
+
+  void _showSnapshotSuccessDialog(String filePath) {
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Snapshot Captured'),
-            content: const Text(
-              'Snapshot has been captured successfully. What would you like to do?',
+            title: Row(
+              children: [
+                Icon(Icons.check_circle, color: Colors.green, size: 24),
+                const SizedBox(width: 8),
+                const Text('Snapshot Saved'),
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Snapshot has been saved successfully!'),
+                const SizedBox(height: 12),
+                Text(
+                  'Location:',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+                const SizedBox(height: 4),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: Colors.grey[300]!),
+                  ),
+                  child: Text(
+                    filePath,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'monospace',
+                    ),
+                  ),
+                ),
+              ],
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Here you could implement save to gallery
-                  Navigator.pop(context);
-                  _showSnackBar('Snapshot saved to gallery');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text('Save'),
+                child: const Text('OK'),
               ),
             ],
           ),
@@ -729,13 +772,42 @@ class _BookContentScreenState extends State<BookContentScreen>
 
     return Column(
       children: [
-        // Text Buffer (when toggled)
+        // Text Buffer (when toggled) - with dynamic height calculation
         AnimatedBuilder(
           animation: _textBufferHeight,
           builder: (context, child) {
+            if (!_showTextBuffer) {
+              return const SizedBox.shrink();
+            }
+
+            // Get screen height and calculate safe text buffer height
+            final screenHeight = MediaQuery.of(context).size.height;
+            final appBarHeight =
+                kToolbarHeight + MediaQuery.of(context).padding.top;
+            // Calculate actual custom bottom navigation bar height
+            // Container padding (vertical: 8 * 2) + button content (~54px) + SafeArea bottom
+            const customBottomNavContentHeight =
+                16 + 54; // Container padding + button content
+            final bottomNavHeight =
+                customBottomNavContentHeight +
+                MediaQuery.of(context).padding.bottom;
+            const ttsControlsHeight = 80.0;
+            const minPdfViewerHeight = 100.0;
+
+            final maxSafeHeight =
+                screenHeight -
+                appBarHeight -
+                bottomNavHeight -
+                ttsControlsHeight -
+                minPdfViewerHeight;
+            final safeTextBufferHeight = (_textBufferHeight.value).clamp(
+              0.0,
+              maxSafeHeight,
+            );
+
             return SizedBox(
-              height: _textBufferHeight.value,
-              child: _showTextBuffer ? _buildTextBuffer() : null,
+              height: safeTextBufferHeight,
+              child: _buildTextBuffer(),
             );
           },
         ),
@@ -1192,9 +1264,14 @@ class _BookContentScreenState extends State<BookContentScreen>
                 children: [
                   Icon(Icons.settings_voice, color: AppColors.primary),
                   const SizedBox(width: 8),
-                  const Text(
-                    'TTS Settings',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Center(
+                    child: const Text(
+                      'TTS Settings',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -1262,9 +1339,16 @@ class _BookContentScreenState extends State<BookContentScreen>
                         _tts?.setPitch(_pitch);
                         _tts?.setVolume(_volume);
                       },
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: AppColors.primary, width: 1.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        foregroundColor: AppColors.primary,
+                      ),
                       child: const Text('Reset to Default'),
                     ),
-                  ),
+                    ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
@@ -1325,23 +1409,87 @@ class _BookContentScreenState extends State<BookContentScreen>
               onTap: _toggleBookmark,
               isActive: _isBookmarked,
             ),
-            if (_bookmarkedPages.isNotEmpty)
-              _buildBottomButton(
-                icon: Icons.bookmarks,
-                label: 'Bookmarks',
-                onTap: _showBookmarks,
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                switch (value) {
+                  case 'bookmarks':
+                    _showBookmarks();
+                    break;
+                  case 'snapshot':
+                    _takeSnapshot();
+                    break;
+                  case 'go_to_page':
+                    if (_isPdfFile) _goToPage();
+                    break;
+                }
+              },
+              offset: const Offset(0, -20), // Show above the button
+              constraints: const BoxConstraints(maxWidth: 150, minWidth: 120),
+              itemBuilder:
+                  (context) => [
+                    if (_bookmarkedPages.isNotEmpty)
+                      PopupMenuItem(
+                        value: 'bookmarks',
+                        height: 40,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.bookmarks, size: 18),
+                            SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                'Bookmarks',
+                                style: TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    PopupMenuItem(
+                      value: 'snapshot',
+                      height: 40,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.camera_alt_outlined, size: 18),
+                          SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              'Snapshot',
+                              style: TextStyle(fontSize: 13),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (_isPdfFile)
+                      PopupMenuItem(
+                        value: 'go_to_page',
+                        height: 40,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.my_location, size: 18),
+                            SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                'Go to Page',
+                                style: TextStyle(fontSize: 13),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                  ],
+              child: _buildBottomButton(
+                icon: Icons.more_vert,
+                label: 'More',
+                onTap: null, // Let PopupMenuButton handle the tap
               ),
-            _buildBottomButton(
-              icon: Icons.camera_alt_outlined,
-              label: 'Snapshot',
-              onTap: _takeSnapshot,
             ),
-            if (_isPdfFile)
-              _buildBottomButton(
-                icon: Icons.my_location,
-                label: 'Go to Page',
-                onTap: _goToPage,
-              ),
           ],
         ),
       ),
