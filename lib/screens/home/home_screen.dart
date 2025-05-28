@@ -1,5 +1,6 @@
 import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:bookread/widgets/custom_text_field.dart';
+import 'package:bookread/AppColors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -30,11 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
   static const String _pickedFilesPrefKey = 'picked_book_files';
   static const String _favouritesPrefKey = 'favourite_book_files';
   static const String _readLaterPrefKey = 'readlater_book_files';
+  static const String _completedPrefKey = 'completed_book_files';
   bool _isGrid = false; // Add to state
   bool _loading = true;
   bool _permissionDenied = false;
   Set<String> favouritePaths = {};
   Set<String> readLaterPaths = {};
+  Set<String> completedPaths = {};
 
   @override
   void initState() {
@@ -59,11 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
       });
       return;
     }
-
     await _loadSavedFolderPath();
     await _loadPickedBookFiles();
     await _loadFavourites();
     await _loadReadLater();
+    await _loadCompleted();
     setState(() => _loading = false);
   }
 
@@ -119,6 +122,17 @@ class _HomeScreenState extends State<HomeScreen> {
     await prefs.setStringList(_readLaterPrefKey, readLaterPaths.toList());
   }
 
+  Future<void> _loadCompleted() async {
+    final prefs = await SharedPreferences.getInstance();
+    completedPaths = (prefs.getStringList(_completedPrefKey) ?? []).toSet();
+    setState(() {});
+  }
+
+  Future<void> _saveCompleted() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(_completedPrefKey, completedPaths.toList());
+  }
+
   Future<void> _toggleFavourite(String? path) async {
     if (path == null) return;
     setState(() {
@@ -141,6 +155,18 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     await _saveReadLater();
+  }
+
+  Future<void> _toggleCompleted(String? path) async {
+    if (path == null) return;
+    setState(() {
+      if (completedPaths.contains(path)) {
+        completedPaths.remove(path);
+      } else {
+        completedPaths.add(path);
+      }
+    });
+    await _saveCompleted();
   }
 
   Future<void> _shareFile(String? path) async {
@@ -815,16 +841,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.blueGrey[50],
+                              color: AppColors.inputFill,
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.blueGrey[100]!),
+                              border: Border.all(color: AppColors.border),
                             ),
                             child: Text(
                               file.extension?.toUpperCase() ?? '',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.blueGrey,
+                                color: AppColors.primary,
                               ),
                             ),
                           ),
@@ -833,13 +859,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 4),
                       Text(
                         _getFileDate(file.path),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey,
+                          color: AppColors.textDisabled,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
                             icon: Icon(
@@ -849,7 +876,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               size: 20,
                               color:
                                   readLaterPaths.contains(file.path)
-                                      ? Colors.orange
+                                      ? AppColors.secondary
                                       : null,
                             ),
                             tooltip: 'Read Later',
@@ -918,7 +945,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               size: 20,
                               color:
                                   favouritePaths.contains(file.path)
-                                      ? Colors.red
+                                      ? AppColors.error
                                       : null,
                             ),
                             tooltip:
@@ -926,6 +953,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ? 'Remove from Favourites'
                                     : 'Add to Favourites',
                             onPressed: () => _toggleFavourite(file.path),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              completedPaths.contains(file.path)
+                                  ? Icons.check_circle
+                                  : Icons.check_circle_outline,
+                              size: 20,
+                              color:
+                                  completedPaths.contains(file.path)
+                                      ? AppColors.success
+                                      : null,
+                            ),
+                            tooltip:
+                                completedPaths.contains(file.path)
+                                    ? 'Remove from Completed'
+                                    : 'Mark as Completed',
+                            onPressed: () => _toggleCompleted(file.path),
                           ),
                         ],
                       ),

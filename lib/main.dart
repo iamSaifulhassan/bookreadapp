@@ -14,6 +14,7 @@ import 'package:bookread/screens/profile/profile_screen.dart';
 import 'package:bookread/screens/downloads/downloads_screen.dart';
 import 'package:bookread/screens/favourites/favourites_screen.dart';
 import 'package:bookread/screens/toread/toread_screen.dart';
+import 'package:bookread/screens/completed/completed_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -34,6 +35,7 @@ void main() async {
         '/downloads': (context) => const DownloadsScreen(),
         '/favourites': (context) => const FavouritesScreen(),
         '/toread': (context) => const ToReadScreen(),
+        '/completed': (context) => const CompletedScreen(),
         // Add other routes here as needed for new features/screens
       },
     ),
