@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../AppColors.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -6,161 +7,151 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.backgroundLight,
       child: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ListTile(
-                    title: const Text('Saif'),
-                    subtitle: const Text('ABC Dev.'),
-                    leading: const CircleAvatar(
-                      backgroundColor: Color.fromARGB(255, 44, 94, 4),
-                      child: Text('S', style: TextStyle(color: Colors.white)),
+                  // User Profile Header
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          AppColors.primary,
+                          AppColors.primary.withOpacity(0.8),
+                        ],
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: AppColors.onPrimary,
+                          radius: 30,
+                          child: Text(
+                            'S',
+                            style: TextStyle(
+                              color: AppColors.primary,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Saif',
+                                style: TextStyle(
+                                  color: AppColors.onPrimary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                'Book Reader',
+                                style: TextStyle(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Divider(),
-                  ListTile(
-                    leading: const Icon(Icons.home),
-                    title: const Text('Home'),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/main');
-                    },
+                  const SizedBox(height: 8),
+
+                  // Main Navigation
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.home,
+                    title: 'My Books',
+                    onTap:
+                        () => Navigator.pushReplacementNamed(context, '/home'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.book),
-                    title: const Text('My Books'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/mybooks');
-                    },
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.favorite,
+                    title: 'Favourites',
+                    iconColor: AppColors.error,
+                    onTap:
+                        () => Navigator.pushReplacementNamed(
+                          context,
+                          '/favourites',
+                        ),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.favorite),
-                    title: const Text('Favorites'),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/favourites');
-                    },
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.bookmark,
+                    title: 'Read Later',
+                    iconColor: AppColors.secondary,
+                    onTap: () => Navigator.pushNamed(context, '/toread'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.history),
-                    title: const Text('To Read'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/toread');
-                    },
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.check_circle,
+                    title: 'Completed',
+                    iconColor: AppColors.success,
+                    onTap: () => Navigator.pushNamed(context, '/completed'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.download),
-                    title: const Text('Downloads'),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/downloads');
-                    },
+
+                  Divider(height: 32, color: AppColors.border),
+
+                  // Secondary Navigation
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.account_circle,
+                    title: 'Profile',
+                    onTap:
+                        () =>
+                            Navigator.pushReplacementNamed(context, '/profile'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.star),
-                    title: const Text('Rate Us'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/rateus');
-                    },
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.settings,
+                    title: 'Settings',
+                    onTap: () => Navigator.pushNamed(context, '/settings'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.share),
-                    title: const Text('Share'),
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.share,
+                    title: 'Share App',
                     onTap: () {
                       Navigator.pop(context);
+                      // TODO: Implement share functionality
                     },
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.feedback),
-                    title: const Text('Feedback'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/feedback');
-                    },
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.star,
+                    title: 'Rate Us',
+                    onTap: () => Navigator.pushNamed(context, '/rateus'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.security),
-                    title: const Text('Privacy Policy'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/privacy-policy');
-                    },
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.info,
+                    title: 'About',
+                    onTap: () => Navigator.pushNamed(context, '/about'),
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.privacy_tip),
-                    title: const Text('Terms of Service'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/terms-of-service');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.language),
-                    title: const Text('Language'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/language');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.notifications),
-                    title: const Text('Notifications'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/notifications');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.account_circle),
-                    title: const Text('Profile'),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/profile');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.lock),
-                    title: const Text('Change Password'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/change-password');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.bookmark),
-                    title: const Text('Bookmarks'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/bookmarks');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.cloud_upload),
-                    title: const Text('Upload Book'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/upload-book');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Settings'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/settings');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.info),
-                    title: const Text('About'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/about');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.contact_page),
-                    title: const Text('Contact Us'),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/contact-us');
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.logout),
-                    title: const Text('Logout'),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, '/signin');
-                    },
+
+                  Divider(height: 32, color: AppColors.border),
+                  // Logout
+                  _buildDrawerItem(
+                    context,
+                    icon: Icons.logout,
+                    title: 'Logout',
+                    iconColor: AppColors.error,
+                    onTap:
+                        () =>
+                            Navigator.pushReplacementNamed(context, '/signin'),
                   ),
                 ],
               ),
@@ -168,6 +159,29 @@ class CustomDrawer extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+    Color? iconColor,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: iconColor ?? AppColors.primary),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: AppColors.onSurface,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      onTap: onTap,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
     );
   }
 }

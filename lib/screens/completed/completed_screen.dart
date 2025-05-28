@@ -1,5 +1,5 @@
-import 'package:bookread/AppColors.dart';
 import 'package:bookread/widgets/custom_drawer.dart';
+import 'package:bookread/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
@@ -7,22 +7,20 @@ import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import '../book_content_screen.dart';
 
-class FavouritesScreen extends StatefulWidget {
-  const FavouritesScreen({super.key});
+class CompletedScreen extends StatefulWidget {
+  const CompletedScreen({super.key});
 
   @override
-  State<FavouritesScreen> createState() => _FavouritesScreenState();
+  State<CompletedScreen> createState() => _CompletedScreenState();
 }
 
-class _FavouritesScreenState extends State<FavouritesScreen> {
-  static const String _favouritesPrefKey = 'favourite_book_files';
-  static const String _readLaterPrefKey = 'readlater_book_files';
+class _CompletedScreenState extends State<CompletedScreen> {
   static const String _completedPrefKey = 'completed_book_files';
+  static const String _favouritesPrefKey = 'favourite_book_files';
 
-  List<String> favouritePaths = [];
-  List<File> favouriteFiles = [];
-  Set<String> readLaterPaths = {};
-  Set<String> completedPaths = {};
+  List<String> completedPaths = [];
+  List<File> completedFiles = [];
+  Set<String> favouritePaths = {};
   bool _loading = true;
   bool _isGrid = false;
 
@@ -34,64 +32,45 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
 
   Future<void> _loadData() async {
     setState(() => _loading = true);
-    await _loadFavourites();
-    await _loadReadLater();
     await _loadCompleted();
+    await _loadFavourites();
     setState(() => _loading = false);
   }
 
-  Future<void> _loadFavourites() async {
+  Future<void> _loadCompleted() async {
     final prefs = await SharedPreferences.getInstance();
-    favouritePaths = prefs.getStringList(_favouritesPrefKey) ?? [];
-    favouriteFiles =
-        favouritePaths
+    completedPaths = prefs.getStringList(_completedPrefKey) ?? [];
+    completedFiles =
+        completedPaths
             .where((p) => File(p).existsSync())
             .map((p) => File(p))
             .toList();
     setState(() {});
   }
 
-  Future<void> _loadReadLater() async {
+  Future<void> _loadFavourites() async {
     final prefs = await SharedPreferences.getInstance();
-    readLaterPaths = (prefs.getStringList(_readLaterPrefKey) ?? []).toSet();
+    favouritePaths = (prefs.getStringList(_favouritesPrefKey) ?? []).toSet();
     setState(() {});
   }
 
-  Future<void> _loadCompleted() async {
+  Future<void> _removeFromCompleted(String path) async {
     final prefs = await SharedPreferences.getInstance();
-    completedPaths = (prefs.getStringList(_completedPrefKey) ?? []).toSet();
-    setState(() {});
+    completedPaths.remove(path);
+    await prefs.setStringList(_completedPrefKey, completedPaths);
+    await _loadCompleted();
   }
 
-  Future<void> _removeFavourite(String path) async {
-    final prefs = await SharedPreferences.getInstance();
-    favouritePaths.remove(path);
-    await prefs.setStringList(_favouritesPrefKey, favouritePaths);
-    await _loadFavourites();
-  }
-
-  Future<void> _toggleReadLater(String path) async {
+  Future<void> _toggleFavourite(String path) async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      if (readLaterPaths.contains(path)) {
-        readLaterPaths.remove(path);
+      if (favouritePaths.contains(path)) {
+        favouritePaths.remove(path);
       } else {
-        readLaterPaths.add(path);
+        favouritePaths.add(path);
       }
     });
-    await prefs.setStringList(_readLaterPrefKey, readLaterPaths.toList());
-  }
-
-  Future<void> _toggleCompleted(String path) async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      if (completedPaths.contains(path)) {
-        completedPaths.remove(path);
-      } else {
-        completedPaths.add(path);
-      }
-    });
-    await prefs.setStringList(_completedPrefKey, completedPaths.toList());
+    await prefs.setStringList(_favouritesPrefKey, favouritePaths.toList());
   }
 
   Future<void> _shareFile(String path) async {
@@ -142,7 +121,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
             children: [
               Row(
                 children: [
-                  // Book cover placeholder
+                  // Book cover placeholder with checkmark
                   Container(
                     width: 50,
                     height: 70,
@@ -152,15 +131,37 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primary.withOpacity(0.8),
-                          AppColors.primary,
+                          AppColors.success.withOpacity(0.8),
+                          AppColors.success,
                         ],
                       ),
                     ),
-                    child: Icon(
-                      Icons.book,
-                      color: AppColors.onPrimary,
-                      size: 24,
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Icon(
+                            Icons.book,
+                            color: AppColors.onSuccess,
+                            size: 24,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 2,
+                          right: 2,
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Icon(
+                              Icons.check,
+                              color: AppColors.success,
+                              size: 12,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -183,9 +184,9 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                             Expanded(
                               child: Text(
                                 fileName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 13,
-                                  color: AppColors.textDisabled,
+                                  color: Colors.grey,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -197,28 +198,51 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.inputFill,
+                                color: AppColors.success.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: AppColors.border),
+                                border: Border.all(
+                                  color: AppColors.success.withOpacity(0.3),
+                                ),
                               ),
                               child: Text(
                                 _getExt(file).toUpperCase(),
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: AppColors.primary,
+                                  color: AppColors.success,
                                 ),
                               ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          _getFileDate(file.path),
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: AppColors.textDisabled,
-                          ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.check_circle,
+                              size: 14,
+                              color: AppColors.success,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Completed',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.success,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                _getFileDate(file.path),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.textDisabled,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -231,17 +255,17 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                 children: [
                   IconButton(
                     icon: Icon(
-                      readLaterPaths.contains(file.path)
-                          ? Icons.bookmark
-                          : Icons.bookmark_border,
+                      favouritePaths.contains(file.path)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                       size: 20,
                       color:
-                          readLaterPaths.contains(file.path)
-                              ? AppColors.secondary
+                          favouritePaths.contains(file.path)
+                              ? AppColors.error
                               : null,
                     ),
-                    tooltip: 'Read Later',
-                    onPressed: () => _toggleReadLater(file.path),
+                    tooltip: 'Favourite',
+                    onPressed: () => _toggleFavourite(file.path),
                   ),
                   IconButton(
                     icon: const Icon(Icons.share, size: 20),
@@ -250,29 +274,12 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                   ),
                   IconButton(
                     icon: Icon(
-                      completedPaths.contains(file.path)
-                          ? Icons.check_circle
-                          : Icons.check_circle_outline,
+                      Icons.check_circle,
                       size: 20,
-                      color:
-                          completedPaths.contains(file.path)
-                              ? AppColors.success
-                              : null,
+                      color: AppColors.success,
                     ),
-                    tooltip:
-                        completedPaths.contains(file.path)
-                            ? 'Remove from Completed'
-                            : 'Mark as Completed',
-                    onPressed: () => _toggleCompleted(file.path),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.favorite,
-                      size: 20,
-                      color: AppColors.error,
-                    ),
-                    tooltip: 'Remove from Favourites',
-                    onPressed: () => _removeFavourite(file.path),
+                    tooltip: 'Remove from Completed',
+                    onPressed: () => _removeFromCompleted(file.path),
                   ),
                 ],
               ),
@@ -319,12 +326,38 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        AppColors.primary.withOpacity(0.8),
-                        AppColors.primary,
+                        AppColors.success.withOpacity(0.8),
+                        AppColors.success,
                       ],
                     ),
                   ),
-                  child: Icon(Icons.book, color: AppColors.onPrimary, size: 40),
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Icon(
+                          Icons.book,
+                          color: AppColors.onSuccess,
+                          size: 40,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 4,
+                        right: 4,
+                        child: Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            color: AppColors.success,
+                            size: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -348,15 +381,15 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   InkWell(
-                    onTap: () => _toggleReadLater(file.path),
+                    onTap: () => _toggleFavourite(file.path),
                     child: Icon(
-                      readLaterPaths.contains(file.path)
-                          ? Icons.bookmark
-                          : Icons.bookmark_border,
+                      favouritePaths.contains(file.path)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                       size: 18,
                       color:
-                          readLaterPaths.contains(file.path)
-                              ? AppColors.secondary
+                          favouritePaths.contains(file.path)
+                              ? AppColors.error
                               : AppColors.textDisabled,
                     ),
                   ),
@@ -369,24 +402,11 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                     ),
                   ),
                   InkWell(
-                    onTap: () => _toggleCompleted(file.path),
+                    onTap: () => _removeFromCompleted(file.path),
                     child: Icon(
-                      completedPaths.contains(file.path)
-                          ? Icons.check_circle
-                          : Icons.check_circle_outline,
+                      Icons.check_circle,
                       size: 18,
-                      color:
-                          completedPaths.contains(file.path)
-                              ? AppColors.success
-                              : AppColors.textDisabled,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => _removeFavourite(file.path),
-                    child: Icon(
-                      Icons.favorite,
-                      size: 18,
-                      color: AppColors.error,
+                      color: AppColors.success,
                     ),
                   ),
                 ],
@@ -406,7 +426,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favourites'),
+        title: const Text('Completed Books'),
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.onPrimary,
         actions: [
@@ -419,32 +439,29 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
       ),
       drawer: const CustomDrawer(),
       body:
-          favouriteFiles.isEmpty
+          completedFiles.isEmpty
               ? Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.favorite_border,
+                      Icons.check_circle_outline,
                       size: 64,
-                      color: AppColors.textDisabled,
+                      color: Colors.grey[400],
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'No favourite books yet',
+                      'No completed books yet',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textDisabled,
+                        color: Colors.grey,
                       ),
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Add books to favourites from the My Books screen',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.textDisabled,
-                      ),
+                      'Books you\'ve finished reading will appear here',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -459,15 +476,15 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                   crossAxisSpacing: 8,
                   mainAxisSpacing: 8,
                 ),
-                itemCount: favouriteFiles.length,
+                itemCount: completedFiles.length,
                 itemBuilder: (context, index) {
-                  return _buildGridCard(favouriteFiles[index], index: index);
+                  return _buildGridCard(completedFiles[index], index: index);
                 },
               )
               : ListView.builder(
-                itemCount: favouriteFiles.length,
+                itemCount: completedFiles.length,
                 itemBuilder: (context, index) {
-                  return _buildFileCard(favouriteFiles[index], index: index);
+                  return _buildFileCard(completedFiles[index], index: index);
                 },
               ),
     );

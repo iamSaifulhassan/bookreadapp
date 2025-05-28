@@ -383,7 +383,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                   ),
                   InkWell(
                     onTap: () => _removeFavourite(file.path),
-                    child: Icon(
+                    child: const Icon(
                       Icons.favorite,
                       size: 18,
                       color: AppColors.error,
@@ -435,7 +435,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        color: AppColors.textDisabled,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                     const SizedBox(height: 8),
