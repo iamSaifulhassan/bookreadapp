@@ -6,7 +6,7 @@
 // -----------------------------------------------------------------------------
 
 import 'package:bookread/Apptheme.dart';
-import 'package:bookread/screens/splash/splash_screen.dart';
+import 'package:bookread/services/auth_wrapper.dart';
 import 'package:bookread/screens/home/home_screen.dart';
 import 'package:bookread/screens/signin/signin_screen.dart';
 import 'package:bookread/screens/signup/signup_screen.dart';
@@ -24,7 +24,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     MaterialApp(
-      home: SplashScreen(),
+      home: const AuthWrapper(), // Use AuthWrapper instead of SplashScreen
       theme: AppTheme.lightTheme, // Uses app-wide theme and color scheme
       debugShowCheckedModeBanner: false,
       routes: {

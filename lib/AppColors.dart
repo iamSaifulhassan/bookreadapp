@@ -29,11 +29,16 @@ class AppColors {
   // Error colors
   static const Color error = Colors.redAccent;
   static const Color onError = Colors.white; // Text/icons on error
-
   // Text colors
-  static const Color textPrimary = Colors.white;
-  static const Color textSecondary = Colors.white70;
-  static const Color textDisabled = Color(0xFFBDBDBD); // Disabled text (muted)
+  static const Color textPrimary = Color(
+    0xFF212121,
+  ); // Dark grey for primary text
+  static const Color textSecondary = Color(
+    0xFF757575,
+  ); // Medium grey for secondary text
+  static const Color textDisabled = Color(
+    0xFFBDBDBD,
+  ); // Light grey for disabled text
 
   // Success colors
   static const Color success = Color(0xFF4CAF50); // Green for success

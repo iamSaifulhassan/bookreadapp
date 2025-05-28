@@ -61,7 +61,6 @@ class _SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
@@ -194,15 +193,23 @@ class _SignupFormState extends State<SignupForm> {
                                 (value) => setState(() => _userType = value),
                             items: const [
                               DropdownMenuItem(
-                                value: 'student',
+                                value: 'Student',
                                 child: Text('Student'),
                               ),
                               DropdownMenuItem(
-                                value: 'researcher',
+                                value: 'Teacher',
+                                child: Text('Teacher'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Professional',
+                                child: Text('Professional'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'Researcher',
                                 child: Text('Researcher'),
                               ),
                               DropdownMenuItem(
-                                value: 'other',
+                                value: 'Other',
                                 child: Text('Other'),
                               ),
                             ],

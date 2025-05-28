@@ -372,7 +372,7 @@ class _ToReadScreenState extends State<ToReadScreen> {
           ),
         ],
       ),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       body:
           readLaterFiles.isEmpty
               ? Center(
