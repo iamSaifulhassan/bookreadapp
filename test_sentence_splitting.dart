@@ -10,7 +10,7 @@ void main() {
 
   print('Original content:');
   print(content);
-  print('\n' + '=' * 60 + '\n');
+  print('\n${'=' * 60}\n');
 
   // Apply the enhanced sentence splitting regex
   final enhancedRegex = RegExp(

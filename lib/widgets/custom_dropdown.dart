@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../AppColors.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
   final String label;
@@ -18,22 +19,27 @@ class CustomDropdown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final inputFillColor = const Color(0xFFF3F6FA);
     return DropdownButtonFormField<T>(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: colorScheme.primary.withOpacity(0.8)),
+        labelStyle: TextStyle(color: AppColors.primary.withOpacity(0.8)),
         hintText: hint,
-        hintStyle: TextStyle(color: colorScheme.primary.withOpacity(0.5)),
-        border: const OutlineInputBorder(),
+        hintStyle: TextStyle(color: AppColors.textSecondary),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary.withOpacity(0.5)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary, width: 2),
+        ),
         filled: true,
-        fillColor: inputFillColor,
+        fillColor: AppColors.surface,
       ),
-      iconEnabledColor: colorScheme.primary,
-      style: Theme.of(
-        context,
-      ).textTheme.bodyLarge?.copyWith(color: Colors.black87),
+      iconEnabledColor: AppColors.primary,
+      style: TextStyle(color: AppColors.textPrimary),
+      dropdownColor: AppColors.surface,
       items: items,
       onChanged: onChanged,
       value: value,

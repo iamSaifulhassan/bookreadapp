@@ -437,7 +437,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
           ),
         ],
       ),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       body:
           completedFiles.isEmpty
               ? Center(

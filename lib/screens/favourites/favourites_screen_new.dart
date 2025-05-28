@@ -417,7 +417,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
           ),
         ],
       ),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       body:
           favouriteFiles.isEmpty
               ? Center(

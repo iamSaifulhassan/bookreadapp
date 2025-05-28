@@ -1,5 +1,4 @@
 import 'package:bookread/AppColors.dart';
-import 'package:bookread/main.dart';
 import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +34,7 @@ class ToReadScreen extends StatelessWidget {
         backgroundColor: AppColors.primary, // Using primary color for app bar
         foregroundColor: AppColors.onPrimary, // White text on app bar
       ),
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(),
       body: ListView.builder(
         itemCount: toReadBooks.length,
         itemBuilder: (context, index) {
