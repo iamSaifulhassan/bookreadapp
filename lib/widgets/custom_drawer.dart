@@ -156,26 +156,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   _buildDrawerItem(
                     context,
-                    icon: Icons.share,
-                    title: 'Share App',
-                    onTap: () {
-                      Navigator.pop(context);
-                      // TODO: Implement share functionality
-                    },
-                  ),
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.star,
-                    title: 'Rate Us',
-                    onTap: () => Navigator.pushNamed(context, '/rateus'),
-                  ),
-                  _buildDrawerItem(
-                    context,
                     icon: Icons.info,
                     title: 'About',
                     onTap: () => Navigator.pushNamed(context, '/about'),
                   ),
-
                   Divider(height: 32, color: AppColors.border), // Logout
                   _buildDrawerItem(
                     context,
@@ -185,7 +169,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     onTap: () async {
                       Navigator.pop(context); // Close drawer first
                       await _userService.signOut();
-                      // AuthWrapper will detect auth state change and redirect automatically
                     },
                   ),
                 ],

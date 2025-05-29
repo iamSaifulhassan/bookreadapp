@@ -37,7 +37,6 @@ dependencies:
   firebase_auth: ^4.17.4
   cloud_firestore: ^4.17.5  
   google_sign_in: ^6.2.1
-  flutter_facebook_auth: ^6.1.1
   firebase_database: ^10.5.7
   firebase_storage: ^11.7.7
   flutter_launcher_icons: ^0.14.3
@@ -49,8 +48,7 @@ dependencies:
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  # rules and activating additional ones.  flutter_lints: ^5.0.0
   permission_handler: ^12.0.0+1
   file_picker: ^8.0.7
   intl: ^0.19.0
@@ -59,6 +57,8 @@ dependencies:
   open_file: ^3.5.4
   flutter_tts: ^4.2.2
   syncfusion_flutter_pdfviewer: ^27.2.5
+  url_launcher: ^6.3.0
+  
   # pdf_render: ^1.4.12 # REMOVE or comment out this line to disable the plugin
 
 # For information on the generic Dart part of this file, see the

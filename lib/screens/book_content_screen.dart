@@ -8,6 +8,7 @@ import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../AppColors.dart';
 import '../services/streak_service.dart';
+import '../services/settings_service.dart';
 
 class BookContentScreen extends StatefulWidget {
   final String filePath;
@@ -24,11 +25,11 @@ class BookContentScreen extends StatefulWidget {
 }
 
 class _BookContentScreenState extends State<BookContentScreen>
-    with TickerProviderStateMixin {
-  // Core Controllers
+    with TickerProviderStateMixin, WidgetsBindingObserver {// Core Controllers
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   PdfViewerController? _pdfController;
   FlutterTts? _tts;
+  final SettingsService _settingsService = SettingsService();
 
   // Animation Controllers
   late AnimationController _textBufferController;
@@ -49,11 +50,14 @@ class _BookContentScreenState extends State<BookContentScreen>
   int _currentSentenceIndex = 0;
   bool _isPlaying = false;
   bool _isPaused = false;
-  bool _showTextBuffer = false;
-  // TTS Settings
+  bool _showTextBuffer = false;  // TTS Settings
   double _speechRate = 0.5;
   double _pitch = 1.0;
   double _volume = 0.8;
+  
+  // Reading Settings
+  double _readingFontSize = 16.0;
+  double _readingLineHeight = 1.5;
   // PDF Features
   double _zoomLevel = 1.0;
   bool _isBookmarked = false;
@@ -63,14 +67,23 @@ class _BookContentScreenState extends State<BookContentScreen>
   // Rolling TTS Buffer state
   List<String> _ttsBuffer = [];
   final int _bufferSize = 5; // Show 5 sentences at a time
-  final int _highlightedIndex = 2; // Middle position (0-indexed)
-  @override
+  final int _highlightedIndex = 2; // Middle position (0-indexed)  @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initializeAnimations();
     _initializeApp();
     // Record that this document was opened for streak tracking
     StreakService().recordDocumentOpened(widget.filePath);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if (state == AppLifecycleState.resumed) {
+      // Refresh reading settings when app resumes (user might have changed settings)
+      _refreshReadingSettings();
+    }
   }
 
   void _initializeAnimations() {
@@ -142,11 +155,18 @@ class _BookContentScreenState extends State<BookContentScreen>
         });
       }
     }
-  }
-
-  Future<void> _initializeTTS() async {
+  }  Future<void> _initializeTTS() async {
     try {
       _tts = FlutterTts();
+
+      // Load TTS settings from settings service
+      _speechRate = await _settingsService.getTTSSpeechRate();
+      _pitch = await _settingsService.getTTSPitch();
+      _volume = await _settingsService.getTTSVolume();
+
+      // Load reading settings from settings service
+      _readingFontSize = await _settingsService.getReadingFontSize();
+      _readingLineHeight = await _settingsService.getReadingLineHeight();
 
       await _tts!.setLanguage("en-US");
       await _tts!.setSpeechRate(_speechRate);
@@ -690,7 +710,6 @@ class _BookContentScreenState extends State<BookContentScreen>
       ),
     );
   }
-
   void _showTTSSettings() {
     showModalBottomSheet(
       context: context,
@@ -702,8 +721,25 @@ class _BookContentScreenState extends State<BookContentScreen>
     );
   }
 
+  // Method to refresh reading settings when they change in the settings screen
+  Future<void> _refreshReadingSettings() async {
+    try {
+      final newFontSize = await _settingsService.getReadingFontSize();
+      final newLineHeight = await _settingsService.getReadingLineHeight();
+      
+      if (mounted) {
+        setState(() {
+          _readingFontSize = newFontSize;
+          _readingLineHeight = newLineHeight;
+        });
+      }
+    } catch (e) {
+      print('Error refreshing reading settings: $e');
+    }
+  }
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _stopReading();
     _textBufferController.dispose();
     _controlsController.dispose();
@@ -768,7 +804,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   value: 'tts_settings',
                   child: Row(
                     children: [
-                      Icon(Icons.settings_voice),
+                      Icon(Icons.settings_voice, color: AppColors.primary),
                       SizedBox(width: 8),
                       Text('TTS Settings'),
                     ],
@@ -778,7 +814,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   value: 'reload',
                   child: Row(
                     children: [
-                      Icon(Icons.refresh),
+                      Icon(Icons.refresh, color: AppColors.primary),
                       SizedBox(width: 8),
                       Text('Reload'),
                     ],
@@ -977,12 +1013,11 @@ class _BookContentScreenState extends State<BookContentScreen>
                             color: AppColors.primary.withOpacity(0.3),
                           )
                           : null,
-                ),
-                child: Text(
+                ),                child: Text(
                   _sentences[i],
                   style: TextStyle(
-                    fontSize: 16,
-                    height: 1.5,
+                    fontSize: _readingFontSize,
+                    height: _readingLineHeight,
                     color:
                         i == _currentSentenceIndex
                             ? AppColors.primary
@@ -1151,11 +1186,10 @@ class _BookContentScreenState extends State<BookContentScreen>
                               const SizedBox(height: 6),
                               // Sentence text
                               GestureDetector(
-                                onTap: isHighlighted ? _togglePlayPause : null,
-                                child: Text(
+                                onTap: isHighlighted ? _togglePlayPause : null,                                child: Text(
                                   sentence,
                                   style: TextStyle(
-                                    fontSize: isHighlighted ? 14 : 13,
+                                    fontSize: isHighlighted ? _readingFontSize + 1 : _readingFontSize - 1,
                                     color:
                                         isCompleted
                                             ? Colors.green.shade700
@@ -1166,7 +1200,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                                         isHighlighted
                                             ? FontWeight.w500
                                             : FontWeight.normal,
-                                    height: 1.4,
+                                    height: _readingLineHeight,
                                   ),
                                   maxLines: isHighlighted ? null : 2,
                                   overflow:
@@ -1314,12 +1348,12 @@ class _BookContentScreenState extends State<BookContentScreen>
                 min: 0.1,
                 max: 1.0,
                 divisions: 9,
-                activeColor: AppColors.primary,
-                onChanged: (value) {
+                activeColor: AppColors.primary,                onChanged: (value) {
                   setModalState(() {
                     _speechRate = value;
                   });
                   _tts?.setSpeechRate(value);
+                  _settingsService.setTTSSpeechRate(value);
                 },
               ),
 
@@ -1330,12 +1364,12 @@ class _BookContentScreenState extends State<BookContentScreen>
                 min: 0.5,
                 max: 2.0,
                 divisions: 15,
-                activeColor: AppColors.primary,
-                onChanged: (value) {
+                activeColor: AppColors.primary,                onChanged: (value) {
                   setModalState(() {
                     _pitch = value;
                   });
                   _tts?.setPitch(value);
+                  _settingsService.setTTSPitch(value);
                 },
               ),
 
@@ -1346,12 +1380,12 @@ class _BookContentScreenState extends State<BookContentScreen>
                 min: 0.0,
                 max: 1.0,
                 divisions: 10,
-                activeColor: AppColors.primary,
-                onChanged: (value) {
+                activeColor: AppColors.primary,                onChanged: (value) {
                   setModalState(() {
                     _volume = value;
                   });
                   _tts?.setVolume(value);
+                  _settingsService.setTTSVolume(value);
                 },
               ),
 
@@ -1359,8 +1393,7 @@ class _BookContentScreenState extends State<BookContentScreen>
               Row(
                 children: [
                   Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
+                    child: OutlinedButton(                      onPressed: () {
                         setModalState(() {
                           _speechRate = 0.5;
                           _pitch = 1.0;
@@ -1369,6 +1402,10 @@ class _BookContentScreenState extends State<BookContentScreen>
                         _tts?.setSpeechRate(_speechRate);
                         _tts?.setPitch(_pitch);
                         _tts?.setVolume(_volume);
+                        // Save settings
+                        _settingsService.setTTSSpeechRate(_speechRate);
+                        _settingsService.setTTSPitch(_pitch);
+                        _settingsService.setTTSVolume(_volume);
                       },
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: AppColors.primary, width: 1.5),

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'lib/services/streak_service.dart';
-import 'lib/widgets/streak_widget.dart';
 
 void main() async {
   // Initialize the streak service
