@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import '../book_content_screen.dart';
+import '../../services/streak_service.dart';
+import '../../widgets/streak_widget.dart';
 
 class CompletedScreen extends StatefulWidget {
   const CompletedScreen({super.key});
@@ -23,10 +25,10 @@ class _CompletedScreenState extends State<CompletedScreen> {
   Set<String> favouritePaths = {};
   bool _loading = true;
   bool _isGrid = false;
-
   @override
   void initState() {
     super.initState();
+    StreakService().loadStreaks(); // Initialize streak service
     _loadData();
   }
 
@@ -169,14 +171,35 @@ class _CompletedScreenState extends State<CompletedScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          displayName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                        Row(
+                          children: [
+                            StreakWidget(
+                              streakCount: StreakService()
+                                  .getCurrentStreakCount(file.path),
+                              isAboutToExpire:
+                                  false, // Completed items don't expire
+                              isCompleted:
+                                  true, // All items in Completed screen are completed
+                              iconSize: 18,
+                              fontSize: 14,
+                            ),
+                            if (StreakService().getCurrentStreakCount(
+                                  file.path,
+                                ) >
+                                0)
+                              const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                displayName,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 4),
                         Row(
@@ -361,15 +384,34 @@ class _CompletedScreenState extends State<CompletedScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                displayName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  StreakWidget(
+                    streakCount: StreakService().getCurrentStreakCount(
+                      file.path,
+                    ),
+                    isAboutToExpire: false, // Completed items don't expire
+                    isCompleted:
+                        true, // All items in Completed screen are completed
+                    iconSize: 16,
+                    fontSize: 12,
+                  ),
+                  if (StreakService().getCurrentStreakCount(file.path) > 0)
+                    const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      displayName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 4),
               Text(

@@ -7,6 +7,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../AppColors.dart';
+import '../services/streak_service.dart';
 
 class BookContentScreen extends StatefulWidget {
   final String filePath;
@@ -63,12 +64,13 @@ class _BookContentScreenState extends State<BookContentScreen>
   List<String> _ttsBuffer = [];
   final int _bufferSize = 5; // Show 5 sentences at a time
   final int _highlightedIndex = 2; // Middle position (0-indexed)
-
   @override
   void initState() {
     super.initState();
     _initializeAnimations();
     _initializeApp();
+    // Record that this document was opened for streak tracking
+    StreakService().recordDocumentOpened(widget.filePath);
   }
 
   void _initializeAnimations() {
@@ -98,10 +100,12 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   Future<void> _initializeApp() async {
     try {
-      setState(() {
-        _isLoading = true;
-        _errorMessage = null;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = true;
+          _errorMessage = null;
+        });
+      }
 
       // Validate file
       if (!_fileExists) {
@@ -124,16 +128,19 @@ class _BookContentScreenState extends State<BookContentScreen>
           'Unsupported file format. Only PDF and TXT files are supported.',
         );
       }
-
-      setState(() {
-        _isInitialized = true;
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+          _isLoading = false;
+        });
+      }
     } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _errorMessage = e.toString();
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = e.toString();
+        });
+      }
     }
   }
 
@@ -240,10 +247,12 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   void _processSentences(String text) {
     if (text.trim().isEmpty) {
-      setState(() {
-        _sentences = ['No readable text found.'];
-        _currentSentenceIndex = 0;
-      });
+      if (mounted) {
+        setState(() {
+          _sentences = ['No readable text found.'];
+          _currentSentenceIndex = 0;
+        });
+      }
       return;
     }
 
@@ -309,15 +318,16 @@ class _BookContentScreenState extends State<BookContentScreen>
   // TTS Controls
   Future<void> _togglePlayPause() async {
     if (_tts == null || _sentences.isEmpty) return;
-
     try {
       if (_isPlaying) {
         if (_isPaused) {
           await _tts!.stop();
-          setState(() {
-            _isPlaying = false;
-            _isPaused = false;
-          });
+          if (mounted) {
+            setState(() {
+              _isPlaying = false;
+              _isPaused = false;
+            });
+          }
         } else {
           await _tts!.pause();
         }
@@ -348,10 +358,12 @@ class _BookContentScreenState extends State<BookContentScreen>
 
     try {
       await _tts!.stop();
-      setState(() {
-        _isPlaying = false;
-        _isPaused = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isPlaying = false;
+          _isPaused = false;
+        });
+      }
     } catch (e) {
       print('Error stopping TTS: $e');
     }
@@ -359,10 +371,12 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   void _moveToPreviousSentence() {
     if (_currentSentenceIndex > 0) {
-      setState(() {
-        _currentSentenceIndex--;
-        _updateTtsBuffer(); // Update rolling buffer
-      });
+      if (mounted) {
+        setState(() {
+          _currentSentenceIndex--;
+          _updateTtsBuffer(); // Update rolling buffer
+        });
+      }
       if (_isPlaying && !_isPaused) {
         _speakCurrentSentence();
       }
@@ -371,10 +385,12 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   void _moveToNextSentence() {
     if (_currentSentenceIndex < _sentences.length - 1) {
-      setState(() {
-        _currentSentenceIndex++;
-        _updateTtsBuffer(); // Update rolling buffer
-      });
+      if (mounted) {
+        setState(() {
+          _currentSentenceIndex++;
+          _updateTtsBuffer(); // Update rolling buffer
+        });
+      }
       if (_isPlaying && !_isPaused) {
         _speakCurrentSentence();
       }
@@ -386,9 +402,11 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   // UI Controls
   void _toggleTextBuffer() {
-    setState(() {
-      _showTextBuffer = !_showTextBuffer;
-    });
+    if (mounted) {
+      setState(() {
+        _showTextBuffer = !_showTextBuffer;
+      });
+    }
 
     if (_showTextBuffer) {
       _textBufferController.forward();
@@ -400,46 +418,54 @@ class _BookContentScreenState extends State<BookContentScreen>
   // PDF Document Features
   void _zoomIn() {
     if (_pdfController != null && _zoomLevel < 3.0) {
-      setState(() {
-        _zoomLevel += 0.25;
-      });
+      if (mounted) {
+        setState(() {
+          _zoomLevel += 0.25;
+        });
+      }
       _pdfController!.zoomLevel = _zoomLevel;
     }
   }
 
   void _zoomOut() {
     if (_pdfController != null && _zoomLevel > 0.5) {
-      setState(() {
-        _zoomLevel -= 0.25;
-      });
+      if (mounted) {
+        setState(() {
+          _zoomLevel -= 0.25;
+        });
+      }
       _pdfController!.zoomLevel = _zoomLevel;
     }
   }
 
   void _resetZoom() {
     if (_pdfController != null) {
-      setState(() {
-        _zoomLevel = 1.0;
-      });
+      if (mounted) {
+        setState(() {
+          _zoomLevel = 1.0;
+        });
+      }
       _pdfController!.zoomLevel = _zoomLevel;
     }
   }
 
   void _toggleBookmark() {
-    setState(() {
-      _isBookmarked = !_isBookmarked;
-      if (_isBookmarked) {
-        if (!_bookmarkedPages.contains(_currentPage)) {
-          _bookmarkedPages.add(_currentPage);
+    if (mounted) {
+      setState(() {
+        _isBookmarked = !_isBookmarked;
+        if (_isBookmarked) {
+          if (!_bookmarkedPages.contains(_currentPage)) {
+            _bookmarkedPages.add(_currentPage);
+          }
+        } else {
+          _bookmarkedPages.remove(_currentPage);
         }
-      } else {
-        _bookmarkedPages.remove(_currentPage);
-      }
-    });
+      });
 
-    _showSnackBar(
-      _isBookmarked ? 'Page $_currentPage bookmarked' : 'Bookmark removed',
-    );
+      _showSnackBar(
+        _isBookmarked ? 'Page $_currentPage bookmarked' : 'Bookmark removed',
+      );
+    }
   }
 
   void _showBookmarks() {
@@ -466,12 +492,14 @@ class _BookContentScreenState extends State<BookContentScreen>
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
-                        setState(() {
-                          _bookmarkedPages.remove(page);
-                          if (page == _currentPage) {
-                            _isBookmarked = false;
-                          }
-                        });
+                        if (mounted) {
+                          setState(() {
+                            _bookmarkedPages.remove(page);
+                            if (page == _currentPage) {
+                              _isBookmarked = false;
+                            }
+                          });
+                        }
                         Navigator.pop(context);
                       },
                     ),
@@ -639,10 +667,12 @@ class _BookContentScreenState extends State<BookContentScreen>
   // PDF Navigation
   void _onPageChanged(PdfPageChangedDetails details) {
     if (details.newPageNumber != _currentPage) {
-      setState(() {
-        _currentPage = details.newPageNumber;
-        _isBookmarked = _bookmarkedPages.contains(_currentPage);
-      });
+      if (mounted) {
+        setState(() {
+          _currentPage = details.newPageNumber;
+          _isBookmarked = _bookmarkedPages.contains(_currentPage);
+        });
+      }
       _extractTextFromCurrentPage();
     }
   }
@@ -923,11 +953,13 @@ class _BookContentScreenState extends State<BookContentScreen>
           for (int i = 0; i < _sentences.length; i++)
             GestureDetector(
               onTap: () {
-                setState(() {
-                  _currentSentenceIndex = i;
-                });
-                if (_isPlaying && !_isPaused) {
-                  _speakCurrentSentence();
+                if (mounted) {
+                  setState(() {
+                    _currentSentenceIndex = i;
+                  });
+                  if (_isPlaying && !_isPaused) {
+                    _speakCurrentSentence();
+                  }
                 }
               },
               child: Container(
@@ -1347,7 +1379,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                       ),
                       child: const Text('Reset to Default'),
                     ),
-                    ),
+                  ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: ElevatedButton(
