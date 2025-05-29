@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../book_content_screen.dart';
+import '../../services/streak_service.dart';
+import '../../widgets/streak_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   final String? defaultFolderPath;
@@ -38,12 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Set<String> favouritePaths = {};
   Set<String> readLaterPaths = {};
   Set<String> completedPaths = {};
-
   @override
   void initState() {
     super.initState();
     _dirController = TextEditingController();
     _initAll();
+    // Initialize streak service
+    StreakService().loadStreaks();
   }
 
   Future<void> _initAll() async {
@@ -159,13 +162,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _toggleCompleted(String? path) async {
     if (path == null) return;
+
+    final wasCompleted = completedPaths.contains(path);
+
     setState(() {
-      if (completedPaths.contains(path)) {
+      if (wasCompleted) {
         completedPaths.remove(path);
       } else {
         completedPaths.add(path);
       }
     });
+
+    // Update StreakService accordingly
+    if (wasCompleted) {
+      await StreakService().markDocumentNotCompleted(path);
+    } else {
+      await StreakService().markDocumentCompleted(path);
+    }
+
     await _saveCompleted();
   }
 
@@ -760,15 +774,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: cover,
                     ),
                     const SizedBox(height: 12),
-                    Text(
-                      file.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (file.path != null)
+                          StreakWidget(
+                            streakCount: StreakService().getCurrentStreakCount(
+                              file.path!,
+                            ),
+                            isAboutToExpire: StreakService()
+                                .isStreakAboutToExpire(file.path!),
+                            isCompleted: completedPaths.contains(file.path),
+                            iconSize: 16,
+                            fontSize: 12,
+                          ),
+                        if (file.path != null &&
+                            StreakService().getCurrentStreakCount(file.path!) >
+                                0)
+                          const SizedBox(width: 4),
+                        Expanded(
+                          child: Text(
+                            file.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -878,6 +914,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Row(
                         children: [
+                          if (file.path != null)
+                            StreakWidget(
+                              streakCount: StreakService()
+                                  .getCurrentStreakCount(file.path!),
+                              isAboutToExpire: StreakService()
+                                  .isStreakAboutToExpire(file.path!),
+                              isCompleted: completedPaths.contains(file.path),
+                              iconSize: 18,
+                              fontSize: 14,
+                            ),
+                          if (file.path != null &&
+                              StreakService().getCurrentStreakCount(
+                                    file.path!,
+                                  ) >
+                                  0)
+                            const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               file.name,
