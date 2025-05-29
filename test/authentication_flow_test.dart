@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:bookread/services/auth_wrapper.dart';
 import 'package:bookread/services/user_service.dart';
 import 'package:bookread/widgets/custom_drawer.dart';
-import 'package:bookread/screens/signin/signin_screen.dart';
-import 'package:bookread/screens/home/home_screen.dart';
 
 void main() {
   group('Authentication Flow Tests', () {

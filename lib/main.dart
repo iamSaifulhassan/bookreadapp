@@ -6,6 +6,7 @@
 // -----------------------------------------------------------------------------
 
 import 'package:bookread/Apptheme.dart';
+import 'package:bookread/about/About.dart';
 import 'package:bookread/services/auth_wrapper.dart';
 import 'package:bookread/screens/home/home_screen.dart';
 import 'package:bookread/screens/signin/signin_screen.dart';
@@ -15,6 +16,7 @@ import 'package:bookread/screens/downloads/downloads_screen.dart';
 import 'package:bookread/screens/favourites/favourites_screen.dart';
 import 'package:bookread/screens/toread/toread_screen.dart';
 import 'package:bookread/screens/completed/completed_screen.dart';
+import 'package:bookread/screens/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -36,6 +38,8 @@ void main() async {
         '/favourites': (context) => const FavouritesScreen(),
         '/toread': (context) => const ToReadScreen(),
         '/completed': (context) => const CompletedScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/about': (context) => const AboutScreen(),
         // Add other routes here as needed for new features/screens
       },
     ),

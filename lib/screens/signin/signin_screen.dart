@@ -1,3 +1,4 @@
+import 'package:bookread/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';
@@ -43,8 +44,14 @@ class SignInScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    Image.asset(
+                      'assets/images/App.png',
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.contain,
+                    ),
+                    const SizedBox(height: 16),
                     CustomTextField(
                       controller: _emailController,
                       label: 'Email',
@@ -110,7 +117,15 @@ class SignInScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 16),
                             // Google Sign-In Button
-                            CustomButton(
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16.0,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                ),
+                              ),
                               onPressed: () async {
                                 final repo = UserRepository();
                                 final success = await repo.signInWithGoogle();
@@ -147,43 +162,8 @@ class SignInScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 16),
+
                             // Facebook Sign-In Button
-                            CustomButton(
-                              onPressed: () async {
-                                final repo = UserRepository();
-                                final success = await repo.signInWithFacebook();
-                                if (success) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                        'Facebook sign-in successful!',
-                                      ),
-                                    ),
-                                  );
-                                  Navigator.pushReplacementNamed(
-                                    context,
-                                    '/home',
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Facebook sign-in failed.'),
-                                    ),
-                                  );
-                                }
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/facebook.png',
-                                    height: 24,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Text('Sign in with Facebook'),
-                                ],
-                              ),
-                            ),
                           ],
                         );
                       },
@@ -197,9 +177,9 @@ class SignInScreen extends StatelessWidget {
                         child: const Text(
                           'Don’t have an account? Sign Up',
                           style: TextStyle(
-                            color: Colors.blueAccent,
+                            color: AppColors.primary,
                             fontSize: 14.0,
-                            decoration: TextDecoration.underline,
+                            decoration: TextDecoration.none,
                           ),
                         ),
                       ),
@@ -214,10 +194,3 @@ class SignInScreen extends StatelessWidget {
     );
   }
 }
-
-// Guidance:
-// - Replace hardcoded controllers with BLoC/user state.
-// - Use BLoC for sign in actions.
-// - Add error handling and loading state as needed.
-// - Keep UI consistent with other screens using reusable widgets.
-// - Remove TODOs as you implement logic.

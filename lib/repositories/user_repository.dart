@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import '../models/user_model.dart';
 
 class UserRepository {
@@ -13,6 +12,7 @@ class UserRepository {
 
   Future<bool> isEmailUnique(String email) async {
     // Firebase does not provide direct email uniqueness check, so try to fetch sign-in methods
+    // ignore: deprecated_member_use
     final methods = await _firebaseAuth.fetchSignInMethodsForEmail(email);
     return methods.isEmpty;
   }
@@ -74,27 +74,6 @@ class UserRepository {
       await _firebaseAuth.signInWithCredential(credential);
       return true;
     } catch (e) {
-      return false;
-    }
-  }
-
-  Future<bool> signInWithFacebook() async {
-    try {
-      final LoginResult result = await FacebookAuth.instance.login();
-      if (result.status == LoginStatus.success) {
-        final OAuthCredential facebookAuthCredential =
-            FacebookAuthProvider.credential(result.accessToken!.token);
-        await _firebaseAuth.signInWithCredential(facebookAuthCredential);
-        return true;
-      } else {
-        print(
-          'Facebook login failed: \\nStatus: \\${result.status}\\nMessage: \\${result.message}',
-        );
-      }
-      return false;
-    } catch (e, stack) {
-      print('Facebook sign-in error: $e');
-      print(stack);
       return false;
     }
   }

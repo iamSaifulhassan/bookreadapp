@@ -433,8 +433,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             // Sign out using UserService
                                             await _userService.signOut();
 
-                                            // No need to manually navigate - AuthWrapper will handle it
-                                            // The AuthWrapper will detect the auth state change and redirect automatically
+                                            // Navigate to login screen and clear navigation stack
+                                            if (mounted) {
+                                              Navigator.of(
+                                                context,
+                                              ).pushReplacementNamed('/');
+                                            }
                                           },
                                           child: Text(
                                             'Sign Out',
