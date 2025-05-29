@@ -770,13 +770,67 @@ class _HomeScreenState extends State<HomeScreen> {
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Text(
-                      _getFileDate(file.path),
-                      style: const TextStyle(fontSize: 11, color: Colors.grey),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      file.extension?.toUpperCase() ?? '',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: AppColors.textDisabled,
+                      ),
                       textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          onTap: () => _toggleFavourite(file.path),
+                          child: Icon(
+                            favouritePaths.contains(file.path)
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            size: 18,
+                            color:
+                                favouritePaths.contains(file.path)
+                                    ? AppColors.error
+                                    : AppColors.textDisabled,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => _toggleReadLater(file.path),
+                          child: Icon(
+                            readLaterPaths.contains(file.path)
+                                ? Icons.bookmark
+                                : Icons.bookmark_border,
+                            size: 18,
+                            color:
+                                readLaterPaths.contains(file.path)
+                                    ? AppColors.secondary
+                                    : AppColors.textDisabled,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => _toggleCompleted(file.path),
+                          child: Icon(
+                            completedPaths.contains(file.path)
+                                ? Icons.check_circle
+                                : Icons.check_circle_outline,
+                            size: 18,
+                            color:
+                                completedPaths.contains(file.path)
+                                    ? AppColors.success
+                                    : AppColors.textDisabled,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => _shareFile(file.path),
+                          child: Icon(
+                            Icons.share,
+                            size: 18,
+                            color: AppColors.textDisabled,
+                          ),
+                        ),
+                      ],
                     ),
                     const Spacer(),
                   ],
