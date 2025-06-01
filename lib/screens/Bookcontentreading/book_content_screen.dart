@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../AppColors.dart';
-import '../services/streak_service.dart';
-import '../services/settings_service.dart';
+import '../../themes/AppColors.dart';
+import '../../services/streak_service.dart';
+import '../../services/settings_service.dart';
 
 class BookContentScreen extends StatefulWidget {
   final String filePath;

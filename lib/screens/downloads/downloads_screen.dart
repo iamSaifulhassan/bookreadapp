@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import '../book_content_screen.dart';
+import '../Bookcontentreading/book_content_screen.dart';
 
 // BLoC State
 abstract class DownloadsState {}

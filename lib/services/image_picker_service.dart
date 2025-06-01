@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../AppColors.dart';
+import '../themes/AppColors.dart';
 
 class ImagePickerService {
   static final ImagePicker _picker = ImagePicker();
