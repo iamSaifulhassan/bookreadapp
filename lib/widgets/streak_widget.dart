@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../AppColors.dart';
+import '../theme/AppColors.dart';
 
 class StreakWidget extends StatelessWidget {
   final int streakCount;

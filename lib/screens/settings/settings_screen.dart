@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../AppColors.dart';
+import 'package:bookread/theme/AppColors.dart';
 import '../../widgets/custom_drawer.dart';
 import '../../services/settings_service.dart';
 
@@ -69,7 +69,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: const Text('Settings'),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
@@ -186,7 +187,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(              children: [
+            Row(
+              children: [
                 Icon(icon, color: AppColors.primary),
                 const SizedBox(width: 8),
                 Text(

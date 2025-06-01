@@ -1,4 +1,4 @@
-import 'package:bookread/AppColors.dart';
+import 'package:bookread/theme/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';

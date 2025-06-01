@@ -1,16 +1,15 @@
 import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:bookread/widgets/custom_text_field.dart';
-import 'package:bookread/AppColors.dart';
+import 'package:bookread/theme/AppColors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
-// import 'package:pdf_render/pdf_render_widgets.dart';
 import 'dart:typed_data';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../book_content_screen.dart';
+import '../bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
 

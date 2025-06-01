@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../AppColors.dart';
+import '../theme/AppColors.dart';
 import '../services/user_service.dart';
 import '../models/user_model.dart';
 

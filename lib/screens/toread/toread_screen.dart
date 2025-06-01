@@ -1,11 +1,11 @@
-import 'package:bookread/AppColors.dart';
+import 'package:bookread/theme/AppColors.dart';
 import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
-import '../book_content_screen.dart';
+import '../bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
 

@@ -5,14 +5,13 @@
 // - App theme and colors are defined in AppTheme and AppColors
 // -----------------------------------------------------------------------------
 
-import 'package:bookread/Apptheme.dart';
-import 'package:bookread/about/About.dart';
+import 'package:bookread/theme/Apptheme.dart';
+import 'package:bookread/screens/about/about_screen.dart';
 import 'package:bookread/services/auth_wrapper.dart';
 import 'package:bookread/screens/home/home_screen.dart';
 import 'package:bookread/screens/signin/signin_screen.dart';
 import 'package:bookread/screens/signup/signup_screen.dart';
 import 'package:bookread/screens/profile/profile_screen.dart';
-import 'package:bookread/screens/downloads/downloads_screen.dart';
 import 'package:bookread/screens/favourites/favourites_screen.dart';
 import 'package:bookread/screens/toread/toread_screen.dart';
 import 'package:bookread/screens/completed/completed_screen.dart';
@@ -34,7 +33,6 @@ void main() async {
         '/signin': (context) => SignInScreen(),
         '/signup': (context) => const SignupScreen(),
         '/profile': (context) => ProfileScreen(),
-        '/downloads': (context) => const DownloadsScreen(),
         '/favourites': (context) => const FavouritesScreen(),
         '/toread': (context) => const ToReadScreen(),
         '/completed': (context) => const CompletedScreen(),
