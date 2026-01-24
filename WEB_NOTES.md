@@ -29,9 +29,11 @@ The app uses several Flutter plugins that have varying levels of web support:
 - `path_provider` - Not available on web (no direct file system access)
 - `permission_handler` - Not needed on web (browser handles permissions)
 - `open_file` - Not available on web (files open in browser automatically)
-- `flutter_tts` - Limited/no support on web
 - `flutter_native_splash` - Not applicable to web
 - `flutter_launcher_icons` - Not applicable to web
+
+### ℹ️ Requires Testing:
+- `flutter_tts` - Has web support but may have limitations depending on browser
 
 ## 🛠️ Handling Platform Differences
 
@@ -55,9 +57,9 @@ if (kIsWeb) {
 - **Workaround**: Use Firebase Storage for file storage, download files directly to browser
 
 ### Text-to-Speech
-- **Issue**: `flutter_tts` has limited web support
-- **Impact**: Audio reading features may not work
-- **Workaround**: Consider using Web Speech API directly through JS interop
+- **Issue**: `flutter_tts` has web support but may have browser-specific limitations
+- **Impact**: Audio reading features may work differently across browsers
+- **Workaround**: Test across browsers and provide fallback UI if needed
 
 ### Permissions
 - **Issue**: `permission_handler` is not available
@@ -223,4 +225,4 @@ To enhance PWA features, update `web/manifest.json` with:
 
 ---
 
-Last Updated: January 2026
+Last Updated: January 2024
