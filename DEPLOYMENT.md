@@ -70,6 +70,26 @@ You can also trigger deployment manually:
 
 ### Common Issues
 
+#### Seeing README instead of the app
+
+This usually means the workflow hasn't run yet or the app hasn't been built:
+
+**Solution:**
+1. Check if the `gh-pages` branch exists: Go to your repository and click on the branch dropdown
+2. If `gh-pages` doesn't exist yet:
+   - Merge your changes to the `main` branch to trigger the workflow
+   - Wait 5-10 minutes for the first deployment
+   - Go to **Actions** tab to monitor the workflow progress
+3. If `gh-pages` exists but still showing README:
+   - Go to **Settings > Pages**
+   - Ensure "Deploy from a branch" is selected
+   - Ensure `gh-pages` branch and `/` (root) folder are selected
+   - Clear your browser cache (Ctrl+Shift+R or Cmd+Shift+R)
+4. If the workflow failed:
+   - Go to **Actions** tab
+   - Click on the failed workflow run
+   - Check the logs for errors
+
 #### Deployment fails with permission error
 - Go to **Settings > Actions > General**
 - Scroll to **Workflow permissions**
@@ -100,8 +120,17 @@ The deployment is configured in `.github/workflows/deploy.yml`:
 - **Trigger**: Push to main/master branch or manual trigger
 - **Flutter Version**: 3.27.2 (stable channel)
 - **Build Command**: `flutter build web --release --base-href /bookreadapp/`
+- **Jekyll Processing**: Disabled via `.nojekyll` file (added automatically)
 - **Deploy Target**: gh-pages branch
 - **Deployment Tool**: peaceiris/actions-gh-pages@v3
+
+### .nojekyll File
+
+The workflow automatically creates a `.nojekyll` file in the build output. This is crucial because:
+- GitHub Pages uses Jekyll by default to process static sites
+- Jekyll ignores files and folders starting with underscores
+- Flutter web apps have critical files like `flutter.js` and folders like `_flutter` that start with underscores
+- Without `.nojekyll`, these files would be ignored, breaking the app
 
 ### Base Href Configuration
 

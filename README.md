@@ -6,7 +6,7 @@ A Flutter-based book reading application with Firebase integration.
 
 The app is automatically deployed to GitHub Pages: [https://iamSaifulhassan.github.io/bookreadapp/](https://iamSaifulhassan.github.io/bookreadapp/)
 
-> **Note**: The app will be deployed automatically when changes are merged to the `main` branch. If you're seeing the README instead of the app, please wait for the first deployment to complete (about 5 minutes after merging). See [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md) for detailed setup instructions and troubleshooting.
+> **Note**: The app will be deployed automatically when changes are merged to the `main` branch. If you're seeing the README instead of the app, please wait for the first deployment to complete (about 5 minutes after merging). See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed setup instructions and troubleshooting.
 
 ## 🚀 Deployment
 
@@ -32,7 +32,7 @@ This app is automatically deployed to GitHub Pages using GitHub Actions.
 6. Wait 5-10 minutes for the initial deployment to complete
 7. Your app will be available at: `https://iamSaifulhassan.github.io/bookreadapp/`
 
-For detailed setup instructions and troubleshooting, see [GITHUB_PAGES_SETUP.md](GITHUB_PAGES_SETUP.md).
+For detailed setup instructions and troubleshooting, see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ### Manual Deployment:
 
