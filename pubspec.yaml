@@ -44,22 +44,19 @@ dependencies:
   flutter_native_splash: ^2.4.0
   image_picker: ^1.1.2
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.  flutter_lints: ^5.0.0
   permission_handler: ^12.0.0+1
   file_picker: ^8.0.7
   intl: ^0.19.0
   shared_preferences: ^2.5.3
   share_plus: ^10.0.0
-  open_file: ^3.5.4
   flutter_tts: ^4.2.2
   syncfusion_flutter_pdfviewer: ^27.2.5
   url_launcher: ^6.3.0
-  
-  # pdf_render: ^1.4.12 # REMOVE or comment out this line to disable the plugin
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -101,13 +98,14 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/App.png"
-  flutter_native_splash:
-    color: "#ffffff" # white background
-    image: assets/images/App_splash.png
-    android: true
-    ios: true
-    image_size: 600 # increase image size (default is 200, adjust as needed)
+
+flutter_native_splash:
+  color: "#ffffff" # white background
+  image: assets/images/App_splash.png
+  android: true
+  ios: true

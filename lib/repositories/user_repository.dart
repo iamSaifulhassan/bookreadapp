@@ -22,12 +22,12 @@ class UserRepository {
     required String phone,
     required String country,
     required String userType,
-    String? password,
+    required String password,
   }) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
-        password: password ?? 'changeme123', // Require password in UI
+        password: password,
       );
 
       // Save additional user info to Firebase Realtime Database
