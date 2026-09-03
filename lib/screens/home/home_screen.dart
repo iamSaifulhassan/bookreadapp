@@ -1,3 +1,4 @@
+import '../../services/app_logger.dart';
 import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:bookread/widgets/custom_text_field.dart';
 import 'package:bookread/themes/AppColors.dart';
@@ -96,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
           await Permission.storage.isGranted ||
           await Permission.photos.isGranted;
     } catch (e) {
-      print('Permission error: $e');
+      AppLogger.log('Permission error: $e');
       // Fallback to basic storage permission
       final status = await Permission.storage.request();
       return status.isGranted;
@@ -224,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
         await booksDir.create(recursive: true);
       }
     } catch (e) {
-      print('Failed to create directory: $e');
+      AppLogger.log('Failed to create directory: $e');
       // Create in a safer location
       booksDir = Directory('/storage/emulated/0/Download/BookRead');
       if (!(await booksDir.exists())) {
@@ -260,13 +261,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _loadBooksFromCustomDir() async {
     if (customBooksDir == null) return;
-    print('Loading books from: ${customBooksDir!.path}');
+    AppLogger.log('Loading books from: ${customBooksDir!.path}');
     final files =
         customBooksDir!
             .listSync()
             .where((f) => f is File && _isBookFile(f.path))
             .toList();
-    print('Found files: ${files.map((f) => f.path).toList()}');
+    AppLogger.log('Found files: ${files.map((f) => f.path).toList()}');
     if (_listKey.currentState != null) {
       final oldLength = customBooks.length;
       for (int i = oldLength - 1; i >= 0; i--) {

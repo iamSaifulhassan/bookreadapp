@@ -1,3 +1,4 @@
+import 'app_logger.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,7 +52,7 @@ class ImagePickerService {
                       ).pop(image != null ? File(image.path) : null);
                     }
                   } catch (e) {
-                    print('Error picking image from camera: $e');
+                    AppLogger.log('Error picking image from camera: $e');
                     if (context.mounted) {
                       Navigator.of(context).pop(null);
                     }
@@ -80,7 +81,7 @@ class ImagePickerService {
                       ).pop(image != null ? File(image.path) : null);
                     }
                   } catch (e) {
-                    print('Error picking image from gallery: $e');
+                    AppLogger.log('Error picking image from gallery: $e');
                     if (context.mounted) {
                       Navigator.of(context).pop(null);
                     }
@@ -120,7 +121,7 @@ class ImagePickerService {
       }
       return null;
     } catch (e) {
-      print('Error picking image from camera: $e');
+      AppLogger.log('Error picking image from camera: $e');
       return null;
     }
   }
@@ -140,7 +141,7 @@ class ImagePickerService {
       }
       return null;
     } catch (e) {
-      print('Error picking image from gallery: $e');
+      AppLogger.log('Error picking image from gallery: $e');
       return null;
     }
   }

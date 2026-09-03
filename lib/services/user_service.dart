@@ -1,3 +1,4 @@
+import 'app_logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../repositories/user_repository.dart';
 import '../models/user_model.dart';
@@ -21,7 +22,7 @@ class UserService {
     try {
       return await _userRepository.getCurrentUserData();
     } catch (e) {
-      print('Error fetching user profile: $e');
+      AppLogger.log('Error fetching user profile: $e');
       return null;
     }
   }
@@ -29,12 +30,12 @@ class UserService {
   /// Update user profile data
   Future<bool> updateUserProfile(UserModel userModel) async {
     try {
-      print('UserService: Updating profile for user: ${userModel.email}');
+      AppLogger.log('UserService: Updating profile for user: ${userModel.email}');
       final result = await _userRepository.updateUserData(userModel);
-      print('UserService: Update result: $result');
+      AppLogger.log('UserService: Update result: $result');
       return result;
     } catch (e) {
-      print('Error updating user profile: $e');
+      AppLogger.log('Error updating user profile: $e');
       return false;
     }
   }
@@ -53,7 +54,7 @@ class UserService {
     try {
       await FirebaseAuth.instance.signOut();
     } catch (e) {
-      print('Error signing out: $e');
+      AppLogger.log('Error signing out: $e');
     }
   }
 

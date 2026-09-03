@@ -1,3 +1,4 @@
+import '../../services/app_logger.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../themes/AppColors.dart';
@@ -41,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _loadUserData() async {
     // Check if user is still authenticated before loading data
     if (!_userService.isAuthenticated) {
-      print('ProfileScreen: User not authenticated, skipping data load');
+      AppLogger.log('ProfileScreen: User not authenticated, skipping data load');
       return;
     }
 
@@ -68,16 +69,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     : userModel.userType;
             _profileImageUrl = userModel.profileImageUrl ?? imagePath;
 
-            print('ProfileScreen: Loaded profile data:');
-            print('  - Email: ${userModel.email}');
-            print('  - Phone: ${userModel.phone}');
-            print('  - Country: ${userModel.country}');
-            print('  - UserType: ${userModel.userType}');
-            print(
+            AppLogger.log('ProfileScreen: Loaded profile data:');
+            AppLogger.log('  - Email: ${userModel.email}');
+            AppLogger.log('  - Phone: ${userModel.phone}');
+            AppLogger.log('  - Country: ${userModel.country}');
+            AppLogger.log('  - UserType: ${userModel.userType}');
+            AppLogger.log(
               '  - UserModel.profileImageUrl: ${userModel.profileImageUrl}',
             );
-            print('  - Storage imagePath: $imagePath');
-            print('  - Final _profileImageUrl: $_profileImageUrl');
+            AppLogger.log('  - Storage imagePath: $imagePath');
+            AppLogger.log('  - Final _profileImageUrl: $_profileImageUrl');
 
             // Check profile completion
             _isProfileIncomplete = ProfileImageUtils.isProfileIncomplete(
@@ -105,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     } catch (e) {
-      print('Error loading user data: $e');
+      AppLogger.log('Error loading user data: $e');
       if (mounted) {
         setState(() {
           _isLoading = false;
@@ -131,7 +132,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _updateProfileData(Map<String, String> data) async {
     try {
-      print('ProfileScreen: Received data: $data');
+      AppLogger.log('ProfileScreen: Received data: $data');
 
       setState(() {
         _emailController.text = data['email']?.trim() ?? _emailController.text;
@@ -143,12 +144,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
         // Handle profileImageUrl properly - always update it from returned data
         final imagePath = data['profileImageUrl'];
-        print('ProfileScreen: Updating profile image path:');
-        print('  - Current _profileImageUrl: $_profileImageUrl');
-        print('  - Returned imagePath: $imagePath');
+        AppLogger.log('ProfileScreen: Updating profile image path:');
+        AppLogger.log('  - Current _profileImageUrl: $_profileImageUrl');
+        AppLogger.log('  - Returned imagePath: $imagePath');
         if (imagePath != null) {
           _profileImageUrl = imagePath.isEmpty ? null : imagePath;
-          print('  - Updated _profileImageUrl: $_profileImageUrl');
+          AppLogger.log('  - Updated _profileImageUrl: $_profileImageUrl');
         }
 
         // Update profile completion status
@@ -175,12 +176,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
 
         await _userService.updateUserProfile(updatedUser);
-        print('ProfileScreen: Profile data saved successfully');
+        AppLogger.log('ProfileScreen: Profile data saved successfully');
       } catch (e) {
-        print('Error saving updated profile data: $e');
+        AppLogger.log('Error saving updated profile data: $e');
       }
     } catch (e) {
-      print('ProfileScreen: Error updating profile data: $e');
+      AppLogger.log('ProfileScreen: Error updating profile data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error updating profile: $e'),
@@ -206,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 96,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
-              print('Error loading local profile image: $error');
+              AppLogger.log('Error loading local profile image: $error');
               return _buildFallbackAvatar();
             },
           ),

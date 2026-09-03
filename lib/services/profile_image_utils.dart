@@ -1,3 +1,4 @@
+import 'app_logger.dart';
 import 'package:flutter/material.dart';
 import '../themes/AppColors.dart';
 
@@ -70,7 +71,7 @@ class ProfileImageUtils {
         backgroundImage: NetworkImage(imageUrl),
         onBackgroundImageError: (exception, stackTrace) {
           // If image fails to load, show initials instead
-          print('Failed to load profile image: $exception');
+          AppLogger.log('Failed to load profile image: $exception');
         },
         child:
             imageUrl.isEmpty

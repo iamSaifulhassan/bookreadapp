@@ -1,10 +1,17 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'app_logger.dart';
 
 class FirebaseStorageService {
   static final FirebaseStorage _storage = FirebaseStorage.instance;
   static final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  /// Per-user folder so a client only ever addresses its own files.
+  /// Pair with a Storage rule restricting reads/writes to
+  /// `request.auth.uid == userId` on `profile_images/{userId}/**`.
+  static Reference _userFolder(String uid) =>
+      _storage.ref().child('profile_images').child(uid);
 
   /// Upload profile image to Firebase Storage
   /// Returns the download URL of the uploaded image
@@ -12,50 +19,25 @@ class FirebaseStorageService {
     try {
       final User? user = _auth.currentUser;
       if (user == null) {
-        print('FirebaseStorage: User not authenticated');
+        AppLogger.log('FirebaseStorage: User not authenticated');
         throw Exception('User not authenticated');
       }
 
-      print('FirebaseStorage: Starting upload for user: ${user.uid}');
+      final String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final Reference ref = _userFolder(user.uid).child(fileName);
 
-      // Create a unique filename using user ID and timestamp
-      final String fileName =
-          'profile_${user.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-
-      print('FirebaseStorage: Upload filename: $fileName');
-
-      // Create a reference to the location where we want to upload the image
-      final Reference ref = _storage
-          .ref()
-          .child('profile_images')
-          .child(fileName);
-
-      print('FirebaseStorage: Upload reference: ${ref.fullPath}');
-
-      // Upload the file
       final UploadTask uploadTask = ref.putFile(
         imageFile,
-        SettableMetadata(
-          contentType: 'image/jpeg',
-          customMetadata: {
-            'userId': user.uid,
-            'uploadedAt': DateTime.now().toIso8601String(),
-          },
-        ),
+        SettableMetadata(contentType: 'image/jpeg'),
       );
 
-      // Wait for the upload to complete
-      print('FirebaseStorage: Starting upload task...');
       final TaskSnapshot snapshot = await uploadTask;
-      print('FirebaseStorage: Upload completed successfully');
-
-      // Get the download URL
       final String downloadUrl = await snapshot.ref.getDownloadURL();
-      print('FirebaseStorage: Download URL obtained: $downloadUrl');
+      AppLogger.log('FirebaseStorage: Upload complete: $downloadUrl');
 
       return downloadUrl;
     } catch (e) {
-      print('Error uploading profile image: $e');
+      AppLogger.error('Error uploading profile image', e);
       return null;
     }
   }
@@ -67,73 +49,38 @@ class FirebaseStorageService {
       await ref.delete();
       return true;
     } catch (e) {
-      print('Error deleting profile image: $e');
+      AppLogger.error('Error deleting profile image', e);
       return false;
     }
   }
 
-  /// Get profile image URL for current user
+  /// Get the current user's most recent profile image URL.
+  ///
+  /// Only lists within the current user's own folder (filenames are
+  /// millisecond timestamps, so the lexicographically-largest name is the
+  /// most recent upload) — never scans other users' files.
   static Future<String?> getProfileImageUrl() async {
     try {
       final User? user = _auth.currentUser;
       if (user == null) {
-        print('FirebaseStorage: No authenticated user found');
+        AppLogger.log('FirebaseStorage: No authenticated user found');
         return null;
       }
 
-      print('FirebaseStorage: Getting profile image for user: ${user.uid}');
-
-      // List files in the profile_images folder for the current user
-      final ListResult result =
-          await _storage.ref().child('profile_images').listAll();
-
+      final ListResult result = await _userFolder(user.uid).listAll();
       if (result.items.isEmpty) {
-        print('FirebaseStorage: No profile images found in storage');
         return null;
       }
 
-      // Find the most recent image for the current user
-      String? latestImageUrl;
-      int latestTimestamp = 0;
-
-      for (final Reference ref in result.items) {
-        try {
-          final FullMetadata metadata = await ref.getMetadata();
-          final String? userId = metadata.customMetadata?['userId'];
-          final String? uploadedAt = metadata.customMetadata?['uploadedAt'];
-
-          print(
-            'FirebaseStorage: Checking file ${ref.name} - userId: $userId, uploadedAt: $uploadedAt',
-          );
-
-          if (userId == user.uid && uploadedAt != null) {
-            final int timestamp =
-                DateTime.parse(uploadedAt).millisecondsSinceEpoch;
-            if (timestamp > latestTimestamp) {
-              latestTimestamp = timestamp;
-              latestImageUrl = await ref.getDownloadURL();
-              print('FirebaseStorage: Found newer image: $latestImageUrl');
-            }
-          }
-        } catch (metadataError) {
-          print(
-            'FirebaseStorage: Error reading metadata for ${ref.name}: $metadataError',
-          );
-          continue;
-        }
-      }
-
-      print('FirebaseStorage: Final result: $latestImageUrl');
-      return latestImageUrl;
+      final Reference latest = result.items.reduce(
+        (a, b) => a.name.compareTo(b.name) > 0 ? a : b,
+      );
+      return await latest.getDownloadURL();
     } catch (e) {
-      // Handle the case where profile_images folder doesn't exist yet
       if (e.toString().contains('object-not-found')) {
-        print(
-          'FirebaseStorage: Profile images folder not found yet (no images uploaded)',
-        );
         return null;
       }
-      print('Error getting profile image URL: $e');
+      AppLogger.error('Error getting profile image URL', e);
       return null;
     }
   }

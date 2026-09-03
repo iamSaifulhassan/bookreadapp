@@ -1,3 +1,4 @@
+import '../services/app_logger.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../themes/AppColors.dart';
@@ -31,7 +32,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         });
       }
     } catch (e) {
-      print('Error loading user data in CustomDrawer: $e');
+      AppLogger.log('Error loading user data in CustomDrawer: $e');
       if (mounted) {
         setState(() {
           _isLoading = false;

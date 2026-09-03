@@ -1,3 +1,4 @@
+import 'app_logger.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
@@ -24,7 +25,7 @@ class LocalImageStorageService {
   /// Returns the local file path if successful, null if failed
   static Future<String?> saveProfileImage(File imageFile) async {
     try {
-      print('LocalImageStorage: Starting to save profile image locally...');
+      AppLogger.log('LocalImageStorage: Starting to save profile image locally...');
 
       final Directory profileImagesDir = await _getProfileImagesDirectory();
       final String newImagePath =
@@ -34,23 +35,23 @@ class LocalImageStorageService {
       final File existingImage = File(newImagePath);
       if (await existingImage.exists()) {
         await existingImage.delete();
-        print('LocalImageStorage: Deleted existing profile image');
+        AppLogger.log('LocalImageStorage: Deleted existing profile image');
       }
 
       // Copy the new image to the profile images directory
       final File savedImage = await imageFile.copy(newImagePath);
 
       if (await savedImage.exists()) {
-        print(
+        AppLogger.log(
           'LocalImageStorage: Profile image saved successfully at: $newImagePath',
         );
         return newImagePath;
       } else {
-        print('LocalImageStorage: Failed to save profile image');
+        AppLogger.log('LocalImageStorage: Failed to save profile image');
         return null;
       }
     } catch (e) {
-      print('LocalImageStorage: Error saving profile image: $e');
+      AppLogger.log('LocalImageStorage: Error saving profile image: $e');
       return null;
     }
   }
@@ -65,14 +66,14 @@ class LocalImageStorageService {
       final File imageFile = File(imagePath);
 
       if (await imageFile.exists()) {
-        print('LocalImageStorage: Found profile image at: $imagePath');
+        AppLogger.log('LocalImageStorage: Found profile image at: $imagePath');
         return imagePath;
       } else {
-        print('LocalImageStorage: No profile image found');
+        AppLogger.log('LocalImageStorage: No profile image found');
         return null;
       }
     } catch (e) {
-      print('LocalImageStorage: Error getting profile image path: $e');
+      AppLogger.log('LocalImageStorage: Error getting profile image path: $e');
       return null;
     }
   }
@@ -88,13 +89,13 @@ class LocalImageStorageService {
 
       if (await imageFile.exists()) {
         await imageFile.delete();
-        print('LocalImageStorage: Profile image deleted successfully');
+        AppLogger.log('LocalImageStorage: Profile image deleted successfully');
       } else {
-        print('LocalImageStorage: No profile image to delete');
+        AppLogger.log('LocalImageStorage: No profile image to delete');
       }
       return true;
     } catch (e) {
-      print('LocalImageStorage: Error deleting profile image: $e');
+      AppLogger.log('LocalImageStorage: Error deleting profile image: $e');
       return false;
     }
   }
@@ -105,7 +106,7 @@ class LocalImageStorageService {
       final String? imagePath = await getProfileImagePath();
       return imagePath != null;
     } catch (e) {
-      print('LocalImageStorage: Error checking if profile image exists: $e');
+      AppLogger.log('LocalImageStorage: Error checking if profile image exists: $e');
       return false;
     }
   }
@@ -117,14 +118,14 @@ class LocalImageStorageService {
       if (imagePath != null) {
         final File imageFile = File(imagePath);
         final int size = await imageFile.length();
-        print(
+        AppLogger.log(
           'LocalImageStorage: Profile image size: ${(size / 1024 / 1024).toStringAsFixed(2)} MB',
         );
         return size;
       }
       return null;
     } catch (e) {
-      print('LocalImageStorage: Error getting profile image size: $e');
+      AppLogger.log('LocalImageStorage: Error getting profile image size: $e');
       return null;
     }
   }

@@ -128,8 +128,9 @@ class SignInScreen extends StatelessWidget {
                               ),
                               onPressed: () async {
                                 final repo = UserRepository();
-                                final success = await repo.signInWithGoogle();
-                                if (success) {
+                                final result = await repo.signInWithGoogle();
+                                if (!context.mounted) return;
+                                if (result.success) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text(
@@ -143,8 +144,11 @@ class SignInScreen extends StatelessWidget {
                                   );
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('Google sign-in failed.'),
+                                    SnackBar(
+                                      content: Text(
+                                        result.message ??
+                                            'Google sign-in failed.',
+                                      ),
                                     ),
                                   );
                                 }

@@ -14,14 +14,14 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
     Emitter<SigninState> emit,
   ) async {
     emit(SigninLoading());
-    final success = await userRepository.signIn(
+    final result = await userRepository.signIn(
       email: event.email,
       password: event.password,
     );
-    if (success) {
+    if (result.success) {
       emit(SigninSuccess());
     } else {
-      emit(SigninFailure('Invalid email or password.'));
+      emit(SigninFailure(result.message ?? 'Invalid email or password.'));
     }
   }
 }

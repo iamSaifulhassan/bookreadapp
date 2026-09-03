@@ -1,3 +1,4 @@
+import '../../services/app_logger.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import '../../themes/AppColors.dart';
@@ -104,7 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         });
       }
     } catch (e) {
-      print('Error loading current profile image: $e');
+      AppLogger.log('Error loading current profile image: $e');
     }
   }
 
@@ -120,19 +121,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         });
 
         // Save to local storage
-        print('EditProfile: Starting save to local storage...');
+        AppLogger.log('EditProfile: Starting save to local storage...');
         final String? savedImagePath =
             await LocalImageStorageService.saveProfileImage(pickedImage);
-        print('EditProfile: Save completed. Result: $savedImagePath');
+        AppLogger.log('EditProfile: Save completed. Result: $savedImagePath');
 
         if (mounted) {
           setState(() {
             _isUploadingImage = false;
             if (savedImagePath != null && savedImagePath.isNotEmpty) {
-              print('EditProfile: Save successful, path: $savedImagePath');
+              AppLogger.log('EditProfile: Save successful, path: $savedImagePath');
               _currentImagePath = savedImagePath;
               _selectedImage = null; // Clear local file to show saved image
-              print(
+              AppLogger.log(
                 'EditProfile: Cleared _selectedImage, now showing saved image',
               );
               ScaffoldMessenger.of(context).showSnackBar(
@@ -142,7 +143,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               );
             } else {
-              print('EditProfile: Save failed or returned null/empty path');
+              AppLogger.log('EditProfile: Save failed or returned null/empty path');
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Text(
@@ -160,7 +161,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         setState(() {
           _isUploadingImage = false;
         });
-        print('Error picking and saving image: $e');
+        AppLogger.log('Error picking and saving image: $e');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Failed to pick image. Please try again.'),
@@ -316,7 +317,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         height: 120,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) {
-          print('Error loading saved image: $error');
+          AppLogger.log('Error loading saved image: $error');
           return _buildDefaultAvatar();
         },
       );

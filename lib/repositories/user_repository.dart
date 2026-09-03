@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user_model.dart';
+import '../services/app_logger.dart';
+import 'auth_result.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -17,7 +19,32 @@ class UserRepository {
     return methods.isEmpty;
   }
 
-  Future<bool> createUser({
+  /// Maps a Firebase error code to a user-facing message.
+  String _messageForAuthCode(String code) {
+    switch (code) {
+      case 'email-already-in-use':
+        return 'An account already exists for that email.';
+      case 'invalid-email':
+        return 'That email address is not valid.';
+      case 'weak-password':
+        return 'That password is too weak. Use at least 6 characters.';
+      case 'wrong-password':
+      case 'invalid-credential':
+        return 'Incorrect email or password.';
+      case 'user-not-found':
+        return 'No account found for that email.';
+      case 'user-disabled':
+        return 'This account has been disabled.';
+      case 'too-many-requests':
+        return 'Too many attempts. Please try again later.';
+      case 'network-request-failed':
+        return 'Network error. Check your connection and try again.';
+      default:
+        return 'Something went wrong. Please try again.';
+    }
+  }
+
+  Future<AuthResult> createUser({
     required String email,
     required String phone,
     required String country,
@@ -38,33 +65,39 @@ class UserRepository {
         userType: userType,
       );
 
-      return true;
+      return const AuthResult.success();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        throw Exception('email-already-exists');
-      }
-      return false;
+      return AuthResult.failure(e.code, _messageForAuthCode(e.code));
     } catch (e) {
-      return false;
+      AppLogger.error('createUser failed', e);
+      return AuthResult.failure('unknown', _messageForAuthCode('unknown'));
     }
   }
 
-  Future<bool> signIn({required String email, required String password}) async {
+  Future<AuthResult> signIn({
+    required String email,
+    required String password,
+  }) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return true;
+      return const AuthResult.success();
+    } on FirebaseAuthException catch (e) {
+      return AuthResult.failure(e.code, _messageForAuthCode(e.code));
     } catch (e) {
-      return false;
+      AppLogger.error('signIn failed', e);
+      return AuthResult.failure('unknown', _messageForAuthCode('unknown'));
     }
   }
 
-  Future<bool> signInWithGoogle() async {
+  Future<AuthResult> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) return false;
+      if (googleUser == null) {
+        return AuthResult.failure('cancelled', 'Sign-in was cancelled.');
+      }
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
@@ -72,9 +105,12 @@ class UserRepository {
         idToken: googleAuth.idToken,
       );
       await _firebaseAuth.signInWithCredential(credential);
-      return true;
+      return const AuthResult.success();
+    } on FirebaseAuthException catch (e) {
+      return AuthResult.failure(e.code, _messageForAuthCode(e.code));
     } catch (e) {
-      return false;
+      AppLogger.error('signInWithGoogle failed', e);
+      return AuthResult.failure('unknown', _messageForAuthCode('unknown'));
     }
   }
 
@@ -86,26 +122,26 @@ class UserRepository {
     try {
       final User? user = _firebaseAuth.currentUser;
       if (user == null) {
-        print('Test: No authenticated user');
+        AppLogger.log('Test: No authenticated user');
         return false;
       }
 
-      print('Test: User authenticated: ${user.email}');
+      AppLogger.log('Test: User authenticated: ${user.email}');
 
       // Try to read a simple value
       final DatabaseReference testRef = db.child('test');
       await testRef.set({'timestamp': DateTime.now().millisecondsSinceEpoch});
-      print('Test: Write successful');
+      AppLogger.log('Test: Write successful');
 
       final DataSnapshot snapshot = await testRef.get();
-      print('Test: Read successful, data exists: ${snapshot.exists}');
+      AppLogger.log('Test: Read successful, data exists: ${snapshot.exists}');
 
       // Clean up test data
       await testRef.remove();
-      print('Test: Database connection successful');
+      AppLogger.log('Test: Database connection successful');
       return true;
     } catch (e) {
-      print('Test: Database connection failed: $e');
+      AppLogger.error('Test: Database connection failed', e);
       return false;
     }
   }
@@ -127,7 +163,7 @@ class UserRepository {
       }
       return null;
     } catch (e) {
-      print('Error fetching user data: $e');
+      AppLogger.error('Error fetching user data', e);
       return null;
     }
   }
@@ -137,19 +173,18 @@ class UserRepository {
     try {
       final User? user = _firebaseAuth.currentUser;
       if (user == null) {
-        print('Error: No authenticated user found');
+        AppLogger.log('Error: No authenticated user found');
         return false;
       }
 
       final String key = _emailKey(user.email ?? '');
-      print('Updating user data for key: $key');
-      print('User data: ${userModel.toMap()}');
+      AppLogger.log('Updating user data for key: $key');
 
       await db.child('users').child(key).update(userModel.toMap());
-      print('User data updated successfully');
+      AppLogger.log('User data updated successfully');
       return true;
     } catch (e) {
-      print('Error updating user data: $e');
+      AppLogger.error('Error updating user data', e);
       return false;
     }
   }
@@ -174,7 +209,7 @@ class UserRepository {
 
       return true;
     } catch (e) {
-      print('Error saving user data: $e');
+      AppLogger.error('Error saving user data', e);
       return false;
     }
   }

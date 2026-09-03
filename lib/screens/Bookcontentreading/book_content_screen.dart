@@ -1,3 +1,4 @@
+import '../../services/app_logger.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -210,7 +211,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         }
       });
     } catch (e) {
-      print('TTS initialization failed: $e');
+      AppLogger.log('TTS initialization failed: $e');
     }
   }
 
@@ -255,7 +256,7 @@ class _BookContentScreenState extends State<BookContentScreen>
 
       document.dispose();
     } catch (e) {
-      print('Error extracting text from page $_currentPage: $e');
+      AppLogger.log('Error extracting text from page $_currentPage: $e');
       if (mounted) {
         setState(() {
           _sentences = ['Unable to extract text from this page.'];
@@ -385,7 +386,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         });
       }
     } catch (e) {
-      print('Error stopping TTS: $e');
+      AppLogger.log('Error stopping TTS: $e');
     }
   }
 
@@ -681,7 +682,7 @@ class _BookContentScreenState extends State<BookContentScreen>
               ),
             ],
           ),
-    );
+    ).then((_) => controller.dispose());
   }
 
   // PDF Navigation
@@ -734,7 +735,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         });
       }
     } catch (e) {
-      print('Error refreshing reading settings: $e');
+      AppLogger.log('Error refreshing reading settings: $e');
     }
   }
   @override
