@@ -472,4 +472,19 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'Conecte-se comigo';
+
+  @override
+  String get loadingLabel => 'Carregando...';
+
+  @override
+  String get pleaseWaitLabel => 'Aguarde...';
+
+  @override
+  String get bookReaderLabel => 'Leitor de Livros';
+
+  @override
+  String get userLabel => 'Usuário';
+
+  @override
+  String get logoutNav => 'Sair';
 }

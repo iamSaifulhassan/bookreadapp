@@ -457,4 +457,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get connectWithMeSection => '联系我';
+
+  @override
+  String get loadingLabel => '加载中...';
+
+  @override
+  String get pleaseWaitLabel => '请稍候...';
+
+  @override
+  String get bookReaderLabel => '读书者';
+
+  @override
+  String get userLabel => '用户';
+
+  @override
+  String get logoutNav => '退出登录';
 }

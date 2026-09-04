@@ -477,4 +477,19 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'Me contacter';
+
+  @override
+  String get loadingLabel => 'Chargement...';
+
+  @override
+  String get pleaseWaitLabel => 'Veuillez patienter...';
+
+  @override
+  String get bookReaderLabel => 'Lecteur de livres';
+
+  @override
+  String get userLabel => 'Utilisateur';
+
+  @override
+  String get logoutNav => 'Déconnexion';
 }

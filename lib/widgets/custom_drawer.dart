@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../themes/AppColors.dart';
 import '../services/user_service.dart';
 import '../models/user_model.dart';
+import '../l10n/generated/app_localizations.dart';
 
 class CustomDrawer extends StatefulWidget {
   CustomDrawer({super.key});
@@ -43,6 +44,59 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final items = <_DrawerEntry>[
+      _DrawerEntry(
+        icon: Icons.home,
+        title: l10n.myBooksTitle,
+        onTap: () => Navigator.pushReplacementNamed(context, '/home'),
+      ),
+      _DrawerEntry(
+        icon: Icons.favorite,
+        title: l10n.favouritesTitle,
+        iconColor: AppColors.error,
+        onTap: () => Navigator.pushReplacementNamed(context, '/favourites'),
+      ),
+      _DrawerEntry(
+        icon: Icons.bookmark,
+        title: l10n.readLaterTitle,
+        iconColor: AppColors.secondary,
+        onTap: () => Navigator.pushNamed(context, '/toread'),
+      ),
+      _DrawerEntry(
+        icon: Icons.check_circle,
+        title: l10n.completedBooksTitle,
+        iconColor: AppColors.success,
+        onTap: () => Navigator.pushNamed(context, '/completed'),
+      ),
+      _DrawerEntry.divider(),
+      _DrawerEntry(
+        icon: Icons.account_circle,
+        title: l10n.profileTitle,
+        onTap: () => Navigator.pushReplacementNamed(context, '/profile'),
+      ),
+      _DrawerEntry(
+        icon: Icons.settings,
+        title: l10n.settingsTitle,
+        onTap: () => Navigator.pushNamed(context, '/settings'),
+      ),
+      _DrawerEntry(
+        icon: Icons.info,
+        title: l10n.aboutTitle,
+        onTap: () => Navigator.pushNamed(context, '/about'),
+      ),
+      _DrawerEntry.divider(),
+      _DrawerEntry(
+        icon: Icons.logout,
+        title: l10n.logoutNav,
+        iconColor: AppColors.error,
+        onTap: () async {
+          Navigator.pop(context); // Close drawer first
+          await _userService.signOut();
+        },
+      ),
+    ];
+
     return Drawer(
       backgroundColor: AppColors.backgroundLight,
       child: Column(
@@ -58,7 +112,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   end: Alignment.bottomRight,
                   colors: [
                     AppColors.primary,
-                    AppColors.primary.withOpacity(0.8),
+                    AppColors.primary.withValues(alpha: 0.8),
                   ],
                 ),
               ),
@@ -72,10 +126,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       children: [
                         Text(
                           _isLoading
-                              ? 'Loading...'
+                              ? l10n.loadingLabel
                               : _userService.getUserDisplayName() ??
                                   _userService.userEmail?.split('@')[0] ??
-                                  'User',
+                                  l10n.userLabel,
                           style: TextStyle(
                             color: AppColors.onPrimary,
                             fontSize: 18,
@@ -84,10 +138,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         Text(
                           _isLoading
-                              ? 'Please wait...'
-                              : _userModel?.userType ?? 'Book Reader',
+                              ? l10n.pleaseWaitLabel
+                              : _userModel?.userType ?? l10n.bookReaderLabel,
                           style: TextStyle(
-                            color: AppColors.onPrimary.withOpacity(0.8),
+                            color: AppColors.onPrimary.withValues(alpha: 0.8),
                             fontSize: 14,
                           ),
                         ),
@@ -103,75 +157,31 @@ class _CustomDrawerState extends State<CustomDrawer> {
               child: Column(
                 children: [
                   const SizedBox(height: 8),
-
-                  // Main Navigation
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.home,
-                    title: 'My Books',
-                    onTap:
-                        () => Navigator.pushReplacementNamed(context, '/home'),
-                  ),
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.favorite,
-                    title: 'Favourites',
-                    iconColor: AppColors.error,
-                    onTap:
-                        () => Navigator.pushReplacementNamed(
-                          context,
-                          '/favourites',
-                        ),
-                  ),
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.bookmark,
-                    title: 'Read Later',
-                    iconColor: AppColors.secondary,
-                    onTap: () => Navigator.pushNamed(context, '/toread'),
-                  ),
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.check_circle,
-                    title: 'Completed',
-                    iconColor: AppColors.success,
-                    onTap: () => Navigator.pushNamed(context, '/completed'),
-                  ),
-
-                  Divider(height: 32, color: AppColors.border),
-
-                  // Secondary Navigation
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.account_circle,
-                    title: 'Profile',
-                    onTap:
-                        () =>
-                            Navigator.pushReplacementNamed(context, '/profile'),
-                  ),
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.settings,
-                    title: 'Settings',
-                    onTap: () => Navigator.pushNamed(context, '/settings'),
-                  ),
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.info,
-                    title: 'About',
-                    onTap: () => Navigator.pushNamed(context, '/about'),
-                  ),
-                  Divider(height: 32, color: AppColors.border), // Logout
-                  _buildDrawerItem(
-                    context,
-                    icon: Icons.logout,
-                    title: 'Logout',
-                    iconColor: AppColors.error,
-                    onTap: () async {
-                      Navigator.pop(context); // Close drawer first
-                      await _userService.signOut();
-                    },
-                  ),
+                  for (int i = 0; i < items.length; i++)
+                    TweenAnimationBuilder<double>(
+                      key: ValueKey(i),
+                      tween: Tween(begin: 0, end: 1),
+                      duration: Duration(milliseconds: 200 + i * 35),
+                      curve: Curves.easeOutCubic,
+                      builder:
+                          (context, value, child) => Opacity(
+                            opacity: value,
+                            child: Transform.translate(
+                              offset: Offset((1 - value) * -16, 0),
+                              child: child,
+                            ),
+                          ),
+                      child:
+                          items[i].isDivider
+                              ? Divider(height: 32, color: AppColors.border)
+                              : _buildDrawerItem(
+                                context,
+                                icon: items[i].icon!,
+                                title: items[i].title!,
+                                iconColor: items[i].iconColor,
+                                onTap: items[i].onTap!,
+                              ),
+                    ),
                 ],
               ),
             ),
@@ -261,4 +271,27 @@ class _CustomDrawerState extends State<CustomDrawer> {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
     );
   }
+}
+
+/// A drawer row, or a divider when [isDivider] is true (via [_DrawerEntry.divider]).
+class _DrawerEntry {
+  final IconData? icon;
+  final String? title;
+  final Color? iconColor;
+  final VoidCallback? onTap;
+  final bool isDivider;
+
+  _DrawerEntry({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+    this.iconColor,
+  }) : isDivider = false;
+
+  _DrawerEntry.divider()
+    : icon = null,
+      title = null,
+      iconColor = null,
+      onTap = null,
+      isDivider = true;
 }

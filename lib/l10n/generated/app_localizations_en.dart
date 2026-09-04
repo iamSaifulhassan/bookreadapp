@@ -468,4 +468,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'Connect with me';
+
+  @override
+  String get loadingLabel => 'Loading...';
+
+  @override
+  String get pleaseWaitLabel => 'Please wait...';
+
+  @override
+  String get bookReaderLabel => 'Book Reader';
+
+  @override
+  String get userLabel => 'User';
+
+  @override
+  String get logoutNav => 'Logout';
 }

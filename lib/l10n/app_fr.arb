@@ -156,5 +156,11 @@
 
   "aboutTitle": "À propos",
   "aboutBio": "Un développeur Flutter passionné par la création d'applications belles et fonctionnelles. Cette application est construite avec Flutter et Firebase avec un stockage de données local, démontrant des compétences en développement mobile.",
-  "connectWithMeSection": "Me contacter"
+  "connectWithMeSection": "Me contacter",
+
+  "loadingLabel": "Chargement...",
+  "pleaseWaitLabel": "Veuillez patienter...",
+  "bookReaderLabel": "Lecteur de livres",
+  "userLabel": "Utilisateur",
+  "logoutNav": "Déconnexion"
 }

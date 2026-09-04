@@ -459,4 +459,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'つながる';
+
+  @override
+  String get loadingLabel => '読み込み中...';
+
+  @override
+  String get pleaseWaitLabel => 'お待ちください...';
+
+  @override
+  String get bookReaderLabel => '読書家';
+
+  @override
+  String get userLabel => 'ユーザー';
+
+  @override
+  String get logoutNav => 'ログアウト';
 }

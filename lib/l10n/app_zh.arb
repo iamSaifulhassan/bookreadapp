@@ -156,5 +156,11 @@
 
   "aboutTitle": "关于",
   "aboutBio": "一名热衷于打造美观实用应用的 Flutter 开发者。此应用使用 Flutter 和 Firebase 结合本地数据存储构建，展示了移动开发方面的技能。",
-  "connectWithMeSection": "联系我"
+  "connectWithMeSection": "联系我",
+
+  "loadingLabel": "加载中...",
+  "pleaseWaitLabel": "请稍候...",
+  "bookReaderLabel": "读书者",
+  "userLabel": "用户",
+  "logoutNav": "退出登录"
 }

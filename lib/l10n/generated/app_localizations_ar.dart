@@ -468,4 +468,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'تواصل معي';
+
+  @override
+  String get loadingLabel => 'جارٍ التحميل...';
+
+  @override
+  String get pleaseWaitLabel => 'يرجى الانتظار...';
+
+  @override
+  String get bookReaderLabel => 'قارئ الكتب';
+
+  @override
+  String get userLabel => 'مستخدم';
+
+  @override
+  String get logoutNav => 'تسجيل الخروج';
 }

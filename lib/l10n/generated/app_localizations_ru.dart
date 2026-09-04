@@ -474,4 +474,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'Связаться со мной';
+
+  @override
+  String get loadingLabel => 'Загрузка...';
+
+  @override
+  String get pleaseWaitLabel => 'Пожалуйста, подождите...';
+
+  @override
+  String get bookReaderLabel => 'Читатель книг';
+
+  @override
+  String get userLabel => 'Пользователь';
+
+  @override
+  String get logoutNav => 'Выйти';
 }

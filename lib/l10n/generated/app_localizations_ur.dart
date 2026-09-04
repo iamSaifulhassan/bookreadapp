@@ -469,4 +469,19 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'مجھ سے رابطہ کریں';
+
+  @override
+  String get loadingLabel => 'لوڈ ہو رہا ہے...';
+
+  @override
+  String get pleaseWaitLabel => 'براہ کرم انتظار کریں...';
+
+  @override
+  String get bookReaderLabel => 'کتاب پڑھنے والا';
+
+  @override
+  String get userLabel => 'صارف';
+
+  @override
+  String get logoutNav => 'لاگ آؤٹ';
 }

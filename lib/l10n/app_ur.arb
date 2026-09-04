@@ -156,5 +156,11 @@
 
   "aboutTitle": "تعارف",
   "aboutBio": "ایک Flutter ڈویلپر جو خوبصورت اور فعال ایپلیکیشنز بنانے کا جذبہ رکھتا ہے۔ یہ ایپ Flutter اور Firebase کے ساتھ مقامی ڈیٹا اسٹوریج کا استعمال کرتے ہوئے بنائی گئی ہے، جو موبائل ڈویلپمنٹ میں مہارت ظاہر کرتی ہے۔",
-  "connectWithMeSection": "مجھ سے رابطہ کریں"
+  "connectWithMeSection": "مجھ سے رابطہ کریں",
+
+  "loadingLabel": "لوڈ ہو رہا ہے...",
+  "pleaseWaitLabel": "براہ کرم انتظار کریں...",
+  "bookReaderLabel": "کتاب پڑھنے والا",
+  "userLabel": "صارف",
+  "logoutNav": "لاگ آؤٹ"
 }

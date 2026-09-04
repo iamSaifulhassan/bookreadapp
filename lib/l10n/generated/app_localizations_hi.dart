@@ -467,4 +467,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'मुझसे जुड़ें';
+
+  @override
+  String get loadingLabel => 'लोड हो रहा है...';
+
+  @override
+  String get pleaseWaitLabel => 'कृपया प्रतीक्षा करें...';
+
+  @override
+  String get bookReaderLabel => 'पुस्तक पाठक';
+
+  @override
+  String get userLabel => 'उपयोगकर्ता';
+
+  @override
+  String get logoutNav => 'लॉगआउट';
 }

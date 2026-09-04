@@ -156,5 +156,11 @@
 
   "aboutTitle": "परिचय",
   "aboutBio": "एक Flutter डेवलपर जो सुंदर और कार्यात्मक एप्लिकेशन बनाने का शौकीन है। यह ऐप Flutter और Firebase के साथ स्थानीय डेटा स्टोरेज का उपयोग करके बनाया गया है, जो मोबाइल डेवलपमेंट में कौशल दर्शाता है।",
-  "connectWithMeSection": "मुझसे जुड़ें"
+  "connectWithMeSection": "मुझसे जुड़ें",
+
+  "loadingLabel": "लोड हो रहा है...",
+  "pleaseWaitLabel": "कृपया प्रतीक्षा करें...",
+  "bookReaderLabel": "पुस्तक पाठक",
+  "userLabel": "उपयोगकर्ता",
+  "logoutNav": "लॉगआउट"
 }

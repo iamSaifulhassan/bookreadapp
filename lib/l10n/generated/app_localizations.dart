@@ -987,6 +987,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect with me'**
   String get connectWithMeSection;
+
+  /// No description provided for @loadingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingLabel;
+
+  /// No description provided for @pleaseWaitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait...'**
+  String get pleaseWaitLabel;
+
+  /// No description provided for @bookReaderLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Book Reader'**
+  String get bookReaderLabel;
+
+  /// No description provided for @userLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'User'**
+  String get userLabel;
+
+  /// No description provided for @logoutNav.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logoutNav;
 }
 
 class _AppLocalizationsDelegate

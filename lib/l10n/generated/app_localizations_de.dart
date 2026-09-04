@@ -470,4 +470,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get connectWithMeSection => 'Kontaktiere mich';
+
+  @override
+  String get loadingLabel => 'Wird geladen...';
+
+  @override
+  String get pleaseWaitLabel => 'Bitte warten...';
+
+  @override
+  String get bookReaderLabel => 'Buchleser';
+
+  @override
+  String get userLabel => 'Benutzer';
+
+  @override
+  String get logoutNav => 'Abmelden';
 }

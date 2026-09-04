@@ -156,5 +156,11 @@
 
   "aboutTitle": "حول",
   "aboutBio": "مطور Flutter شغوف بإنشاء تطبيقات جميلة وعملية. تم بناء هذا التطبيق باستخدام Flutter و Firebase مع تخزين بيانات محلي، مما يُظهر مهارات في تطوير تطبيقات الجوال.",
-  "connectWithMeSection": "تواصل معي"
+  "connectWithMeSection": "تواصل معي",
+
+  "loadingLabel": "جارٍ التحميل...",
+  "pleaseWaitLabel": "يرجى الانتظار...",
+  "bookReaderLabel": "قارئ الكتب",
+  "userLabel": "مستخدم",
+  "logoutNav": "تسجيل الخروج"
 }

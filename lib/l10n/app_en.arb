@@ -181,5 +181,11 @@
 
   "aboutTitle": "About",
   "aboutBio": "A Flutter developer with a passion for creating beautiful and functional applications. This app is built using Flutter and Firebase with Local Data Storage, showcasing skills in mobile development.",
-  "connectWithMeSection": "Connect with me"
+  "connectWithMeSection": "Connect with me",
+
+  "loadingLabel": "Loading...",
+  "pleaseWaitLabel": "Please wait...",
+  "bookReaderLabel": "Book Reader",
+  "userLabel": "User",
+  "logoutNav": "Logout"
 }
