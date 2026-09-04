@@ -152,5 +152,9 @@
   "completedBooksTitle": "مکمل کتابیں",
   "completedStatusLabel": "مکمل",
   "noCompletedBooksYet": "ابھی تک کوئی مکمل کتاب نہیں",
-  "completedBooksHint": "آپ کی پڑھی ہوئی کتابیں یہاں دکھائی دیں گی"
+  "completedBooksHint": "آپ کی پڑھی ہوئی کتابیں یہاں دکھائی دیں گی",
+
+  "aboutTitle": "تعارف",
+  "aboutBio": "ایک Flutter ڈویلپر جو خوبصورت اور فعال ایپلیکیشنز بنانے کا جذبہ رکھتا ہے۔ یہ ایپ Flutter اور Firebase کے ساتھ مقامی ڈیٹا اسٹوریج کا استعمال کرتے ہوئے بنائی گئی ہے، جو موبائل ڈویلپمنٹ میں مہارت ظاہر کرتی ہے۔",
+  "connectWithMeSection": "مجھ سے رابطہ کریں"
 }

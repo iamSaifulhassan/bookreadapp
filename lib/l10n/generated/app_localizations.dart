@@ -969,6 +969,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Books you\'ve finished reading will appear here'**
   String get completedBooksHint;
+
+  /// No description provided for @aboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutTitle;
+
+  /// No description provided for @aboutBio.
+  ///
+  /// In en, this message translates to:
+  /// **'A Flutter developer with a passion for creating beautiful and functional applications. This app is built using Flutter and Firebase with Local Data Storage, showcasing skills in mobile development.'**
+  String get aboutBio;
+
+  /// No description provided for @connectWithMeSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with me'**
+  String get connectWithMeSection;
 }
 
 class _AppLocalizationsDelegate

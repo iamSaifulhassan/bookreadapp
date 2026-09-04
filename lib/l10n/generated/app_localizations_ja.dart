@@ -449,4 +449,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get completedBooksHint => '読み終えた本がここに表示されます';
+
+  @override
+  String get aboutTitle => 'アプリについて';
+
+  @override
+  String get aboutBio =>
+      '美しく機能的なアプリケーションの作成に情熱を注ぐFlutter開発者です。このアプリはFlutterとFirebaseをローカルデータストレージと組み合わせて構築されており、モバイル開発のスキルを示しています。';
+
+  @override
+  String get connectWithMeSection => 'つながる';
 }

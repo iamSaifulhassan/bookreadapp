@@ -464,4 +464,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get completedBooksHint => 'Книги, которые вы дочитали, появятся здесь';
+
+  @override
+  String get aboutTitle => 'О программе';
+
+  @override
+  String get aboutBio =>
+      'Flutter-разработчик, увлечённый созданием красивых и функциональных приложений. Это приложение создано на Flutter и Firebase с локальным хранением данных, демонстрируя навыки мобильной разработки.';
+
+  @override
+  String get connectWithMeSection => 'Связаться со мной';
 }

@@ -152,5 +152,9 @@
   "completedBooksTitle": "已完成的图书",
   "completedStatusLabel": "已完成",
   "noCompletedBooksYet": "还没有已完成的图书",
-  "completedBooksHint": "您读完的图书将显示在这里"
+  "completedBooksHint": "您读完的图书将显示在这里",
+
+  "aboutTitle": "关于",
+  "aboutBio": "一名热衷于打造美观实用应用的 Flutter 开发者。此应用使用 Flutter 和 Firebase 结合本地数据存储构建，展示了移动开发方面的技能。",
+  "connectWithMeSection": "联系我"
 }

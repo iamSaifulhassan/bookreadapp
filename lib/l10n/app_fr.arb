@@ -152,5 +152,9 @@
   "completedBooksTitle": "Livres Terminés",
   "completedStatusLabel": "Terminé",
   "noCompletedBooksYet": "Aucun livre terminé pour le moment",
-  "completedBooksHint": "Les livres que vous avez terminés apparaîtront ici"
+  "completedBooksHint": "Les livres que vous avez terminés apparaîtront ici",
+
+  "aboutTitle": "À propos",
+  "aboutBio": "Un développeur Flutter passionné par la création d'applications belles et fonctionnelles. Cette application est construite avec Flutter et Firebase avec un stockage de données local, démontrant des compétences en développement mobile.",
+  "connectWithMeSection": "Me contacter"
 }

@@ -152,5 +152,9 @@
   "completedBooksTitle": "読了した本",
   "completedStatusLabel": "読了",
   "noCompletedBooksYet": "読了した本はまだありません",
-  "completedBooksHint": "読み終えた本がここに表示されます"
+  "completedBooksHint": "読み終えた本がここに表示されます",
+
+  "aboutTitle": "アプリについて",
+  "aboutBio": "美しく機能的なアプリケーションの作成に情熱を注ぐFlutter開発者です。このアプリはFlutterとFirebaseをローカルデータストレージと組み合わせて構築されており、モバイル開発のスキルを示しています。",
+  "connectWithMeSection": "つながる"
 }

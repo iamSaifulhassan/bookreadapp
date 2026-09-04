@@ -152,5 +152,9 @@
   "completedBooksTitle": "الكتب المكتملة",
   "completedStatusLabel": "مكتمل",
   "noCompletedBooksYet": "لا توجد كتب مكتملة بعد",
-  "completedBooksHint": "ستظهر هنا الكتب التي انتهيت من قراءتها"
+  "completedBooksHint": "ستظهر هنا الكتب التي انتهيت من قراءتها",
+
+  "aboutTitle": "حول",
+  "aboutBio": "مطور Flutter شغوف بإنشاء تطبيقات جميلة وعملية. تم بناء هذا التطبيق باستخدام Flutter و Firebase مع تخزين بيانات محلي، مما يُظهر مهارات في تطوير تطبيقات الجوال.",
+  "connectWithMeSection": "تواصل معي"
 }

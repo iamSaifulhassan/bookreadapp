@@ -459,4 +459,14 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get completedBooksHint => 'آپ کی پڑھی ہوئی کتابیں یہاں دکھائی دیں گی';
+
+  @override
+  String get aboutTitle => 'تعارف';
+
+  @override
+  String get aboutBio =>
+      'ایک Flutter ڈویلپر جو خوبصورت اور فعال ایپلیکیشنز بنانے کا جذبہ رکھتا ہے۔ یہ ایپ Flutter اور Firebase کے ساتھ مقامی ڈیٹا اسٹوریج کا استعمال کرتے ہوئے بنائی گئی ہے، جو موبائل ڈویلپمنٹ میں مہارت ظاہر کرتی ہے۔';
+
+  @override
+  String get connectWithMeSection => 'مجھ سے رابطہ کریں';
 }

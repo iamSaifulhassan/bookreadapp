@@ -460,4 +460,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get completedBooksHint =>
       'Bücher, die du fertig gelesen hast, erscheinen hier';
+
+  @override
+  String get aboutTitle => 'Über mich';
+
+  @override
+  String get aboutBio =>
+      'Ein Flutter-Entwickler mit Leidenschaft für schöne und funktionale Anwendungen. Diese App wurde mit Flutter und Firebase mit lokaler Datenspeicherung erstellt und zeigt Fähigkeiten in der mobilen Entwicklung.';
+
+  @override
+  String get connectWithMeSection => 'Kontaktiere mich';
 }

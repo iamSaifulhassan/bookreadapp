@@ -177,5 +177,9 @@
   "completedBooksTitle": "Completed Books",
   "completedStatusLabel": "Completed",
   "noCompletedBooksYet": "No completed books yet",
-  "completedBooksHint": "Books you've finished reading will appear here"
+  "completedBooksHint": "Books you've finished reading will appear here",
+
+  "aboutTitle": "About",
+  "aboutBio": "A Flutter developer with a passion for creating beautiful and functional applications. This app is built using Flutter and Firebase with Local Data Storage, showcasing skills in mobile development.",
+  "connectWithMeSection": "Connect with me"
 }
