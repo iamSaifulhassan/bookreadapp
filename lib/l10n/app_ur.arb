@@ -147,5 +147,10 @@
   "favouriteTooltip": "پسندیدہ",
   "removeFromReadLaterTooltip": "بعد میں پڑھیں سے ہٹائیں",
   "noBooksToReadLater": "بعد میں پڑھنے کے لیے کوئی کتاب نہیں",
-  "addBooksToReadLaterHint": "میری کتابیں اسکرین سے کتابیں بعد میں پڑھنے کے لیے شامل کریں"
+  "addBooksToReadLaterHint": "میری کتابیں اسکرین سے کتابیں بعد میں پڑھنے کے لیے شامل کریں",
+
+  "completedBooksTitle": "مکمل کتابیں",
+  "completedStatusLabel": "مکمل",
+  "noCompletedBooksYet": "ابھی تک کوئی مکمل کتاب نہیں",
+  "completedBooksHint": "آپ کی پڑھی ہوئی کتابیں یہاں دکھائی دیں گی"
 }

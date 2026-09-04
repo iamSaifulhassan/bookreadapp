@@ -435,4 +435,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get addBooksToReadLaterHint => '从我的图书屏幕添加图书到稍后阅读';
+
+  @override
+  String get completedBooksTitle => '已完成的图书';
+
+  @override
+  String get completedStatusLabel => '已完成';
+
+  @override
+  String get noCompletedBooksYet => '还没有已完成的图书';
+
+  @override
+  String get completedBooksHint => '您读完的图书将显示在这里';
 }

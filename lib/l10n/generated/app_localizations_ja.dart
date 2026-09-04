@@ -437,4 +437,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get addBooksToReadLaterHint => 'マイブック画面から本を後で読むに追加してください';
+
+  @override
+  String get completedBooksTitle => '読了した本';
+
+  @override
+  String get completedStatusLabel => '読了';
+
+  @override
+  String get noCompletedBooksYet => '読了した本はまだありません';
+
+  @override
+  String get completedBooksHint => '読み終えた本がここに表示されます';
 }

@@ -945,6 +945,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add books to read later from the My Books screen'**
   String get addBooksToReadLaterHint;
+
+  /// No description provided for @completedBooksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed Books'**
+  String get completedBooksTitle;
+
+  /// No description provided for @completedStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completedStatusLabel;
+
+  /// No description provided for @noCompletedBooksYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No completed books yet'**
+  String get noCompletedBooksYet;
+
+  /// No description provided for @completedBooksHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Books you\'ve finished reading will appear here'**
+  String get completedBooksHint;
 }
 
 class _AppLocalizationsDelegate

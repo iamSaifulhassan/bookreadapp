@@ -147,5 +147,10 @@
   "favouriteTooltip": "Favorit",
   "removeFromReadLaterTooltip": "Aus „Später lesen“ entfernen",
   "noBooksToReadLater": "Keine Bücher zum späteren Lesen",
-  "addBooksToReadLaterHint": "Füge Bücher über den Bildschirm „Meine Bücher“ zu „Später lesen“ hinzu"
+  "addBooksToReadLaterHint": "Füge Bücher über den Bildschirm „Meine Bücher“ zu „Später lesen“ hinzu",
+
+  "completedBooksTitle": "Abgeschlossene Bücher",
+  "completedStatusLabel": "Abgeschlossen",
+  "noCompletedBooksYet": "Noch keine abgeschlossenen Bücher",
+  "completedBooksHint": "Bücher, die du fertig gelesen hast, erscheinen hier"
 }

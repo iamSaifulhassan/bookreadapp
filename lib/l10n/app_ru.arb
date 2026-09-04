@@ -147,5 +147,10 @@
   "favouriteTooltip": "Избранное",
   "removeFromReadLaterTooltip": "Удалить из «Прочитать позже»",
   "noBooksToReadLater": "Нет книг для чтения позже",
-  "addBooksToReadLaterHint": "Добавьте книги для чтения позже на экране «Мои книги»"
+  "addBooksToReadLaterHint": "Добавьте книги для чтения позже на экране «Мои книги»",
+
+  "completedBooksTitle": "Завершённые книги",
+  "completedStatusLabel": "Завершено",
+  "noCompletedBooksYet": "Пока нет завершённых книг",
+  "completedBooksHint": "Книги, которые вы дочитали, появятся здесь"
 }

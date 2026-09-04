@@ -147,5 +147,10 @@
   "favouriteTooltip": "收藏",
   "removeFromReadLaterTooltip": "从稍后阅读中移除",
   "noBooksToReadLater": "没有稍后阅读的图书",
-  "addBooksToReadLaterHint": "从我的图书屏幕添加图书到稍后阅读"
+  "addBooksToReadLaterHint": "从我的图书屏幕添加图书到稍后阅读",
+
+  "completedBooksTitle": "已完成的图书",
+  "completedStatusLabel": "已完成",
+  "noCompletedBooksYet": "还没有已完成的图书",
+  "completedBooksHint": "您读完的图书将显示在这里"
 }

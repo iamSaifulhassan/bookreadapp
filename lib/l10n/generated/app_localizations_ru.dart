@@ -452,4 +452,16 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get addBooksToReadLaterHint =>
       'Добавьте книги для чтения позже на экране «Мои книги»';
+
+  @override
+  String get completedBooksTitle => 'Завершённые книги';
+
+  @override
+  String get completedStatusLabel => 'Завершено';
+
+  @override
+  String get noCompletedBooksYet => 'Пока нет завершённых книг';
+
+  @override
+  String get completedBooksHint => 'Книги, которые вы дочитали, появятся здесь';
 }

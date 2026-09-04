@@ -446,4 +446,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addBooksToReadLaterHint => 'أضف كتبًا للقراءة لاحقًا من شاشة كتبي';
+
+  @override
+  String get completedBooksTitle => 'الكتب المكتملة';
+
+  @override
+  String get completedStatusLabel => 'مكتمل';
+
+  @override
+  String get noCompletedBooksYet => 'لا توجد كتب مكتملة بعد';
+
+  @override
+  String get completedBooksHint => 'ستظهر هنا الكتب التي انتهيت من قراءتها';
 }

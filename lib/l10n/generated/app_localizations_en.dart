@@ -445,4 +445,17 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get addBooksToReadLaterHint =>
       'Add books to read later from the My Books screen';
+
+  @override
+  String get completedBooksTitle => 'Completed Books';
+
+  @override
+  String get completedStatusLabel => 'Completed';
+
+  @override
+  String get noCompletedBooksYet => 'No completed books yet';
+
+  @override
+  String get completedBooksHint =>
+      'Books you\'ve finished reading will appear here';
 }

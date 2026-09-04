@@ -147,5 +147,10 @@
   "favouriteTooltip": "مفضلة",
   "removeFromReadLaterTooltip": "إزالة من القراءة لاحقًا",
   "noBooksToReadLater": "لا توجد كتب للقراءة لاحقًا",
-  "addBooksToReadLaterHint": "أضف كتبًا للقراءة لاحقًا من شاشة كتبي"
+  "addBooksToReadLaterHint": "أضف كتبًا للقراءة لاحقًا من شاشة كتبي",
+
+  "completedBooksTitle": "الكتب المكتملة",
+  "completedStatusLabel": "مكتمل",
+  "noCompletedBooksYet": "لا توجد كتب مكتملة بعد",
+  "completedBooksHint": "ستظهر هنا الكتب التي انتهيت من قراءتها"
 }

@@ -147,5 +147,10 @@
   "favouriteTooltip": "Favorito",
   "removeFromReadLaterTooltip": "Quitar de Leer Más Tarde",
   "noBooksToReadLater": "No hay libros para leer más tarde",
-  "addBooksToReadLaterHint": "Añade libros para leer más tarde desde la pantalla Mis Libros"
+  "addBooksToReadLaterHint": "Añade libros para leer más tarde desde la pantalla Mis Libros",
+
+  "completedBooksTitle": "Libros Completados",
+  "completedStatusLabel": "Completado",
+  "noCompletedBooksYet": "Aún no hay libros completados",
+  "completedBooksHint": "Los libros que hayas terminado de leer aparecerán aquí"
 }

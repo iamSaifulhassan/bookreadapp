@@ -147,5 +147,10 @@
   "favouriteTooltip": "お気に入り",
   "removeFromReadLaterTooltip": "後で読むから削除",
   "noBooksToReadLater": "後で読む本がありません",
-  "addBooksToReadLaterHint": "マイブック画面から本を後で読むに追加してください"
+  "addBooksToReadLaterHint": "マイブック画面から本を後で読むに追加してください",
+
+  "completedBooksTitle": "読了した本",
+  "completedStatusLabel": "読了",
+  "noCompletedBooksYet": "読了した本はまだありません",
+  "completedBooksHint": "読み終えた本がここに表示されます"
 }

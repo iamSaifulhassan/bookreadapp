@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import '../Bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class CompletedScreen extends StatefulWidget {
   const CompletedScreen({super.key});
@@ -82,7 +83,10 @@ class _CompletedScreenState extends State<CompletedScreen> {
   String _getFileDate(String path) {
     try {
       final file = File(path);
-      return 'Modified: ${DateFormat('yyyy-MM-dd HH:mm').format(file.statSync().modified)}';
+      final formatted = DateFormat(
+        'yyyy-MM-dd HH:mm',
+      ).format(file.statSync().modified);
+      return AppLocalizations.of(context)!.modifiedLabel(formatted);
     } catch (_) {
       return '';
     }
@@ -94,6 +98,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
   }
 
   Widget _buildFileCard(File file, {int? index}) {
+    final l10n = AppLocalizations.of(context)!;
     final fileName = file.path.split('/').last;
     final displayName =
         fileName.length > 25 ? '${fileName.substring(0, 22)}...' : fileName;
@@ -133,7 +138,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.success.withOpacity(0.8),
+                          AppColors.success.withValues(alpha: 0.8),
                           AppColors.success,
                         ],
                       ),
@@ -221,10 +226,10 @@ class _CompletedScreenState extends State<CompletedScreen> {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.success.withOpacity(0.1),
+                                color: AppColors.success.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: AppColors.success.withOpacity(0.3),
+                                  color: AppColors.success.withValues(alpha: 0.3),
                                 ),
                               ),
                               child: Text(
@@ -248,7 +253,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              'Completed',
+                              l10n.completedStatusLabel,
                               style: TextStyle(
                                 fontSize: 12,
                                 color: AppColors.success,
@@ -287,12 +292,12 @@ class _CompletedScreenState extends State<CompletedScreen> {
                               ? AppColors.error
                               : null,
                     ),
-                    tooltip: 'Favourite',
+                    tooltip: l10n.favouriteTooltip,
                     onPressed: () => _toggleFavourite(file.path),
                   ),
                   IconButton(
                     icon: const Icon(Icons.share, size: 20),
-                    tooltip: 'Share',
+                    tooltip: l10n.commonShare,
                     onPressed: () => _shareFile(file.path),
                   ),
                   IconButton(
@@ -301,7 +306,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
                       size: 20,
                       color: AppColors.success,
                     ),
-                    tooltip: 'Remove from Completed',
+                    tooltip: l10n.removeFromCompletedTooltip,
                     onPressed: () => _removeFromCompleted(file.path),
                   ),
                 ],
@@ -349,7 +354,7 @@ class _CompletedScreenState extends State<CompletedScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        AppColors.success.withOpacity(0.8),
+                        AppColors.success.withValues(alpha: 0.8),
                         AppColors.success,
                       ],
                     ),
@@ -465,17 +470,18 @@ class _CompletedScreenState extends State<CompletedScreen> {
     if (_loading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Completed Books'),
+        title: Text(l10n.completedBooksTitle),
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.onPrimary,
         actions: [
           IconButton(
             icon: Icon(_isGrid ? Icons.list : Icons.grid_view),
             onPressed: () => setState(() => _isGrid = !_isGrid),
-            tooltip: _isGrid ? 'List View' : 'Grid View',
+            tooltip: _isGrid ? l10n.listViewTooltip : l10n.gridViewTooltip,
           ),
         ],
       ),
@@ -492,18 +498,18 @@ class _CompletedScreenState extends State<CompletedScreen> {
                       color: Colors.grey[400],
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'No completed books yet',
-                      style: TextStyle(
+                    Text(
+                      l10n.noCompletedBooksYet,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: Colors.grey,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Books you\'ve finished reading will appear here',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    Text(
+                      l10n.completedBooksHint,
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
                   ],

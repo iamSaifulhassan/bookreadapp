@@ -172,5 +172,10 @@
   "favouriteTooltip": "Favourite",
   "removeFromReadLaterTooltip": "Remove from Read Later",
   "noBooksToReadLater": "No books to read later",
-  "addBooksToReadLaterHint": "Add books to read later from the My Books screen"
+  "addBooksToReadLaterHint": "Add books to read later from the My Books screen",
+
+  "completedBooksTitle": "Completed Books",
+  "completedStatusLabel": "Completed",
+  "noCompletedBooksYet": "No completed books yet",
+  "completedBooksHint": "Books you've finished reading will appear here"
 }
