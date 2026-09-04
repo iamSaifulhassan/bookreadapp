@@ -679,4 +679,48 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get unsupportedFileFormatMessage =>
       'असमर्थित फ़ाइल प्रारूप। केवल PDF और TXT फ़ाइलें समर्थित हैं।';
+
+  @override
+  String get subscriptionTitle => 'BookRead Premium';
+
+  @override
+  String get subscriptionUnlockPremium => 'BookRead का पूरा अनुभव अनलॉक करें';
+
+  @override
+  String get subscriptionRestoreButton => 'खरीदारी बहाल करें';
+
+  @override
+  String get subscriptionPurchaseSuccessMessage =>
+      'सदस्यता सक्रिय हो गई। BookRead Premium का आनंद लें!';
+
+  @override
+  String get subscriptionPurchaseCancelledMessage => 'खरीदारी रद्द कर दी गई।';
+
+  @override
+  String subscriptionPurchaseFailedMessage(String error) {
+    return 'खरीदारी विफल: $error';
+  }
+
+  @override
+  String get subscriptionAlreadyActiveMessage =>
+      'आप पहले से ही BookRead Premium के सदस्य हैं।';
+
+  @override
+  String get subscriptionNoOfferingsMessage =>
+      'सदस्यताएं अभी उपलब्ध नहीं हैं। कृपया बाद में पुनः प्रयास करें।';
+
+  @override
+  String get subscriptionRestoreSuccessMessage =>
+      'आपकी खरीदारी बहाल कर दी गई है।';
+
+  @override
+  String subscriptionRestoreFailedMessage(String error) {
+    return 'बहाली विफल: $error';
+  }
+
+  @override
+  String get subscriptionSubscribeButton => 'सदस्यता लें';
+
+  @override
+  String get premiumNav => 'प्रीमियम लें';
 }

@@ -686,4 +686,47 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get unsupportedFileFormatMessage =>
       'Неподдерживаемый формат файла. Поддерживаются только файлы PDF и TXT.';
+
+  @override
+  String get subscriptionTitle => 'BookRead Премиум';
+
+  @override
+  String get subscriptionUnlockPremium => 'Откройте полный опыт BookRead';
+
+  @override
+  String get subscriptionRestoreButton => 'Восстановить покупки';
+
+  @override
+  String get subscriptionPurchaseSuccessMessage =>
+      'Подписка активирована. Наслаждайтесь BookRead Премиум!';
+
+  @override
+  String get subscriptionPurchaseCancelledMessage => 'Покупка отменена.';
+
+  @override
+  String subscriptionPurchaseFailedMessage(String error) {
+    return 'Ошибка покупки: $error';
+  }
+
+  @override
+  String get subscriptionAlreadyActiveMessage =>
+      'Вы уже подписаны на BookRead Премиум.';
+
+  @override
+  String get subscriptionNoOfferingsMessage =>
+      'Подписки сейчас недоступны. Пожалуйста, попробуйте позже.';
+
+  @override
+  String get subscriptionRestoreSuccessMessage => 'Ваша покупка восстановлена.';
+
+  @override
+  String subscriptionRestoreFailedMessage(String error) {
+    return 'Ошибка восстановления: $error';
+  }
+
+  @override
+  String get subscriptionSubscribeButton => 'Подписаться';
+
+  @override
+  String get premiumNav => 'Перейти на Премиум';
 }

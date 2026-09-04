@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "このページからテキストを抽出できませんでした。",
   "noReadableTextMessage": "読み取り可能なテキストが見つかりませんでした。",
   "noSentencesFoundMessage": "文章が見つかりませんでした。",
-  "unsupportedFileFormatMessage": "サポートされていないファイル形式です。PDFおよびTXTファイルのみサポートされています。"
+  "unsupportedFileFormatMessage": "サポートされていないファイル形式です。PDFおよびTXTファイルのみサポートされています。",
+
+  "subscriptionTitle": "BookRead プレミアム",
+  "subscriptionUnlockPremium": "BookRead のすべての機能を解放しよう",
+  "subscriptionRestoreButton": "購入を復元",
+  "subscriptionPurchaseSuccessMessage": "サブスクリプションが有効になりました。BookRead プレミアムをお楽しみください！",
+  "subscriptionPurchaseCancelledMessage": "購入がキャンセルされました。",
+  "subscriptionPurchaseFailedMessage": "購入に失敗しました: {error}",
+  "subscriptionAlreadyActiveMessage": "すでに BookRead プレミアムに登録済みです。",
+  "subscriptionNoOfferingsMessage": "現在サブスクリプションはご利用いただけません。後でもう一度お試しください。",
+  "subscriptionRestoreSuccessMessage": "購入が復元されました。",
+  "subscriptionRestoreFailedMessage": "復元に失敗しました: {error}",
+  "subscriptionSubscribeButton": "登録する",
+  "premiumNav": "プレミアムにする"
 }

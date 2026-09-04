@@ -9,6 +9,8 @@ import 'package:bookread/screens/about/About.dart';
 import 'package:bookread/services/auth_wrapper.dart';
 import 'package:bookread/services/locale_service.dart';
 import 'package:bookread/services/theme_service.dart';
+import 'package:bookread/services/subscription_service.dart';
+import 'package:bookread/screens/subscription/subscription_screen.dart';
 import 'package:bookread/screens/home/home_screen.dart';
 import 'package:bookread/screens/signin/signin_screen.dart';
 import 'package:bookread/screens/signup/signup_screen.dart';
@@ -30,6 +32,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocaleService().loadSavedLocale();
   await ThemeService().loadSavedThemeMode();
+  await SubscriptionService().initialize();
   runApp(const BookReadApp());
 }
 
@@ -70,6 +73,7 @@ class BookReadApp extends StatelessWidget {
                 '/completed': (context) => const CompletedScreen(),
                 '/settings': (context) => const SettingsScreen(),
                 '/about': (context) => const AboutScreen(),
+                '/subscription': (context) => const SubscriptionScreen(),
                 // Add other routes here as needed for new features/screens
               },
             );

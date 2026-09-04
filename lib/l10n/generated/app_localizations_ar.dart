@@ -678,4 +678,48 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get unsupportedFileFormatMessage =>
       'تنسيق ملف غير مدعوم. يتم دعم ملفات PDF وTXT فقط.';
+
+  @override
+  String get subscriptionTitle => 'BookRead Premium';
+
+  @override
+  String get subscriptionUnlockPremium => 'افتح تجربة BookRead الكاملة';
+
+  @override
+  String get subscriptionRestoreButton => 'استعادة المشتريات';
+
+  @override
+  String get subscriptionPurchaseSuccessMessage =>
+      'تم تفعيل الاشتراك. استمتع بـ BookRead Premium!';
+
+  @override
+  String get subscriptionPurchaseCancelledMessage => 'تم إلغاء الشراء.';
+
+  @override
+  String subscriptionPurchaseFailedMessage(String error) {
+    return 'فشل الشراء: $error';
+  }
+
+  @override
+  String get subscriptionAlreadyActiveMessage =>
+      'أنت مشترك بالفعل في BookRead Premium.';
+
+  @override
+  String get subscriptionNoOfferingsMessage =>
+      'الاشتراكات غير متاحة حاليًا. يرجى المحاولة لاحقًا.';
+
+  @override
+  String get subscriptionRestoreSuccessMessage =>
+      'تم استعادة عملية الشراء الخاصة بك.';
+
+  @override
+  String subscriptionRestoreFailedMessage(String error) {
+    return 'فشل الاستعادة: $error';
+  }
+
+  @override
+  String get subscriptionSubscribeButton => 'اشترك';
+
+  @override
+  String get premiumNav => 'الترقية إلى بريميوم';
 }

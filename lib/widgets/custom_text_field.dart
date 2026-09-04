@@ -52,7 +52,7 @@ class CustomTextField extends StatelessWidget {
         hintStyle: TextStyle(
           color:
               readOnly
-                  ? AppColors.textSecondary.withOpacity(0.7)
+                  ? AppColors.textSecondary.withValues(alpha: 0.7)
                   : colorScheme.primary.withAlpha((0.5 * 255).toInt()),
         ),
         prefixIcon: Icon(
@@ -71,7 +71,7 @@ class CustomTextField extends StatelessWidget {
             color:
                 readOnly
                     ? Colors.grey.shade300
-                    : colorScheme.primary.withOpacity(0.5),
+                    : colorScheme.primary.withValues(alpha: 0.5),
           ),
         ),
         focusedBorder: OutlineInputBorder(

@@ -169,7 +169,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primary.withOpacity(0.8),
+                          AppColors.primary.withValues(alpha: 0.8),
                           AppColors.primary,
                         ],
                       ),
@@ -356,7 +356,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        AppColors.primary.withOpacity(0.8),
+                        AppColors.primary.withValues(alpha: 0.8),
                         AppColors.primary,
                       ],
                     ),

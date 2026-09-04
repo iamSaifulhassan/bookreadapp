@@ -208,7 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       final imageFile = File(_profileImageUrl!);
       return CircleAvatar(
         radius: 48,
-        backgroundColor: AppColors.primary.withOpacity(0.1),
+        backgroundColor: AppColors.primary.withValues(alpha: 0.1),
         child: ClipOval(
           child: Image.file(
             imageFile,

@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "اس صفحے سے متن نکالنے میں ناکام۔",
   "noReadableTextMessage": "کوئی پڑھنے کے قابل متن نہیں ملا۔",
   "noSentencesFoundMessage": "کوئی جملہ نہیں ملا۔",
-  "unsupportedFileFormatMessage": "غیر معاون فائل فارمیٹ۔ صرف PDF اور TXT فائلیں معاون ہیں۔"
+  "unsupportedFileFormatMessage": "غیر معاون فائل فارمیٹ۔ صرف PDF اور TXT فائلیں معاون ہیں۔",
+
+  "subscriptionTitle": "BookRead Premium",
+  "subscriptionUnlockPremium": "BookRead کا مکمل تجربہ حاصل کریں",
+  "subscriptionRestoreButton": "خریداری بحال کریں",
+  "subscriptionPurchaseSuccessMessage": "سبسکرپشن فعال ہو گئی۔ BookRead Premium سے لطف اٹھائیں!",
+  "subscriptionPurchaseCancelledMessage": "خریداری منسوخ کر دی گئی۔",
+  "subscriptionPurchaseFailedMessage": "خریداری ناکام ہوئی: {error}",
+  "subscriptionAlreadyActiveMessage": "آپ پہلے ہی BookRead Premium کے رکن ہیں۔",
+  "subscriptionNoOfferingsMessage": "سبسکرپشنز ابھی دستیاب نہیں ہیں۔ براہ کرم بعد میں کوشش کریں۔",
+  "subscriptionRestoreSuccessMessage": "آپ کی خریداری بحال کر دی گئی ہے۔",
+  "subscriptionRestoreFailedMessage": "بحالی ناکام ہوئی: {error}",
+  "subscriptionSubscribeButton": "سبسکرائب کریں",
+  "premiumNav": "پریمیم حاصل کریں"
 }

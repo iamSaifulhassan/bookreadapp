@@ -38,7 +38,7 @@ class ProfileImageUtils {
   }) {
     return CircleAvatar(
       radius: radius,
-      backgroundColor: backgroundColor ?? AppColors.primary.withOpacity(0.8),
+      backgroundColor: backgroundColor ?? AppColors.primary.withValues(alpha: 0.8),
       child: Text(
         initials,
         style: TextStyle(
@@ -67,7 +67,7 @@ class ProfileImageUtils {
     if (imageUrl != null && imageUrl.isNotEmpty) {
       avatar = CircleAvatar(
         radius: radius,
-        backgroundColor: backgroundColor ?? AppColors.primary.withOpacity(0.1),
+        backgroundColor: backgroundColor ?? AppColors.primary.withValues(alpha: 0.1),
         backgroundImage: NetworkImage(imageUrl),
         onBackgroundImageError: (exception, stackTrace) {
           // If image fails to load, show initials instead
@@ -113,7 +113,7 @@ class ProfileImageUtils {
       // Use app icon as fallback
       return CircleAvatar(
         radius: radius,
-        backgroundColor: backgroundColor ?? AppColors.primary.withOpacity(0.1),
+        backgroundColor: backgroundColor ?? AppColors.primary.withValues(alpha: 0.1),
         child: ClipOval(
           child: Image.asset(
             'assets/images/App.png',

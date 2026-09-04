@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "Не удалось извлечь текст с этой страницы.",
   "noReadableTextMessage": "Читаемый текст не найден.",
   "noSentencesFoundMessage": "Предложения не найдены.",
-  "unsupportedFileFormatMessage": "Неподдерживаемый формат файла. Поддерживаются только файлы PDF и TXT."
+  "unsupportedFileFormatMessage": "Неподдерживаемый формат файла. Поддерживаются только файлы PDF и TXT.",
+
+  "subscriptionTitle": "BookRead Премиум",
+  "subscriptionUnlockPremium": "Откройте полный опыт BookRead",
+  "subscriptionRestoreButton": "Восстановить покупки",
+  "subscriptionPurchaseSuccessMessage": "Подписка активирована. Наслаждайтесь BookRead Премиум!",
+  "subscriptionPurchaseCancelledMessage": "Покупка отменена.",
+  "subscriptionPurchaseFailedMessage": "Ошибка покупки: {error}",
+  "subscriptionAlreadyActiveMessage": "Вы уже подписаны на BookRead Премиум.",
+  "subscriptionNoOfferingsMessage": "Подписки сейчас недоступны. Пожалуйста, попробуйте позже.",
+  "subscriptionRestoreSuccessMessage": "Ваша покупка восстановлена.",
+  "subscriptionRestoreFailedMessage": "Ошибка восстановления: {error}",
+  "subscriptionSubscribeButton": "Подписаться",
+  "premiumNav": "Перейти на Премиум"
 }

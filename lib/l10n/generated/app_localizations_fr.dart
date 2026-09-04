@@ -689,4 +689,48 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get unsupportedFileFormatMessage =>
       'Format de fichier non pris en charge. Seuls les fichiers PDF et TXT sont pris en charge.';
+
+  @override
+  String get subscriptionTitle => 'BookRead Premium';
+
+  @override
+  String get subscriptionUnlockPremium =>
+      'Débloquez l\'expérience complète de BookRead';
+
+  @override
+  String get subscriptionRestoreButton => 'Restaurer les Achats';
+
+  @override
+  String get subscriptionPurchaseSuccessMessage =>
+      'Abonnement activé. Profitez de BookRead Premium !';
+
+  @override
+  String get subscriptionPurchaseCancelledMessage => 'Achat annulé.';
+
+  @override
+  String subscriptionPurchaseFailedMessage(String error) {
+    return 'Échec de l\'achat : $error';
+  }
+
+  @override
+  String get subscriptionAlreadyActiveMessage =>
+      'Vous êtes déjà abonné à BookRead Premium.';
+
+  @override
+  String get subscriptionNoOfferingsMessage =>
+      'Les abonnements ne sont pas disponibles pour le moment. Veuillez réessayer plus tard.';
+
+  @override
+  String get subscriptionRestoreSuccessMessage => 'Votre achat a été restauré.';
+
+  @override
+  String subscriptionRestoreFailedMessage(String error) {
+    return 'Échec de la restauration : $error';
+  }
+
+  @override
+  String get subscriptionSubscribeButton => 'S\'abonner';
+
+  @override
+  String get premiumNav => 'Passer à Premium';
 }

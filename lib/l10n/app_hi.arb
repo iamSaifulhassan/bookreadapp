@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "इस पृष्ठ से टेक्स्ट निकालने में असमर्थ।",
   "noReadableTextMessage": "कोई पठनीय टेक्स्ट नहीं मिला।",
   "noSentencesFoundMessage": "कोई वाक्य नहीं मिला।",
-  "unsupportedFileFormatMessage": "असमर्थित फ़ाइल प्रारूप। केवल PDF और TXT फ़ाइलें समर्थित हैं।"
+  "unsupportedFileFormatMessage": "असमर्थित फ़ाइल प्रारूप। केवल PDF और TXT फ़ाइलें समर्थित हैं।",
+
+  "subscriptionTitle": "BookRead Premium",
+  "subscriptionUnlockPremium": "BookRead का पूरा अनुभव अनलॉक करें",
+  "subscriptionRestoreButton": "खरीदारी बहाल करें",
+  "subscriptionPurchaseSuccessMessage": "सदस्यता सक्रिय हो गई। BookRead Premium का आनंद लें!",
+  "subscriptionPurchaseCancelledMessage": "खरीदारी रद्द कर दी गई।",
+  "subscriptionPurchaseFailedMessage": "खरीदारी विफल: {error}",
+  "subscriptionAlreadyActiveMessage": "आप पहले से ही BookRead Premium के सदस्य हैं।",
+  "subscriptionNoOfferingsMessage": "सदस्यताएं अभी उपलब्ध नहीं हैं। कृपया बाद में पुनः प्रयास करें।",
+  "subscriptionRestoreSuccessMessage": "आपकी खरीदारी बहाल कर दी गई है।",
+  "subscriptionRestoreFailedMessage": "बहाली विफल: {error}",
+  "subscriptionSubscribeButton": "सदस्यता लें",
+  "premiumNav": "प्रीमियम लें"
 }

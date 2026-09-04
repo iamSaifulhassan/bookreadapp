@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "تعذر استخراج النص من هذه الصفحة.",
   "noReadableTextMessage": "لم يتم العثور على نص قابل للقراءة.",
   "noSentencesFoundMessage": "لم يتم العثور على جمل.",
-  "unsupportedFileFormatMessage": "تنسيق ملف غير مدعوم. يتم دعم ملفات PDF وTXT فقط."
+  "unsupportedFileFormatMessage": "تنسيق ملف غير مدعوم. يتم دعم ملفات PDF وTXT فقط.",
+
+  "subscriptionTitle": "BookRead Premium",
+  "subscriptionUnlockPremium": "افتح تجربة BookRead الكاملة",
+  "subscriptionRestoreButton": "استعادة المشتريات",
+  "subscriptionPurchaseSuccessMessage": "تم تفعيل الاشتراك. استمتع بـ BookRead Premium!",
+  "subscriptionPurchaseCancelledMessage": "تم إلغاء الشراء.",
+  "subscriptionPurchaseFailedMessage": "فشل الشراء: {error}",
+  "subscriptionAlreadyActiveMessage": "أنت مشترك بالفعل في BookRead Premium.",
+  "subscriptionNoOfferingsMessage": "الاشتراكات غير متاحة حاليًا. يرجى المحاولة لاحقًا.",
+  "subscriptionRestoreSuccessMessage": "تم استعادة عملية الشراء الخاصة بك.",
+  "subscriptionRestoreFailedMessage": "فشل الاستعادة: {error}",
+  "subscriptionSubscribeButton": "اشترك",
+  "premiumNav": "الترقية إلى بريميوم"
 }

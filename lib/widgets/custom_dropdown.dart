@@ -22,14 +22,14 @@ class CustomDropdown<T> extends StatelessWidget {
     return DropdownButtonFormField<T>(
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: AppColors.primary.withOpacity(0.8)),
+        labelStyle: TextStyle(color: AppColors.primary.withValues(alpha: 0.8)),
         hintText: hint,
         hintStyle: TextStyle(color: AppColors.textSecondary),
         border: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primary),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.primary.withOpacity(0.5)),
+          borderSide: BorderSide(color: AppColors.primary.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primary, width: 2),

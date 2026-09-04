@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "无法从此页面提取文本。",
   "noReadableTextMessage": "未找到可读文本。",
   "noSentencesFoundMessage": "未找到句子。",
-  "unsupportedFileFormatMessage": "不支持的文件格式。仅支持 PDF 和 TXT 文件。"
+  "unsupportedFileFormatMessage": "不支持的文件格式。仅支持 PDF 和 TXT 文件。",
+
+  "subscriptionTitle": "BookRead 高级版",
+  "subscriptionUnlockPremium": "解锁完整的 BookRead 体验",
+  "subscriptionRestoreButton": "恢复购买",
+  "subscriptionPurchaseSuccessMessage": "订阅已激活。尽享 BookRead 高级版！",
+  "subscriptionPurchaseCancelledMessage": "购买已取消。",
+  "subscriptionPurchaseFailedMessage": "购买失败：{error}",
+  "subscriptionAlreadyActiveMessage": "您已订阅 BookRead 高级版。",
+  "subscriptionNoOfferingsMessage": "订阅暂不可用，请稍后重试。",
+  "subscriptionRestoreSuccessMessage": "您的购买已恢复。",
+  "subscriptionRestoreFailedMessage": "恢复失败：{error}",
+  "subscriptionSubscribeButton": "订阅",
+  "premiumNav": "升级到高级版"
 }

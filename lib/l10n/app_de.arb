@@ -219,5 +219,18 @@
   "unableToExtractTextMessage": "Text konnte von dieser Seite nicht extrahiert werden.",
   "noReadableTextMessage": "Kein lesbarer Text gefunden.",
   "noSentencesFoundMessage": "Keine Sätze gefunden.",
-  "unsupportedFileFormatMessage": "Nicht unterstütztes Dateiformat. Nur PDF- und TXT-Dateien werden unterstützt."
+  "unsupportedFileFormatMessage": "Nicht unterstütztes Dateiformat. Nur PDF- und TXT-Dateien werden unterstützt.",
+
+  "subscriptionTitle": "BookRead Premium",
+  "subscriptionUnlockPremium": "Schalte das komplette BookRead-Erlebnis frei",
+  "subscriptionRestoreButton": "Käufe wiederherstellen",
+  "subscriptionPurchaseSuccessMessage": "Abo aktiviert. Viel Spaß mit BookRead Premium!",
+  "subscriptionPurchaseCancelledMessage": "Kauf abgebrochen.",
+  "subscriptionPurchaseFailedMessage": "Kauf fehlgeschlagen: {error}",
+  "subscriptionAlreadyActiveMessage": "Du hast bereits BookRead Premium abonniert.",
+  "subscriptionNoOfferingsMessage": "Abos sind derzeit nicht verfügbar. Bitte versuche es später erneut.",
+  "subscriptionRestoreSuccessMessage": "Dein Kauf wurde wiederhergestellt.",
+  "subscriptionRestoreFailedMessage": "Wiederherstellung fehlgeschlagen: {error}",
+  "subscriptionSubscribeButton": "Abonnieren",
+  "premiumNav": "Premium werden"
 }

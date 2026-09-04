@@ -71,6 +71,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
       ),
       _DrawerEntry.divider(),
       _DrawerEntry(
+        icon: Icons.workspace_premium,
+        title: l10n.premiumNav,
+        iconColor: Colors.amber.shade700,
+        onTap: () => Navigator.pushNamed(context, '/subscription'),
+      ),
+      _DrawerEntry.divider(),
+      _DrawerEntry(
         icon: Icons.account_circle,
         title: l10n.profileTitle,
         onTap: () => Navigator.pushReplacementNamed(context, '/profile'),

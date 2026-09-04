@@ -1353,6 +1353,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unsupported file format. Only PDF and TXT files are supported.'**
   String get unsupportedFileFormatMessage;
+
+  /// No description provided for @subscriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'BookRead Premium'**
+  String get subscriptionTitle;
+
+  /// No description provided for @subscriptionUnlockPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock the full BookRead experience'**
+  String get subscriptionUnlockPremium;
+
+  /// No description provided for @subscriptionRestoreButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get subscriptionRestoreButton;
+
+  /// No description provided for @subscriptionPurchaseSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription activated. Enjoy BookRead Premium!'**
+  String get subscriptionPurchaseSuccessMessage;
+
+  /// No description provided for @subscriptionPurchaseCancelledMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase cancelled.'**
+  String get subscriptionPurchaseCancelledMessage;
+
+  /// No description provided for @subscriptionPurchaseFailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase failed: {error}'**
+  String subscriptionPurchaseFailedMessage(String error);
+
+  /// No description provided for @subscriptionAlreadyActiveMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re already subscribed to BookRead Premium.'**
+  String get subscriptionAlreadyActiveMessage;
+
+  /// No description provided for @subscriptionNoOfferingsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions aren\'t available right now. Please try again later.'**
+  String get subscriptionNoOfferingsMessage;
+
+  /// No description provided for @subscriptionRestoreSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your purchase has been restored.'**
+  String get subscriptionRestoreSuccessMessage;
+
+  /// No description provided for @subscriptionRestoreFailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore failed: {error}'**
+  String subscriptionRestoreFailedMessage(String error);
+
+  /// No description provided for @subscriptionSubscribeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscribe'**
+  String get subscriptionSubscribeButton;
+
+  /// No description provided for @premiumNav.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Premium'**
+  String get premiumNav;
 }
 
 class _AppLocalizationsDelegate

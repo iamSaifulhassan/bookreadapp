@@ -666,4 +666,44 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get unsupportedFileFormatMessage => '不支持的文件格式。仅支持 PDF 和 TXT 文件。';
+
+  @override
+  String get subscriptionTitle => 'BookRead 高级版';
+
+  @override
+  String get subscriptionUnlockPremium => '解锁完整的 BookRead 体验';
+
+  @override
+  String get subscriptionRestoreButton => '恢复购买';
+
+  @override
+  String get subscriptionPurchaseSuccessMessage => '订阅已激活。尽享 BookRead 高级版！';
+
+  @override
+  String get subscriptionPurchaseCancelledMessage => '购买已取消。';
+
+  @override
+  String subscriptionPurchaseFailedMessage(String error) {
+    return '购买失败：$error';
+  }
+
+  @override
+  String get subscriptionAlreadyActiveMessage => '您已订阅 BookRead 高级版。';
+
+  @override
+  String get subscriptionNoOfferingsMessage => '订阅暂不可用，请稍后重试。';
+
+  @override
+  String get subscriptionRestoreSuccessMessage => '您的购买已恢复。';
+
+  @override
+  String subscriptionRestoreFailedMessage(String error) {
+    return '恢复失败：$error';
+  }
+
+  @override
+  String get subscriptionSubscribeButton => '订阅';
+
+  @override
+  String get premiumNav => '升级到高级版';
 }

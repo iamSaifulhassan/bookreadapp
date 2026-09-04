@@ -55,21 +55,21 @@ class StreakWidget extends StatelessWidget {
 
   Color _getBackgroundColor() {
     if (isCompleted) {
-      return AppColors.success.withOpacity(0.15);
+      return AppColors.success.withValues(alpha: 0.15);
     } else if (isAboutToExpire) {
-      return Colors.orange.withOpacity(0.15);
+      return Colors.orange.withValues(alpha: 0.15);
     } else {
-      return Colors.red.withOpacity(0.15);
+      return Colors.red.withValues(alpha: 0.15);
     }
   }
 
   Color _getBorderColor() {
     if (isCompleted) {
-      return AppColors.success.withOpacity(0.3);
+      return AppColors.success.withValues(alpha: 0.3);
     } else if (isAboutToExpire) {
-      return Colors.red.withOpacity(0.3);
+      return Colors.red.withValues(alpha: 0.3);
     } else {
-      return Colors.orange.withOpacity(0.3);
+      return Colors.orange.withValues(alpha: 0.3);
     }
   }
 
