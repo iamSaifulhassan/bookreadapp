@@ -55,6 +55,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '395687345962',
     projectId: 'thebookread-4a4f5',
     authDomain: 'thebookread-4a4f5.firebaseapp.com',
+    databaseURL: 'https://thebookread-4a4f5-default-rtdb.firebaseio.com',
     storageBucket: 'thebookread-4a4f5.firebasestorage.app',
   );
 
@@ -63,6 +64,7 @@ class DefaultFirebaseOptions {
     appId: '1:395687345962:android:2dfb3964c9aa2816a2e853',
     messagingSenderId: '395687345962',
     projectId: 'thebookread-4a4f5',
+    databaseURL: 'https://thebookread-4a4f5-default-rtdb.firebaseio.com',
     storageBucket: 'thebookread-4a4f5.firebasestorage.app',
   );
 
@@ -71,6 +73,7 @@ class DefaultFirebaseOptions {
     appId: '1:395687345962:ios:2928cbffbc18f625a2e853',
     messagingSenderId: '395687345962',
     projectId: 'thebookread-4a4f5',
+    databaseURL: 'https://thebookread-4a4f5-default-rtdb.firebaseio.com',
     storageBucket: 'thebookread-4a4f5.firebasestorage.app',
     iosBundleId: 'com.example.thebookread',
   );

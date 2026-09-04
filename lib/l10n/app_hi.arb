@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "पढ़ने के लिए टेक्स्ट का आकार",
   "lineHeightLabel": "लाइन की ऊँचाई",
   "lineHeightSubtitle": "टेक्स्ट की पंक्तियों के बीच की दूरी",
+  "themeSection": "रूप-रंग",
+  "themeSubtitle": "चुनें कि BookRead कैसा दिखे",
+  "themeLight": "हल्का",
+  "themeDark": "गहरा",
+  "themeSystem": "सिस्टम",
+
   "languageSection": "भाषा",
   "languageSubtitle": "अपनी पसंदीदा भाषा चुनें",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "शोधकर्ता",
   "signUpButton": "साइन अप करें",
   "signUpSuccessMessage": "साइन अप सफल रहा!",
-  "alreadyHaveAccountSignInPrompt": "पहले से खाता है? साइन इन करें"
+  "alreadyHaveAccountSignInPrompt": "पहले से खाता है? साइन इन करें",
+
+  "profileTitle": "प्रोफ़ाइल",
+  "refreshProfileTooltip": "प्रोफ़ाइल रीफ्रेश करें",
+  "loadingProfile": "प्रोफ़ाइल लोड हो रही है...",
+  "noPhoneNumber": "कोई फ़ोन नंबर नहीं",
+  "noCountry": "कोई देश नहीं",
+  "noUserType": "कोई उपयोगकर्ता प्रकार नहीं",
+  "noEmail": "कोई ईमेल नहीं",
+  "profileIncompleteMessage": "कृपया अपना देश, उपयोगकर्ता प्रकार और फ़ोन नंबर जोड़कर अपनी प्रोफ़ाइल पूरी करें।",
+  "failedToLoadProfileError": "प्रोफ़ाइल डेटा लोड करने में विफल: {error}",
+  "errorUpdatingProfileError": "प्रोफ़ाइल अपडेट करने में त्रुटि: {error}",
+  "phoneFieldLabel": "फ़ोन",
+  "phoneFieldHint": "अपना फ़ोन दर्ज करें",
+  "countryFieldHint": "अपना देश दर्ज करें",
+  "userTypeFieldLabel": "उपयोगकर्ता प्रकार",
+  "userTypeFieldHint": "उपयोगकर्ता प्रकार दर्ज करें",
+  "editProfileButton": "प्रोफ़ाइल संपादित करें",
+  "signOutButton": "साइन आउट करें",
+  "signOutConfirmMessage": "क्या आप वाकई साइन आउट करना चाहते हैं?"
 }

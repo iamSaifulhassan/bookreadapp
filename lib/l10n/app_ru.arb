@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "Размер текста для чтения",
   "lineHeightLabel": "Межстрочный интервал",
   "lineHeightSubtitle": "Расстояние между строками текста",
+  "themeSection": "Оформление",
+  "themeSubtitle": "Выберите внешний вид BookRead",
+  "themeLight": "Светлая",
+  "themeDark": "Тёмная",
+  "themeSystem": "Системная",
+
   "languageSection": "Язык",
   "languageSubtitle": "Выберите предпочитаемый язык",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "Исследователь",
   "signUpButton": "Зарегистрироваться",
   "signUpSuccessMessage": "Регистрация прошла успешно!",
-  "alreadyHaveAccountSignInPrompt": "Уже есть аккаунт? Войти"
+  "alreadyHaveAccountSignInPrompt": "Уже есть аккаунт? Войти",
+
+  "profileTitle": "Профиль",
+  "refreshProfileTooltip": "Обновить профиль",
+  "loadingProfile": "Загрузка профиля...",
+  "noPhoneNumber": "Нет номера телефона",
+  "noCountry": "Нет страны",
+  "noUserType": "Нет типа пользователя",
+  "noEmail": "Нет электронной почты",
+  "profileIncompleteMessage": "Пожалуйста, заполните профиль, указав страну, тип пользователя и номер телефона.",
+  "failedToLoadProfileError": "Не удалось загрузить данные профиля: {error}",
+  "errorUpdatingProfileError": "Ошибка при обновлении профиля: {error}",
+  "phoneFieldLabel": "Телефон",
+  "phoneFieldHint": "Введите свой телефон",
+  "countryFieldHint": "Введите свою страну",
+  "userTypeFieldLabel": "Тип пользователя",
+  "userTypeFieldHint": "Введите тип пользователя",
+  "editProfileButton": "Редактировать профиль",
+  "signOutButton": "Выйти",
+  "signOutConfirmMessage": "Вы уверены, что хотите выйти?"
 }

@@ -10,6 +10,7 @@ import '../../services/user_service.dart';
 import '../../services/profile_image_utils.dart';
 import '../../models/user_model.dart';
 import 'edit_profile_screen.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -56,16 +57,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       final String? imagePath =
           await LocalImageStorageService.getProfileImagePath();
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         setState(() {
           if (userModel != null) {
             _emailController.text = userModel.email;
             _phoneController.text =
-                userModel.phone.isEmpty ? 'No phone number' : userModel.phone;
+                userModel.phone.isEmpty ? l10n.noPhoneNumber : userModel.phone;
             _countryController.text =
-                userModel.country.isEmpty ? 'No country' : userModel.country;
+                userModel.country.isEmpty ? l10n.noCountry : userModel.country;
             _userTypeController.text =
                 userModel.userType.isEmpty
-                    ? 'No user type'
+                    ? l10n.noUserType
                     : userModel.userType;
             _profileImageUrl = userModel.profileImageUrl ?? imagePath;
 
@@ -93,14 +95,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           } else {
             // Fallback to auth user email if no profile data exists
-            _emailController.text = _userService.userEmail ?? 'No email';
-            _phoneController.text = 'No phone number';
-            _countryController.text = 'No country';
-            _userTypeController.text = 'No user type';
+            _emailController.text = _userService.userEmail ?? l10n.noEmail;
+            _phoneController.text = l10n.noPhoneNumber;
+            _countryController.text = l10n.noCountry;
+            _userTypeController.text = l10n.noUserType;
             _profileImageUrl = imagePath;
             _isProfileIncomplete = true;
-            _completionMessage =
-                'Please complete your profile by adding your Country, User Type, and Phone Number.';
+            _completionMessage = l10n.profileIncompleteMessage;
           }
           _isLoading = false;
         });
@@ -113,7 +114,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to load profile data: $e'),
+            content: Text(
+              AppLocalizations.of(context)!.failedToLoadProfileError(
+                e.toString(),
+              ),
+            ),
             backgroundColor: AppColors.error,
           ),
         );
@@ -184,7 +189,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       AppLogger.log('ProfileScreen: Error updating profile data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error updating profile: $e'),
+          content: Text(
+            AppLocalizations.of(context)!.errorUpdatingProfileError(
+              e.toString(),
+            ),
+          ),
           backgroundColor: AppColors.error,
         ),
       );
@@ -238,10 +247,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: AppColors.backgroundLight,
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text(l10n.profileTitle),
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.onPrimary,
         elevation: 2,
@@ -249,35 +259,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _userService.isAuthenticated ? _loadUserData : null,
-            tooltip: 'Refresh Profile',
+            tooltip: l10n.refreshProfileTooltip,
           ),
         ],
       ),
       drawer: CustomDrawer(),
-      body:
-          _isLoading
-              ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.primary,
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        switchInCurve: Curves.easeOutCubic,
+        child:
+            _isLoading
+                ? Center(
+                  key: const ValueKey('loading'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          AppColors.primary,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Loading profile...',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 16,
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.loadingProfile,
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-              : Center(
-                child: SingleChildScrollView(
+                    ],
+                  ),
+                )
+                : Center(
+                  key: const ValueKey('loaded'),
+                  child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Card(
                     color: AppColors.surface,
@@ -327,8 +342,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(height: 24),
                           CustomTextField(
                             controller: _emailController,
-                            label: 'Email',
-                            hint: 'Enter your email',
+                            label: l10n.emailLabel,
+                            hint: l10n.emailHint,
                             icon: Icons.email,
                             validator: (_) => null,
                             keyboardType: TextInputType.emailAddress,
@@ -337,8 +352,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(height: 16),
                           CustomTextField(
                             controller: _phoneController,
-                            label: 'Phone',
-                            hint: 'Enter your phone',
+                            label: l10n.phoneFieldLabel,
+                            hint: l10n.phoneFieldHint,
                             icon: Icons.phone,
                             validator: (_) => null,
                             keyboardType: TextInputType.phone,
@@ -347,8 +362,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(height: 16),
                           CustomTextField(
                             controller: _countryController,
-                            label: 'Country',
-                            hint: 'Enter your country',
+                            label: l10n.countryLabel,
+                            hint: l10n.countryFieldHint,
                             icon: Icons.flag,
                             validator: (_) => null,
                             readOnly: true,
@@ -356,8 +371,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(height: 16),
                           CustomTextField(
                             controller: _userTypeController,
-                            label: 'User Type',
-                            hint: 'Enter user type',
+                            label: l10n.userTypeFieldLabel,
+                            hint: l10n.userTypeFieldHint,
                             icon: Icons.person_outline,
                             validator: (_) => null,
                             readOnly: true,
@@ -388,7 +403,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 _updateProfileData(result);
                               }
                             },
-                            child: const Text('Edit Profile'),
+                            child: Text(l10n.editProfileButton),
                           ),
                           const SizedBox(height: 16),
                           CustomButton(
@@ -399,13 +414,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     (context) => AlertDialog(
                                       backgroundColor: AppColors.surface,
                                       title: Text(
-                                        'Sign Out',
+                                        l10n.signOutButton,
                                         style: TextStyle(
                                           color: AppColors.textPrimary,
                                         ),
                                       ),
                                       content: Text(
-                                        'Are you sure you want to sign out?',
+                                        l10n.signOutConfirmMessage,
                                         style: TextStyle(
                                           color: AppColors.textSecondary,
                                         ),
@@ -418,7 +433,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             }
                                           },
                                           child: Text(
-                                            'Cancel',
+                                            l10n.commonCancel,
                                             style: TextStyle(
                                               color: AppColors.textSecondary,
                                             ),
@@ -442,7 +457,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             }
                                           },
                                           child: Text(
-                                            'Sign Out',
+                                            l10n.signOutButton,
                                             style: TextStyle(
                                               color: AppColors.error,
                                             ),
@@ -452,7 +467,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                               );
                             },
-                            child: const Text('Sign Out'),
+                            child: Text(l10n.signOutButton),
                           ),
                         ],
                       ),
@@ -460,6 +475,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+      ),
     );
   }
 }

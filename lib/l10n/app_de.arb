@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "Textgröße zum Lesen",
   "lineHeightLabel": "Zeilenhöhe",
   "lineHeightSubtitle": "Abstand zwischen den Textzeilen",
+  "themeSection": "Erscheinungsbild",
+  "themeSubtitle": "Wähle, wie BookRead aussieht",
+  "themeLight": "Hell",
+  "themeDark": "Dunkel",
+  "themeSystem": "System",
+
   "languageSection": "Sprache",
   "languageSubtitle": "Wählen Sie Ihre bevorzugte Sprache",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "Forscher",
   "signUpButton": "Registrieren",
   "signUpSuccessMessage": "Registrierung erfolgreich!",
-  "alreadyHaveAccountSignInPrompt": "Bereits ein Konto? Anmelden"
+  "alreadyHaveAccountSignInPrompt": "Bereits ein Konto? Anmelden",
+
+  "profileTitle": "Profil",
+  "refreshProfileTooltip": "Profil aktualisieren",
+  "loadingProfile": "Profil wird geladen...",
+  "noPhoneNumber": "Keine Telefonnummer",
+  "noCountry": "Kein Land",
+  "noUserType": "Kein Benutzertyp",
+  "noEmail": "Keine E-Mail",
+  "profileIncompleteMessage": "Bitte vervollständige dein Profil, indem du Land, Benutzertyp und Telefonnummer angibst.",
+  "failedToLoadProfileError": "Profildaten konnten nicht geladen werden: {error}",
+  "errorUpdatingProfileError": "Fehler beim Aktualisieren des Profils: {error}",
+  "phoneFieldLabel": "Telefon",
+  "phoneFieldHint": "Gib dein Telefon ein",
+  "countryFieldHint": "Gib dein Land ein",
+  "userTypeFieldLabel": "Benutzertyp",
+  "userTypeFieldHint": "Gib den Benutzertyp ein",
+  "editProfileButton": "Profil bearbeiten",
+  "signOutButton": "Abmelden",
+  "signOutConfirmMessage": "Möchtest du dich wirklich abmelden?"
 }

@@ -71,6 +71,21 @@ class AppLocalizationsIt extends AppLocalizations {
   String get languageSubtitle => 'Scegli la tua lingua preferita';
 
   @override
+  String get themeSection => 'Aspetto';
+
+  @override
+  String get themeSubtitle => 'Scegli l\'aspetto di BookRead';
+
+  @override
+  String get themeLight => 'Chiaro';
+
+  @override
+  String get themeDark => 'Scuro';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
   String get commonCancel => 'Annulla';
 
   @override
@@ -285,4 +300,63 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => 'Hai già un account? Accedi';
+
+  @override
+  String get profileTitle => 'Profilo';
+
+  @override
+  String get refreshProfileTooltip => 'Aggiorna Profilo';
+
+  @override
+  String get loadingProfile => 'Caricamento del profilo...';
+
+  @override
+  String get noPhoneNumber => 'Nessun numero di telefono';
+
+  @override
+  String get noCountry => 'Nessun paese';
+
+  @override
+  String get noUserType => 'Nessun tipo di utente';
+
+  @override
+  String get noEmail => 'Nessuna email';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Completa il tuo profilo aggiungendo paese, tipo di utente e numero di telefono.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Impossibile caricare i dati del profilo: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Errore durante l\'aggiornamento del profilo: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Telefono';
+
+  @override
+  String get phoneFieldHint => 'Inserisci il tuo telefono';
+
+  @override
+  String get countryFieldHint => 'Inserisci il tuo paese';
+
+  @override
+  String get userTypeFieldLabel => 'Tipo di Utente';
+
+  @override
+  String get userTypeFieldHint => 'Inserisci il tipo di utente';
+
+  @override
+  String get editProfileButton => 'Modifica Profilo';
+
+  @override
+  String get signOutButton => 'Esci';
+
+  @override
+  String get signOutConfirmMessage => 'Sei sicuro di voler uscire?';
 }

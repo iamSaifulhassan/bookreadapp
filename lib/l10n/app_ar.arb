@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "حجم النص للقراءة",
   "lineHeightLabel": "تباعد الأسطر",
   "lineHeightSubtitle": "المسافة بين أسطر النص",
+  "themeSection": "المظهر",
+  "themeSubtitle": "اختر مظهر التطبيق",
+  "themeLight": "فاتح",
+  "themeDark": "داكن",
+  "themeSystem": "النظام",
+
   "languageSection": "اللغة",
   "languageSubtitle": "اختر لغتك المفضلة",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "باحث",
   "signUpButton": "إنشاء حساب",
   "signUpSuccessMessage": "تم إنشاء الحساب بنجاح!",
-  "alreadyHaveAccountSignInPrompt": "لديك حساب بالفعل؟ تسجيل الدخول"
+  "alreadyHaveAccountSignInPrompt": "لديك حساب بالفعل؟ تسجيل الدخول",
+
+  "profileTitle": "الملف الشخصي",
+  "refreshProfileTooltip": "تحديث الملف الشخصي",
+  "loadingProfile": "جارٍ تحميل الملف الشخصي...",
+  "noPhoneNumber": "لا يوجد رقم هاتف",
+  "noCountry": "لا توجد دولة",
+  "noUserType": "لا يوجد نوع مستخدم",
+  "noEmail": "لا يوجد بريد إلكتروني",
+  "profileIncompleteMessage": "يرجى إكمال ملفك الشخصي بإضافة دولتك ونوع المستخدم ورقم الهاتف.",
+  "failedToLoadProfileError": "فشل تحميل بيانات الملف الشخصي: {error}",
+  "errorUpdatingProfileError": "خطأ أثناء تحديث الملف الشخصي: {error}",
+  "phoneFieldLabel": "الهاتف",
+  "phoneFieldHint": "أدخل هاتفك",
+  "countryFieldHint": "أدخل دولتك",
+  "userTypeFieldLabel": "نوع المستخدم",
+  "userTypeFieldHint": "أدخل نوع المستخدم",
+  "editProfileButton": "تعديل الملف الشخصي",
+  "signOutButton": "تسجيل الخروج",
+  "signOutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
 }

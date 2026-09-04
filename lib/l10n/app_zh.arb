@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "阅读文本的大小",
   "lineHeightLabel": "行高",
   "lineHeightSubtitle": "文本行之间的间距",
+  "themeSection": "外观",
+  "themeSubtitle": "选择 BookRead 的外观",
+  "themeLight": "浅色",
+  "themeDark": "深色",
+  "themeSystem": "跟随系统",
+
   "languageSection": "语言",
   "languageSubtitle": "选择您的首选语言",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "研究人员",
   "signUpButton": "注册",
   "signUpSuccessMessage": "注册成功！",
-  "alreadyHaveAccountSignInPrompt": "已有账户？立即登录"
+  "alreadyHaveAccountSignInPrompt": "已有账户？立即登录",
+
+  "profileTitle": "个人资料",
+  "refreshProfileTooltip": "刷新个人资料",
+  "loadingProfile": "正在加载个人资料...",
+  "noPhoneNumber": "无电话号码",
+  "noCountry": "无国家",
+  "noUserType": "无用户类型",
+  "noEmail": "无电子邮箱",
+  "profileIncompleteMessage": "请添加您的国家、用户类型和电话号码以完善个人资料。",
+  "failedToLoadProfileError": "加载个人资料数据失败：{error}",
+  "errorUpdatingProfileError": "更新个人资料时出错：{error}",
+  "phoneFieldLabel": "电话",
+  "phoneFieldHint": "请输入您的电话",
+  "countryFieldHint": "请输入您的国家",
+  "userTypeFieldLabel": "用户类型",
+  "userTypeFieldHint": "请输入用户类型",
+  "editProfileButton": "编辑资料",
+  "signOutButton": "退出登录",
+  "signOutConfirmMessage": "您确定要退出登录吗？"
 }

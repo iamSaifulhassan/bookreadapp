@@ -3,6 +3,7 @@ import '../../themes/AppColors.dart';
 import '../../widgets/custom_drawer.dart';
 import '../../services/settings_service.dart';
 import '../../services/locale_service.dart';
+import '../../services/theme_service.dart';
 import '../../l10n/generated/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -91,19 +92,70 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
       drawer: CustomDrawer(),
-      body:
-          _isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  _buildLanguageSettings(l10n),
-                  const SizedBox(height: 24),
-                  _buildTTSSettings(l10n),
-                  const SizedBox(height: 24),
-                  _buildReadingSettings(l10n),
-                ],
-              ),
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        child:
+            _isLoading
+                ? const Center(
+                  key: ValueKey('loading'),
+                  child: CircularProgressIndicator(),
+                )
+                : ListView(
+                  key: const ValueKey('loaded'),
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    _buildThemeSettings(l10n),
+                    const SizedBox(height: 24),
+                    _buildLanguageSettings(l10n),
+                    const SizedBox(height: 24),
+                    _buildTTSSettings(l10n),
+                    const SizedBox(height: 24),
+                    _buildReadingSettings(l10n),
+                  ],
+                ),
+      ),
+    );
+  }
+
+  Widget _buildThemeSettings(AppLocalizations l10n) {
+    return _buildSettingsCard(
+      title: l10n.themeSection,
+      icon: Icons.palette_outlined,
+      children: [
+        Text(
+          l10n.themeSubtitle,
+          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+        ),
+        const SizedBox(height: 12),
+        ValueListenableBuilder<ThemeMode>(
+          valueListenable: ThemeService().themeMode,
+          builder: (context, mode, _) {
+            return SegmentedButton<ThemeMode>(
+              segments: [
+                ButtonSegment(
+                  value: ThemeMode.light,
+                  icon: const Icon(Icons.light_mode_outlined),
+                  label: Text(l10n.themeLight),
+                ),
+                ButtonSegment(
+                  value: ThemeMode.dark,
+                  icon: const Icon(Icons.dark_mode_outlined),
+                  label: Text(l10n.themeDark),
+                ),
+                ButtonSegment(
+                  value: ThemeMode.system,
+                  icon: const Icon(Icons.brightness_auto_outlined),
+                  label: Text(l10n.themeSystem),
+                ),
+              ],
+              selected: {mode},
+              onSelectionChanged: (selection) {
+                ThemeService().setThemeMode(selection.first);
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 

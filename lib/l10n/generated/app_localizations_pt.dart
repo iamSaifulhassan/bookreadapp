@@ -71,6 +71,21 @@ class AppLocalizationsPt extends AppLocalizations {
   String get languageSubtitle => 'Escolha seu idioma preferido';
 
   @override
+  String get themeSection => 'Aparência';
+
+  @override
+  String get themeSubtitle => 'Escolha a aparência do BookRead';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Escuro';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
   String get commonCancel => 'Cancelar';
 
   @override
@@ -284,4 +299,63 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => 'Já tem uma conta? Entrar';
+
+  @override
+  String get profileTitle => 'Perfil';
+
+  @override
+  String get refreshProfileTooltip => 'Atualizar Perfil';
+
+  @override
+  String get loadingProfile => 'Carregando perfil...';
+
+  @override
+  String get noPhoneNumber => 'Sem número de telefone';
+
+  @override
+  String get noCountry => 'Sem país';
+
+  @override
+  String get noUserType => 'Sem tipo de usuário';
+
+  @override
+  String get noEmail => 'Sem e-mail';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Complete seu perfil adicionando seu país, tipo de usuário e número de telefone.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Falha ao carregar os dados do perfil: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Erro ao atualizar o perfil: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Telefone';
+
+  @override
+  String get phoneFieldHint => 'Digite seu telefone';
+
+  @override
+  String get countryFieldHint => 'Digite seu país';
+
+  @override
+  String get userTypeFieldLabel => 'Tipo de Usuário';
+
+  @override
+  String get userTypeFieldHint => 'Digite o tipo de usuário';
+
+  @override
+  String get editProfileButton => 'Editar Perfil';
+
+  @override
+  String get signOutButton => 'Sair';
+
+  @override
+  String get signOutConfirmMessage => 'Tem certeza de que deseja sair?';
 }

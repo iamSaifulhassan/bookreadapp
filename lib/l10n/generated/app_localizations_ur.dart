@@ -70,6 +70,21 @@ class AppLocalizationsUr extends AppLocalizations {
   String get languageSubtitle => 'اپنی پسندیدہ زبان منتخب کریں';
 
   @override
+  String get themeSection => 'ظاہری شکل';
+
+  @override
+  String get themeSubtitle => 'منتخب کریں کہ BookRead کیسا دکھے';
+
+  @override
+  String get themeLight => 'روشن';
+
+  @override
+  String get themeDark => 'تاریک';
+
+  @override
+  String get themeSystem => 'سسٹم';
+
+  @override
   String get commonCancel => 'منسوخ کریں';
 
   @override
@@ -281,4 +296,63 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get alreadyHaveAccountSignInPrompt =>
       'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
+
+  @override
+  String get profileTitle => 'پروفائل';
+
+  @override
+  String get refreshProfileTooltip => 'پروفائل ریفریش کریں';
+
+  @override
+  String get loadingProfile => 'پروفائل لوڈ ہو رہی ہے...';
+
+  @override
+  String get noPhoneNumber => 'کوئی فون نمبر نہیں';
+
+  @override
+  String get noCountry => 'کوئی ملک نہیں';
+
+  @override
+  String get noUserType => 'کوئی صارف قسم نہیں';
+
+  @override
+  String get noEmail => 'کوئی ای میل نہیں';
+
+  @override
+  String get profileIncompleteMessage =>
+      'براہ کرم اپنا ملک، صارف قسم اور فون نمبر شامل کر کے اپنی پروفائل مکمل کریں۔';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'پروفائل ڈیٹا لوڈ کرنے میں ناکامی: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'پروفائل اپ ڈیٹ کرنے میں خرابی: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'فون';
+
+  @override
+  String get phoneFieldHint => 'اپنا فون درج کریں';
+
+  @override
+  String get countryFieldHint => 'اپنا ملک درج کریں';
+
+  @override
+  String get userTypeFieldLabel => 'صارف قسم';
+
+  @override
+  String get userTypeFieldHint => 'صارف قسم درج کریں';
+
+  @override
+  String get editProfileButton => 'پروفائل میں ترمیم کریں';
+
+  @override
+  String get signOutButton => 'سائن آؤٹ کریں';
+
+  @override
+  String get signOutConfirmMessage => 'کیا آپ واقعی سائن آؤٹ کرنا چاہتے ہیں؟';
 }

@@ -70,6 +70,21 @@ class AppLocalizationsDe extends AppLocalizations {
   String get languageSubtitle => 'Wählen Sie Ihre bevorzugte Sprache';
 
   @override
+  String get themeSection => 'Erscheinungsbild';
+
+  @override
+  String get themeSubtitle => 'Wähle, wie BookRead aussieht';
+
+  @override
+  String get themeLight => 'Hell';
+
+  @override
+  String get themeDark => 'Dunkel';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
   String get commonCancel => 'Abbrechen';
 
   @override
@@ -282,4 +297,63 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => 'Bereits ein Konto? Anmelden';
+
+  @override
+  String get profileTitle => 'Profil';
+
+  @override
+  String get refreshProfileTooltip => 'Profil aktualisieren';
+
+  @override
+  String get loadingProfile => 'Profil wird geladen...';
+
+  @override
+  String get noPhoneNumber => 'Keine Telefonnummer';
+
+  @override
+  String get noCountry => 'Kein Land';
+
+  @override
+  String get noUserType => 'Kein Benutzertyp';
+
+  @override
+  String get noEmail => 'Keine E-Mail';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Bitte vervollständige dein Profil, indem du Land, Benutzertyp und Telefonnummer angibst.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Profildaten konnten nicht geladen werden: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Fehler beim Aktualisieren des Profils: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Telefon';
+
+  @override
+  String get phoneFieldHint => 'Gib dein Telefon ein';
+
+  @override
+  String get countryFieldHint => 'Gib dein Land ein';
+
+  @override
+  String get userTypeFieldLabel => 'Benutzertyp';
+
+  @override
+  String get userTypeFieldHint => 'Gib den Benutzertyp ein';
+
+  @override
+  String get editProfileButton => 'Profil bearbeiten';
+
+  @override
+  String get signOutButton => 'Abmelden';
+
+  @override
+  String get signOutConfirmMessage => 'Möchtest du dich wirklich abmelden?';
 }

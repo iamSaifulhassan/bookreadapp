@@ -30,6 +30,12 @@
   "languageSection": "Language",
   "languageSubtitle": "Choose your preferred language",
 
+  "themeSection": "Appearance",
+  "themeSubtitle": "Choose how BookRead looks",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "themeSystem": "System",
+
   "commonCancel": "Cancel",
   "commonChange": "Change",
   "commonRetry": "Retry",
@@ -104,5 +110,30 @@
   "userTypeResearcher": "Researcher",
   "signUpButton": "Sign Up",
   "signUpSuccessMessage": "Sign-up successful!",
-  "alreadyHaveAccountSignInPrompt": "Already have an account? Sign In"
+  "alreadyHaveAccountSignInPrompt": "Already have an account? Sign In",
+
+  "profileTitle": "Profile",
+  "refreshProfileTooltip": "Refresh Profile",
+  "loadingProfile": "Loading profile...",
+  "noPhoneNumber": "No phone number",
+  "noCountry": "No country",
+  "noUserType": "No user type",
+  "noEmail": "No email",
+  "profileIncompleteMessage": "Please complete your profile by adding your Country, User Type, and Phone Number.",
+  "failedToLoadProfileError": "Failed to load profile data: {error}",
+  "@failedToLoadProfileError": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "errorUpdatingProfileError": "Error updating profile: {error}",
+  "@errorUpdatingProfileError": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "phoneFieldLabel": "Phone",
+  "phoneFieldHint": "Enter your phone",
+  "countryFieldHint": "Enter your country",
+  "userTypeFieldLabel": "User Type",
+  "userTypeFieldHint": "Enter user type",
+  "editProfileButton": "Edit Profile",
+  "signOutButton": "Sign Out",
+  "signOutConfirmMessage": "Are you sure you want to sign out?"
 }

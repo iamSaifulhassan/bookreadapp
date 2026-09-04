@@ -70,6 +70,21 @@ class AppLocalizationsJa extends AppLocalizations {
   String get languageSubtitle => '希望する言語を選択してください';
 
   @override
+  String get themeSection => '外観';
+
+  @override
+  String get themeSubtitle => 'BookRead の見た目を選択してください';
+
+  @override
+  String get themeLight => 'ライト';
+
+  @override
+  String get themeDark => 'ダーク';
+
+  @override
+  String get themeSystem => 'システム';
+
+  @override
   String get commonCancel => 'キャンセル';
 
   @override
@@ -279,4 +294,62 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => '既にアカウントをお持ちですか？サインイン';
+
+  @override
+  String get profileTitle => 'プロフィール';
+
+  @override
+  String get refreshProfileTooltip => 'プロフィールを更新';
+
+  @override
+  String get loadingProfile => 'プロフィールを読み込んでいます...';
+
+  @override
+  String get noPhoneNumber => '電話番号なし';
+
+  @override
+  String get noCountry => '国なし';
+
+  @override
+  String get noUserType => 'ユーザータイプなし';
+
+  @override
+  String get noEmail => 'メールアドレスなし';
+
+  @override
+  String get profileIncompleteMessage => '国、ユーザータイプ、電話番号を追加してプロフィールを完成させてください。';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'プロフィールデータの読み込みに失敗しました: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'プロフィールの更新中にエラーが発生しました: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => '電話番号';
+
+  @override
+  String get phoneFieldHint => '電話番号を入力してください';
+
+  @override
+  String get countryFieldHint => '国を入力してください';
+
+  @override
+  String get userTypeFieldLabel => 'ユーザータイプ';
+
+  @override
+  String get userTypeFieldHint => 'ユーザータイプを入力してください';
+
+  @override
+  String get editProfileButton => 'プロフィールを編集';
+
+  @override
+  String get signOutButton => 'サインアウト';
+
+  @override
+  String get signOutConfirmMessage => '本当にサインアウトしますか？';
 }

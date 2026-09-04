@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "読書用のテキストサイズ",
   "lineHeightLabel": "行の高さ",
   "lineHeightSubtitle": "テキスト行間の間隔",
+  "themeSection": "外観",
+  "themeSubtitle": "BookRead の見た目を選択してください",
+  "themeLight": "ライト",
+  "themeDark": "ダーク",
+  "themeSystem": "システム",
+
   "languageSection": "言語",
   "languageSubtitle": "希望する言語を選択してください",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "研究者",
   "signUpButton": "新規登録",
   "signUpSuccessMessage": "登録に成功しました！",
-  "alreadyHaveAccountSignInPrompt": "既にアカウントをお持ちですか？サインイン"
+  "alreadyHaveAccountSignInPrompt": "既にアカウントをお持ちですか？サインイン",
+
+  "profileTitle": "プロフィール",
+  "refreshProfileTooltip": "プロフィールを更新",
+  "loadingProfile": "プロフィールを読み込んでいます...",
+  "noPhoneNumber": "電話番号なし",
+  "noCountry": "国なし",
+  "noUserType": "ユーザータイプなし",
+  "noEmail": "メールアドレスなし",
+  "profileIncompleteMessage": "国、ユーザータイプ、電話番号を追加してプロフィールを完成させてください。",
+  "failedToLoadProfileError": "プロフィールデータの読み込みに失敗しました: {error}",
+  "errorUpdatingProfileError": "プロフィールの更新中にエラーが発生しました: {error}",
+  "phoneFieldLabel": "電話番号",
+  "phoneFieldHint": "電話番号を入力してください",
+  "countryFieldHint": "国を入力してください",
+  "userTypeFieldLabel": "ユーザータイプ",
+  "userTypeFieldHint": "ユーザータイプを入力してください",
+  "editProfileButton": "プロフィールを編集",
+  "signOutButton": "サインアウト",
+  "signOutConfirmMessage": "本当にサインアウトしますか？"
 }

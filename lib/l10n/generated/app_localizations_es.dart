@@ -71,6 +71,21 @@ class AppLocalizationsEs extends AppLocalizations {
   String get languageSubtitle => 'Elige tu idioma preferido';
 
   @override
+  String get themeSection => 'Apariencia';
+
+  @override
+  String get themeSubtitle => 'Elige cómo se ve BookRead';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Oscuro';
+
+  @override
+  String get themeSystem => 'Sistema';
+
+  @override
   String get commonCancel => 'Cancelar';
 
   @override
@@ -286,4 +301,63 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get alreadyHaveAccountSignInPrompt =>
       '¿Ya tienes una cuenta? Inicia sesión';
+
+  @override
+  String get profileTitle => 'Perfil';
+
+  @override
+  String get refreshProfileTooltip => 'Actualizar Perfil';
+
+  @override
+  String get loadingProfile => 'Cargando perfil...';
+
+  @override
+  String get noPhoneNumber => 'Sin número de teléfono';
+
+  @override
+  String get noCountry => 'Sin país';
+
+  @override
+  String get noUserType => 'Sin tipo de usuario';
+
+  @override
+  String get noEmail => 'Sin correo electrónico';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Completa tu perfil añadiendo tu país, tipo de usuario y número de teléfono.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Error al cargar los datos del perfil: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Error al actualizar el perfil: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Teléfono';
+
+  @override
+  String get phoneFieldHint => 'Introduce tu teléfono';
+
+  @override
+  String get countryFieldHint => 'Introduce tu país';
+
+  @override
+  String get userTypeFieldLabel => 'Tipo de Usuario';
+
+  @override
+  String get userTypeFieldHint => 'Introduce el tipo de usuario';
+
+  @override
+  String get editProfileButton => 'Editar Perfil';
+
+  @override
+  String get signOutButton => 'Cerrar Sesión';
+
+  @override
+  String get signOutConfirmMessage => '¿Seguro que quieres cerrar sesión?';
 }

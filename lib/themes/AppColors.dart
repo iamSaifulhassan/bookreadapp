@@ -43,4 +43,13 @@ class AppColors {
   // Success colors
   static const Color success = Color(0xFF4CAF50); // Green for success
   static const Color onSuccess = Color(0xFFFFFFFF); // White text on success
+
+  // Dark theme palette
+  static const Color primaryDark = Color(0xFF3E6BD6); // Brighter navy-blue accent for dark backgrounds
+  static const Color surfaceDark = Color(0xFF161B22);
+  static const Color backgroundDarkElevated = Color(0xFF0D1117);
+  static const Color onSurfaceDark = Color(0xFFE6E9EF);
+  static const Color inputFillDark = Color(0xFF1F2630);
+  static const Color borderDark = Color(0x33FFFFFF);
+  static const Color textSecondaryDark = Color(0xFF9AA4B2);
 }

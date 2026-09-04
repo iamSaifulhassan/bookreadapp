@@ -71,6 +71,21 @@ class AppLocalizationsFr extends AppLocalizations {
   String get languageSubtitle => 'Choisissez votre langue préférée';
 
   @override
+  String get themeSection => 'Apparence';
+
+  @override
+  String get themeSubtitle => 'Choisissez l\'apparence de BookRead';
+
+  @override
+  String get themeLight => 'Clair';
+
+  @override
+  String get themeDark => 'Sombre';
+
+  @override
+  String get themeSystem => 'Système';
+
+  @override
   String get commonCancel => 'Annuler';
 
   @override
@@ -287,4 +302,63 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get alreadyHaveAccountSignInPrompt =>
       'Vous avez déjà un compte ? Connectez-vous';
+
+  @override
+  String get profileTitle => 'Profil';
+
+  @override
+  String get refreshProfileTooltip => 'Actualiser le Profil';
+
+  @override
+  String get loadingProfile => 'Chargement du profil...';
+
+  @override
+  String get noPhoneNumber => 'Aucun numéro de téléphone';
+
+  @override
+  String get noCountry => 'Aucun pays';
+
+  @override
+  String get noUserType => 'Aucun type d\'utilisateur';
+
+  @override
+  String get noEmail => 'Aucun e-mail';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Veuillez compléter votre profil en ajoutant votre pays, type d\'utilisateur et numéro de téléphone.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Échec du chargement des données du profil : $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Erreur lors de la mise à jour du profil : $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Téléphone';
+
+  @override
+  String get phoneFieldHint => 'Entrez votre téléphone';
+
+  @override
+  String get countryFieldHint => 'Entrez votre pays';
+
+  @override
+  String get userTypeFieldLabel => 'Type d\'Utilisateur';
+
+  @override
+  String get userTypeFieldHint => 'Entrez le type d\'utilisateur';
+
+  @override
+  String get editProfileButton => 'Modifier le Profil';
+
+  @override
+  String get signOutButton => 'Déconnexion';
+
+  @override
+  String get signOutConfirmMessage => 'Voulez-vous vraiment vous déconnecter ?';
 }

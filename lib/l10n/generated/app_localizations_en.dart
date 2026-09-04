@@ -70,6 +70,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageSubtitle => 'Choose your preferred language';
 
   @override
+  String get themeSection => 'Appearance';
+
+  @override
+  String get themeSubtitle => 'Choose how BookRead looks';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
   String get commonCancel => 'Cancel';
 
   @override
@@ -281,4 +296,63 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get alreadyHaveAccountSignInPrompt =>
       'Already have an account? Sign In';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get refreshProfileTooltip => 'Refresh Profile';
+
+  @override
+  String get loadingProfile => 'Loading profile...';
+
+  @override
+  String get noPhoneNumber => 'No phone number';
+
+  @override
+  String get noCountry => 'No country';
+
+  @override
+  String get noUserType => 'No user type';
+
+  @override
+  String get noEmail => 'No email';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Please complete your profile by adding your Country, User Type, and Phone Number.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Failed to load profile data: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Error updating profile: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Phone';
+
+  @override
+  String get phoneFieldHint => 'Enter your phone';
+
+  @override
+  String get countryFieldHint => 'Enter your country';
+
+  @override
+  String get userTypeFieldLabel => 'User Type';
+
+  @override
+  String get userTypeFieldHint => 'Enter user type';
+
+  @override
+  String get editProfileButton => 'Edit Profile';
+
+  @override
+  String get signOutButton => 'Sign Out';
+
+  @override
+  String get signOutConfirmMessage => 'Are you sure you want to sign out?';
 }

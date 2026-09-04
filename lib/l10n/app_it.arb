@@ -17,6 +17,12 @@
   "fontSizeSubtitle": "Dimensione del testo per la lettura",
   "lineHeightLabel": "Interlinea",
   "lineHeightSubtitle": "Spazio tra le righe di testo",
+  "themeSection": "Aspetto",
+  "themeSubtitle": "Scegli l'aspetto di BookRead",
+  "themeLight": "Chiaro",
+  "themeDark": "Scuro",
+  "themeSystem": "Sistema",
+
   "languageSection": "Lingua",
   "languageSubtitle": "Scegli la tua lingua preferita",
 
@@ -91,5 +97,24 @@
   "userTypeResearcher": "Ricercatore",
   "signUpButton": "Registrati",
   "signUpSuccessMessage": "Registrazione avvenuta con successo!",
-  "alreadyHaveAccountSignInPrompt": "Hai già un account? Accedi"
+  "alreadyHaveAccountSignInPrompt": "Hai già un account? Accedi",
+
+  "profileTitle": "Profilo",
+  "refreshProfileTooltip": "Aggiorna Profilo",
+  "loadingProfile": "Caricamento del profilo...",
+  "noPhoneNumber": "Nessun numero di telefono",
+  "noCountry": "Nessun paese",
+  "noUserType": "Nessun tipo di utente",
+  "noEmail": "Nessuna email",
+  "profileIncompleteMessage": "Completa il tuo profilo aggiungendo paese, tipo di utente e numero di telefono.",
+  "failedToLoadProfileError": "Impossibile caricare i dati del profilo: {error}",
+  "errorUpdatingProfileError": "Errore durante l'aggiornamento del profilo: {error}",
+  "phoneFieldLabel": "Telefono",
+  "phoneFieldHint": "Inserisci il tuo telefono",
+  "countryFieldHint": "Inserisci il tuo paese",
+  "userTypeFieldLabel": "Tipo di Utente",
+  "userTypeFieldHint": "Inserisci il tipo di utente",
+  "editProfileButton": "Modifica Profilo",
+  "signOutButton": "Esci",
+  "signOutConfirmMessage": "Sei sicuro di voler uscire?"
 }

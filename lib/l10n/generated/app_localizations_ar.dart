@@ -71,6 +71,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get languageSubtitle => 'اختر لغتك المفضلة';
 
   @override
+  String get themeSection => 'المظهر';
+
+  @override
+  String get themeSubtitle => 'اختر مظهر التطبيق';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeDark => 'داكن';
+
+  @override
+  String get themeSystem => 'النظام';
+
+  @override
   String get commonCancel => 'إلغاء';
 
   @override
@@ -283,4 +298,63 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => 'لديك حساب بالفعل؟ تسجيل الدخول';
+
+  @override
+  String get profileTitle => 'الملف الشخصي';
+
+  @override
+  String get refreshProfileTooltip => 'تحديث الملف الشخصي';
+
+  @override
+  String get loadingProfile => 'جارٍ تحميل الملف الشخصي...';
+
+  @override
+  String get noPhoneNumber => 'لا يوجد رقم هاتف';
+
+  @override
+  String get noCountry => 'لا توجد دولة';
+
+  @override
+  String get noUserType => 'لا يوجد نوع مستخدم';
+
+  @override
+  String get noEmail => 'لا يوجد بريد إلكتروني';
+
+  @override
+  String get profileIncompleteMessage =>
+      'يرجى إكمال ملفك الشخصي بإضافة دولتك ونوع المستخدم ورقم الهاتف.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'فشل تحميل بيانات الملف الشخصي: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'خطأ أثناء تحديث الملف الشخصي: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'الهاتف';
+
+  @override
+  String get phoneFieldHint => 'أدخل هاتفك';
+
+  @override
+  String get countryFieldHint => 'أدخل دولتك';
+
+  @override
+  String get userTypeFieldLabel => 'نوع المستخدم';
+
+  @override
+  String get userTypeFieldHint => 'أدخل نوع المستخدم';
+
+  @override
+  String get editProfileButton => 'تعديل الملف الشخصي';
+
+  @override
+  String get signOutButton => 'تسجيل الخروج';
+
+  @override
+  String get signOutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 }

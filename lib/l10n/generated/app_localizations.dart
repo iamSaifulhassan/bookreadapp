@@ -232,6 +232,36 @@ abstract class AppLocalizations {
   /// **'Choose your preferred language'**
   String get languageSubtitle;
 
+  /// No description provided for @themeSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get themeSection;
+
+  /// No description provided for @themeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how BookRead looks'**
+  String get themeSubtitle;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
   /// No description provided for @commonCancel.
   ///
   /// In en, this message translates to:
@@ -645,6 +675,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Already have an account? Sign In'**
   String get alreadyHaveAccountSignInPrompt;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTitle;
+
+  /// No description provided for @refreshProfileTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh Profile'**
+  String get refreshProfileTooltip;
+
+  /// No description provided for @loadingProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading profile...'**
+  String get loadingProfile;
+
+  /// No description provided for @noPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'No phone number'**
+  String get noPhoneNumber;
+
+  /// No description provided for @noCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'No country'**
+  String get noCountry;
+
+  /// No description provided for @noUserType.
+  ///
+  /// In en, this message translates to:
+  /// **'No user type'**
+  String get noUserType;
+
+  /// No description provided for @noEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'No email'**
+  String get noEmail;
+
+  /// No description provided for @profileIncompleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete your profile by adding your Country, User Type, and Phone Number.'**
+  String get profileIncompleteMessage;
+
+  /// No description provided for @failedToLoadProfileError.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile data: {error}'**
+  String failedToLoadProfileError(String error);
+
+  /// No description provided for @errorUpdatingProfileError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error updating profile: {error}'**
+  String errorUpdatingProfileError(String error);
+
+  /// No description provided for @phoneFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phoneFieldLabel;
+
+  /// No description provided for @phoneFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone'**
+  String get phoneFieldHint;
+
+  /// No description provided for @countryFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your country'**
+  String get countryFieldHint;
+
+  /// No description provided for @userTypeFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'User Type'**
+  String get userTypeFieldLabel;
+
+  /// No description provided for @userTypeFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter user type'**
+  String get userTypeFieldHint;
+
+  /// No description provided for @editProfileButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfileButton;
+
+  /// No description provided for @signOutButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get signOutButton;
+
+  /// No description provided for @signOutConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to sign out?'**
+  String get signOutConfirmMessage;
 }
 
 class _AppLocalizationsDelegate

@@ -71,6 +71,21 @@ class AppLocalizationsRu extends AppLocalizations {
   String get languageSubtitle => 'Выберите предпочитаемый язык';
 
   @override
+  String get themeSection => 'Оформление';
+
+  @override
+  String get themeSubtitle => 'Выберите внешний вид BookRead';
+
+  @override
+  String get themeLight => 'Светлая';
+
+  @override
+  String get themeDark => 'Тёмная';
+
+  @override
+  String get themeSystem => 'Системная';
+
+  @override
   String get commonCancel => 'Отмена';
 
   @override
@@ -285,4 +300,63 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => 'Уже есть аккаунт? Войти';
+
+  @override
+  String get profileTitle => 'Профиль';
+
+  @override
+  String get refreshProfileTooltip => 'Обновить профиль';
+
+  @override
+  String get loadingProfile => 'Загрузка профиля...';
+
+  @override
+  String get noPhoneNumber => 'Нет номера телефона';
+
+  @override
+  String get noCountry => 'Нет страны';
+
+  @override
+  String get noUserType => 'Нет типа пользователя';
+
+  @override
+  String get noEmail => 'Нет электронной почты';
+
+  @override
+  String get profileIncompleteMessage =>
+      'Пожалуйста, заполните профиль, указав страну, тип пользователя и номер телефона.';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'Не удалось загрузить данные профиля: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'Ошибка при обновлении профиля: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'Телефон';
+
+  @override
+  String get phoneFieldHint => 'Введите свой телефон';
+
+  @override
+  String get countryFieldHint => 'Введите свою страну';
+
+  @override
+  String get userTypeFieldLabel => 'Тип пользователя';
+
+  @override
+  String get userTypeFieldHint => 'Введите тип пользователя';
+
+  @override
+  String get editProfileButton => 'Редактировать профиль';
+
+  @override
+  String get signOutButton => 'Выйти';
+
+  @override
+  String get signOutConfirmMessage => 'Вы уверены, что хотите выйти?';
 }

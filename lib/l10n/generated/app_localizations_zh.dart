@@ -70,6 +70,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get languageSubtitle => '选择您的首选语言';
 
   @override
+  String get themeSection => '外观';
+
+  @override
+  String get themeSubtitle => '选择 BookRead 的外观';
+
+  @override
+  String get themeLight => '浅色';
+
+  @override
+  String get themeDark => '深色';
+
+  @override
+  String get themeSystem => '跟随系统';
+
+  @override
   String get commonCancel => '取消';
 
   @override
@@ -277,4 +292,62 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => '已有账户？立即登录';
+
+  @override
+  String get profileTitle => '个人资料';
+
+  @override
+  String get refreshProfileTooltip => '刷新个人资料';
+
+  @override
+  String get loadingProfile => '正在加载个人资料...';
+
+  @override
+  String get noPhoneNumber => '无电话号码';
+
+  @override
+  String get noCountry => '无国家';
+
+  @override
+  String get noUserType => '无用户类型';
+
+  @override
+  String get noEmail => '无电子邮箱';
+
+  @override
+  String get profileIncompleteMessage => '请添加您的国家、用户类型和电话号码以完善个人资料。';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return '加载个人资料数据失败：$error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return '更新个人资料时出错：$error';
+  }
+
+  @override
+  String get phoneFieldLabel => '电话';
+
+  @override
+  String get phoneFieldHint => '请输入您的电话';
+
+  @override
+  String get countryFieldHint => '请输入您的国家';
+
+  @override
+  String get userTypeFieldLabel => '用户类型';
+
+  @override
+  String get userTypeFieldHint => '请输入用户类型';
+
+  @override
+  String get editProfileButton => '编辑资料';
+
+  @override
+  String get signOutButton => '退出登录';
+
+  @override
+  String get signOutConfirmMessage => '您确定要退出登录吗？';
 }

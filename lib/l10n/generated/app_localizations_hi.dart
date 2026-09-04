@@ -70,6 +70,21 @@ class AppLocalizationsHi extends AppLocalizations {
   String get languageSubtitle => 'अपनी पसंदीदा भाषा चुनें';
 
   @override
+  String get themeSection => 'रूप-रंग';
+
+  @override
+  String get themeSubtitle => 'चुनें कि BookRead कैसा दिखे';
+
+  @override
+  String get themeLight => 'हल्का';
+
+  @override
+  String get themeDark => 'गहरा';
+
+  @override
+  String get themeSystem => 'सिस्टम';
+
+  @override
   String get commonCancel => 'रद्द करें';
 
   @override
@@ -281,4 +296,63 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get alreadyHaveAccountSignInPrompt => 'पहले से खाता है? साइन इन करें';
+
+  @override
+  String get profileTitle => 'प्रोफ़ाइल';
+
+  @override
+  String get refreshProfileTooltip => 'प्रोफ़ाइल रीफ्रेश करें';
+
+  @override
+  String get loadingProfile => 'प्रोफ़ाइल लोड हो रही है...';
+
+  @override
+  String get noPhoneNumber => 'कोई फ़ोन नंबर नहीं';
+
+  @override
+  String get noCountry => 'कोई देश नहीं';
+
+  @override
+  String get noUserType => 'कोई उपयोगकर्ता प्रकार नहीं';
+
+  @override
+  String get noEmail => 'कोई ईमेल नहीं';
+
+  @override
+  String get profileIncompleteMessage =>
+      'कृपया अपना देश, उपयोगकर्ता प्रकार और फ़ोन नंबर जोड़कर अपनी प्रोफ़ाइल पूरी करें।';
+
+  @override
+  String failedToLoadProfileError(String error) {
+    return 'प्रोफ़ाइल डेटा लोड करने में विफल: $error';
+  }
+
+  @override
+  String errorUpdatingProfileError(String error) {
+    return 'प्रोफ़ाइल अपडेट करने में त्रुटि: $error';
+  }
+
+  @override
+  String get phoneFieldLabel => 'फ़ोन';
+
+  @override
+  String get phoneFieldHint => 'अपना फ़ोन दर्ज करें';
+
+  @override
+  String get countryFieldHint => 'अपना देश दर्ज करें';
+
+  @override
+  String get userTypeFieldLabel => 'उपयोगकर्ता प्रकार';
+
+  @override
+  String get userTypeFieldHint => 'उपयोगकर्ता प्रकार दर्ज करें';
+
+  @override
+  String get editProfileButton => 'प्रोफ़ाइल संपादित करें';
+
+  @override
+  String get signOutButton => 'साइन आउट करें';
+
+  @override
+  String get signOutConfirmMessage => 'क्या आप वाकई साइन आउट करना चाहते हैं?';
 }

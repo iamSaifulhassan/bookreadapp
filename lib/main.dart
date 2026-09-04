@@ -8,6 +8,7 @@
 import 'package:bookread/screens/about/About.dart';
 import 'package:bookread/services/auth_wrapper.dart';
 import 'package:bookread/services/locale_service.dart';
+import 'package:bookread/services/theme_service.dart';
 import 'package:bookread/screens/home/home_screen.dart';
 import 'package:bookread/screens/signin/signin_screen.dart';
 import 'package:bookread/screens/signup/signup_screen.dart';
@@ -28,6 +29,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await LocaleService().loadSavedLocale();
+  await ThemeService().loadSavedThemeMode();
   runApp(const BookReadApp());
 }
 
@@ -39,31 +41,38 @@ class BookReadApp extends StatelessWidget {
     return ValueListenableBuilder<Locale?>(
       valueListenable: LocaleService().currentLocale,
       builder: (context, locale, _) {
-        return MaterialApp(
-          home: const AuthWrapper(), // Use AuthWrapper instead of SplashScreen
-          theme: AppTheme.lightTheme, // Uses app-wide theme and color scheme
-          debugShowCheckedModeBanner: false,
-          locale: locale,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales:
-              kSupportedLocales.map((l) => l.locale).toList(),
-          routes: {
-            '/home': (context) => const HomeScreen(),
-            '/signin': (context) => SignInScreen(),
-            '/signup': (context) => const SignupScreen(),
-            '/profile': (context) => ProfileScreen(),
-            '/downloads': (context) => const DownloadsScreen(),
-            '/favourites': (context) => const FavouritesScreen(),
-            '/toread': (context) => const ToReadScreen(),
-            '/completed': (context) => const CompletedScreen(),
-            '/settings': (context) => const SettingsScreen(),
-            '/about': (context) => const AboutScreen(),
-            // Add other routes here as needed for new features/screens
+        return ValueListenableBuilder<ThemeMode>(
+          valueListenable: ThemeService().themeMode,
+          builder: (context, themeMode, _) {
+            return MaterialApp(
+              home:
+                  const AuthWrapper(), // Use AuthWrapper instead of SplashScreen
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: themeMode,
+              debugShowCheckedModeBanner: false,
+              locale: locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: kSupportedLocales.map((l) => l.locale).toList(),
+              routes: {
+                '/home': (context) => const HomeScreen(),
+                '/signin': (context) => SignInScreen(),
+                '/signup': (context) => const SignupScreen(),
+                '/profile': (context) => ProfileScreen(),
+                '/downloads': (context) => const DownloadsScreen(),
+                '/favourites': (context) => const FavouritesScreen(),
+                '/toread': (context) => const ToReadScreen(),
+                '/completed': (context) => const CompletedScreen(),
+                '/settings': (context) => const SettingsScreen(),
+                '/about': (context) => const AboutScreen(),
+                // Add other routes here as needed for new features/screens
+              },
+            );
           },
         );
       },
