@@ -69,4 +69,90 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get languageSubtitle => 'اختر لغتك المفضلة';
+
+  @override
+  String get commonCancel => 'إلغاء';
+
+  @override
+  String get commonChange => 'تغيير';
+
+  @override
+  String get commonRetry => 'إعادة المحاولة';
+
+  @override
+  String get commonShare => 'مشاركة';
+
+  @override
+  String get commonOk => 'موافق';
+
+  @override
+  String get myBooksTitle => 'كتبي';
+
+  @override
+  String get loadingYourBooks => 'جارٍ تحميل كتبك...';
+
+  @override
+  String get storageAccessRequiredTitle => 'مطلوب الوصول إلى وحدة التخزين';
+
+  @override
+  String get storageAccessRequiredBody =>
+      'يحتاج هذا التطبيق إلى إذن التخزين للوصول إلى ملفات كتبك وإدارتها.';
+
+  @override
+  String get storageAccessRequiredHint =>
+      'يرجى تمكين إذن التخزين في إعدادات جهازك.';
+
+  @override
+  String get openSettingsButton => 'فتح الإعدادات';
+
+  @override
+  String get showAsListTooltip => 'عرض كقائمة';
+
+  @override
+  String get showAsGridTooltip => 'عرض كشبكة';
+
+  @override
+  String get pickBookFilesTooltip => 'اختيار ملفات الكتب';
+
+  @override
+  String get booksFolderPathLabel => 'مسار مجلد الكتب';
+
+  @override
+  String get changeBooksFolderPathTitle => 'تغيير مسار مجلد الكتب';
+
+  @override
+  String get selectBooksFolderTitle => 'اختيار مجلد الكتب';
+
+  @override
+  String get browseForFolderTooltip => 'تصفح للبحث عن مجلد';
+
+  @override
+  String get noBooksMessage =>
+      'لا توجد ملفات كتب في المجلد المخصص أو المختارة. اضغط على + لإضافة ملفات.';
+
+  @override
+  String modifiedLabel(String date) {
+    return 'تم التعديل: $date';
+  }
+
+  @override
+  String get readLaterTooltip => 'القراءة لاحقًا';
+
+  @override
+  String get removeFromListTooltip => 'إزالة من القائمة';
+
+  @override
+  String get removeFromFavouritesTooltip => 'إزالة من المفضلة';
+
+  @override
+  String get addToFavouritesTooltip => 'إضافة إلى المفضلة';
+
+  @override
+  String get removeFromCompletedTooltip => 'إزالة من المكتملة';
+
+  @override
+  String get markAsCompletedTooltip => 'تعليم كمكتمل';
+
+  @override
+  String get fileAlreadyExistsMessage => 'الملف موجود بالفعل';
 }

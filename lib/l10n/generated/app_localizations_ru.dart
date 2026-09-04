@@ -69,4 +69,90 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get languageSubtitle => 'Выберите предпочитаемый язык';
+
+  @override
+  String get commonCancel => 'Отмена';
+
+  @override
+  String get commonChange => 'Изменить';
+
+  @override
+  String get commonRetry => 'Повторить';
+
+  @override
+  String get commonShare => 'Поделиться';
+
+  @override
+  String get commonOk => 'ОК';
+
+  @override
+  String get myBooksTitle => 'Мои книги';
+
+  @override
+  String get loadingYourBooks => 'Загрузка ваших книг...';
+
+  @override
+  String get storageAccessRequiredTitle => 'Требуется доступ к хранилищу';
+
+  @override
+  String get storageAccessRequiredBody =>
+      'Этому приложению требуется разрешение на доступ к хранилищу для доступа к вашим файлам книг и управления ими.';
+
+  @override
+  String get storageAccessRequiredHint =>
+      'Пожалуйста, включите разрешение на хранилище в настройках устройства.';
+
+  @override
+  String get openSettingsButton => 'Открыть настройки';
+
+  @override
+  String get showAsListTooltip => 'Показать как список';
+
+  @override
+  String get showAsGridTooltip => 'Показать как сетку';
+
+  @override
+  String get pickBookFilesTooltip => 'Выбрать файлы книг';
+
+  @override
+  String get booksFolderPathLabel => 'Путь к папке с книгами';
+
+  @override
+  String get changeBooksFolderPathTitle => 'Изменить путь к папке с книгами';
+
+  @override
+  String get selectBooksFolderTitle => 'Выбрать папку с книгами';
+
+  @override
+  String get browseForFolderTooltip => 'Обзор папки';
+
+  @override
+  String get noBooksMessage =>
+      'В выбранной папке нет файлов книг. Нажмите +, чтобы добавить файлы.';
+
+  @override
+  String modifiedLabel(String date) {
+    return 'Изменено: $date';
+  }
+
+  @override
+  String get readLaterTooltip => 'Прочитать позже';
+
+  @override
+  String get removeFromListTooltip => 'Удалить из списка';
+
+  @override
+  String get removeFromFavouritesTooltip => 'Удалить из избранного';
+
+  @override
+  String get addToFavouritesTooltip => 'Добавить в избранное';
+
+  @override
+  String get removeFromCompletedTooltip => 'Удалить из завершённых';
+
+  @override
+  String get markAsCompletedTooltip => 'Отметить как завершённое';
+
+  @override
+  String get fileAlreadyExistsMessage => 'Файл уже существует';
 }

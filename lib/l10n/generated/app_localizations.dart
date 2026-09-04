@@ -231,6 +231,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose your preferred language'**
   String get languageSubtitle;
+
+  /// No description provided for @commonCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get commonCancel;
+
+  /// No description provided for @commonChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get commonChange;
+
+  /// No description provided for @commonRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get commonRetry;
+
+  /// No description provided for @commonShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get commonShare;
+
+  /// No description provided for @commonOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get commonOk;
+
+  /// No description provided for @myBooksTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Books'**
+  String get myBooksTitle;
+
+  /// No description provided for @loadingYourBooks.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading your books...'**
+  String get loadingYourBooks;
+
+  /// No description provided for @storageAccessRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage Access Required'**
+  String get storageAccessRequiredTitle;
+
+  /// No description provided for @storageAccessRequiredBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This app needs storage permission to access and manage your book files.'**
+  String get storageAccessRequiredBody;
+
+  /// No description provided for @storageAccessRequiredHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable storage permission in your device settings.'**
+  String get storageAccessRequiredHint;
+
+  /// No description provided for @openSettingsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettingsButton;
+
+  /// No description provided for @showAsListTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Show as List'**
+  String get showAsListTooltip;
+
+  /// No description provided for @showAsGridTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Show as Grid'**
+  String get showAsGridTooltip;
+
+  /// No description provided for @pickBookFilesTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Book Files'**
+  String get pickBookFilesTooltip;
+
+  /// No description provided for @booksFolderPathLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Books Folder Path'**
+  String get booksFolderPathLabel;
+
+  /// No description provided for @changeBooksFolderPathTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Books Folder Path'**
+  String get changeBooksFolderPathTitle;
+
+  /// No description provided for @selectBooksFolderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Books Folder'**
+  String get selectBooksFolderTitle;
+
+  /// No description provided for @browseForFolderTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse for folder'**
+  String get browseForFolderTooltip;
+
+  /// No description provided for @noBooksMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No book files in custom folder or picked. Tap + to add files.'**
+  String get noBooksMessage;
+
+  /// No description provided for @modifiedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Modified: {date}'**
+  String modifiedLabel(String date);
+
+  /// No description provided for @readLaterTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Read Later'**
+  String get readLaterTooltip;
+
+  /// No description provided for @removeFromListTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from List'**
+  String get removeFromListTooltip;
+
+  /// No description provided for @removeFromFavouritesTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from Favourites'**
+  String get removeFromFavouritesTooltip;
+
+  /// No description provided for @addToFavouritesTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Favourites'**
+  String get addToFavouritesTooltip;
+
+  /// No description provided for @removeFromCompletedTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from Completed'**
+  String get removeFromCompletedTooltip;
+
+  /// No description provided for @markAsCompletedTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Completed'**
+  String get markAsCompletedTooltip;
+
+  /// No description provided for @fileAlreadyExistsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'File already exists'**
+  String get fileAlreadyExistsMessage;
 }
 
 class _AppLocalizationsDelegate

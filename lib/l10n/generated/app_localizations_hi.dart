@@ -68,4 +68,90 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get languageSubtitle => 'अपनी पसंदीदा भाषा चुनें';
+
+  @override
+  String get commonCancel => 'रद्द करें';
+
+  @override
+  String get commonChange => 'बदलें';
+
+  @override
+  String get commonRetry => 'पुनः प्रयास करें';
+
+  @override
+  String get commonShare => 'साझा करें';
+
+  @override
+  String get commonOk => 'ठीक है';
+
+  @override
+  String get myBooksTitle => 'मेरी किताबें';
+
+  @override
+  String get loadingYourBooks => 'आपकी किताबें लोड हो रही हैं...';
+
+  @override
+  String get storageAccessRequiredTitle => 'स्टोरेज एक्सेस आवश्यक है';
+
+  @override
+  String get storageAccessRequiredBody =>
+      'इस ऐप को आपकी किताब फ़ाइलों तक पहुँचने और उन्हें प्रबंधित करने के लिए स्टोरेज अनुमति की आवश्यकता है।';
+
+  @override
+  String get storageAccessRequiredHint =>
+      'कृपया अपने डिवाइस की सेटिंग्स में स्टोरेज अनुमति सक्षम करें।';
+
+  @override
+  String get openSettingsButton => 'सेटिंग्स खोलें';
+
+  @override
+  String get showAsListTooltip => 'सूची के रूप में दिखाएं';
+
+  @override
+  String get showAsGridTooltip => 'ग्रिड के रूप में दिखाएं';
+
+  @override
+  String get pickBookFilesTooltip => 'किताब फ़ाइलें चुनें';
+
+  @override
+  String get booksFolderPathLabel => 'किताब फ़ोल्डर पथ';
+
+  @override
+  String get changeBooksFolderPathTitle => 'किताब फ़ोल्डर पथ बदलें';
+
+  @override
+  String get selectBooksFolderTitle => 'किताब फ़ोल्डर चुनें';
+
+  @override
+  String get browseForFolderTooltip => 'फ़ोल्डर के लिए ब्राउज़ करें';
+
+  @override
+  String get noBooksMessage =>
+      'कस्टम फ़ोल्डर में या चुनी गई कोई किताब फ़ाइल नहीं है। फ़ाइलें जोड़ने के लिए + पर टैप करें।';
+
+  @override
+  String modifiedLabel(String date) {
+    return 'संशोधित: $date';
+  }
+
+  @override
+  String get readLaterTooltip => 'बाद में पढ़ें';
+
+  @override
+  String get removeFromListTooltip => 'सूची से हटाएं';
+
+  @override
+  String get removeFromFavouritesTooltip => 'पसंदीदा से हटाएं';
+
+  @override
+  String get addToFavouritesTooltip => 'पसंदीदा में जोड़ें';
+
+  @override
+  String get removeFromCompletedTooltip => 'पूर्ण से हटाएं';
+
+  @override
+  String get markAsCompletedTooltip => 'पूर्ण के रूप में चिह्नित करें';
+
+  @override
+  String get fileAlreadyExistsMessage => 'फ़ाइल पहले से मौजूद है';
 }

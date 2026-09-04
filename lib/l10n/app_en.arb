@@ -28,5 +28,37 @@
   "lineHeightSubtitle": "Space between lines of text",
 
   "languageSection": "Language",
-  "languageSubtitle": "Choose your preferred language"
+  "languageSubtitle": "Choose your preferred language",
+
+  "commonCancel": "Cancel",
+  "commonChange": "Change",
+  "commonRetry": "Retry",
+  "commonShare": "Share",
+  "commonOk": "OK",
+
+  "myBooksTitle": "My Books",
+  "loadingYourBooks": "Loading your books...",
+  "storageAccessRequiredTitle": "Storage Access Required",
+  "storageAccessRequiredBody": "This app needs storage permission to access and manage your book files.",
+  "storageAccessRequiredHint": "Please enable storage permission in your device settings.",
+  "openSettingsButton": "Open Settings",
+  "showAsListTooltip": "Show as List",
+  "showAsGridTooltip": "Show as Grid",
+  "pickBookFilesTooltip": "Pick Book Files",
+  "booksFolderPathLabel": "Books Folder Path",
+  "changeBooksFolderPathTitle": "Change Books Folder Path",
+  "selectBooksFolderTitle": "Select Books Folder",
+  "browseForFolderTooltip": "Browse for folder",
+  "noBooksMessage": "No book files in custom folder or picked. Tap + to add files.",
+  "modifiedLabel": "Modified: {date}",
+  "@modifiedLabel": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "readLaterTooltip": "Read Later",
+  "removeFromListTooltip": "Remove from List",
+  "removeFromFavouritesTooltip": "Remove from Favourites",
+  "addToFavouritesTooltip": "Add to Favourites",
+  "removeFromCompletedTooltip": "Remove from Completed",
+  "markAsCompletedTooltip": "Mark as Completed",
+  "fileAlreadyExistsMessage": "File already exists"
 }

@@ -68,4 +68,87 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get languageSubtitle => '选择您的首选语言';
+
+  @override
+  String get commonCancel => '取消';
+
+  @override
+  String get commonChange => '更改';
+
+  @override
+  String get commonRetry => '重试';
+
+  @override
+  String get commonShare => '分享';
+
+  @override
+  String get commonOk => '确定';
+
+  @override
+  String get myBooksTitle => '我的图书';
+
+  @override
+  String get loadingYourBooks => '正在加载您的图书...';
+
+  @override
+  String get storageAccessRequiredTitle => '需要存储访问权限';
+
+  @override
+  String get storageAccessRequiredBody => '此应用需要存储权限才能访问和管理您的图书文件。';
+
+  @override
+  String get storageAccessRequiredHint => '请在设备设置中启用存储权限。';
+
+  @override
+  String get openSettingsButton => '打开设置';
+
+  @override
+  String get showAsListTooltip => '以列表显示';
+
+  @override
+  String get showAsGridTooltip => '以网格显示';
+
+  @override
+  String get pickBookFilesTooltip => '选择图书文件';
+
+  @override
+  String get booksFolderPathLabel => '图书文件夹路径';
+
+  @override
+  String get changeBooksFolderPathTitle => '更改图书文件夹路径';
+
+  @override
+  String get selectBooksFolderTitle => '选择图书文件夹';
+
+  @override
+  String get browseForFolderTooltip => '浏览文件夹';
+
+  @override
+  String get noBooksMessage => '自定义文件夹中没有图书文件，也没有已选择的文件。点击 + 添加文件。';
+
+  @override
+  String modifiedLabel(String date) {
+    return '修改时间：$date';
+  }
+
+  @override
+  String get readLaterTooltip => '稍后阅读';
+
+  @override
+  String get removeFromListTooltip => '从列表中移除';
+
+  @override
+  String get removeFromFavouritesTooltip => '从收藏中移除';
+
+  @override
+  String get addToFavouritesTooltip => '添加到收藏';
+
+  @override
+  String get removeFromCompletedTooltip => '从已完成中移除';
+
+  @override
+  String get markAsCompletedTooltip => '标记为已完成';
+
+  @override
+  String get fileAlreadyExistsMessage => '文件已存在';
 }

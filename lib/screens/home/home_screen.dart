@@ -12,6 +12,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../Bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// Lightweight value type for a book entry shown in the library — either a
 /// file discovered in the custom books folder or one picked via the file
@@ -344,7 +345,9 @@ class _HomeScreenState extends State<HomeScreen> {
       final file = File(path);
       final stat = file.statSync();
       final formatter = DateFormat('yyyy-MM-dd HH:mm');
-      return 'Modified: ${formatter.format(stat.modified)}';
+      return AppLocalizations.of(
+        context,
+      )!.modifiedLabel(formatter.format(stat.modified));
     } catch (_) {
       return '';
     }
@@ -368,22 +371,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     if (_loading) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('My Books'),
+          title: Text(l10n.myBooksTitle),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
+              const CircularProgressIndicator(),
+              const SizedBox(height: 16),
               Text(
-                'Loading your books...',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                l10n.loadingYourBooks,
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ],
           ),
@@ -393,7 +397,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (_permissionDenied) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('My Books'),
+          title: Text(l10n.myBooksTitle),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -409,9 +413,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.grey,
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'Storage Access Required',
-                  style: TextStyle(
+                Text(
+                  l10n.storageAccessRequiredTitle,
+                  style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
@@ -419,9 +423,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
-                const Text(
-                  'This app needs storage permission to access and manage your book files.',
-                  style: TextStyle(
+                Text(
+                  l10n.storageAccessRequiredBody,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                     height: 1.5,
@@ -429,9 +433,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Please enable storage permission in your device settings.',
-                  style: TextStyle(fontSize: 14, color: Colors.grey),
+                Text(
+                  l10n.storageAccessRequiredHint,
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -443,7 +447,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         await openAppSettings();
                       },
                       icon: const Icon(Icons.settings),
-                      label: const Text('Open Settings'),
+                      label: Text(l10n.openSettingsButton),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -460,7 +464,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         await _initAll();
                       },
                       icon: const Icon(Icons.refresh),
-                      label: const Text('Retry'),
+                      label: Text(l10n.commonRetry),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -488,13 +492,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: const Text("My Books"),
+        title: Text(l10n.myBooksTitle),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
               icon: Icon(_isGrid ? Icons.view_list : Icons.grid_view),
-              tooltip: _isGrid ? 'Show as List' : 'Show as Grid',
+              tooltip:
+                  _isGrid ? l10n.showAsListTooltip : l10n.showAsGridTooltip,
               onPressed: () {
                 setState(() {
                   _isGrid = !_isGrid;
@@ -506,7 +511,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _pickFiles,
-        tooltip: 'Pick Book Files',
+        tooltip: l10n.pickBookFilesTooltip,
         child: const Icon(Icons.add),
       ),
       body: CustomScrollView(
@@ -528,7 +533,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: CustomTextField(
                             controller: _dirController!,
-                            label: 'Books Folder Path',
+                            label: l10n.booksFolderPathLabel,
                             hint: '',
                             icon:
                                 Icons.folder, // Only specify once, as required
@@ -556,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   text: _dirController?.text ?? '',
                                 );
                                 return AlertDialog(
-                                  title: const Text('Change Books Folder Path'),
+                                  title: Text(l10n.changeBooksFolderPathTitle),
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -565,9 +570,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Expanded(
                                             child: TextField(
                                               controller: tempController,
-                                              decoration: const InputDecoration(
-                                                labelText: 'Books Folder Path',
-                                                border: OutlineInputBorder(),
+                                              decoration: InputDecoration(
+                                                labelText:
+                                                    l10n.booksFolderPathLabel,
+                                                border:
+                                                    const OutlineInputBorder(),
                                                 isDense: false,
                                                 contentPadding:
                                                     EdgeInsets.symmetric(
@@ -592,14 +599,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ).iconTheme.color ??
                                                   Colors.grey[700],
                                             ),
-                                            tooltip: 'Browse for folder',
+                                            tooltip: l10n.browseForFolderTooltip,
                                             onPressed: () async {
                                               String? selectedDir;
                                               try {
                                                 selectedDir =
                                                     await FilePicker.getDirectoryPath(
                                                       dialogTitle:
-                                                          'Select Books Folder',
+                                                          l10n.selectBooksFolderTitle,
                                                     );
                                               } catch (e) {
                                                 selectedDir = null;
@@ -622,7 +629,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           rootNavigator: true,
                                         ).pop();
                                       },
-                                      child: const Text('Cancel'),
+                                      child: Text(l10n.commonCancel),
                                     ),
                                     ElevatedButton(
                                       onPressed: () async {
@@ -636,14 +643,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         }
                                         Navigator.of(context).pop();
                                       },
-                                      child: const Text('Change'),
+                                      child: Text(l10n.commonChange),
                                     ),
                                   ],
                                 );
                               },
                             );
                           },
-                          child: const Text('Change'),
+                          child: Text(l10n.commonChange),
                         ),
                       ),
                     ],
@@ -657,7 +664,7 @@ class _HomeScreenState extends State<HomeScreen> {
               hasScrollBody: false,
               child: Center(
                 child: Text(
-                  "No book files in custom folder or picked. Tap + to add files.",
+                  l10n.noBooksMessage,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
@@ -712,6 +719,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildFileCard(BookFile file, [int? index, bool isGrid = false]) {
+    final l10n = AppLocalizations.of(context)!;
     Widget cover;
     if (file.extension == 'pdf' && file.path != null) {
       cover = AnimatedSwitcher(
@@ -993,17 +1001,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ? AppColors.secondary
                                       : null,
                             ),
-                            tooltip: 'Read Later',
+                            tooltip: l10n.readLaterTooltip,
                             onPressed: () => _toggleReadLater(file.path),
                           ),
                           IconButton(
                             icon: const Icon(Icons.share, size: 20),
-                            tooltip: 'Share',
+                            tooltip: l10n.commonShare,
                             onPressed: () => _shareFile(file.path),
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete_outline, size: 20),
-                            tooltip: 'Remove from List',
+                            tooltip: l10n.removeFromListTooltip,
                             onPressed: () async {
                               if (file.path != null && index != null) {
                                 final isPicked = index >= (customBooks.length);
@@ -1064,8 +1072,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             tooltip:
                                 favouritePaths.contains(file.path)
-                                    ? 'Remove from Favourites'
-                                    : 'Add to Favourites',
+                                    ? l10n.removeFromFavouritesTooltip
+                                    : l10n.addToFavouritesTooltip,
                             onPressed: () => _toggleFavourite(file.path),
                           ),
                           IconButton(
@@ -1081,8 +1089,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             tooltip:
                                 completedPaths.contains(file.path)
-                                    ? 'Remove from Completed'
-                                    : 'Mark as Completed',
+                                    ? l10n.removeFromCompletedTooltip
+                                    : l10n.markAsCompletedTooltip,
                             onPressed: () => _toggleCompleted(file.path),
                           ),
                         ],
@@ -1122,9 +1130,9 @@ class _HomeScreenState extends State<HomeScreen> {
         displayedPaths.contains(file.path) ||
         pickedBookFiles.any((f) => f.name == file.name) ||
         customBooks.map(_toBookFile).any((f) => f.name == file.name)) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('File already exists')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context)!.fileAlreadyExistsMessage)),
+      );
       return;
     }
     setState(() {

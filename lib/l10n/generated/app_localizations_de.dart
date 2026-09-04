@@ -68,4 +68,90 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get languageSubtitle => 'Wählen Sie Ihre bevorzugte Sprache';
+
+  @override
+  String get commonCancel => 'Abbrechen';
+
+  @override
+  String get commonChange => 'Ändern';
+
+  @override
+  String get commonRetry => 'Wiederholen';
+
+  @override
+  String get commonShare => 'Teilen';
+
+  @override
+  String get commonOk => 'OK';
+
+  @override
+  String get myBooksTitle => 'Meine Bücher';
+
+  @override
+  String get loadingYourBooks => 'Deine Bücher werden geladen...';
+
+  @override
+  String get storageAccessRequiredTitle => 'Speicherzugriff erforderlich';
+
+  @override
+  String get storageAccessRequiredBody =>
+      'Diese App benötigt die Speicherberechtigung, um auf deine Buchdateien zuzugreifen und sie zu verwalten.';
+
+  @override
+  String get storageAccessRequiredHint =>
+      'Bitte aktiviere die Speicherberechtigung in den Geräteeinstellungen.';
+
+  @override
+  String get openSettingsButton => 'Einstellungen öffnen';
+
+  @override
+  String get showAsListTooltip => 'Als Liste anzeigen';
+
+  @override
+  String get showAsGridTooltip => 'Als Raster anzeigen';
+
+  @override
+  String get pickBookFilesTooltip => 'Buchdateien auswählen';
+
+  @override
+  String get booksFolderPathLabel => 'Pfad des Bücherordners';
+
+  @override
+  String get changeBooksFolderPathTitle => 'Pfad des Bücherordners ändern';
+
+  @override
+  String get selectBooksFolderTitle => 'Bücherordner auswählen';
+
+  @override
+  String get browseForFolderTooltip => 'Nach Ordner suchen';
+
+  @override
+  String get noBooksMessage =>
+      'Keine Buchdateien im benutzerdefinierten Ordner oder ausgewählt. Tippe auf +, um Dateien hinzuzufügen.';
+
+  @override
+  String modifiedLabel(String date) {
+    return 'Geändert: $date';
+  }
+
+  @override
+  String get readLaterTooltip => 'Später lesen';
+
+  @override
+  String get removeFromListTooltip => 'Aus Liste entfernen';
+
+  @override
+  String get removeFromFavouritesTooltip => 'Aus Favoriten entfernen';
+
+  @override
+  String get addToFavouritesTooltip => 'Zu Favoriten hinzufügen';
+
+  @override
+  String get removeFromCompletedTooltip => 'Aus Abgeschlossen entfernen';
+
+  @override
+  String get markAsCompletedTooltip => 'Als abgeschlossen markieren';
+
+  @override
+  String get fileAlreadyExistsMessage => 'Die Datei existiert bereits';
 }
