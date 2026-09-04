@@ -422,4 +422,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get addBooksToFavouritesHint => 'マイブック画面から本をお気に入りに追加してください';
+
+  @override
+  String get readLaterTitle => '後で読む';
+
+  @override
+  String get favouriteTooltip => 'お気に入り';
+
+  @override
+  String get removeFromReadLaterTooltip => '後で読むから削除';
+
+  @override
+  String get noBooksToReadLater => '後で読む本がありません';
+
+  @override
+  String get addBooksToReadLaterHint => 'マイブック画面から本を後で読むに追加してください';
 }

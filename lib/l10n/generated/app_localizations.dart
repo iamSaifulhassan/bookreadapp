@@ -915,6 +915,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add books to favourites from the My Books screen'**
   String get addBooksToFavouritesHint;
+
+  /// No description provided for @readLaterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Read Later'**
+  String get readLaterTitle;
+
+  /// No description provided for @favouriteTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Favourite'**
+  String get favouriteTooltip;
+
+  /// No description provided for @removeFromReadLaterTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove from Read Later'**
+  String get removeFromReadLaterTooltip;
+
+  /// No description provided for @noBooksToReadLater.
+  ///
+  /// In en, this message translates to:
+  /// **'No books to read later'**
+  String get noBooksToReadLater;
+
+  /// No description provided for @addBooksToReadLaterHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add books to read later from the My Books screen'**
+  String get addBooksToReadLaterHint;
 }
 
 class _AppLocalizationsDelegate

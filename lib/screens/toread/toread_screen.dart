@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import '../Bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class ToReadScreen extends StatefulWidget {
   const ToReadScreen({super.key});
@@ -82,7 +83,10 @@ class _ToReadScreenState extends State<ToReadScreen> {
   String _getFileDate(String path) {
     try {
       final file = File(path);
-      return 'Modified: ${DateFormat('yyyy-MM-dd HH:mm').format(file.statSync().modified)}';
+      final formatted = DateFormat(
+        'yyyy-MM-dd HH:mm',
+      ).format(file.statSync().modified);
+      return AppLocalizations.of(context)!.modifiedLabel(formatted);
     } catch (_) {
       return '';
     }
@@ -94,6 +98,7 @@ class _ToReadScreenState extends State<ToReadScreen> {
   }
 
   Widget _buildFileCard(File file, {int? index}) {
+    final l10n = AppLocalizations.of(context)!;
     final fileName = file.path.split('/').last;
     final displayName =
         fileName.length > 25 ? '${fileName.substring(0, 22)}...' : fileName;
@@ -133,7 +138,7 @@ class _ToReadScreenState extends State<ToReadScreen> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.secondary.withOpacity(0.8),
+                          AppColors.secondary.withValues(alpha: 0.8),
                           AppColors.secondary,
                         ],
                       ),
@@ -199,10 +204,10 @@ class _ToReadScreenState extends State<ToReadScreen> {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: AppColors.secondary.withOpacity(0.1),
+                                color: AppColors.secondary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: AppColors.secondary.withOpacity(0.3),
+                                  color: AppColors.secondary.withValues(alpha: 0.3),
                                 ),
                               ),
                               child: Text(
@@ -244,12 +249,12 @@ class _ToReadScreenState extends State<ToReadScreen> {
                               ? AppColors.error
                               : null,
                     ),
-                    tooltip: 'Favourite',
+                    tooltip: l10n.favouriteTooltip,
                     onPressed: () => _toggleFavourite(file.path),
                   ),
                   IconButton(
                     icon: const Icon(Icons.share, size: 20),
-                    tooltip: 'Share',
+                    tooltip: l10n.commonShare,
                     onPressed: () => _shareFile(file.path),
                   ),
                   IconButton(
@@ -258,7 +263,7 @@ class _ToReadScreenState extends State<ToReadScreen> {
                       size: 20,
                       color: AppColors.secondary,
                     ),
-                    tooltip: 'Remove from Read Later',
+                    tooltip: l10n.removeFromReadLaterTooltip,
                     onPressed: () => _removeFromReadLater(file.path),
                   ),
                 ],
@@ -306,7 +311,7 @@ class _ToReadScreenState extends State<ToReadScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        AppColors.secondary.withOpacity(0.8),
+                        AppColors.secondary.withValues(alpha: 0.8),
                         AppColors.secondary,
                       ],
                     ),
@@ -401,17 +406,18 @@ class _ToReadScreenState extends State<ToReadScreen> {
     if (_loading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Read Later'),
+        title: Text(l10n.readLaterTitle),
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.onPrimary,
         actions: [
           IconButton(
             icon: Icon(_isGrid ? Icons.list : Icons.grid_view),
             onPressed: () => setState(() => _isGrid = !_isGrid),
-            tooltip: _isGrid ? 'List View' : 'Grid View',
+            tooltip: _isGrid ? l10n.listViewTooltip : l10n.gridViewTooltip,
           ),
         ],
       ),
@@ -428,18 +434,18 @@ class _ToReadScreenState extends State<ToReadScreen> {
                       color: AppColors.textDisabled,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'No books to read later',
-                      style: TextStyle(
+                    Text(
+                      l10n.noBooksToReadLater,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: AppColors.textDisabled,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Add books to read later from the My Books screen',
-                      style: TextStyle(
+                    Text(
+                      l10n.addBooksToReadLaterHint,
+                      style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.textDisabled,
                       ),

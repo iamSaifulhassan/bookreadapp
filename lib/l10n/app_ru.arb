@@ -141,5 +141,11 @@
   "listViewTooltip": "Вид списком",
   "gridViewTooltip": "Вид сеткой",
   "noFavouriteBooksYet": "Пока нет избранных книг",
-  "addBooksToFavouritesHint": "Добавьте книги в избранное на экране «Мои книги»"
+  "addBooksToFavouritesHint": "Добавьте книги в избранное на экране «Мои книги»",
+
+  "readLaterTitle": "Прочитать позже",
+  "favouriteTooltip": "Избранное",
+  "removeFromReadLaterTooltip": "Удалить из «Прочитать позже»",
+  "noBooksToReadLater": "Нет книг для чтения позже",
+  "addBooksToReadLaterHint": "Добавьте книги для чтения позже на экране «Мои книги»"
 }

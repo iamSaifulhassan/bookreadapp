@@ -141,5 +141,11 @@
   "listViewTooltip": "Listenansicht",
   "gridViewTooltip": "Rasteransicht",
   "noFavouriteBooksYet": "Noch keine Lieblingsbücher",
-  "addBooksToFavouritesHint": "Füge Bücher über den Bildschirm „Meine Bücher“ zu den Favoriten hinzu"
+  "addBooksToFavouritesHint": "Füge Bücher über den Bildschirm „Meine Bücher“ zu den Favoriten hinzu",
+
+  "readLaterTitle": "Später lesen",
+  "favouriteTooltip": "Favorit",
+  "removeFromReadLaterTooltip": "Aus „Später lesen“ entfernen",
+  "noBooksToReadLater": "Keine Bücher zum späteren Lesen",
+  "addBooksToReadLaterHint": "Füge Bücher über den Bildschirm „Meine Bücher“ zu „Später lesen“ hinzu"
 }

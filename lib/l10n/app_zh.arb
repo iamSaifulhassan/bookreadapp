@@ -141,5 +141,11 @@
   "listViewTooltip": "列表视图",
   "gridViewTooltip": "网格视图",
   "noFavouriteBooksYet": "还没有收藏的图书",
-  "addBooksToFavouritesHint": "从我的图书屏幕将图书添加到收藏"
+  "addBooksToFavouritesHint": "从我的图书屏幕将图书添加到收藏",
+
+  "readLaterTitle": "稍后阅读",
+  "favouriteTooltip": "收藏",
+  "removeFromReadLaterTooltip": "从稍后阅读中移除",
+  "noBooksToReadLater": "没有稍后阅读的图书",
+  "addBooksToReadLaterHint": "从我的图书屏幕添加图书到稍后阅读"
 }

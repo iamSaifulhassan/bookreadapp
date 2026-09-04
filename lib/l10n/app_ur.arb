@@ -141,5 +141,11 @@
   "listViewTooltip": "فہرست منظر",
   "gridViewTooltip": "گرڈ منظر",
   "noFavouriteBooksYet": "ابھی تک کوئی پسندیدہ کتاب نہیں",
-  "addBooksToFavouritesHint": "میری کتابیں اسکرین سے کتابیں پسندیدہ میں شامل کریں"
+  "addBooksToFavouritesHint": "میری کتابیں اسکرین سے کتابیں پسندیدہ میں شامل کریں",
+
+  "readLaterTitle": "بعد میں پڑھیں",
+  "favouriteTooltip": "پسندیدہ",
+  "removeFromReadLaterTooltip": "بعد میں پڑھیں سے ہٹائیں",
+  "noBooksToReadLater": "بعد میں پڑھنے کے لیے کوئی کتاب نہیں",
+  "addBooksToReadLaterHint": "میری کتابیں اسکرین سے کتابیں بعد میں پڑھنے کے لیے شامل کریں"
 }

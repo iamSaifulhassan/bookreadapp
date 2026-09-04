@@ -166,5 +166,11 @@
   "listViewTooltip": "List View",
   "gridViewTooltip": "Grid View",
   "noFavouriteBooksYet": "No favourite books yet",
-  "addBooksToFavouritesHint": "Add books to favourites from the My Books screen"
+  "addBooksToFavouritesHint": "Add books to favourites from the My Books screen",
+
+  "readLaterTitle": "Read Later",
+  "favouriteTooltip": "Favourite",
+  "removeFromReadLaterTooltip": "Remove from Read Later",
+  "noBooksToReadLater": "No books to read later",
+  "addBooksToReadLaterHint": "Add books to read later from the My Books screen"
 }

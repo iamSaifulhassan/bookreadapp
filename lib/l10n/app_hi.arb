@@ -141,5 +141,11 @@
   "listViewTooltip": "सूची दृश्य",
   "gridViewTooltip": "ग्रिड दृश्य",
   "noFavouriteBooksYet": "अभी तक कोई पसंदीदा किताब नहीं",
-  "addBooksToFavouritesHint": "मेरी किताबें स्क्रीन से किताबों को पसंदीदा में जोड़ें"
+  "addBooksToFavouritesHint": "मेरी किताबें स्क्रीन से किताबों को पसंदीदा में जोड़ें",
+
+  "readLaterTitle": "बाद में पढ़ें",
+  "favouriteTooltip": "पसंदीदा",
+  "removeFromReadLaterTooltip": "बाद में पढ़ें से हटाएं",
+  "noBooksToReadLater": "बाद में पढ़ने के लिए कोई किताब नहीं",
+  "addBooksToReadLaterHint": "मेरी किताबें स्क्रीन से किताबें बाद में पढ़ने के लिए जोड़ें"
 }

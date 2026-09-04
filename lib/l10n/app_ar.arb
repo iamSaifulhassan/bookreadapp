@@ -141,5 +141,11 @@
   "listViewTooltip": "عرض القائمة",
   "gridViewTooltip": "عرض الشبكة",
   "noFavouriteBooksYet": "لا توجد كتب مفضلة بعد",
-  "addBooksToFavouritesHint": "أضف كتبًا إلى المفضلة من شاشة كتبي"
+  "addBooksToFavouritesHint": "أضف كتبًا إلى المفضلة من شاشة كتبي",
+
+  "readLaterTitle": "القراءة لاحقًا",
+  "favouriteTooltip": "مفضلة",
+  "removeFromReadLaterTooltip": "إزالة من القراءة لاحقًا",
+  "noBooksToReadLater": "لا توجد كتب للقراءة لاحقًا",
+  "addBooksToReadLaterHint": "أضف كتبًا للقراءة لاحقًا من شاشة كتبي"
 }

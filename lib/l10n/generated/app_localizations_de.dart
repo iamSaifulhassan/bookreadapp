@@ -431,4 +431,20 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get addBooksToFavouritesHint =>
       'Füge Bücher über den Bildschirm „Meine Bücher“ zu den Favoriten hinzu';
+
+  @override
+  String get readLaterTitle => 'Später lesen';
+
+  @override
+  String get favouriteTooltip => 'Favorit';
+
+  @override
+  String get removeFromReadLaterTooltip => 'Aus „Später lesen“ entfernen';
+
+  @override
+  String get noBooksToReadLater => 'Keine Bücher zum späteren Lesen';
+
+  @override
+  String get addBooksToReadLaterHint =>
+      'Füge Bücher über den Bildschirm „Meine Bücher“ zu „Später lesen“ hinzu';
 }

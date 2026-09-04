@@ -436,4 +436,20 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get addBooksToFavouritesHint =>
       'Добавьте книги в избранное на экране «Мои книги»';
+
+  @override
+  String get readLaterTitle => 'Прочитать позже';
+
+  @override
+  String get favouriteTooltip => 'Избранное';
+
+  @override
+  String get removeFromReadLaterTooltip => 'Удалить из «Прочитать позже»';
+
+  @override
+  String get noBooksToReadLater => 'Нет книг для чтения позже';
+
+  @override
+  String get addBooksToReadLaterHint =>
+      'Добавьте книги для чтения позже на экране «Мои книги»';
 }

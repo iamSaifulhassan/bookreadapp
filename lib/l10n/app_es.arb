@@ -141,5 +141,11 @@
   "listViewTooltip": "Vista de Lista",
   "gridViewTooltip": "Vista de Cuadrícula",
   "noFavouriteBooksYet": "Aún no hay libros favoritos",
-  "addBooksToFavouritesHint": "Añade libros a favoritos desde la pantalla Mis Libros"
+  "addBooksToFavouritesHint": "Añade libros a favoritos desde la pantalla Mis Libros",
+
+  "readLaterTitle": "Leer Más Tarde",
+  "favouriteTooltip": "Favorito",
+  "removeFromReadLaterTooltip": "Quitar de Leer Más Tarde",
+  "noBooksToReadLater": "No hay libros para leer más tarde",
+  "addBooksToReadLaterHint": "Añade libros para leer más tarde desde la pantalla Mis Libros"
 }

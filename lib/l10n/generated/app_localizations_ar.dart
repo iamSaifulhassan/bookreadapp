@@ -431,4 +431,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addBooksToFavouritesHint => 'أضف كتبًا إلى المفضلة من شاشة كتبي';
+
+  @override
+  String get readLaterTitle => 'القراءة لاحقًا';
+
+  @override
+  String get favouriteTooltip => 'مفضلة';
+
+  @override
+  String get removeFromReadLaterTooltip => 'إزالة من القراءة لاحقًا';
+
+  @override
+  String get noBooksToReadLater => 'لا توجد كتب للقراءة لاحقًا';
+
+  @override
+  String get addBooksToReadLaterHint => 'أضف كتبًا للقراءة لاحقًا من شاشة كتبي';
 }

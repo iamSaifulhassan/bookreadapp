@@ -420,4 +420,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get addBooksToFavouritesHint => '从我的图书屏幕将图书添加到收藏';
+
+  @override
+  String get readLaterTitle => '稍后阅读';
+
+  @override
+  String get favouriteTooltip => '收藏';
+
+  @override
+  String get removeFromReadLaterTooltip => '从稍后阅读中移除';
+
+  @override
+  String get noBooksToReadLater => '没有稍后阅读的图书';
+
+  @override
+  String get addBooksToReadLaterHint => '从我的图书屏幕添加图书到稍后阅读';
 }

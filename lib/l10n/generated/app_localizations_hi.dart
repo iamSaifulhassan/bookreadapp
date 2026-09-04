@@ -429,4 +429,20 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get addBooksToFavouritesHint =>
       'मेरी किताबें स्क्रीन से किताबों को पसंदीदा में जोड़ें';
+
+  @override
+  String get readLaterTitle => 'बाद में पढ़ें';
+
+  @override
+  String get favouriteTooltip => 'पसंदीदा';
+
+  @override
+  String get removeFromReadLaterTooltip => 'बाद में पढ़ें से हटाएं';
+
+  @override
+  String get noBooksToReadLater => 'बाद में पढ़ने के लिए कोई किताब नहीं';
+
+  @override
+  String get addBooksToReadLaterHint =>
+      'मेरी किताबें स्क्रीन से किताबें बाद में पढ़ने के लिए जोड़ें';
 }

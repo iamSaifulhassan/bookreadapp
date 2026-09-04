@@ -438,4 +438,20 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get addBooksToFavouritesHint =>
       'Ajoutez des livres aux favoris depuis l\'écran Mes Livres';
+
+  @override
+  String get readLaterTitle => 'Lire Plus Tard';
+
+  @override
+  String get favouriteTooltip => 'Favori';
+
+  @override
+  String get removeFromReadLaterTooltip => 'Retirer de Lire Plus Tard';
+
+  @override
+  String get noBooksToReadLater => 'Aucun livre à lire plus tard';
+
+  @override
+  String get addBooksToReadLaterHint =>
+      'Ajoutez des livres à lire plus tard depuis l\'écran Mes Livres';
 }

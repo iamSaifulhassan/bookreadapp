@@ -141,5 +141,11 @@
   "listViewTooltip": "Visualização em Lista",
   "gridViewTooltip": "Visualização em Grade",
   "noFavouriteBooksYet": "Ainda não há livros favoritos",
-  "addBooksToFavouritesHint": "Adicione livros aos favoritos na tela Meus Livros"
+  "addBooksToFavouritesHint": "Adicione livros aos favoritos na tela Meus Livros",
+
+  "readLaterTitle": "Ler Mais Tarde",
+  "favouriteTooltip": "Favorito",
+  "removeFromReadLaterTooltip": "Remover de Ler Mais Tarde",
+  "noBooksToReadLater": "Nenhum livro para ler mais tarde",
+  "addBooksToReadLaterHint": "Adicione livros para ler mais tarde na tela Meus Livros"
 }
