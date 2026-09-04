@@ -490,4 +490,202 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get logoutNav => 'Cerrar Sesión';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return 'Error de voz: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return 'Error al controlar la voz: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return 'Error al leer la frase: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return 'Página $page marcada';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'Marcador eliminado';
+
+  @override
+  String get noBookmarksYetMessage => 'Aún no hay marcadores';
+
+  @override
+  String get bookmarksDialogTitle => 'Marcadores';
+
+  @override
+  String pageLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
+  String get closeButton => 'Cerrar';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'Error al capturar la instantánea: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'Error al guardar la instantánea: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'Instantánea Guardada';
+
+  @override
+  String get snapshotSavedBody =>
+      '¡La instantánea se ha guardado correctamente!';
+
+  @override
+  String get locationLabel => 'Ubicación:';
+
+  @override
+  String get goToPageTitle => 'Ir a la Página';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'Número de Página (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => 'Número de página no válido';
+
+  @override
+  String get goButton => 'Ir';
+
+  @override
+  String get toggleTextBufferTooltip => 'Alternar Búfer de Texto';
+
+  @override
+  String get ttsSettingsMenuItem => 'Ajustes de Voz';
+
+  @override
+  String get reloadMenuItem => 'Recargar';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return 'Cargando $fileName...';
+  }
+
+  @override
+  String get initializingViewerMessage =>
+      'Inicializando visor de PDF y motor de voz';
+
+  @override
+  String get failedToLoadContentTitle => 'Error al Cargar el Contenido';
+
+  @override
+  String get unknownErrorMessage => 'Ocurrió un error desconocido';
+
+  @override
+  String get readingBufferLabel => 'Búfer de Lectura';
+
+  @override
+  String get noSentencesAvailableMessage => 'No hay frases disponibles';
+
+  @override
+  String get sentenceStatusRead => 'Leída';
+
+  @override
+  String get sentenceStatusCurrent => 'Actual';
+
+  @override
+  String get sentenceStatusNext => 'Siguiente';
+
+  @override
+  String get pausedLabel => 'Pausado';
+
+  @override
+  String get playingLabel => 'Reproduciendo';
+
+  @override
+  String get previousSentenceTooltip => 'Frase Anterior';
+
+  @override
+  String get resumeTooltip => 'Reanudar';
+
+  @override
+  String get pauseTooltip => 'Pausar';
+
+  @override
+  String get playTooltip => 'Reproducir';
+
+  @override
+  String get stopTooltip => 'Detener';
+
+  @override
+  String get nextSentenceTooltip => 'Siguiente Frase';
+
+  @override
+  String get ttsSettingsSheetTitle => 'Ajustes de Voz';
+
+  @override
+  String speechRateWithValue(String value) {
+    return 'Velocidad de Voz: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'Tono: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return 'Volumen: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'Restablecer Predeterminados';
+
+  @override
+  String get doneButton => 'Listo';
+
+  @override
+  String get zoomInLabel => 'Acercar';
+
+  @override
+  String get zoomOutLabel => 'Alejar';
+
+  @override
+  String get resetLabel => 'Restablecer';
+
+  @override
+  String get bookmarkLabel => 'Marcador';
+
+  @override
+  String get snapshotLabel => 'Instantánea';
+
+  @override
+  String get goToPageLabel => 'Ir a la Página';
+
+  @override
+  String get moreLabel => 'Más';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return 'Página $current de $total';
+  }
+
+  @override
+  String get unableToExtractTextMessage =>
+      'No se pudo extraer texto de esta página.';
+
+  @override
+  String get noReadableTextMessage => 'No se encontró texto legible.';
+
+  @override
+  String get noSentencesFoundMessage => 'No se encontraron frases.';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'Formato de archivo no compatible. Solo se admiten archivos PDF y TXT.';
 }

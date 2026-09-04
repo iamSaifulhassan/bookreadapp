@@ -10,6 +10,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../themes/AppColors.dart';
 import '../../services/streak_service.dart';
 import '../../services/settings_service.dart';
+import '../../services/locale_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class BookContentScreen extends StatefulWidget {
   final String filePath;
@@ -138,9 +140,7 @@ class _BookContentScreenState extends State<BookContentScreen>
       } else if (_isTxtFile) {
         await _loadTxtContent();
       } else {
-        throw Exception(
-          'Unsupported file format. Only PDF and TXT files are supported.',
-        );
+        throw Exception(AppLocalizations.of(context)!.unsupportedFileFormatMessage);
       }
       if (mounted) {
         setState(() {
@@ -156,7 +156,32 @@ class _BookContentScreenState extends State<BookContentScreen>
         });
       }
     }
-  }  Future<void> _initializeTTS() async {
+  }  /// Maps the app's current language to a TTS engine locale code, so
+  /// read-aloud follows whatever language the user picked in Settings
+  /// instead of always speaking English regardless of book language.
+  static const Map<String, String> _ttsLocaleByLanguage = {
+    'en': 'en-US',
+    'es': 'es-ES',
+    'fr': 'fr-FR',
+    'de': 'de-DE',
+    'pt': 'pt-BR',
+    'it': 'it-IT',
+    'ar': 'ar-SA',
+    'hi': 'hi-IN',
+    'ur': 'ur-PK',
+    'zh': 'zh-CN',
+    'ja': 'ja-JP',
+    'ru': 'ru-RU',
+  };
+
+  String _ttsLocaleForApp() {
+    final languageCode =
+        LocaleService().currentLocale.value?.languageCode ??
+        Localizations.localeOf(context).languageCode;
+    return _ttsLocaleByLanguage[languageCode] ?? 'en-US';
+  }
+
+  Future<void> _initializeTTS() async {
     try {
       _tts = FlutterTts();
 
@@ -169,7 +194,7 @@ class _BookContentScreenState extends State<BookContentScreen>
       _readingFontSize = await _settingsService.getReadingFontSize();
       _readingLineHeight = await _settingsService.getReadingLineHeight();
 
-      await _tts!.setLanguage("en-US");
+      await _tts!.setLanguage(_ttsLocaleForApp());
       await _tts!.setSpeechRate(_speechRate);
       await _tts!.setPitch(_pitch);
       await _tts!.setVolume(_volume);
@@ -207,7 +232,10 @@ class _BookContentScreenState extends State<BookContentScreen>
 
       _tts!.setErrorHandler((message) {
         if (mounted) {
-          _showSnackBar('TTS Error: $message', isError: true);
+          _showSnackBar(
+            AppLocalizations.of(context)!.ttsErrorMessage(message.toString()),
+            isError: true,
+          );
         }
       });
     } catch (e) {
@@ -259,7 +287,9 @@ class _BookContentScreenState extends State<BookContentScreen>
       AppLogger.log('Error extracting text from page $_currentPage: $e');
       if (mounted) {
         setState(() {
-          _sentences = ['Unable to extract text from this page.'];
+          _sentences = [
+            AppLocalizations.of(context)!.unableToExtractTextMessage,
+          ];
           _currentSentenceIndex = 0;
         });
       }
@@ -270,7 +300,7 @@ class _BookContentScreenState extends State<BookContentScreen>
     if (text.trim().isEmpty) {
       if (mounted) {
         setState(() {
-          _sentences = ['No readable text found.'];
+          _sentences = [AppLocalizations.of(context)!.noReadableTextMessage];
           _currentSentenceIndex = 0;
         });
       }
@@ -296,7 +326,10 @@ class _BookContentScreenState extends State<BookContentScreen>
             .toList();
     if (mounted) {
       setState(() {
-        _sentences = sentences.isEmpty ? ['No sentences found.'] : sentences;
+        _sentences =
+            sentences.isEmpty
+                ? [AppLocalizations.of(context)!.noSentencesFoundMessage]
+                : sentences;
         _currentSentenceIndex = 0;
         _updateTtsBuffer(); // Initialize rolling buffer
       });
@@ -356,7 +389,10 @@ class _BookContentScreenState extends State<BookContentScreen>
         await _speakCurrentSentence();
       }
     } catch (e) {
-      _showSnackBar('Error controlling TTS: $e', isError: true);
+      _showSnackBar(
+        AppLocalizations.of(context)!.ttsControlErrorMessage(e.toString()),
+        isError: true,
+      );
     }
   }
 
@@ -370,7 +406,10 @@ class _BookContentScreenState extends State<BookContentScreen>
     try {
       await _tts!.speak(_sentences[_currentSentenceIndex]);
     } catch (e) {
-      _showSnackBar('Error speaking sentence: $e', isError: true);
+      _showSnackBar(
+        AppLocalizations.of(context)!.ttsSpeakErrorMessage(e.toString()),
+        isError: true,
+      );
     }
   }
 
@@ -483,23 +522,30 @@ class _BookContentScreenState extends State<BookContentScreen>
         }
       });
 
+      final l10n = AppLocalizations.of(context)!;
       _showSnackBar(
-        _isBookmarked ? 'Page $_currentPage bookmarked' : 'Bookmark removed',
+        _isBookmarked
+            ? l10n.pageBookmarkedMessage(_currentPage)
+            : l10n.bookmarkRemovedMessage,
       );
     }
   }
 
   void _showBookmarks() {
     if (_bookmarkedPages.isEmpty) {
-      _showSnackBar('No bookmarks yet', isError: true);
+      _showSnackBar(
+        AppLocalizations.of(context)!.noBookmarksYetMessage,
+        isError: true,
+      );
       return;
     }
+    final l10n = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Bookmarks'),
+            title: Text(l10n.bookmarksDialogTitle),
             content: SizedBox(
               width: double.maxFinite,
               child: ListView.builder(
@@ -509,7 +555,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   final page = _bookmarkedPages[index];
                   return ListTile(
                     leading: Icon(Icons.bookmark, color: AppColors.primary),
-                    title: Text('Page $page'),
+                    title: Text(l10n.pageLabel(page)),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
@@ -535,7 +581,7 @@ class _BookContentScreenState extends State<BookContentScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Close'),
+                child: Text(l10n.closeButton),
               ),
             ],
           ),
@@ -558,7 +604,10 @@ class _BookContentScreenState extends State<BookContentScreen>
         await _saveSnapshotToFile(byteData);
       }
     } catch (e) {
-      _showSnackBar('Failed to capture snapshot: $e', isError: true);
+      _showSnackBar(
+        AppLocalizations.of(context)!.snapshotFailedMessage(e.toString()),
+        isError: true,
+      );
     }
   }
 
@@ -586,11 +635,15 @@ class _BookContentScreenState extends State<BookContentScreen>
       // Show success message with file location
       _showSnapshotSuccessDialog(snapshotFile.path);
     } catch (e) {
-      _showSnackBar('Failed to save snapshot: $e', isError: true);
+      _showSnackBar(
+        AppLocalizations.of(context)!.snapshotSaveFailedMessage(e.toString()),
+        isError: true,
+      );
     }
   }
 
   void _showSnapshotSuccessDialog(String filePath) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder:
@@ -599,17 +652,17 @@ class _BookContentScreenState extends State<BookContentScreen>
               children: [
                 Icon(Icons.check_circle, color: Colors.green, size: 24),
                 const SizedBox(width: 8),
-                const Text('Snapshot Saved'),
+                Text(l10n.snapshotSavedTitle),
               ],
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Snapshot has been saved successfully!'),
+                Text(l10n.snapshotSavedBody),
                 const SizedBox(height: 12),
                 Text(
-                  'Location:',
+                  l10n.locationLabel,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                 ),
                 const SizedBox(height: 4),
@@ -633,7 +686,7 @@ class _BookContentScreenState extends State<BookContentScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
+                child: Text(l10n.commonOk),
               ),
             ],
           ),
@@ -642,17 +695,18 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   void _goToPage() {
     final controller = TextEditingController();
+    final l10n = AppLocalizations.of(context)!;
 
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Go to Page'),
+            title: Text(l10n.goToPageTitle),
             content: TextField(
               controller: controller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Page Number (1-$_totalPages)',
+                labelText: l10n.pageNumberLabel(_totalPages),
                 border: const OutlineInputBorder(),
               ),
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -660,7 +714,7 @@ class _BookContentScreenState extends State<BookContentScreen>
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
+                child: Text(l10n.commonCancel),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -671,14 +725,14 @@ class _BookContentScreenState extends State<BookContentScreen>
                     _pdfController?.jumpToPage(pageNumber);
                     Navigator.pop(context);
                   } else {
-                    _showSnackBar('Invalid page number', isError: true);
+                    _showSnackBar(l10n.invalidPageNumberMessage, isError: true);
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text('Go'),
+                child: Text(l10n.goButton),
               ),
             ],
           ),
@@ -759,6 +813,7 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   PreferredSizeWidget _buildAppBar() {
+    final l10n = AppLocalizations.of(context)!;
     return AppBar(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -769,7 +824,7 @@ class _BookContentScreenState extends State<BookContentScreen>
           ),
           if (_isPdfFile && _isInitialized)
             Text(
-              'Page $_currentPage of $_totalPages',
+              l10n.pageOfPagesLabel(_currentPage, _totalPages),
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
             ),
         ],
@@ -786,7 +841,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   ? Icons.text_snippet
                   : Icons.text_snippet_outlined,
             ),
-            tooltip: 'Toggle Text Buffer',
+            tooltip: l10n.toggleTextBufferTooltip,
           ),
         PopupMenuButton<String>(
           onSelected: (value) {
@@ -801,23 +856,23 @@ class _BookContentScreenState extends State<BookContentScreen>
           },
           itemBuilder:
               (context) => [
-                const PopupMenuItem(
+                PopupMenuItem(
                   value: 'tts_settings',
                   child: Row(
                     children: [
-                      Icon(Icons.settings_voice, color: AppColors.primary),
-                      SizedBox(width: 8),
-                      Text('TTS Settings'),
+                      const Icon(Icons.settings_voice, color: AppColors.primary),
+                      const SizedBox(width: 8),
+                      Text(l10n.ttsSettingsMenuItem),
                     ],
                   ),
                 ),
-                const PopupMenuItem(
+                PopupMenuItem(
                   value: 'reload',
                   child: Row(
                     children: [
-                      Icon(Icons.refresh, color: AppColors.primary),
-                      SizedBox(width: 8),
-                      Text('Reload'),
+                      const Icon(Icons.refresh, color: AppColors.primary),
+                      const SizedBox(width: 8),
+                      Text(l10n.reloadMenuItem),
                     ],
                   ),
                 ),
@@ -888,6 +943,7 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   Widget _buildLoadingScreen() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -897,12 +953,12 @@ class _BookContentScreenState extends State<BookContentScreen>
           ),
           const SizedBox(height: 16),
           Text(
-            'Loading ${widget.fileName}...',
+            l10n.loadingFileMessage(widget.fileName),
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 8),
           Text(
-            'Initializing PDF viewer and TTS engine',
+            l10n.initializingViewerMessage,
             style: TextStyle(fontSize: 14, color: Colors.grey[600]),
           ),
         ],
@@ -911,6 +967,7 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   Widget _buildErrorScreen() {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -919,13 +976,13 @@ class _BookContentScreenState extends State<BookContentScreen>
           children: [
             Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
             const SizedBox(height: 16),
-            const Text(
-              'Failed to Load Content',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.failedToLoadContentTitle,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
-              _errorMessage ?? 'Unknown error occurred',
+              _errorMessage ?? l10n.unknownErrorMessage,
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey[600]),
             ),
@@ -933,7 +990,7 @@ class _BookContentScreenState extends State<BookContentScreen>
             ElevatedButton.icon(
               onPressed: _initializeApp,
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(l10n.commonRetry),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -953,7 +1010,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -1005,13 +1062,13 @@ class _BookContentScreenState extends State<BookContentScreen>
                 decoration: BoxDecoration(
                   color:
                       i == _currentSentenceIndex
-                          ? AppColors.primary.withOpacity(0.1)
+                          ? AppColors.primary.withValues(alpha: 0.1)
                           : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                   border:
                       i == _currentSentenceIndex
                           ? Border.all(
-                            color: AppColors.primary.withOpacity(0.3),
+                            color: AppColors.primary.withValues(alpha: 0.3),
                           )
                           : null,
                 ),                child: Text(
@@ -1037,12 +1094,13 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   Widget _buildTextBuffer() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -1055,7 +1113,7 @@ class _BookContentScreenState extends State<BookContentScreen>
             height: 40,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
             ),
             child: Row(
@@ -1063,7 +1121,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                 Icon(Icons.text_snippet, color: AppColors.primary, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  'Reading Buffer',
+                  l10n.readingBufferLabel,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: AppColors.primary,
@@ -1082,10 +1140,10 @@ class _BookContentScreenState extends State<BookContentScreen>
           Expanded(
             child:
                 _ttsBuffer.isEmpty
-                    ? const Center(
+                    ? Center(
                       child: Text(
-                        'No sentences available',
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
+                        l10n.noSentencesAvailableMessage,
+                        style: const TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                     )
                     : ListView.builder(
@@ -1107,11 +1165,11 @@ class _BookContentScreenState extends State<BookContentScreen>
                         IconData statusIcon;
 
                         if (isCompleted) {
-                          label = 'Read';
+                          label = l10n.sentenceStatusRead;
                           color = Colors.green;
                           statusIcon = Icons.check_circle;
                         } else if (isHighlighted) {
-                          label = 'Current';
+                          label = l10n.sentenceStatusCurrent;
                           color = AppColors.primary;
                           statusIcon =
                               _isPlaying
@@ -1120,7 +1178,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                                       : Icons.play_circle)
                                   : Icons.radio_button_unchecked;
                         } else {
-                          label = 'Next';
+                          label = l10n.sentenceStatusNext;
                           color = Colors.grey;
                           statusIcon = Icons.radio_button_unchecked;
                         }
@@ -1131,18 +1189,18 @@ class _BookContentScreenState extends State<BookContentScreen>
                           decoration: BoxDecoration(
                             color:
                                 isHighlighted
-                                    ? color.withOpacity(0.1)
+                                    ? color.withValues(alpha: 0.1)
                                     : isCompleted
-                                    ? Colors.green.withOpacity(0.05)
-                                    : Colors.grey.withOpacity(0.02),
+                                    ? Colors.green.withValues(alpha: 0.05)
+                                    : Colors.grey.withValues(alpha: 0.02),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color:
                                   isHighlighted
-                                      ? color.withOpacity(0.4)
+                                      ? color.withValues(alpha: 0.4)
                                       : isCompleted
-                                      ? Colors.green.withOpacity(0.2)
-                                      : Colors.grey.withOpacity(0.2),
+                                      ? Colors.green.withValues(alpha: 0.2)
+                                      : Colors.grey.withValues(alpha: 0.2),
                               width: isHighlighted ? 2 : 1,
                             ),
                           ),
@@ -1170,11 +1228,13 @@ class _BookContentScreenState extends State<BookContentScreen>
                                         vertical: 2,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: color.withOpacity(0.2),
+                                        color: color.withValues(alpha: 0.2),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Text(
-                                        _isPaused ? 'Paused' : 'Playing',
+                                        _isPaused
+                                            ? l10n.pausedLabel
+                                            : l10n.playingLabel,
                                         style: TextStyle(
                                           fontSize: 8,
                                           fontWeight: FontWeight.w500,
@@ -1222,6 +1282,7 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   Widget _buildTTSControls() {
+    final l10n = AppLocalizations.of(context)!;
     return FadeTransition(
       opacity: _controlsOpacity,
       child: Container(
@@ -1230,7 +1291,7 @@ class _BookContentScreenState extends State<BookContentScreen>
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 4,
               offset: const Offset(0, -2),
             ),
@@ -1245,7 +1306,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   _sentences.isNotEmpty && _currentSentenceIndex > 0
                       ? _moveToPreviousSentence
                       : null,
-              tooltip: 'Previous Sentence',
+              tooltip: l10n.previousSentenceTooltip,
             ),
             _buildTTSButton(
               icon:
@@ -1253,13 +1314,16 @@ class _BookContentScreenState extends State<BookContentScreen>
                       ? (_isPaused ? Icons.play_arrow : Icons.pause)
                       : Icons.play_arrow,
               onPressed: _sentences.isNotEmpty ? _togglePlayPause : null,
-              tooltip: _isPlaying ? (_isPaused ? 'Resume' : 'Pause') : 'Play',
+              tooltip:
+                  _isPlaying
+                      ? (_isPaused ? l10n.resumeTooltip : l10n.pauseTooltip)
+                      : l10n.playTooltip,
               isPrimary: true,
             ),
             _buildTTSButton(
               icon: Icons.stop,
               onPressed: _isPlaying ? _stopReading : null,
-              tooltip: 'Stop',
+              tooltip: l10n.stopTooltip,
             ),
             _buildTTSButton(
               icon: Icons.skip_next,
@@ -1268,7 +1332,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                           _currentSentenceIndex < _sentences.length - 1
                       ? _moveToNextSentence
                       : null,
-              tooltip: 'Next Sentence',
+              tooltip: l10n.nextSentenceTooltip,
             ),
           ],
         ),
@@ -1297,7 +1361,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   isPrimary
                       ? AppColors.primary
                       : (onPressed != null
-                          ? AppColors.primary.withOpacity(0.1)
+                          ? AppColors.primary.withValues(alpha: 0.1)
                           : Colors.grey[200]),
               shape: BoxShape.circle,
             ),
@@ -1318,6 +1382,7 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   Widget _buildTTSSettingsSheet() {
+    final l10n = AppLocalizations.of(context)!;
     return StatefulBuilder(
       builder: (context, setModalState) {
         return Container(
@@ -1331,9 +1396,9 @@ class _BookContentScreenState extends State<BookContentScreen>
                   Icon(Icons.settings_voice, color: AppColors.primary),
                   const SizedBox(width: 8),
                   Center(
-                    child: const Text(
-                      'TTS Settings',
-                      style: TextStyle(
+                    child: Text(
+                      l10n.ttsSettingsSheetTitle,
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -1343,7 +1408,7 @@ class _BookContentScreenState extends State<BookContentScreen>
               ),
               const SizedBox(height: 24),
 
-              Text('Speech Rate: ${_speechRate.toStringAsFixed(1)}'),
+              Text(l10n.speechRateWithValue(_speechRate.toStringAsFixed(1))),
               Slider(
                 value: _speechRate,
                 min: 0.1,
@@ -1359,7 +1424,7 @@ class _BookContentScreenState extends State<BookContentScreen>
               ),
 
               const SizedBox(height: 16),
-              Text('Pitch: ${_pitch.toStringAsFixed(1)}'),
+              Text(l10n.pitchWithValue(_pitch.toStringAsFixed(1))),
               Slider(
                 value: _pitch,
                 min: 0.5,
@@ -1375,7 +1440,7 @@ class _BookContentScreenState extends State<BookContentScreen>
               ),
 
               const SizedBox(height: 16),
-              Text('Volume: ${(_volume * 100).round()}%'),
+              Text(l10n.volumeWithValue((_volume * 100).round().toString())),
               Slider(
                 value: _volume,
                 min: 0.0,
@@ -1415,7 +1480,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                         ),
                         foregroundColor: AppColors.primary,
                       ),
-                      child: const Text('Reset to Default'),
+                      child: Text(l10n.resetToDefaultButton),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -1426,7 +1491,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text('Done'),
+                      child: Text(l10n.doneButton),
                     ),
                   ),
                 ],
@@ -1439,13 +1504,14 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   Widget _buildBottomDocumentControls() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),
@@ -1458,23 +1524,23 @@ class _BookContentScreenState extends State<BookContentScreen>
             if (_isPdfFile) ...[
               _buildBottomButton(
                 icon: Icons.zoom_in,
-                label: 'Zoom In',
+                label: l10n.zoomInLabel,
                 onTap: _zoomLevel < 3.0 ? _zoomIn : null,
               ),
               _buildBottomButton(
                 icon: Icons.zoom_out,
-                label: 'Zoom Out',
+                label: l10n.zoomOutLabel,
                 onTap: _zoomLevel > 0.5 ? _zoomOut : null,
               ),
               _buildBottomButton(
                 icon: Icons.center_focus_strong,
-                label: 'Reset',
+                label: l10n.resetLabel,
                 onTap: _zoomLevel != 1.0 ? _resetZoom : null,
               ),
             ],
             _buildBottomButton(
               icon: _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-              label: 'Bookmark',
+              label: l10n.bookmarkLabel,
               onTap: _toggleBookmark,
               isActive: _isBookmarked,
             ),
@@ -1507,7 +1573,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                             SizedBox(width: 6),
                             Flexible(
                               child: Text(
-                                'Bookmarks',
+                                l10n.bookmarksDialogTitle,
                                 style: TextStyle(fontSize: 13),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -1525,7 +1591,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                           SizedBox(width: 6),
                           Flexible(
                             child: Text(
-                              'Snapshot',
+                              l10n.snapshotLabel,
                               style: TextStyle(fontSize: 13),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -1544,7 +1610,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                             SizedBox(width: 6),
                             Flexible(
                               child: Text(
-                                'Go to Page',
+                                l10n.goToPageLabel,
                                 style: TextStyle(fontSize: 13),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -1555,7 +1621,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                   ],
               child: _buildBottomButton(
                 icon: Icons.more_vert,
-                label: 'More',
+                label: l10n.moreLabel,
                 onTap: null, // Let PopupMenuButton handle the tap
               ),
             ),
@@ -1577,11 +1643,11 @@ class _BookContentScreenState extends State<BookContentScreen>
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         decoration: BoxDecoration(
-          color: isActive ? AppColors.primary.withOpacity(0.1) : null,
+          color: isActive ? AppColors.primary.withValues(alpha: 0.1) : null,
           borderRadius: BorderRadius.circular(8),
           border:
               isActive
-                  ? Border.all(color: AppColors.primary.withOpacity(0.3))
+                  ? Border.all(color: AppColors.primary.withValues(alpha: 0.3))
                   : null,
         ),
         child: Column(

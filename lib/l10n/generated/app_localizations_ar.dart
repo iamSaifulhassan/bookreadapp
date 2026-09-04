@@ -483,4 +483,199 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logoutNav => 'تسجيل الخروج';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return 'خطأ في تحويل النص إلى كلام: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return 'خطأ في التحكم بالصوت: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return 'خطأ في قراءة الجملة: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return 'تمت إضافة الصفحة $page إلى الإشارات المرجعية';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'تمت إزالة الإشارة المرجعية';
+
+  @override
+  String get noBookmarksYetMessage => 'لا توجد إشارات مرجعية بعد';
+
+  @override
+  String get bookmarksDialogTitle => 'الإشارات المرجعية';
+
+  @override
+  String pageLabel(int page) {
+    return 'الصفحة $page';
+  }
+
+  @override
+  String get closeButton => 'إغلاق';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'فشل التقاط لقطة الشاشة: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'فشل حفظ لقطة الشاشة: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'تم حفظ اللقطة';
+
+  @override
+  String get snapshotSavedBody => 'تم حفظ لقطة الشاشة بنجاح!';
+
+  @override
+  String get locationLabel => 'الموقع:';
+
+  @override
+  String get goToPageTitle => 'الانتقال إلى صفحة';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'رقم الصفحة (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => 'رقم صفحة غير صالح';
+
+  @override
+  String get goButton => 'انتقال';
+
+  @override
+  String get toggleTextBufferTooltip => 'تبديل مخزن النص';
+
+  @override
+  String get ttsSettingsMenuItem => 'إعدادات الصوت';
+
+  @override
+  String get reloadMenuItem => 'إعادة تحميل';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return 'جارٍ تحميل $fileName...';
+  }
+
+  @override
+  String get initializingViewerMessage => 'جارٍ تهيئة عارض PDF ومحرك الصوت';
+
+  @override
+  String get failedToLoadContentTitle => 'فشل تحميل المحتوى';
+
+  @override
+  String get unknownErrorMessage => 'حدث خطأ غير معروف';
+
+  @override
+  String get readingBufferLabel => 'مخزن القراءة';
+
+  @override
+  String get noSentencesAvailableMessage => 'لا توجد جمل متاحة';
+
+  @override
+  String get sentenceStatusRead => 'مقروءة';
+
+  @override
+  String get sentenceStatusCurrent => 'الحالية';
+
+  @override
+  String get sentenceStatusNext => 'التالية';
+
+  @override
+  String get pausedLabel => 'متوقف مؤقتًا';
+
+  @override
+  String get playingLabel => 'قيد التشغيل';
+
+  @override
+  String get previousSentenceTooltip => 'الجملة السابقة';
+
+  @override
+  String get resumeTooltip => 'استئناف';
+
+  @override
+  String get pauseTooltip => 'إيقاف مؤقت';
+
+  @override
+  String get playTooltip => 'تشغيل';
+
+  @override
+  String get stopTooltip => 'إيقاف';
+
+  @override
+  String get nextSentenceTooltip => 'الجملة التالية';
+
+  @override
+  String get ttsSettingsSheetTitle => 'إعدادات الصوت';
+
+  @override
+  String speechRateWithValue(String value) {
+    return 'سرعة الكلام: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'طبقة الصوت: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return 'مستوى الصوت: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'إعادة التعيين إلى الافتراضي';
+
+  @override
+  String get doneButton => 'تم';
+
+  @override
+  String get zoomInLabel => 'تكبير';
+
+  @override
+  String get zoomOutLabel => 'تصغير';
+
+  @override
+  String get resetLabel => 'إعادة تعيين';
+
+  @override
+  String get bookmarkLabel => 'إشارة مرجعية';
+
+  @override
+  String get snapshotLabel => 'لقطة شاشة';
+
+  @override
+  String get goToPageLabel => 'الانتقال إلى صفحة';
+
+  @override
+  String get moreLabel => 'المزيد';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return 'الصفحة $current من $total';
+  }
+
+  @override
+  String get unableToExtractTextMessage => 'تعذر استخراج النص من هذه الصفحة.';
+
+  @override
+  String get noReadableTextMessage => 'لم يتم العثور على نص قابل للقراءة.';
+
+  @override
+  String get noSentencesFoundMessage => 'لم يتم العثور على جمل.';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'تنسيق ملف غير مدعوم. يتم دعم ملفات PDF وTXT فقط.';
 }

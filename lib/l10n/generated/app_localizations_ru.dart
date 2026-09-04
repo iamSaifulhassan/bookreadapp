@@ -489,4 +489,201 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get logoutNav => 'Выйти';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return 'Ошибка озвучивания: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return 'Ошибка управления озвучиванием: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return 'Ошибка при чтении предложения: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return 'Страница $page добавлена в закладки';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'Закладка удалена';
+
+  @override
+  String get noBookmarksYetMessage => 'Пока нет закладок';
+
+  @override
+  String get bookmarksDialogTitle => 'Закладки';
+
+  @override
+  String pageLabel(int page) {
+    return 'Страница $page';
+  }
+
+  @override
+  String get closeButton => 'Закрыть';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'Не удалось сделать снимок: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'Не удалось сохранить снимок: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'Снимок сохранён';
+
+  @override
+  String get snapshotSavedBody => 'Снимок успешно сохранён!';
+
+  @override
+  String get locationLabel => 'Расположение:';
+
+  @override
+  String get goToPageTitle => 'Перейти на страницу';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'Номер страницы (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => 'Неверный номер страницы';
+
+  @override
+  String get goButton => 'Перейти';
+
+  @override
+  String get toggleTextBufferTooltip => 'Переключить текстовый буфер';
+
+  @override
+  String get ttsSettingsMenuItem => 'Настройки озвучивания';
+
+  @override
+  String get reloadMenuItem => 'Перезагрузить';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return 'Загрузка $fileName...';
+  }
+
+  @override
+  String get initializingViewerMessage =>
+      'Инициализация просмотрщика PDF и голосового движка';
+
+  @override
+  String get failedToLoadContentTitle => 'Не удалось загрузить содержимое';
+
+  @override
+  String get unknownErrorMessage => 'Произошла неизвестная ошибка';
+
+  @override
+  String get readingBufferLabel => 'Буфер чтения';
+
+  @override
+  String get noSentencesAvailableMessage => 'Нет доступных предложений';
+
+  @override
+  String get sentenceStatusRead => 'Прочитано';
+
+  @override
+  String get sentenceStatusCurrent => 'Текущее';
+
+  @override
+  String get sentenceStatusNext => 'Следующее';
+
+  @override
+  String get pausedLabel => 'Приостановлено';
+
+  @override
+  String get playingLabel => 'Воспроизводится';
+
+  @override
+  String get previousSentenceTooltip => 'Предыдущее предложение';
+
+  @override
+  String get resumeTooltip => 'Продолжить';
+
+  @override
+  String get pauseTooltip => 'Пауза';
+
+  @override
+  String get playTooltip => 'Воспроизвести';
+
+  @override
+  String get stopTooltip => 'Остановить';
+
+  @override
+  String get nextSentenceTooltip => 'Следующее предложение';
+
+  @override
+  String get ttsSettingsSheetTitle => 'Настройки озвучивания';
+
+  @override
+  String speechRateWithValue(String value) {
+    return 'Скорость речи: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'Высота тона: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return 'Громкость: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'Сбросить по умолчанию';
+
+  @override
+  String get doneButton => 'Готово';
+
+  @override
+  String get zoomInLabel => 'Увеличить';
+
+  @override
+  String get zoomOutLabel => 'Уменьшить';
+
+  @override
+  String get resetLabel => 'Сбросить';
+
+  @override
+  String get bookmarkLabel => 'Закладка';
+
+  @override
+  String get snapshotLabel => 'Снимок';
+
+  @override
+  String get goToPageLabel => 'Перейти на страницу';
+
+  @override
+  String get moreLabel => 'Ещё';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return 'Страница $current из $total';
+  }
+
+  @override
+  String get unableToExtractTextMessage =>
+      'Не удалось извлечь текст с этой страницы.';
+
+  @override
+  String get noReadableTextMessage => 'Читаемый текст не найден.';
+
+  @override
+  String get noSentencesFoundMessage => 'Предложения не найдены.';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'Неподдерживаемый формат файла. Поддерживаются только файлы PDF и TXT.';
 }

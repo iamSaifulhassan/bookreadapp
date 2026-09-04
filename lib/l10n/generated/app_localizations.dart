@@ -1017,6 +1017,342 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Logout'**
   String get logoutNav;
+
+  /// No description provided for @ttsErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'TTS Error: {message}'**
+  String ttsErrorMessage(String message);
+
+  /// No description provided for @ttsControlErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Error controlling TTS: {error}'**
+  String ttsControlErrorMessage(String error);
+
+  /// No description provided for @ttsSpeakErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Error speaking sentence: {error}'**
+  String ttsSpeakErrorMessage(String error);
+
+  /// No description provided for @pageBookmarkedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page} bookmarked'**
+  String pageBookmarkedMessage(int page);
+
+  /// No description provided for @bookmarkRemovedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark removed'**
+  String get bookmarkRemovedMessage;
+
+  /// No description provided for @noBookmarksYetMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No bookmarks yet'**
+  String get noBookmarksYetMessage;
+
+  /// No description provided for @bookmarksDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmarks'**
+  String get bookmarksDialogTitle;
+
+  /// No description provided for @pageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page}'**
+  String pageLabel(int page);
+
+  /// No description provided for @closeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get closeButton;
+
+  /// No description provided for @snapshotFailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to capture snapshot: {error}'**
+  String snapshotFailedMessage(String error);
+
+  /// No description provided for @snapshotSaveFailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save snapshot: {error}'**
+  String snapshotSaveFailedMessage(String error);
+
+  /// No description provided for @snapshotSavedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Snapshot Saved'**
+  String get snapshotSavedTitle;
+
+  /// No description provided for @snapshotSavedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Snapshot has been saved successfully!'**
+  String get snapshotSavedBody;
+
+  /// No description provided for @locationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Location:'**
+  String get locationLabel;
+
+  /// No description provided for @goToPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Page'**
+  String get goToPageTitle;
+
+  /// No description provided for @pageNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Page Number (1-{total})'**
+  String pageNumberLabel(int total);
+
+  /// No description provided for @invalidPageNumberMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid page number'**
+  String get invalidPageNumberMessage;
+
+  /// No description provided for @goButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Go'**
+  String get goButton;
+
+  /// No description provided for @toggleTextBufferTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle Text Buffer'**
+  String get toggleTextBufferTooltip;
+
+  /// No description provided for @ttsSettingsMenuItem.
+  ///
+  /// In en, this message translates to:
+  /// **'TTS Settings'**
+  String get ttsSettingsMenuItem;
+
+  /// No description provided for @reloadMenuItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Reload'**
+  String get reloadMenuItem;
+
+  /// No description provided for @loadingFileMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading {fileName}...'**
+  String loadingFileMessage(String fileName);
+
+  /// No description provided for @initializingViewerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Initializing PDF viewer and TTS engine'**
+  String get initializingViewerMessage;
+
+  /// No description provided for @failedToLoadContentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to Load Content'**
+  String get failedToLoadContentTitle;
+
+  /// No description provided for @unknownErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown error occurred'**
+  String get unknownErrorMessage;
+
+  /// No description provided for @readingBufferLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading Buffer'**
+  String get readingBufferLabel;
+
+  /// No description provided for @noSentencesAvailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No sentences available'**
+  String get noSentencesAvailableMessage;
+
+  /// No description provided for @sentenceStatusRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get sentenceStatusRead;
+
+  /// No description provided for @sentenceStatusCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get sentenceStatusCurrent;
+
+  /// No description provided for @sentenceStatusNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get sentenceStatusNext;
+
+  /// No description provided for @pausedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get pausedLabel;
+
+  /// No description provided for @playingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Playing'**
+  String get playingLabel;
+
+  /// No description provided for @previousSentenceTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous Sentence'**
+  String get previousSentenceTooltip;
+
+  /// No description provided for @resumeTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resumeTooltip;
+
+  /// No description provided for @pauseTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pauseTooltip;
+
+  /// No description provided for @playTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get playTooltip;
+
+  /// No description provided for @stopTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stopTooltip;
+
+  /// No description provided for @nextSentenceTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Sentence'**
+  String get nextSentenceTooltip;
+
+  /// No description provided for @ttsSettingsSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'TTS Settings'**
+  String get ttsSettingsSheetTitle;
+
+  /// No description provided for @speechRateWithValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Speech Rate: {value}'**
+  String speechRateWithValue(String value);
+
+  /// No description provided for @pitchWithValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Pitch: {value}'**
+  String pitchWithValue(String value);
+
+  /// No description provided for @volumeWithValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume: {value}%'**
+  String volumeWithValue(String value);
+
+  /// No description provided for @resetToDefaultButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to Default'**
+  String get resetToDefaultButton;
+
+  /// No description provided for @doneButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get doneButton;
+
+  /// No description provided for @zoomInLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom In'**
+  String get zoomInLabel;
+
+  /// No description provided for @zoomOutLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Zoom Out'**
+  String get zoomOutLabel;
+
+  /// No description provided for @resetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetLabel;
+
+  /// No description provided for @bookmarkLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark'**
+  String get bookmarkLabel;
+
+  /// No description provided for @snapshotLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Snapshot'**
+  String get snapshotLabel;
+
+  /// No description provided for @goToPageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Page'**
+  String get goToPageLabel;
+
+  /// No description provided for @moreLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get moreLabel;
+
+  /// No description provided for @pageOfPagesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {current} of {total}'**
+  String pageOfPagesLabel(int current, int total);
+
+  /// No description provided for @unableToExtractTextMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to extract text from this page.'**
+  String get unableToExtractTextMessage;
+
+  /// No description provided for @noReadableTextMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No readable text found.'**
+  String get noReadableTextMessage;
+
+  /// No description provided for @noSentencesFoundMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No sentences found.'**
+  String get noSentencesFoundMessage;
+
+  /// No description provided for @unsupportedFileFormatMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Unsupported file format. Only PDF and TXT files are supported.'**
+  String get unsupportedFileFormatMessage;
 }
 
 class _AppLocalizationsDelegate

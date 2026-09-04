@@ -482,4 +482,201 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get logoutNav => 'लॉगआउट';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return 'TTS त्रुटि: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return 'TTS को नियंत्रित करने में त्रुटि: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return 'वाक्य बोलने में त्रुटि: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return 'पृष्ठ $page बुकमार्क किया गया';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'बुकमार्क हटा दिया गया';
+
+  @override
+  String get noBookmarksYetMessage => 'अभी तक कोई बुकमार्क नहीं';
+
+  @override
+  String get bookmarksDialogTitle => 'बुकमार्क्स';
+
+  @override
+  String pageLabel(int page) {
+    return 'पृष्ठ $page';
+  }
+
+  @override
+  String get closeButton => 'बंद करें';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'स्नैपशॉट कैप्चर करने में विफल: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'स्नैपशॉट सहेजने में विफल: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'स्नैपशॉट सहेजा गया';
+
+  @override
+  String get snapshotSavedBody => 'स्नैपशॉट सफलतापूर्वक सहेजा गया है!';
+
+  @override
+  String get locationLabel => 'स्थान:';
+
+  @override
+  String get goToPageTitle => 'पृष्ठ पर जाएं';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'पृष्ठ संख्या (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => 'अमान्य पृष्ठ संख्या';
+
+  @override
+  String get goButton => 'जाएं';
+
+  @override
+  String get toggleTextBufferTooltip => 'टेक्स्ट बफर टॉगल करें';
+
+  @override
+  String get ttsSettingsMenuItem => 'आवाज़ सेटिंग्स';
+
+  @override
+  String get reloadMenuItem => 'पुनः लोड करें';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return '$fileName लोड हो रहा है...';
+  }
+
+  @override
+  String get initializingViewerMessage =>
+      'PDF व्यूअर और TTS इंजन शुरू हो रहा है';
+
+  @override
+  String get failedToLoadContentTitle => 'सामग्री लोड करने में विफल';
+
+  @override
+  String get unknownErrorMessage => 'एक अज्ञात त्रुटि हुई';
+
+  @override
+  String get readingBufferLabel => 'रीडिंग बफर';
+
+  @override
+  String get noSentencesAvailableMessage => 'कोई वाक्य उपलब्ध नहीं';
+
+  @override
+  String get sentenceStatusRead => 'पढ़ा गया';
+
+  @override
+  String get sentenceStatusCurrent => 'वर्तमान';
+
+  @override
+  String get sentenceStatusNext => 'अगला';
+
+  @override
+  String get pausedLabel => 'रुका हुआ';
+
+  @override
+  String get playingLabel => 'चल रहा है';
+
+  @override
+  String get previousSentenceTooltip => 'पिछला वाक्य';
+
+  @override
+  String get resumeTooltip => 'फिर से शुरू करें';
+
+  @override
+  String get pauseTooltip => 'रोकें';
+
+  @override
+  String get playTooltip => 'चलाएं';
+
+  @override
+  String get stopTooltip => 'रुकें';
+
+  @override
+  String get nextSentenceTooltip => 'अगला वाक्य';
+
+  @override
+  String get ttsSettingsSheetTitle => 'आवाज़ सेटिंग्स';
+
+  @override
+  String speechRateWithValue(String value) {
+    return 'बोलने की गति: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'पिच: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return 'वॉल्यूम: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'डिफ़ॉल्ट पर रीसेट करें';
+
+  @override
+  String get doneButton => 'हो गया';
+
+  @override
+  String get zoomInLabel => 'ज़ूम इन';
+
+  @override
+  String get zoomOutLabel => 'ज़ूम आउट';
+
+  @override
+  String get resetLabel => 'रीसेट करें';
+
+  @override
+  String get bookmarkLabel => 'बुकमार्क';
+
+  @override
+  String get snapshotLabel => 'स्नैपशॉट';
+
+  @override
+  String get goToPageLabel => 'पृष्ठ पर जाएं';
+
+  @override
+  String get moreLabel => 'अधिक';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return 'पृष्ठ $current / $total';
+  }
+
+  @override
+  String get unableToExtractTextMessage =>
+      'इस पृष्ठ से टेक्स्ट निकालने में असमर्थ।';
+
+  @override
+  String get noReadableTextMessage => 'कोई पठनीय टेक्स्ट नहीं मिला।';
+
+  @override
+  String get noSentencesFoundMessage => 'कोई वाक्य नहीं मिला।';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'असमर्थित फ़ाइल प्रारूप। केवल PDF और TXT फ़ाइलें समर्थित हैं।';
 }

@@ -472,4 +472,198 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get logoutNav => '退出登录';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return '语音错误：$message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return '控制语音时出错：$error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return '朗读句子时出错：$error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return '已将第 $page 页添加书签';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => '书签已移除';
+
+  @override
+  String get noBookmarksYetMessage => '还没有书签';
+
+  @override
+  String get bookmarksDialogTitle => '书签';
+
+  @override
+  String pageLabel(int page) {
+    return '第 $page 页';
+  }
+
+  @override
+  String get closeButton => '关闭';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return '截图失败：$error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return '保存截图失败：$error';
+  }
+
+  @override
+  String get snapshotSavedTitle => '截图已保存';
+
+  @override
+  String get snapshotSavedBody => '截图已成功保存！';
+
+  @override
+  String get locationLabel => '位置：';
+
+  @override
+  String get goToPageTitle => '跳转到页面';
+
+  @override
+  String pageNumberLabel(int total) {
+    return '页码（1-$total）';
+  }
+
+  @override
+  String get invalidPageNumberMessage => '无效的页码';
+
+  @override
+  String get goButton => '跳转';
+
+  @override
+  String get toggleTextBufferTooltip => '切换文本缓冲区';
+
+  @override
+  String get ttsSettingsMenuItem => '语音设置';
+
+  @override
+  String get reloadMenuItem => '重新加载';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return '正在加载 $fileName...';
+  }
+
+  @override
+  String get initializingViewerMessage => '正在初始化 PDF 阅读器和语音引擎';
+
+  @override
+  String get failedToLoadContentTitle => '内容加载失败';
+
+  @override
+  String get unknownErrorMessage => '发生未知错误';
+
+  @override
+  String get readingBufferLabel => '阅读缓冲区';
+
+  @override
+  String get noSentencesAvailableMessage => '没有可用的句子';
+
+  @override
+  String get sentenceStatusRead => '已读';
+
+  @override
+  String get sentenceStatusCurrent => '当前';
+
+  @override
+  String get sentenceStatusNext => '下一个';
+
+  @override
+  String get pausedLabel => '已暂停';
+
+  @override
+  String get playingLabel => '正在播放';
+
+  @override
+  String get previousSentenceTooltip => '上一句';
+
+  @override
+  String get resumeTooltip => '继续';
+
+  @override
+  String get pauseTooltip => '暂停';
+
+  @override
+  String get playTooltip => '播放';
+
+  @override
+  String get stopTooltip => '停止';
+
+  @override
+  String get nextSentenceTooltip => '下一句';
+
+  @override
+  String get ttsSettingsSheetTitle => '语音设置';
+
+  @override
+  String speechRateWithValue(String value) {
+    return '语速：$value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return '音调：$value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return '音量：$value%';
+  }
+
+  @override
+  String get resetToDefaultButton => '恢复默认值';
+
+  @override
+  String get doneButton => '完成';
+
+  @override
+  String get zoomInLabel => '放大';
+
+  @override
+  String get zoomOutLabel => '缩小';
+
+  @override
+  String get resetLabel => '重置';
+
+  @override
+  String get bookmarkLabel => '书签';
+
+  @override
+  String get snapshotLabel => '截图';
+
+  @override
+  String get goToPageLabel => '跳转到页面';
+
+  @override
+  String get moreLabel => '更多';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return '第 $current 页，共 $total 页';
+  }
+
+  @override
+  String get unableToExtractTextMessage => '无法从此页面提取文本。';
+
+  @override
+  String get noReadableTextMessage => '未找到可读文本。';
+
+  @override
+  String get noSentencesFoundMessage => '未找到句子。';
+
+  @override
+  String get unsupportedFileFormatMessage => '不支持的文件格式。仅支持 PDF 和 TXT 文件。';
 }

@@ -485,4 +485,202 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get logoutNav => 'Abmelden';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return 'Sprachfehler: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return 'Fehler bei der Sprachsteuerung: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return 'Fehler beim Vorlesen des Satzes: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return 'Seite $page als Lesezeichen gespeichert';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'Lesezeichen entfernt';
+
+  @override
+  String get noBookmarksYetMessage => 'Noch keine Lesezeichen';
+
+  @override
+  String get bookmarksDialogTitle => 'Lesezeichen';
+
+  @override
+  String pageLabel(int page) {
+    return 'Seite $page';
+  }
+
+  @override
+  String get closeButton => 'Schließen';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'Screenshot fehlgeschlagen: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'Speichern des Screenshots fehlgeschlagen: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'Screenshot Gespeichert';
+
+  @override
+  String get snapshotSavedBody =>
+      'Der Screenshot wurde erfolgreich gespeichert!';
+
+  @override
+  String get locationLabel => 'Speicherort:';
+
+  @override
+  String get goToPageTitle => 'Zu Seite Springen';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'Seitenzahl (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => 'Ungültige Seitenzahl';
+
+  @override
+  String get goButton => 'Los';
+
+  @override
+  String get toggleTextBufferTooltip => 'Textpuffer umschalten';
+
+  @override
+  String get ttsSettingsMenuItem => 'Spracheinstellungen';
+
+  @override
+  String get reloadMenuItem => 'Neu laden';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return '$fileName wird geladen...';
+  }
+
+  @override
+  String get initializingViewerMessage =>
+      'PDF-Viewer und Sprach-Engine werden initialisiert';
+
+  @override
+  String get failedToLoadContentTitle => 'Inhalt konnte nicht geladen werden';
+
+  @override
+  String get unknownErrorMessage => 'Ein unbekannter Fehler ist aufgetreten';
+
+  @override
+  String get readingBufferLabel => 'Lesepuffer';
+
+  @override
+  String get noSentencesAvailableMessage => 'Keine Sätze verfügbar';
+
+  @override
+  String get sentenceStatusRead => 'Gelesen';
+
+  @override
+  String get sentenceStatusCurrent => 'Aktuell';
+
+  @override
+  String get sentenceStatusNext => 'Nächster';
+
+  @override
+  String get pausedLabel => 'Pausiert';
+
+  @override
+  String get playingLabel => 'Wird abgespielt';
+
+  @override
+  String get previousSentenceTooltip => 'Vorheriger Satz';
+
+  @override
+  String get resumeTooltip => 'Fortsetzen';
+
+  @override
+  String get pauseTooltip => 'Pause';
+
+  @override
+  String get playTooltip => 'Abspielen';
+
+  @override
+  String get stopTooltip => 'Stopp';
+
+  @override
+  String get nextSentenceTooltip => 'Nächster Satz';
+
+  @override
+  String get ttsSettingsSheetTitle => 'Spracheinstellungen';
+
+  @override
+  String speechRateWithValue(String value) {
+    return 'Sprechgeschwindigkeit: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'Tonhöhe: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return 'Lautstärke: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'Auf Standard zurücksetzen';
+
+  @override
+  String get doneButton => 'Fertig';
+
+  @override
+  String get zoomInLabel => 'Vergrößern';
+
+  @override
+  String get zoomOutLabel => 'Verkleinern';
+
+  @override
+  String get resetLabel => 'Zurücksetzen';
+
+  @override
+  String get bookmarkLabel => 'Lesezeichen';
+
+  @override
+  String get snapshotLabel => 'Screenshot';
+
+  @override
+  String get goToPageLabel => 'Zu Seite Springen';
+
+  @override
+  String get moreLabel => 'Mehr';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return 'Seite $current von $total';
+  }
+
+  @override
+  String get unableToExtractTextMessage =>
+      'Text konnte von dieser Seite nicht extrahiert werden.';
+
+  @override
+  String get noReadableTextMessage => 'Kein lesbarer Text gefunden.';
+
+  @override
+  String get noSentencesFoundMessage => 'Keine Sätze gefunden.';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'Nicht unterstütztes Dateiformat. Nur PDF- und TXT-Dateien werden unterstützt.';
 }

@@ -474,4 +474,199 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get logoutNav => 'ログアウト';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return '音声エラー: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return '音声の制御中にエラーが発生しました: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return '文章の読み上げ中にエラーが発生しました: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return '$page ページをブックマークしました';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'ブックマークを削除しました';
+
+  @override
+  String get noBookmarksYetMessage => 'ブックマークはまだありません';
+
+  @override
+  String get bookmarksDialogTitle => 'ブックマーク';
+
+  @override
+  String pageLabel(int page) {
+    return '$page ページ';
+  }
+
+  @override
+  String get closeButton => '閉じる';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'スナップショットの撮影に失敗しました: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'スナップショットの保存に失敗しました: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'スナップショットを保存しました';
+
+  @override
+  String get snapshotSavedBody => 'スナップショットが正常に保存されました！';
+
+  @override
+  String get locationLabel => '場所:';
+
+  @override
+  String get goToPageTitle => 'ページに移動';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'ページ番号 (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => '無効なページ番号です';
+
+  @override
+  String get goButton => '移動';
+
+  @override
+  String get toggleTextBufferTooltip => 'テキストバッファを切り替え';
+
+  @override
+  String get ttsSettingsMenuItem => '音声設定';
+
+  @override
+  String get reloadMenuItem => '再読み込み';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return '$fileName を読み込んでいます...';
+  }
+
+  @override
+  String get initializingViewerMessage => 'PDFビューアと音声エンジンを初期化しています';
+
+  @override
+  String get failedToLoadContentTitle => 'コンテンツの読み込みに失敗しました';
+
+  @override
+  String get unknownErrorMessage => '不明なエラーが発生しました';
+
+  @override
+  String get readingBufferLabel => '読み上げバッファ';
+
+  @override
+  String get noSentencesAvailableMessage => '利用可能な文章がありません';
+
+  @override
+  String get sentenceStatusRead => '読了';
+
+  @override
+  String get sentenceStatusCurrent => '現在';
+
+  @override
+  String get sentenceStatusNext => '次へ';
+
+  @override
+  String get pausedLabel => '一時停止中';
+
+  @override
+  String get playingLabel => '再生中';
+
+  @override
+  String get previousSentenceTooltip => '前の文章';
+
+  @override
+  String get resumeTooltip => '再開';
+
+  @override
+  String get pauseTooltip => '一時停止';
+
+  @override
+  String get playTooltip => '再生';
+
+  @override
+  String get stopTooltip => '停止';
+
+  @override
+  String get nextSentenceTooltip => '次の文章';
+
+  @override
+  String get ttsSettingsSheetTitle => '音声設定';
+
+  @override
+  String speechRateWithValue(String value) {
+    return '読み上げ速度: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'ピッチ: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return '音量: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'デフォルトに戻す';
+
+  @override
+  String get doneButton => '完了';
+
+  @override
+  String get zoomInLabel => '拡大';
+
+  @override
+  String get zoomOutLabel => '縮小';
+
+  @override
+  String get resetLabel => 'リセット';
+
+  @override
+  String get bookmarkLabel => 'ブックマーク';
+
+  @override
+  String get snapshotLabel => 'スナップショット';
+
+  @override
+  String get goToPageLabel => 'ページに移動';
+
+  @override
+  String get moreLabel => 'その他';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return '$total ページ中 $current ページ';
+  }
+
+  @override
+  String get unableToExtractTextMessage => 'このページからテキストを抽出できませんでした。';
+
+  @override
+  String get noReadableTextMessage => '読み取り可能なテキストが見つかりませんでした。';
+
+  @override
+  String get noSentencesFoundMessage => '文章が見つかりませんでした。';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'サポートされていないファイル形式です。PDFおよびTXTファイルのみサポートされています。';
 }

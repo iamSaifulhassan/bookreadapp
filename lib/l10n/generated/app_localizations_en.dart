@@ -483,4 +483,201 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutNav => 'Logout';
+
+  @override
+  String ttsErrorMessage(String message) {
+    return 'TTS Error: $message';
+  }
+
+  @override
+  String ttsControlErrorMessage(String error) {
+    return 'Error controlling TTS: $error';
+  }
+
+  @override
+  String ttsSpeakErrorMessage(String error) {
+    return 'Error speaking sentence: $error';
+  }
+
+  @override
+  String pageBookmarkedMessage(int page) {
+    return 'Page $page bookmarked';
+  }
+
+  @override
+  String get bookmarkRemovedMessage => 'Bookmark removed';
+
+  @override
+  String get noBookmarksYetMessage => 'No bookmarks yet';
+
+  @override
+  String get bookmarksDialogTitle => 'Bookmarks';
+
+  @override
+  String pageLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String get closeButton => 'Close';
+
+  @override
+  String snapshotFailedMessage(String error) {
+    return 'Failed to capture snapshot: $error';
+  }
+
+  @override
+  String snapshotSaveFailedMessage(String error) {
+    return 'Failed to save snapshot: $error';
+  }
+
+  @override
+  String get snapshotSavedTitle => 'Snapshot Saved';
+
+  @override
+  String get snapshotSavedBody => 'Snapshot has been saved successfully!';
+
+  @override
+  String get locationLabel => 'Location:';
+
+  @override
+  String get goToPageTitle => 'Go to Page';
+
+  @override
+  String pageNumberLabel(int total) {
+    return 'Page Number (1-$total)';
+  }
+
+  @override
+  String get invalidPageNumberMessage => 'Invalid page number';
+
+  @override
+  String get goButton => 'Go';
+
+  @override
+  String get toggleTextBufferTooltip => 'Toggle Text Buffer';
+
+  @override
+  String get ttsSettingsMenuItem => 'TTS Settings';
+
+  @override
+  String get reloadMenuItem => 'Reload';
+
+  @override
+  String loadingFileMessage(String fileName) {
+    return 'Loading $fileName...';
+  }
+
+  @override
+  String get initializingViewerMessage =>
+      'Initializing PDF viewer and TTS engine';
+
+  @override
+  String get failedToLoadContentTitle => 'Failed to Load Content';
+
+  @override
+  String get unknownErrorMessage => 'Unknown error occurred';
+
+  @override
+  String get readingBufferLabel => 'Reading Buffer';
+
+  @override
+  String get noSentencesAvailableMessage => 'No sentences available';
+
+  @override
+  String get sentenceStatusRead => 'Read';
+
+  @override
+  String get sentenceStatusCurrent => 'Current';
+
+  @override
+  String get sentenceStatusNext => 'Next';
+
+  @override
+  String get pausedLabel => 'Paused';
+
+  @override
+  String get playingLabel => 'Playing';
+
+  @override
+  String get previousSentenceTooltip => 'Previous Sentence';
+
+  @override
+  String get resumeTooltip => 'Resume';
+
+  @override
+  String get pauseTooltip => 'Pause';
+
+  @override
+  String get playTooltip => 'Play';
+
+  @override
+  String get stopTooltip => 'Stop';
+
+  @override
+  String get nextSentenceTooltip => 'Next Sentence';
+
+  @override
+  String get ttsSettingsSheetTitle => 'TTS Settings';
+
+  @override
+  String speechRateWithValue(String value) {
+    return 'Speech Rate: $value';
+  }
+
+  @override
+  String pitchWithValue(String value) {
+    return 'Pitch: $value';
+  }
+
+  @override
+  String volumeWithValue(String value) {
+    return 'Volume: $value%';
+  }
+
+  @override
+  String get resetToDefaultButton => 'Reset to Default';
+
+  @override
+  String get doneButton => 'Done';
+
+  @override
+  String get zoomInLabel => 'Zoom In';
+
+  @override
+  String get zoomOutLabel => 'Zoom Out';
+
+  @override
+  String get resetLabel => 'Reset';
+
+  @override
+  String get bookmarkLabel => 'Bookmark';
+
+  @override
+  String get snapshotLabel => 'Snapshot';
+
+  @override
+  String get goToPageLabel => 'Go to Page';
+
+  @override
+  String get moreLabel => 'More';
+
+  @override
+  String pageOfPagesLabel(int current, int total) {
+    return 'Page $current of $total';
+  }
+
+  @override
+  String get unableToExtractTextMessage =>
+      'Unable to extract text from this page.';
+
+  @override
+  String get noReadableTextMessage => 'No readable text found.';
+
+  @override
+  String get noSentencesFoundMessage => 'No sentences found.';
+
+  @override
+  String get unsupportedFileFormatMessage =>
+      'Unsupported file format. Only PDF and TXT files are supported.';
 }

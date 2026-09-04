@@ -187,5 +187,101 @@
   "pleaseWaitLabel": "Please wait...",
   "bookReaderLabel": "Book Reader",
   "userLabel": "User",
-  "logoutNav": "Logout"
+  "logoutNav": "Logout",
+
+  "ttsErrorMessage": "TTS Error: {message}",
+  "@ttsErrorMessage": {
+    "placeholders": { "message": { "type": "String" } }
+  },
+  "ttsControlErrorMessage": "Error controlling TTS: {error}",
+  "@ttsControlErrorMessage": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "ttsSpeakErrorMessage": "Error speaking sentence: {error}",
+  "@ttsSpeakErrorMessage": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "pageBookmarkedMessage": "Page {page} bookmarked",
+  "@pageBookmarkedMessage": {
+    "placeholders": { "page": { "type": "int" } }
+  },
+  "bookmarkRemovedMessage": "Bookmark removed",
+  "noBookmarksYetMessage": "No bookmarks yet",
+  "bookmarksDialogTitle": "Bookmarks",
+  "pageLabel": "Page {page}",
+  "@pageLabel": {
+    "placeholders": { "page": { "type": "int" } }
+  },
+  "closeButton": "Close",
+  "snapshotFailedMessage": "Failed to capture snapshot: {error}",
+  "@snapshotFailedMessage": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "snapshotSaveFailedMessage": "Failed to save snapshot: {error}",
+  "@snapshotSaveFailedMessage": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "snapshotSavedTitle": "Snapshot Saved",
+  "snapshotSavedBody": "Snapshot has been saved successfully!",
+  "locationLabel": "Location:",
+  "goToPageTitle": "Go to Page",
+  "pageNumberLabel": "Page Number (1-{total})",
+  "@pageNumberLabel": {
+    "placeholders": { "total": { "type": "int" } }
+  },
+  "invalidPageNumberMessage": "Invalid page number",
+  "goButton": "Go",
+  "toggleTextBufferTooltip": "Toggle Text Buffer",
+  "ttsSettingsMenuItem": "TTS Settings",
+  "reloadMenuItem": "Reload",
+  "loadingFileMessage": "Loading {fileName}...",
+  "@loadingFileMessage": {
+    "placeholders": { "fileName": { "type": "String" } }
+  },
+  "initializingViewerMessage": "Initializing PDF viewer and TTS engine",
+  "failedToLoadContentTitle": "Failed to Load Content",
+  "unknownErrorMessage": "Unknown error occurred",
+  "readingBufferLabel": "Reading Buffer",
+  "noSentencesAvailableMessage": "No sentences available",
+  "sentenceStatusRead": "Read",
+  "sentenceStatusCurrent": "Current",
+  "sentenceStatusNext": "Next",
+  "pausedLabel": "Paused",
+  "playingLabel": "Playing",
+  "previousSentenceTooltip": "Previous Sentence",
+  "resumeTooltip": "Resume",
+  "pauseTooltip": "Pause",
+  "playTooltip": "Play",
+  "stopTooltip": "Stop",
+  "nextSentenceTooltip": "Next Sentence",
+  "ttsSettingsSheetTitle": "TTS Settings",
+  "speechRateWithValue": "Speech Rate: {value}",
+  "@speechRateWithValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "pitchWithValue": "Pitch: {value}",
+  "@pitchWithValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "volumeWithValue": "Volume: {value}%",
+  "@volumeWithValue": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "resetToDefaultButton": "Reset to Default",
+  "doneButton": "Done",
+  "zoomInLabel": "Zoom In",
+  "zoomOutLabel": "Zoom Out",
+  "resetLabel": "Reset",
+  "bookmarkLabel": "Bookmark",
+  "snapshotLabel": "Snapshot",
+  "goToPageLabel": "Go to Page",
+  "moreLabel": "More",
+  "pageOfPagesLabel": "Page {current} of {total}",
+  "@pageOfPagesLabel": {
+    "placeholders": { "current": { "type": "int" }, "total": { "type": "int" } }
+  },
+  "unableToExtractTextMessage": "Unable to extract text from this page.",
+  "noReadableTextMessage": "No readable text found.",
+  "noSentencesFoundMessage": "No sentences found.",
+  "unsupportedFileFormatMessage": "Unsupported file format. Only PDF and TXT files are supported."
 }
