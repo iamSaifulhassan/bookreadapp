@@ -116,5 +116,20 @@
   "userTypeFieldHint": "Введите тип пользователя",
   "editProfileButton": "Редактировать профиль",
   "signOutButton": "Выйти",
-  "signOutConfirmMessage": "Вы уверены, что хотите выйти?"
+  "signOutConfirmMessage": "Вы уверены, что хотите выйти?",
+
+  "tapToChangePhoto": "Нажмите, чтобы изменить фото профиля",
+  "profileImageSavedMessage": "Изображение профиля успешно сохранено!",
+  "failedToSaveImageMessage": "Не удалось сохранить изображение. Попробуйте снова.",
+  "failedToPickImageMessage": "Не удалось выбрать изображение. Попробуйте снова.",
+  "profileUpdatedMessage": "Профиль успешно обновлён!",
+  "failedToUpdateProfileMessage": "Не удалось обновить профиль. Попробуйте снова.",
+  "genericErrorMessage": "Ошибка: {error}",
+  "emailAddressSectionLabel": "Адрес электронной почты",
+  "emailAddressHint": "Введите адрес электронной почты",
+  "pleaseEnterEmailError": "Пожалуйста, введите адрес электронной почты",
+  "pleaseEnterValidEmailError": "Пожалуйста, введите действительный адрес электронной почты",
+  "pleaseEnterPhoneError": "Пожалуйста, введите номер телефона",
+  "updatingButtonLabel": "Обновление...",
+  "updateProfileButtonLabel": "Обновить профиль"
 }

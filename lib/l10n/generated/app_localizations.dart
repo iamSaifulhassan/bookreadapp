@@ -783,6 +783,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to sign out?'**
   String get signOutConfirmMessage;
+
+  /// No description provided for @tapToChangePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to change profile picture'**
+  String get tapToChangePhoto;
+
+  /// No description provided for @profileImageSavedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile image saved successfully!'**
+  String get profileImageSavedMessage;
+
+  /// No description provided for @failedToSaveImageMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save image. Please try again.'**
+  String get failedToSaveImageMessage;
+
+  /// No description provided for @failedToPickImageMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to pick image. Please try again.'**
+  String get failedToPickImageMessage;
+
+  /// No description provided for @profileUpdatedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully!'**
+  String get profileUpdatedMessage;
+
+  /// No description provided for @failedToUpdateProfileMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update profile. Please try again.'**
+  String get failedToUpdateProfileMessage;
+
+  /// No description provided for @genericErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String genericErrorMessage(String error);
+
+  /// No description provided for @emailAddressSectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get emailAddressSectionLabel;
+
+  /// No description provided for @emailAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address'**
+  String get emailAddressHint;
+
+  /// No description provided for @pleaseEnterEmailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email address'**
+  String get pleaseEnterEmailError;
+
+  /// No description provided for @pleaseEnterValidEmailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address'**
+  String get pleaseEnterValidEmailError;
+
+  /// No description provided for @pleaseEnterPhoneError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your phone number'**
+  String get pleaseEnterPhoneError;
+
+  /// No description provided for @updatingButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Updating...'**
+  String get updatingButtonLabel;
+
+  /// No description provided for @updateProfileButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile'**
+  String get updateProfileButtonLabel;
 }
 
 class _AppLocalizationsDelegate

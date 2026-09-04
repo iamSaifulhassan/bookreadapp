@@ -350,4 +350,48 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get signOutConfirmMessage => '您确定要退出登录吗？';
+
+  @override
+  String get tapToChangePhoto => '点击更换个人资料照片';
+
+  @override
+  String get profileImageSavedMessage => '个人资料照片保存成功！';
+
+  @override
+  String get failedToSaveImageMessage => '保存图片失败，请重试。';
+
+  @override
+  String get failedToPickImageMessage => '选择图片失败，请重试。';
+
+  @override
+  String get profileUpdatedMessage => '个人资料更新成功！';
+
+  @override
+  String get failedToUpdateProfileMessage => '更新个人资料失败，请重试。';
+
+  @override
+  String genericErrorMessage(String error) {
+    return '错误：$error';
+  }
+
+  @override
+  String get emailAddressSectionLabel => '电子邮箱地址';
+
+  @override
+  String get emailAddressHint => '请输入您的电子邮箱地址';
+
+  @override
+  String get pleaseEnterEmailError => '请输入您的电子邮箱地址';
+
+  @override
+  String get pleaseEnterValidEmailError => '请输入有效的电子邮箱地址';
+
+  @override
+  String get pleaseEnterPhoneError => '请输入您的电话号码';
+
+  @override
+  String get updatingButtonLabel => '正在更新...';
+
+  @override
+  String get updateProfileButtonLabel => '更新资料';
 }

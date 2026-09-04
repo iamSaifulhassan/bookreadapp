@@ -116,5 +116,20 @@
   "userTypeFieldHint": "उपयोगकर्ता प्रकार दर्ज करें",
   "editProfileButton": "प्रोफ़ाइल संपादित करें",
   "signOutButton": "साइन आउट करें",
-  "signOutConfirmMessage": "क्या आप वाकई साइन आउट करना चाहते हैं?"
+  "signOutConfirmMessage": "क्या आप वाकई साइन आउट करना चाहते हैं?",
+
+  "tapToChangePhoto": "प्रोफ़ाइल तस्वीर बदलने के लिए टैप करें",
+  "profileImageSavedMessage": "प्रोफ़ाइल छवि सफलतापूर्वक सहेजी गई!",
+  "failedToSaveImageMessage": "छवि सहेजने में विफल। कृपया पुनः प्रयास करें।",
+  "failedToPickImageMessage": "छवि चुनने में विफल। कृपया पुनः प्रयास करें।",
+  "profileUpdatedMessage": "प्रोफ़ाइल सफलतापूर्वक अपडेट की गई!",
+  "failedToUpdateProfileMessage": "प्रोफ़ाइल अपडेट करने में विफल। कृपया पुनः प्रयास करें।",
+  "genericErrorMessage": "त्रुटि: {error}",
+  "emailAddressSectionLabel": "ईमेल पता",
+  "emailAddressHint": "अपना ईमेल पता दर्ज करें",
+  "pleaseEnterEmailError": "कृपया अपना ईमेल पता दर्ज करें",
+  "pleaseEnterValidEmailError": "कृपया एक मान्य ईमेल पता दर्ज करें",
+  "pleaseEnterPhoneError": "कृपया अपना फ़ोन नंबर दर्ज करें",
+  "updatingButtonLabel": "अपडेट हो रहा है...",
+  "updateProfileButtonLabel": "प्रोफ़ाइल अपडेट करें"
 }

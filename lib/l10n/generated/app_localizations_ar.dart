@@ -357,4 +357,52 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get signOutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get tapToChangePhoto => 'اضغط لتغيير صورة الملف الشخصي';
+
+  @override
+  String get profileImageSavedMessage => 'تم حفظ صورة الملف الشخصي بنجاح!';
+
+  @override
+  String get failedToSaveImageMessage =>
+      'فشل حفظ الصورة. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get failedToPickImageMessage =>
+      'فشل اختيار الصورة. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get profileUpdatedMessage => 'تم تحديث الملف الشخصي بنجاح!';
+
+  @override
+  String get failedToUpdateProfileMessage =>
+      'فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String genericErrorMessage(String error) {
+    return 'خطأ: $error';
+  }
+
+  @override
+  String get emailAddressSectionLabel => 'عنوان البريد الإلكتروني';
+
+  @override
+  String get emailAddressHint => 'أدخل عنوان بريدك الإلكتروني';
+
+  @override
+  String get pleaseEnterEmailError => 'يرجى إدخال عنوان بريدك الإلكتروني';
+
+  @override
+  String get pleaseEnterValidEmailError =>
+      'يرجى إدخال عنوان بريد إلكتروني صالح';
+
+  @override
+  String get pleaseEnterPhoneError => 'يرجى إدخال رقم هاتفك';
+
+  @override
+  String get updatingButtonLabel => 'جارٍ التحديث...';
+
+  @override
+  String get updateProfileButtonLabel => 'تحديث الملف الشخصي';
 }

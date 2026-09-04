@@ -355,4 +355,53 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get signOutConfirmMessage => 'کیا آپ واقعی سائن آؤٹ کرنا چاہتے ہیں؟';
+
+  @override
+  String get tapToChangePhoto => 'پروفائل تصویر تبدیل کرنے کے لیے ٹیپ کریں';
+
+  @override
+  String get profileImageSavedMessage =>
+      'پروفائل تصویر کامیابی سے محفوظ ہو گئی!';
+
+  @override
+  String get failedToSaveImageMessage =>
+      'تصویر محفوظ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔';
+
+  @override
+  String get failedToPickImageMessage =>
+      'تصویر منتخب کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔';
+
+  @override
+  String get profileUpdatedMessage => 'پروفائل کامیابی سے اپ ڈیٹ ہو گئی!';
+
+  @override
+  String get failedToUpdateProfileMessage =>
+      'پروفائل اپ ڈیٹ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔';
+
+  @override
+  String genericErrorMessage(String error) {
+    return 'خرابی: $error';
+  }
+
+  @override
+  String get emailAddressSectionLabel => 'ای میل ایڈریس';
+
+  @override
+  String get emailAddressHint => 'اپنا ای میل ایڈریس درج کریں';
+
+  @override
+  String get pleaseEnterEmailError => 'براہ کرم اپنا ای میل ایڈریس درج کریں';
+
+  @override
+  String get pleaseEnterValidEmailError =>
+      'براہ کرم ایک درست ای میل ایڈریس درج کریں';
+
+  @override
+  String get pleaseEnterPhoneError => 'براہ کرم اپنا فون نمبر درج کریں';
+
+  @override
+  String get updatingButtonLabel => 'اپ ڈیٹ ہو رہا ہے...';
+
+  @override
+  String get updateProfileButtonLabel => 'پروفائل اپ ڈیٹ کریں';
 }

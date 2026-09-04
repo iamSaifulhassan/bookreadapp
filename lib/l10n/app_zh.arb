@@ -116,5 +116,20 @@
   "userTypeFieldHint": "请输入用户类型",
   "editProfileButton": "编辑资料",
   "signOutButton": "退出登录",
-  "signOutConfirmMessage": "您确定要退出登录吗？"
+  "signOutConfirmMessage": "您确定要退出登录吗？",
+
+  "tapToChangePhoto": "点击更换个人资料照片",
+  "profileImageSavedMessage": "个人资料照片保存成功！",
+  "failedToSaveImageMessage": "保存图片失败，请重试。",
+  "failedToPickImageMessage": "选择图片失败，请重试。",
+  "profileUpdatedMessage": "个人资料更新成功！",
+  "failedToUpdateProfileMessage": "更新个人资料失败，请重试。",
+  "genericErrorMessage": "错误：{error}",
+  "emailAddressSectionLabel": "电子邮箱地址",
+  "emailAddressHint": "请输入您的电子邮箱地址",
+  "pleaseEnterEmailError": "请输入您的电子邮箱地址",
+  "pleaseEnterValidEmailError": "请输入有效的电子邮箱地址",
+  "pleaseEnterPhoneError": "请输入您的电话号码",
+  "updatingButtonLabel": "正在更新...",
+  "updateProfileButtonLabel": "更新资料"
 }

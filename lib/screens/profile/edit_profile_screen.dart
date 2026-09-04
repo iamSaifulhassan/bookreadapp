@@ -10,6 +10,7 @@ import '../../services/local_image_storage_service.dart';
 import '../../services/user_service.dart';
 import '../../services/profile_image_utils.dart';
 import '../../models/user_model.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final String currentEmail;
@@ -138,7 +139,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               );
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: const Text('Profile image saved successfully!'),
+                  content: Text(
+                    AppLocalizations.of(context)!.profileImageSavedMessage,
+                  ),
                   backgroundColor: AppColors.success,
                 ),
               );
@@ -146,8 +149,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               AppLogger.log('EditProfile: Save failed or returned null/empty path');
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: const Text(
-                    'Failed to save image. Please try again.',
+                  content: Text(
+                    AppLocalizations.of(context)!.failedToSaveImageMessage,
                   ),
                   backgroundColor: AppColors.error,
                 ),
@@ -164,7 +167,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         AppLogger.log('Error picking and saving image: $e');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('Failed to pick image. Please try again.'),
+            content: Text(
+              AppLocalizations.of(context)!.failedToPickImageMessage,
+            ),
             backgroundColor: AppColors.error,
           ),
         );
@@ -196,7 +201,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('Profile updated successfully!'),
+              content: Text(
+                AppLocalizations.of(context)!.profileUpdatedMessage,
+              ),
               backgroundColor: AppColors.success,
             ),
           ); // Return the updated profile data to the profile screen
@@ -210,8 +217,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text(
-                'Failed to update profile. Please try again.',
+              content: Text(
+                AppLocalizations.of(context)!.failedToUpdateProfileMessage,
               ),
               backgroundColor: AppColors.error,
             ),
@@ -222,7 +229,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: $e'),
+            content: Text(
+              AppLocalizations.of(context)!.genericErrorMessage(e.toString()),
+            ),
             backgroundColor: AppColors.error,
           ),
         );
@@ -260,7 +269,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: 120,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black.withOpacity(0.5),
+                      color: Colors.black.withValues(alpha: 0.5),
                     ),
                     child: const Center(
                       child: CircularProgressIndicator(color: Colors.white),
@@ -290,7 +299,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ),
         const SizedBox(height: 16),
         Text(
-          'Tap to change profile picture',
+          AppLocalizations.of(context)!.tapToChangePhoto,
           style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
         ),
       ],
@@ -352,6 +361,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -362,7 +372,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Edit Profile',
+          l10n.editProfileButton,
           style: TextStyle(
             color: AppColors.textPrimary,
             fontSize: 18,
@@ -382,7 +392,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 32),
 
               Text(
-                'Email Address',
+                l10n.emailAddressSectionLabel,
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
@@ -392,18 +402,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 8),
               CustomTextField(
                 controller: _emailController,
-                label: 'Email',
-                hint: 'Enter your email address',
+                label: l10n.emailLabel,
+                hint: l10n.emailAddressHint,
                 icon: Icons.email,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your email address';
+                    return l10n.pleaseEnterEmailError;
                   }
                   if (!RegExp(
                     r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                   ).hasMatch(value)) {
-                    return 'Please enter a valid email address';
+                    return l10n.pleaseEnterValidEmailError;
                   }
                   return null;
                 },
@@ -411,7 +421,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 20),
 
               Text(
-                'Phone Number',
+                l10n.phoneNumberLabel,
                 style: TextStyle(
                   color: const Color.fromARGB(255, 95, 91, 91),
                   fontSize: 16,
@@ -421,13 +431,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 8),
               CustomTextField(
                 controller: _phoneController,
-                label: 'Phone',
-                hint: 'Enter your phone number',
+                label: l10n.phoneFieldLabel,
+                hint: l10n.phoneNumberHint,
                 icon: Icons.phone,
                 keyboardType: TextInputType.phone,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your phone number';
+                    return l10n.pleaseEnterPhoneError;
                   }
                   return null;
                 },
@@ -435,7 +445,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 20),
 
               Text(
-                'Country',
+                l10n.countryLabel,
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
@@ -444,10 +454,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 8),
               CustomDropdown<String>(
-                label: 'Country',
+                label: l10n.countryLabel,
                 value: _selectedCountry,
                 items: _buildDropdownItems(_countries),
-                hint: 'Select your country',
+                hint: l10n.selectCountryHint,
                 onChanged: (String? newValue) {
                   setState(() {
                     _selectedCountry = newValue ?? 'Pakistan';
@@ -457,7 +467,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 20),
 
               Text(
-                'User Type',
+                l10n.userTypeFieldLabel,
                 style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 16,
@@ -466,10 +476,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 8),
               CustomDropdown<String>(
-                label: 'User Type',
+                label: l10n.userTypeFieldLabel,
                 value: _selectedUserType,
                 items: _buildDropdownItems(_userTypes),
-                hint: 'Select user type',
+                hint: l10n.selectUserTypeHint,
                 onChanged: (String? newValue) {
                   setState(() {
                     _selectedUserType = newValue ?? 'Student';
@@ -483,7 +493,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: CustomButton(
                   onPressed: _isLoading ? null : _updateProfile,
                   isLoading: _isLoading,
-                  child: Text(_isLoading ? 'Updating...' : 'Update Profile'),
+                  child: Text(
+                    _isLoading
+                        ? l10n.updatingButtonLabel
+                        : l10n.updateProfileButtonLabel,
+                  ),
                 ),
               ),
             ],

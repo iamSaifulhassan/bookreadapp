@@ -352,4 +352,48 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get signOutConfirmMessage => '本当にサインアウトしますか？';
+
+  @override
+  String get tapToChangePhoto => 'タップしてプロフィール写真を変更';
+
+  @override
+  String get profileImageSavedMessage => 'プロフィール画像を保存しました！';
+
+  @override
+  String get failedToSaveImageMessage => '画像の保存に失敗しました。もう一度お試しください。';
+
+  @override
+  String get failedToPickImageMessage => '画像の選択に失敗しました。もう一度お試しください。';
+
+  @override
+  String get profileUpdatedMessage => 'プロフィールを更新しました！';
+
+  @override
+  String get failedToUpdateProfileMessage => 'プロフィールの更新に失敗しました。もう一度お試しください。';
+
+  @override
+  String genericErrorMessage(String error) {
+    return 'エラー: $error';
+  }
+
+  @override
+  String get emailAddressSectionLabel => 'メールアドレス';
+
+  @override
+  String get emailAddressHint => 'メールアドレスを入力してください';
+
+  @override
+  String get pleaseEnterEmailError => 'メールアドレスを入力してください';
+
+  @override
+  String get pleaseEnterValidEmailError => '有効なメールアドレスを入力してください';
+
+  @override
+  String get pleaseEnterPhoneError => '電話番号を入力してください';
+
+  @override
+  String get updatingButtonLabel => '更新中...';
+
+  @override
+  String get updateProfileButtonLabel => 'プロフィールを更新';
 }

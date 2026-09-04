@@ -116,5 +116,20 @@
   "userTypeFieldHint": "أدخل نوع المستخدم",
   "editProfileButton": "تعديل الملف الشخصي",
   "signOutButton": "تسجيل الخروج",
-  "signOutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+  "signOutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+
+  "tapToChangePhoto": "اضغط لتغيير صورة الملف الشخصي",
+  "profileImageSavedMessage": "تم حفظ صورة الملف الشخصي بنجاح!",
+  "failedToSaveImageMessage": "فشل حفظ الصورة. يرجى المحاولة مرة أخرى.",
+  "failedToPickImageMessage": "فشل اختيار الصورة. يرجى المحاولة مرة أخرى.",
+  "profileUpdatedMessage": "تم تحديث الملف الشخصي بنجاح!",
+  "failedToUpdateProfileMessage": "فشل تحديث الملف الشخصي. يرجى المحاولة مرة أخرى.",
+  "genericErrorMessage": "خطأ: {error}",
+  "emailAddressSectionLabel": "عنوان البريد الإلكتروني",
+  "emailAddressHint": "أدخل عنوان بريدك الإلكتروني",
+  "pleaseEnterEmailError": "يرجى إدخال عنوان بريدك الإلكتروني",
+  "pleaseEnterValidEmailError": "يرجى إدخال عنوان بريد إلكتروني صالح",
+  "pleaseEnterPhoneError": "يرجى إدخال رقم هاتفك",
+  "updatingButtonLabel": "جارٍ التحديث...",
+  "updateProfileButtonLabel": "تحديث الملف الشخصي"
 }

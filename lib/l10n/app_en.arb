@@ -135,5 +135,23 @@
   "userTypeFieldHint": "Enter user type",
   "editProfileButton": "Edit Profile",
   "signOutButton": "Sign Out",
-  "signOutConfirmMessage": "Are you sure you want to sign out?"
+  "signOutConfirmMessage": "Are you sure you want to sign out?",
+
+  "tapToChangePhoto": "Tap to change profile picture",
+  "profileImageSavedMessage": "Profile image saved successfully!",
+  "failedToSaveImageMessage": "Failed to save image. Please try again.",
+  "failedToPickImageMessage": "Failed to pick image. Please try again.",
+  "profileUpdatedMessage": "Profile updated successfully!",
+  "failedToUpdateProfileMessage": "Failed to update profile. Please try again.",
+  "genericErrorMessage": "Error: {error}",
+  "@genericErrorMessage": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "emailAddressSectionLabel": "Email Address",
+  "emailAddressHint": "Enter your email address",
+  "pleaseEnterEmailError": "Please enter your email address",
+  "pleaseEnterValidEmailError": "Please enter a valid email address",
+  "pleaseEnterPhoneError": "Please enter your phone number",
+  "updatingButtonLabel": "Updating...",
+  "updateProfileButtonLabel": "Update Profile"
 }

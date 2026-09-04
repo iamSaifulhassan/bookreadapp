@@ -116,5 +116,20 @@
   "userTypeFieldHint": "Inserisci il tipo di utente",
   "editProfileButton": "Modifica Profilo",
   "signOutButton": "Esci",
-  "signOutConfirmMessage": "Sei sicuro di voler uscire?"
+  "signOutConfirmMessage": "Sei sicuro di voler uscire?",
+
+  "tapToChangePhoto": "Tocca per cambiare la foto profilo",
+  "profileImageSavedMessage": "Immagine del profilo salvata con successo!",
+  "failedToSaveImageMessage": "Impossibile salvare l'immagine. Riprova.",
+  "failedToPickImageMessage": "Impossibile selezionare l'immagine. Riprova.",
+  "profileUpdatedMessage": "Profilo aggiornato con successo!",
+  "failedToUpdateProfileMessage": "Impossibile aggiornare il profilo. Riprova.",
+  "genericErrorMessage": "Errore: {error}",
+  "emailAddressSectionLabel": "Indirizzo Email",
+  "emailAddressHint": "Inserisci il tuo indirizzo email",
+  "pleaseEnterEmailError": "Inserisci il tuo indirizzo email",
+  "pleaseEnterValidEmailError": "Inserisci un indirizzo email valido",
+  "pleaseEnterPhoneError": "Inserisci il tuo numero di telefono",
+  "updatingButtonLabel": "Aggiornamento...",
+  "updateProfileButtonLabel": "Aggiorna Profilo"
 }

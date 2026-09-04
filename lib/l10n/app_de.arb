@@ -116,5 +116,20 @@
   "userTypeFieldHint": "Gib den Benutzertyp ein",
   "editProfileButton": "Profil bearbeiten",
   "signOutButton": "Abmelden",
-  "signOutConfirmMessage": "Möchtest du dich wirklich abmelden?"
+  "signOutConfirmMessage": "Möchtest du dich wirklich abmelden?",
+
+  "tapToChangePhoto": "Tippen, um das Profilbild zu ändern",
+  "profileImageSavedMessage": "Profilbild erfolgreich gespeichert!",
+  "failedToSaveImageMessage": "Bild konnte nicht gespeichert werden. Bitte versuche es erneut.",
+  "failedToPickImageMessage": "Bild konnte nicht ausgewählt werden. Bitte versuche es erneut.",
+  "profileUpdatedMessage": "Profil erfolgreich aktualisiert!",
+  "failedToUpdateProfileMessage": "Profil konnte nicht aktualisiert werden. Bitte versuche es erneut.",
+  "genericErrorMessage": "Fehler: {error}",
+  "emailAddressSectionLabel": "E-Mail-Adresse",
+  "emailAddressHint": "Gib deine E-Mail-Adresse ein",
+  "pleaseEnterEmailError": "Bitte gib deine E-Mail-Adresse ein",
+  "pleaseEnterValidEmailError": "Bitte gib eine gültige E-Mail-Adresse ein",
+  "pleaseEnterPhoneError": "Bitte gib deine Telefonnummer ein",
+  "updatingButtonLabel": "Wird aktualisiert...",
+  "updateProfileButtonLabel": "Profil aktualisieren"
 }

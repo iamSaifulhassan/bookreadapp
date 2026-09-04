@@ -116,5 +116,20 @@
   "userTypeFieldHint": "صارف قسم درج کریں",
   "editProfileButton": "پروفائل میں ترمیم کریں",
   "signOutButton": "سائن آؤٹ کریں",
-  "signOutConfirmMessage": "کیا آپ واقعی سائن آؤٹ کرنا چاہتے ہیں؟"
+  "signOutConfirmMessage": "کیا آپ واقعی سائن آؤٹ کرنا چاہتے ہیں؟",
+
+  "tapToChangePhoto": "پروفائل تصویر تبدیل کرنے کے لیے ٹیپ کریں",
+  "profileImageSavedMessage": "پروفائل تصویر کامیابی سے محفوظ ہو گئی!",
+  "failedToSaveImageMessage": "تصویر محفوظ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔",
+  "failedToPickImageMessage": "تصویر منتخب کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔",
+  "profileUpdatedMessage": "پروفائل کامیابی سے اپ ڈیٹ ہو گئی!",
+  "failedToUpdateProfileMessage": "پروفائل اپ ڈیٹ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔",
+  "genericErrorMessage": "خرابی: {error}",
+  "emailAddressSectionLabel": "ای میل ایڈریس",
+  "emailAddressHint": "اپنا ای میل ایڈریس درج کریں",
+  "pleaseEnterEmailError": "براہ کرم اپنا ای میل ایڈریس درج کریں",
+  "pleaseEnterValidEmailError": "براہ کرم ایک درست ای میل ایڈریس درج کریں",
+  "pleaseEnterPhoneError": "براہ کرم اپنا فون نمبر درج کریں",
+  "updatingButtonLabel": "اپ ڈیٹ ہو رہا ہے...",
+  "updateProfileButtonLabel": "پروفائل اپ ڈیٹ کریں"
 }

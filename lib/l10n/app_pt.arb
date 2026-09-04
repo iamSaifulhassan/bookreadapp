@@ -116,5 +116,20 @@
   "userTypeFieldHint": "Digite o tipo de usuário",
   "editProfileButton": "Editar Perfil",
   "signOutButton": "Sair",
-  "signOutConfirmMessage": "Tem certeza de que deseja sair?"
+  "signOutConfirmMessage": "Tem certeza de que deseja sair?",
+
+  "tapToChangePhoto": "Toque para alterar a foto de perfil",
+  "profileImageSavedMessage": "Imagem de perfil salva com sucesso!",
+  "failedToSaveImageMessage": "Falha ao salvar a imagem. Tente novamente.",
+  "failedToPickImageMessage": "Falha ao selecionar a imagem. Tente novamente.",
+  "profileUpdatedMessage": "Perfil atualizado com sucesso!",
+  "failedToUpdateProfileMessage": "Falha ao atualizar o perfil. Tente novamente.",
+  "genericErrorMessage": "Erro: {error}",
+  "emailAddressSectionLabel": "Endereço de E-mail",
+  "emailAddressHint": "Digite seu endereço de e-mail",
+  "pleaseEnterEmailError": "Digite seu endereço de e-mail",
+  "pleaseEnterValidEmailError": "Digite um endereço de e-mail válido",
+  "pleaseEnterPhoneError": "Digite seu número de telefone",
+  "updatingButtonLabel": "Atualizando...",
+  "updateProfileButtonLabel": "Atualizar Perfil"
 }

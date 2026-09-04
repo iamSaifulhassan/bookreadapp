@@ -116,5 +116,20 @@
   "userTypeFieldHint": "Entrez le type d'utilisateur",
   "editProfileButton": "Modifier le Profil",
   "signOutButton": "Déconnexion",
-  "signOutConfirmMessage": "Voulez-vous vraiment vous déconnecter ?"
+  "signOutConfirmMessage": "Voulez-vous vraiment vous déconnecter ?",
+
+  "tapToChangePhoto": "Appuyez pour changer la photo de profil",
+  "profileImageSavedMessage": "Image de profil enregistrée avec succès !",
+  "failedToSaveImageMessage": "Échec de l'enregistrement de l'image. Réessayez.",
+  "failedToPickImageMessage": "Échec de la sélection de l'image. Réessayez.",
+  "profileUpdatedMessage": "Profil mis à jour avec succès !",
+  "failedToUpdateProfileMessage": "Échec de la mise à jour du profil. Réessayez.",
+  "genericErrorMessage": "Erreur : {error}",
+  "emailAddressSectionLabel": "Adresse e-mail",
+  "emailAddressHint": "Entrez votre adresse e-mail",
+  "pleaseEnterEmailError": "Veuillez entrer votre adresse e-mail",
+  "pleaseEnterValidEmailError": "Veuillez entrer une adresse e-mail valide",
+  "pleaseEnterPhoneError": "Veuillez entrer votre numéro de téléphone",
+  "updatingButtonLabel": "Mise à jour...",
+  "updateProfileButtonLabel": "Mettre à jour le profil"
 }

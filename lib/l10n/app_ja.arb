@@ -116,5 +116,20 @@
   "userTypeFieldHint": "ユーザータイプを入力してください",
   "editProfileButton": "プロフィールを編集",
   "signOutButton": "サインアウト",
-  "signOutConfirmMessage": "本当にサインアウトしますか？"
+  "signOutConfirmMessage": "本当にサインアウトしますか？",
+
+  "tapToChangePhoto": "タップしてプロフィール写真を変更",
+  "profileImageSavedMessage": "プロフィール画像を保存しました！",
+  "failedToSaveImageMessage": "画像の保存に失敗しました。もう一度お試しください。",
+  "failedToPickImageMessage": "画像の選択に失敗しました。もう一度お試しください。",
+  "profileUpdatedMessage": "プロフィールを更新しました！",
+  "failedToUpdateProfileMessage": "プロフィールの更新に失敗しました。もう一度お試しください。",
+  "genericErrorMessage": "エラー: {error}",
+  "emailAddressSectionLabel": "メールアドレス",
+  "emailAddressHint": "メールアドレスを入力してください",
+  "pleaseEnterEmailError": "メールアドレスを入力してください",
+  "pleaseEnterValidEmailError": "有効なメールアドレスを入力してください",
+  "pleaseEnterPhoneError": "電話番号を入力してください",
+  "updatingButtonLabel": "更新中...",
+  "updateProfileButtonLabel": "プロフィールを更新"
 }

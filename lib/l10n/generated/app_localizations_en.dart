@@ -355,4 +355,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signOutConfirmMessage => 'Are you sure you want to sign out?';
+
+  @override
+  String get tapToChangePhoto => 'Tap to change profile picture';
+
+  @override
+  String get profileImageSavedMessage => 'Profile image saved successfully!';
+
+  @override
+  String get failedToSaveImageMessage =>
+      'Failed to save image. Please try again.';
+
+  @override
+  String get failedToPickImageMessage =>
+      'Failed to pick image. Please try again.';
+
+  @override
+  String get profileUpdatedMessage => 'Profile updated successfully!';
+
+  @override
+  String get failedToUpdateProfileMessage =>
+      'Failed to update profile. Please try again.';
+
+  @override
+  String genericErrorMessage(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get emailAddressSectionLabel => 'Email Address';
+
+  @override
+  String get emailAddressHint => 'Enter your email address';
+
+  @override
+  String get pleaseEnterEmailError => 'Please enter your email address';
+
+  @override
+  String get pleaseEnterValidEmailError => 'Please enter a valid email address';
+
+  @override
+  String get pleaseEnterPhoneError => 'Please enter your phone number';
+
+  @override
+  String get updatingButtonLabel => 'Updating...';
+
+  @override
+  String get updateProfileButtonLabel => 'Update Profile';
 }

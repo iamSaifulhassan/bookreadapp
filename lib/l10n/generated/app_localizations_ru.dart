@@ -359,4 +359,54 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get signOutConfirmMessage => 'Вы уверены, что хотите выйти?';
+
+  @override
+  String get tapToChangePhoto => 'Нажмите, чтобы изменить фото профиля';
+
+  @override
+  String get profileImageSavedMessage =>
+      'Изображение профиля успешно сохранено!';
+
+  @override
+  String get failedToSaveImageMessage =>
+      'Не удалось сохранить изображение. Попробуйте снова.';
+
+  @override
+  String get failedToPickImageMessage =>
+      'Не удалось выбрать изображение. Попробуйте снова.';
+
+  @override
+  String get profileUpdatedMessage => 'Профиль успешно обновлён!';
+
+  @override
+  String get failedToUpdateProfileMessage =>
+      'Не удалось обновить профиль. Попробуйте снова.';
+
+  @override
+  String genericErrorMessage(String error) {
+    return 'Ошибка: $error';
+  }
+
+  @override
+  String get emailAddressSectionLabel => 'Адрес электронной почты';
+
+  @override
+  String get emailAddressHint => 'Введите адрес электронной почты';
+
+  @override
+  String get pleaseEnterEmailError =>
+      'Пожалуйста, введите адрес электронной почты';
+
+  @override
+  String get pleaseEnterValidEmailError =>
+      'Пожалуйста, введите действительный адрес электронной почты';
+
+  @override
+  String get pleaseEnterPhoneError => 'Пожалуйста, введите номер телефона';
+
+  @override
+  String get updatingButtonLabel => 'Обновление...';
+
+  @override
+  String get updateProfileButtonLabel => 'Обновить профиль';
 }
