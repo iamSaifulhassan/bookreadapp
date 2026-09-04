@@ -24,7 +24,12 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     if (result.success) {
       emit(SignupSuccess());
     } else {
-      emit(SignupFailure(result.message ?? 'Sign-up failed. Try again.'));
+      emit(
+        SignupFailure(
+          result.message ?? 'Sign-up failed. Try again.',
+          errorCode: result.errorCode,
+        ),
+      );
     }
   }
 }

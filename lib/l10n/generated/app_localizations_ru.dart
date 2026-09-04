@@ -155,4 +155,134 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => 'Файл уже существует';
+
+  @override
+  String get signInTitle => 'Вход';
+
+  @override
+  String get emailLabel => 'Электронная почта';
+
+  @override
+  String get emailHint => 'Введите свою электронную почту';
+
+  @override
+  String get emailRequiredError => 'Требуется электронная почта';
+
+  @override
+  String get passwordLabel => 'Пароль';
+
+  @override
+  String get passwordHint => 'Введите свой пароль';
+
+  @override
+  String get passwordRequiredError => 'Требуется пароль';
+
+  @override
+  String get signInButton => 'Войти';
+
+  @override
+  String get signInSuccessMessage => 'Вход выполнен успешно!';
+
+  @override
+  String get signInWithGoogleButton => 'Войти через Google';
+
+  @override
+  String get googleSignInSuccessMessage =>
+      'Вход через Google выполнен успешно!';
+
+  @override
+  String get googleSignInFailedMessage => 'Не удалось войти через Google.';
+
+  @override
+  String get noAccountSignUpPrompt => 'Нет аккаунта? Зарегистрироваться';
+
+  @override
+  String get commonOther => 'Другое';
+
+  @override
+  String get phoneNumberLabel => 'Номер телефона';
+
+  @override
+  String get phoneNumberHint => 'Введите свой номер телефона';
+
+  @override
+  String get phoneRequiredError => 'Требуется номер телефона';
+
+  @override
+  String get invalidPhoneError => 'Введите действительный номер телефона';
+
+  @override
+  String get invalidEmailError =>
+      'Введите действительный адрес электронной почты';
+
+  @override
+  String get emailAlreadyExistsFieldError =>
+      'Эта электронная почта уже используется.';
+
+  @override
+  String get countryLabel => 'Страна';
+
+  @override
+  String get selectCountryHint => 'Выберите свою страну';
+
+  @override
+  String get countryPakistan => 'Пакистан';
+
+  @override
+  String get countryIndia => 'Индия';
+
+  @override
+  String get countryUnitedStates => 'США';
+
+  @override
+  String get countryUnitedKingdom => 'Великобритания';
+
+  @override
+  String get countryCanada => 'Канада';
+
+  @override
+  String get countryAustralia => 'Австралия';
+
+  @override
+  String get confirmPasswordLabel => 'Подтвердите пароль';
+
+  @override
+  String get confirmPasswordHint => 'Введите пароль ещё раз';
+
+  @override
+  String get confirmPasswordRequiredError => 'Требуется подтверждение пароля';
+
+  @override
+  String get passwordsDoNotMatchError => 'Пароли не совпадают';
+
+  @override
+  String get passwordTooShortError =>
+      'Пароль должен содержать не менее 6 символов';
+
+  @override
+  String get userTypeLabel => 'Я...';
+
+  @override
+  String get selectUserTypeHint => 'Выберите тип пользователя';
+
+  @override
+  String get userTypeStudent => 'Студент';
+
+  @override
+  String get userTypeTeacher => 'Преподаватель';
+
+  @override
+  String get userTypeProfessional => 'Специалист';
+
+  @override
+  String get userTypeResearcher => 'Исследователь';
+
+  @override
+  String get signUpButton => 'Зарегистрироваться';
+
+  @override
+  String get signUpSuccessMessage => 'Регистрация прошла успешно!';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt => 'Уже есть аккаунт? Войти';
 }

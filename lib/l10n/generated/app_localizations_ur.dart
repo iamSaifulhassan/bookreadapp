@@ -154,4 +154,131 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => 'فائل پہلے سے موجود ہے';
+
+  @override
+  String get signInTitle => 'سائن ان کریں';
+
+  @override
+  String get emailLabel => 'ای میل';
+
+  @override
+  String get emailHint => 'اپنا ای میل درج کریں';
+
+  @override
+  String get emailRequiredError => 'ای میل درکار ہے';
+
+  @override
+  String get passwordLabel => 'پاس ورڈ';
+
+  @override
+  String get passwordHint => 'اپنا پاس ورڈ درج کریں';
+
+  @override
+  String get passwordRequiredError => 'پاس ورڈ درکار ہے';
+
+  @override
+  String get signInButton => 'سائن ان کریں';
+
+  @override
+  String get signInSuccessMessage => 'سائن ان کامیاب رہا!';
+
+  @override
+  String get signInWithGoogleButton => 'Google کے ساتھ سائن ان کریں';
+
+  @override
+  String get googleSignInSuccessMessage => 'Google سائن ان کامیاب رہا!';
+
+  @override
+  String get googleSignInFailedMessage => 'Google سائن ان ناکام رہا۔';
+
+  @override
+  String get noAccountSignUpPrompt => 'اکاؤنٹ نہیں ہے؟ سائن اپ کریں';
+
+  @override
+  String get commonOther => 'دیگر';
+
+  @override
+  String get phoneNumberLabel => 'فون نمبر';
+
+  @override
+  String get phoneNumberHint => 'اپنا فون نمبر درج کریں';
+
+  @override
+  String get phoneRequiredError => 'فون نمبر درکار ہے';
+
+  @override
+  String get invalidPhoneError => 'ایک درست فون نمبر درج کریں';
+
+  @override
+  String get invalidEmailError => 'ایک درست ای میل ایڈریس درج کریں';
+
+  @override
+  String get emailAlreadyExistsFieldError => 'یہ ای میل پہلے سے موجود ہے۔';
+
+  @override
+  String get countryLabel => 'ملک';
+
+  @override
+  String get selectCountryHint => 'اپنا ملک منتخب کریں';
+
+  @override
+  String get countryPakistan => 'پاکستان';
+
+  @override
+  String get countryIndia => 'بھارت';
+
+  @override
+  String get countryUnitedStates => 'ریاستہائے متحدہ';
+
+  @override
+  String get countryUnitedKingdom => 'برطانیہ';
+
+  @override
+  String get countryCanada => 'کینیڈا';
+
+  @override
+  String get countryAustralia => 'آسٹریلیا';
+
+  @override
+  String get confirmPasswordLabel => 'پاس ورڈ کی تصدیق کریں';
+
+  @override
+  String get confirmPasswordHint => 'اپنا پاس ورڈ دوبارہ درج کریں';
+
+  @override
+  String get confirmPasswordRequiredError => 'پاس ورڈ کی تصدیق درکار ہے';
+
+  @override
+  String get passwordsDoNotMatchError => 'پاس ورڈز مماثل نہیں ہیں';
+
+  @override
+  String get passwordTooShortError => 'پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے';
+
+  @override
+  String get userTypeLabel => 'میں ہوں...';
+
+  @override
+  String get selectUserTypeHint => 'اپنی صارف قسم منتخب کریں';
+
+  @override
+  String get userTypeStudent => 'طالب علم';
+
+  @override
+  String get userTypeTeacher => 'استاد';
+
+  @override
+  String get userTypeProfessional => 'پیشہ ور';
+
+  @override
+  String get userTypeResearcher => 'محقق';
+
+  @override
+  String get signUpButton => 'سائن اپ کریں';
+
+  @override
+  String get signUpSuccessMessage => 'سائن اپ کامیاب رہا!';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt =>
+      'پہلے سے اکاؤنٹ ہے؟ سائن ان کریں';
 }

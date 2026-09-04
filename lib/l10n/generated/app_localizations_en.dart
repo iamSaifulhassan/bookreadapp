@@ -154,4 +154,131 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => 'File already exists';
+
+  @override
+  String get signInTitle => 'Sign In';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get emailHint => 'Enter your email';
+
+  @override
+  String get emailRequiredError => 'Email is required';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get passwordHint => 'Enter your password';
+
+  @override
+  String get passwordRequiredError => 'Password is required';
+
+  @override
+  String get signInButton => 'Sign In';
+
+  @override
+  String get signInSuccessMessage => 'Sign-in successful!';
+
+  @override
+  String get signInWithGoogleButton => 'Sign in with Google';
+
+  @override
+  String get googleSignInSuccessMessage => 'Google sign-in successful!';
+
+  @override
+  String get googleSignInFailedMessage => 'Google sign-in failed.';
+
+  @override
+  String get noAccountSignUpPrompt => 'Don’t have an account? Sign Up';
+
+  @override
+  String get commonOther => 'Other';
+
+  @override
+  String get phoneNumberLabel => 'Phone Number';
+
+  @override
+  String get phoneNumberHint => 'Enter your phone number';
+
+  @override
+  String get phoneRequiredError => 'Phone number is required';
+
+  @override
+  String get invalidPhoneError => 'Enter a valid phone number';
+
+  @override
+  String get invalidEmailError => 'Enter a valid email address';
+
+  @override
+  String get emailAlreadyExistsFieldError => 'Email already exists.';
+
+  @override
+  String get countryLabel => 'Country';
+
+  @override
+  String get selectCountryHint => 'Select your country';
+
+  @override
+  String get countryPakistan => 'Pakistan';
+
+  @override
+  String get countryIndia => 'India';
+
+  @override
+  String get countryUnitedStates => 'United States';
+
+  @override
+  String get countryUnitedKingdom => 'United Kingdom';
+
+  @override
+  String get countryCanada => 'Canada';
+
+  @override
+  String get countryAustralia => 'Australia';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get confirmPasswordHint => 'Re-enter your password';
+
+  @override
+  String get confirmPasswordRequiredError => 'Confirm Password is required';
+
+  @override
+  String get passwordsDoNotMatchError => 'Passwords do not match';
+
+  @override
+  String get passwordTooShortError => 'Password must be at least 6 characters';
+
+  @override
+  String get userTypeLabel => 'I am a...';
+
+  @override
+  String get selectUserTypeHint => 'Select User type';
+
+  @override
+  String get userTypeStudent => 'Student';
+
+  @override
+  String get userTypeTeacher => 'Teacher';
+
+  @override
+  String get userTypeProfessional => 'Professional';
+
+  @override
+  String get userTypeResearcher => 'Researcher';
+
+  @override
+  String get signUpButton => 'Sign Up';
+
+  @override
+  String get signUpSuccessMessage => 'Sign-up successful!';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt =>
+      'Already have an account? Sign In';
 }

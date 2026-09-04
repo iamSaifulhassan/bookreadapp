@@ -153,4 +153,130 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => 'ファイルは既に存在します';
+
+  @override
+  String get signInTitle => 'サインイン';
+
+  @override
+  String get emailLabel => 'メールアドレス';
+
+  @override
+  String get emailHint => 'メールアドレスを入力してください';
+
+  @override
+  String get emailRequiredError => 'メールアドレスは必須です';
+
+  @override
+  String get passwordLabel => 'パスワード';
+
+  @override
+  String get passwordHint => 'パスワードを入力してください';
+
+  @override
+  String get passwordRequiredError => 'パスワードは必須です';
+
+  @override
+  String get signInButton => 'サインイン';
+
+  @override
+  String get signInSuccessMessage => 'サインインに成功しました！';
+
+  @override
+  String get signInWithGoogleButton => 'Googleでサインイン';
+
+  @override
+  String get googleSignInSuccessMessage => 'Googleサインインに成功しました！';
+
+  @override
+  String get googleSignInFailedMessage => 'Googleサインインに失敗しました。';
+
+  @override
+  String get noAccountSignUpPrompt => 'アカウントをお持ちでないですか？新規登録';
+
+  @override
+  String get commonOther => 'その他';
+
+  @override
+  String get phoneNumberLabel => '電話番号';
+
+  @override
+  String get phoneNumberHint => '電話番号を入力してください';
+
+  @override
+  String get phoneRequiredError => '電話番号は必須です';
+
+  @override
+  String get invalidPhoneError => '有効な電話番号を入力してください';
+
+  @override
+  String get invalidEmailError => '有効なメールアドレスを入力してください';
+
+  @override
+  String get emailAlreadyExistsFieldError => 'このメールアドレスは既に登録されています。';
+
+  @override
+  String get countryLabel => '国';
+
+  @override
+  String get selectCountryHint => '国を選択してください';
+
+  @override
+  String get countryPakistan => 'パキスタン';
+
+  @override
+  String get countryIndia => 'インド';
+
+  @override
+  String get countryUnitedStates => 'アメリカ合衆国';
+
+  @override
+  String get countryUnitedKingdom => 'イギリス';
+
+  @override
+  String get countryCanada => 'カナダ';
+
+  @override
+  String get countryAustralia => 'オーストラリア';
+
+  @override
+  String get confirmPasswordLabel => 'パスワードの確認';
+
+  @override
+  String get confirmPasswordHint => 'パスワードを再入力してください';
+
+  @override
+  String get confirmPasswordRequiredError => 'パスワードの確認は必須です';
+
+  @override
+  String get passwordsDoNotMatchError => 'パスワードが一致しません';
+
+  @override
+  String get passwordTooShortError => 'パスワードは6文字以上で入力してください';
+
+  @override
+  String get userTypeLabel => '私は...';
+
+  @override
+  String get selectUserTypeHint => 'ユーザータイプを選択してください';
+
+  @override
+  String get userTypeStudent => '学生';
+
+  @override
+  String get userTypeTeacher => '教師';
+
+  @override
+  String get userTypeProfessional => '社会人';
+
+  @override
+  String get userTypeResearcher => '研究者';
+
+  @override
+  String get signUpButton => '新規登録';
+
+  @override
+  String get signUpSuccessMessage => '登録に成功しました！';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt => '既にアカウントをお持ちですか？サインイン';
 }

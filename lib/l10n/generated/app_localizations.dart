@@ -393,6 +393,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'File already exists'**
   String get fileAlreadyExistsMessage;
+
+  /// No description provided for @signInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signInTitle;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @emailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get emailHint;
+
+  /// No description provided for @emailRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequiredError;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get passwordHint;
+
+  /// No description provided for @passwordRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequiredError;
+
+  /// No description provided for @signInButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signInButton;
+
+  /// No description provided for @signInSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in successful!'**
+  String get signInSuccessMessage;
+
+  /// No description provided for @signInWithGoogleButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google'**
+  String get signInWithGoogleButton;
+
+  /// No description provided for @googleSignInSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in successful!'**
+  String get googleSignInSuccessMessage;
+
+  /// No description provided for @googleSignInFailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in failed.'**
+  String get googleSignInFailedMessage;
+
+  /// No description provided for @noAccountSignUpPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Don’t have an account? Sign Up'**
+  String get noAccountSignUpPrompt;
+
+  /// No description provided for @commonOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get commonOther;
+
+  /// No description provided for @phoneNumberLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumberLabel;
+
+  /// No description provided for @phoneNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number'**
+  String get phoneNumberHint;
+
+  /// No description provided for @phoneRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number is required'**
+  String get phoneRequiredError;
+
+  /// No description provided for @invalidPhoneError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get invalidPhoneError;
+
+  /// No description provided for @invalidEmailError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address'**
+  String get invalidEmailError;
+
+  /// No description provided for @emailAlreadyExistsFieldError.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already exists.'**
+  String get emailAlreadyExistsFieldError;
+
+  /// No description provided for @countryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get countryLabel;
+
+  /// No description provided for @selectCountryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select your country'**
+  String get selectCountryHint;
+
+  /// No description provided for @countryPakistan.
+  ///
+  /// In en, this message translates to:
+  /// **'Pakistan'**
+  String get countryPakistan;
+
+  /// No description provided for @countryIndia.
+  ///
+  /// In en, this message translates to:
+  /// **'India'**
+  String get countryIndia;
+
+  /// No description provided for @countryUnitedStates.
+  ///
+  /// In en, this message translates to:
+  /// **'United States'**
+  String get countryUnitedStates;
+
+  /// No description provided for @countryUnitedKingdom.
+  ///
+  /// In en, this message translates to:
+  /// **'United Kingdom'**
+  String get countryUnitedKingdom;
+
+  /// No description provided for @countryCanada.
+  ///
+  /// In en, this message translates to:
+  /// **'Canada'**
+  String get countryCanada;
+
+  /// No description provided for @countryAustralia.
+  ///
+  /// In en, this message translates to:
+  /// **'Australia'**
+  String get countryAustralia;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @confirmPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-enter your password'**
+  String get confirmPasswordHint;
+
+  /// No description provided for @confirmPasswordRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password is required'**
+  String get confirmPasswordRequiredError;
+
+  /// No description provided for @passwordsDoNotMatchError.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatchError;
+
+  /// No description provided for @passwordTooShortError.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordTooShortError;
+
+  /// No description provided for @userTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a...'**
+  String get userTypeLabel;
+
+  /// No description provided for @selectUserTypeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select User type'**
+  String get selectUserTypeHint;
+
+  /// No description provided for @userTypeStudent.
+  ///
+  /// In en, this message translates to:
+  /// **'Student'**
+  String get userTypeStudent;
+
+  /// No description provided for @userTypeTeacher.
+  ///
+  /// In en, this message translates to:
+  /// **'Teacher'**
+  String get userTypeTeacher;
+
+  /// No description provided for @userTypeProfessional.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional'**
+  String get userTypeProfessional;
+
+  /// No description provided for @userTypeResearcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Researcher'**
+  String get userTypeResearcher;
+
+  /// No description provided for @signUpButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUpButton;
+
+  /// No description provided for @signUpSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-up successful!'**
+  String get signUpSuccessMessage;
+
+  /// No description provided for @alreadyHaveAccountSignInPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign In'**
+  String get alreadyHaveAccountSignInPrompt;
 }
 
 class _AppLocalizationsDelegate

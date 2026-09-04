@@ -8,5 +8,6 @@ class SignupSuccess extends SignupState {}
 
 class SignupFailure extends SignupState {
   final String message;
-  SignupFailure(this.message);
+  final String? errorCode;
+  SignupFailure(this.message, {this.errorCode});
 }

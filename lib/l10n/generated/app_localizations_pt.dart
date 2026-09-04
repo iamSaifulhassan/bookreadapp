@@ -155,4 +155,133 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => 'O arquivo já existe';
+
+  @override
+  String get signInTitle => 'Entrar';
+
+  @override
+  String get emailLabel => 'E-mail';
+
+  @override
+  String get emailHint => 'Digite seu e-mail';
+
+  @override
+  String get emailRequiredError => 'O e-mail é obrigatório';
+
+  @override
+  String get passwordLabel => 'Senha';
+
+  @override
+  String get passwordHint => 'Digite sua senha';
+
+  @override
+  String get passwordRequiredError => 'A senha é obrigatória';
+
+  @override
+  String get signInButton => 'Entrar';
+
+  @override
+  String get signInSuccessMessage => 'Login realizado com sucesso!';
+
+  @override
+  String get signInWithGoogleButton => 'Entrar com o Google';
+
+  @override
+  String get googleSignInSuccessMessage =>
+      'Login com Google realizado com sucesso!';
+
+  @override
+  String get googleSignInFailedMessage => 'Falha ao entrar com o Google.';
+
+  @override
+  String get noAccountSignUpPrompt => 'Não tem uma conta? Cadastre-se';
+
+  @override
+  String get commonOther => 'Outro';
+
+  @override
+  String get phoneNumberLabel => 'Número de telefone';
+
+  @override
+  String get phoneNumberHint => 'Digite seu número de telefone';
+
+  @override
+  String get phoneRequiredError => 'O número de telefone é obrigatório';
+
+  @override
+  String get invalidPhoneError => 'Digite um número de telefone válido';
+
+  @override
+  String get invalidEmailError => 'Digite um endereço de e-mail válido';
+
+  @override
+  String get emailAlreadyExistsFieldError => 'Este e-mail já existe.';
+
+  @override
+  String get countryLabel => 'País';
+
+  @override
+  String get selectCountryHint => 'Selecione seu país';
+
+  @override
+  String get countryPakistan => 'Paquistão';
+
+  @override
+  String get countryIndia => 'Índia';
+
+  @override
+  String get countryUnitedStates => 'Estados Unidos';
+
+  @override
+  String get countryUnitedKingdom => 'Reino Unido';
+
+  @override
+  String get countryCanada => 'Canadá';
+
+  @override
+  String get countryAustralia => 'Austrália';
+
+  @override
+  String get confirmPasswordLabel => 'Confirmar Senha';
+
+  @override
+  String get confirmPasswordHint => 'Digite a senha novamente';
+
+  @override
+  String get confirmPasswordRequiredError =>
+      'A confirmação de senha é obrigatória';
+
+  @override
+  String get passwordsDoNotMatchError => 'As senhas não coincidem';
+
+  @override
+  String get passwordTooShortError =>
+      'A senha deve ter pelo menos 6 caracteres';
+
+  @override
+  String get userTypeLabel => 'Eu sou...';
+
+  @override
+  String get selectUserTypeHint => 'Selecione seu tipo de usuário';
+
+  @override
+  String get userTypeStudent => 'Estudante';
+
+  @override
+  String get userTypeTeacher => 'Professor';
+
+  @override
+  String get userTypeProfessional => 'Profissional';
+
+  @override
+  String get userTypeResearcher => 'Pesquisador';
+
+  @override
+  String get signUpButton => 'Cadastrar';
+
+  @override
+  String get signUpSuccessMessage => 'Cadastro realizado com sucesso!';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt => 'Já tem uma conta? Entrar';
 }

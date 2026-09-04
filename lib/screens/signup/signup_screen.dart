@@ -7,6 +7,7 @@ import '../../repositories/user_repository.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_dropdown.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 // This is the new BLoC-based sign-up screen. Use CustomTextField, CustomDropdown, and CustomButton from lib/widgets/ for all input and actions.
 // You can use this file as a template for other forms/screens in your app.
@@ -61,6 +62,7 @@ class _SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
@@ -94,15 +96,15 @@ class _SignupFormState extends State<SignupForm> {
                           const SizedBox(height: 16.0),
                           CustomTextField(
                             controller: _emailController,
-                            label: 'Email',
-                            hint: 'Enter your email address',
+                            label: l10n.emailLabel,
+                            hint: l10n.emailHint,
                             icon: Icons.email,
                             validator: (value) {
                               const emailRegex = r'^[^@\s]+@[^@\s]+\.[^@\s]+$';
                               if (value == null || value.isEmpty) {
-                                return 'Email is required';
+                                return l10n.emailRequiredError;
                               } else if (!RegExp(emailRegex).hasMatch(value)) {
-                                return 'Enter a valid email address';
+                                return l10n.invalidEmailError;
                               } else if (_emailError != null) {
                                 return _emailError;
                               }
@@ -113,15 +115,15 @@ class _SignupFormState extends State<SignupForm> {
                           const SizedBox(height: 16),
                           CustomTextField(
                             controller: _phoneController,
-                            label: 'Phone Number',
-                            hint: 'Enter your phone number',
+                            label: l10n.phoneNumberLabel,
+                            hint: l10n.phoneNumberHint,
                             icon: Icons.phone,
                             validator: (value) {
                               const phoneRegex = r'^\+?[0-9]{7,15}$';
                               if (value == null || value.isEmpty) {
-                                return 'Phone number is required';
+                                return l10n.phoneRequiredError;
                               } else if (!RegExp(phoneRegex).hasMatch(value)) {
-                                return 'Enter a valid phone number';
+                                return l10n.invalidPhoneError;
                               }
                               return null;
                             },
@@ -129,40 +131,39 @@ class _SignupFormState extends State<SignupForm> {
                           ),
                           const SizedBox(height: 16),
                           CustomDropdown<String>(
-                            label: 'Country',
+                            label: l10n.countryLabel,
                             value: _selectedCountry,
                             onChanged:
                                 (value) =>
                                     setState(() => _selectedCountry = value),
                             items: [
                               ...[
-                                // Add your country list here
-                                'Pakistan',
-                                'India',
-                                'United States',
-                                'United Kingdom',
-                                'Canada',
-                                'Australia',
-                                'Other',
+                                l10n.countryPakistan,
+                                l10n.countryIndia,
+                                l10n.countryUnitedStates,
+                                l10n.countryUnitedKingdom,
+                                l10n.countryCanada,
+                                l10n.countryAustralia,
+                                l10n.commonOther,
                               ].map(
                                 (c) =>
                                     DropdownMenuItem(value: c, child: Text(c)),
                               ),
                             ],
-                            hint: 'Select your country',
+                            hint: l10n.selectCountryHint,
                           ),
                           const SizedBox(height: 16),
                           CustomTextField(
                             controller: _passwordController,
-                            label: 'Password',
-                            hint: 'Enter your password',
+                            label: l10n.passwordLabel,
+                            hint: l10n.passwordHint,
                             icon: Icons.lock,
                             isObscure: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Password is required';
+                                return l10n.passwordRequiredError;
                               } else if (value.length < 6) {
-                                return 'Password must be at least 6 characters';
+                                return l10n.passwordTooShortError;
                               } else if (_passwordError != null) {
                                 return _passwordError;
                               }
@@ -172,74 +173,70 @@ class _SignupFormState extends State<SignupForm> {
                           const SizedBox(height: 16),
                           CustomTextField(
                             controller: _confirmPasswordController,
-                            label: 'Confirm Password',
-                            hint: 'Re-enter your password',
+                            label: l10n.confirmPasswordLabel,
+                            hint: l10n.confirmPasswordHint,
                             icon: Icons.lock_outline,
                             isObscure: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Confirm Password is required';
+                                return l10n.confirmPasswordRequiredError;
                               } else if (value != _passwordController.text) {
-                                return 'Passwords do not match';
+                                return l10n.passwordsDoNotMatchError;
                               }
                               return null;
                             },
                           ),
                           const SizedBox(height: 16),
                           CustomDropdown<String>(
-                            label: 'I am a...',
+                            label: l10n.userTypeLabel,
                             value: _userType,
                             onChanged:
                                 (value) => setState(() => _userType = value),
-                            items: const [
+                            items: [
                               DropdownMenuItem(
                                 value: 'Student',
-                                child: Text('Student'),
+                                child: Text(l10n.userTypeStudent),
                               ),
                               DropdownMenuItem(
                                 value: 'Teacher',
-                                child: Text('Teacher'),
+                                child: Text(l10n.userTypeTeacher),
                               ),
                               DropdownMenuItem(
                                 value: 'Professional',
-                                child: Text('Professional'),
+                                child: Text(l10n.userTypeProfessional),
                               ),
                               DropdownMenuItem(
                                 value: 'Researcher',
-                                child: Text('Researcher'),
+                                child: Text(l10n.userTypeResearcher),
                               ),
                               DropdownMenuItem(
                                 value: 'Other',
-                                child: Text('Other'),
+                                child: Text(l10n.commonOther),
                               ),
                             ],
-                            hint: 'Select User type',
+                            hint: l10n.selectUserTypeHint,
                           ),
                           const SizedBox(height: 24),
                           BlocConsumer<SignupBloc, SignupState>(
                             listener: (context, state) {
                               if (state is SignupFailure) {
-                                if (state.message.contains(
-                                  'Email already exists',
-                                )) {
+                                if (state.errorCode == 'email-already-in-use') {
                                   _setFieldError(
-                                    email: 'Email already exists.',
+                                    email: l10n.emailAlreadyExistsFieldError,
                                   );
                                   _formKey.currentState!.validate();
-                                } else if (state.message.contains(
-                                  'valid email',
-                                )) {
+                                } else if (state.errorCode == 'invalid-email') {
                                   _setFieldError(email: state.message);
                                   _formKey.currentState!.validate();
-                                } else if (state.message.contains('Password')) {
+                                } else if (state.errorCode == 'weak-password') {
                                   _setFieldError(password: state.message);
                                   _formKey.currentState!.validate();
                                 }
                               } else if (state is SignupSuccess) {
                                 _setFieldError(email: null, password: null);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Sign-up successful!'),
+                                  SnackBar(
+                                    content: Text(l10n.signUpSuccessMessage),
                                   ),
                                 );
                                 Navigator.pushNamed(context, '/signin');
@@ -265,9 +262,9 @@ class _SignupFormState extends State<SignupForm> {
                                     );
                                   }
                                 },
-                                child: const Text(
-                                  'Sign Up',
-                                  style: TextStyle(fontSize: 16),
+                                child: Text(
+                                  l10n.signUpButton,
+                                  style: const TextStyle(fontSize: 16),
                                 ),
                               );
                             },
@@ -278,9 +275,9 @@ class _SignupFormState extends State<SignupForm> {
                               onTap: () {
                                 Navigator.pushNamed(context, '/signin');
                               },
-                              child: const Text(
-                                'Already have an account? Sign In',
-                                style: TextStyle(
+                              child: Text(
+                                l10n.alreadyHaveAccountSignInPrompt,
+                                style: const TextStyle(
                                   color: Colors.blueAccent,
                                   fontSize: 14.0,
                                   decoration: TextDecoration.underline,

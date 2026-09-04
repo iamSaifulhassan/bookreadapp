@@ -151,4 +151,130 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => '文件已存在';
+
+  @override
+  String get signInTitle => '登录';
+
+  @override
+  String get emailLabel => '电子邮箱';
+
+  @override
+  String get emailHint => '请输入您的电子邮箱';
+
+  @override
+  String get emailRequiredError => '电子邮箱为必填项';
+
+  @override
+  String get passwordLabel => '密码';
+
+  @override
+  String get passwordHint => '请输入您的密码';
+
+  @override
+  String get passwordRequiredError => '密码为必填项';
+
+  @override
+  String get signInButton => '登录';
+
+  @override
+  String get signInSuccessMessage => '登录成功！';
+
+  @override
+  String get signInWithGoogleButton => '使用 Google 登录';
+
+  @override
+  String get googleSignInSuccessMessage => 'Google 登录成功！';
+
+  @override
+  String get googleSignInFailedMessage => 'Google 登录失败。';
+
+  @override
+  String get noAccountSignUpPrompt => '还没有账户？立即注册';
+
+  @override
+  String get commonOther => '其他';
+
+  @override
+  String get phoneNumberLabel => '电话号码';
+
+  @override
+  String get phoneNumberHint => '请输入您的电话号码';
+
+  @override
+  String get phoneRequiredError => '电话号码为必填项';
+
+  @override
+  String get invalidPhoneError => '请输入有效的电话号码';
+
+  @override
+  String get invalidEmailError => '请输入有效的电子邮箱地址';
+
+  @override
+  String get emailAlreadyExistsFieldError => '该电子邮箱已存在。';
+
+  @override
+  String get countryLabel => '国家';
+
+  @override
+  String get selectCountryHint => '选择您的国家';
+
+  @override
+  String get countryPakistan => '巴基斯坦';
+
+  @override
+  String get countryIndia => '印度';
+
+  @override
+  String get countryUnitedStates => '美国';
+
+  @override
+  String get countryUnitedKingdom => '英国';
+
+  @override
+  String get countryCanada => '加拿大';
+
+  @override
+  String get countryAustralia => '澳大利亚';
+
+  @override
+  String get confirmPasswordLabel => '确认密码';
+
+  @override
+  String get confirmPasswordHint => '请再次输入密码';
+
+  @override
+  String get confirmPasswordRequiredError => '确认密码为必填项';
+
+  @override
+  String get passwordsDoNotMatchError => '两次密码不一致';
+
+  @override
+  String get passwordTooShortError => '密码长度至少为 6 个字符';
+
+  @override
+  String get userTypeLabel => '我是...';
+
+  @override
+  String get selectUserTypeHint => '选择您的用户类型';
+
+  @override
+  String get userTypeStudent => '学生';
+
+  @override
+  String get userTypeTeacher => '教师';
+
+  @override
+  String get userTypeProfessional => '专业人士';
+
+  @override
+  String get userTypeResearcher => '研究人员';
+
+  @override
+  String get signUpButton => '注册';
+
+  @override
+  String get signUpSuccessMessage => '注册成功！';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt => '已有账户？立即登录';
 }

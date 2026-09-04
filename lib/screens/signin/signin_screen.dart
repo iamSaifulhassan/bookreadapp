@@ -7,10 +7,7 @@ import '../../blocs/signin/signin_state.dart';
 import '../../repositories/user_repository.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
-
-// This is the new SignIn screen, refactored for BLoC and reusable widgets.
-// TODO: Integrate BLoC and reusable widgets as needed.
-// ...existing code from signin.dart (to be migrated here)...
+import '../../l10n/generated/app_localizations.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
@@ -22,12 +19,13 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (_) => SigninBloc(UserRepository()),
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         appBar: AppBar(
-          title: const Text('Sign In'),
+          title: Text(l10n.signInTitle),
           backgroundColor: colorScheme.primary,
           foregroundColor: colorScheme.onPrimary,
           elevation: 2,
@@ -54,12 +52,12 @@ class SignInScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     CustomTextField(
                       controller: _emailController,
-                      label: 'Email',
-                      hint: 'Enter your email',
+                      label: l10n.emailLabel,
+                      hint: l10n.emailHint,
                       icon: Icons.email,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Email is required';
+                          return l10n.emailRequiredError;
                         }
                         return null;
                       },
@@ -68,12 +66,12 @@ class SignInScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     CustomTextField(
                       controller: _passwordController,
-                      label: 'Password',
-                      hint: 'Enter your password',
+                      label: l10n.passwordLabel,
+                      hint: l10n.passwordHint,
                       icon: Icons.lock,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Password is required';
+                          return l10n.passwordRequiredError;
                         }
                         return null;
                       },
@@ -89,9 +87,7 @@ class SignInScreen extends StatelessWidget {
                           );
                         } else if (state is SigninSuccess) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Sign-in successful!'),
-                            ),
+                            SnackBar(content: Text(l10n.signInSuccessMessage)),
                           );
                           Navigator.pushReplacementNamed(context, '/home');
                         }
@@ -113,7 +109,7 @@ class SignInScreen extends StatelessWidget {
                                   );
                                 }
                               },
-                              child: const Text('Sign In'),
+                              child: Text(l10n.signInButton),
                             ),
                             const SizedBox(height: 16),
                             // Google Sign-In Button
@@ -132,9 +128,9 @@ class SignInScreen extends StatelessWidget {
                                 if (!context.mounted) return;
                                 if (result.success) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
+                                    SnackBar(
                                       content: Text(
-                                        'Google sign-in successful!',
+                                        l10n.googleSignInSuccessMessage,
                                       ),
                                     ),
                                   );
@@ -147,7 +143,7 @@ class SignInScreen extends StatelessWidget {
                                     SnackBar(
                                       content: Text(
                                         result.message ??
-                                            'Google sign-in failed.',
+                                            l10n.googleSignInFailedMessage,
                                       ),
                                     ),
                                   );
@@ -161,7 +157,7 @@ class SignInScreen extends StatelessWidget {
                                     height: 24,
                                   ),
                                   const SizedBox(width: 8),
-                                  const Text('Sign in with Google'),
+                                  Text(l10n.signInWithGoogleButton),
                                 ],
                               ),
                             ),
@@ -178,9 +174,9 @@ class SignInScreen extends StatelessWidget {
                         onTap: () {
                           Navigator.pushNamed(context, '/signup');
                         },
-                        child: const Text(
-                          'Don’t have an account? Sign Up',
-                          style: TextStyle(
+                        child: Text(
+                          l10n.noAccountSignUpPrompt,
+                          style: const TextStyle(
                             color: AppColors.primary,
                             fontSize: 14.0,
                             decoration: TextDecoration.none,

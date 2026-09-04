@@ -155,4 +155,132 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get fileAlreadyExistsMessage => 'الملف موجود بالفعل';
+
+  @override
+  String get signInTitle => 'تسجيل الدخول';
+
+  @override
+  String get emailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get emailHint => 'أدخل بريدك الإلكتروني';
+
+  @override
+  String get emailRequiredError => 'البريد الإلكتروني مطلوب';
+
+  @override
+  String get passwordLabel => 'كلمة المرور';
+
+  @override
+  String get passwordHint => 'أدخل كلمة المرور';
+
+  @override
+  String get passwordRequiredError => 'كلمة المرور مطلوبة';
+
+  @override
+  String get signInButton => 'تسجيل الدخول';
+
+  @override
+  String get signInSuccessMessage => 'تم تسجيل الدخول بنجاح!';
+
+  @override
+  String get signInWithGoogleButton => 'تسجيل الدخول باستخدام جوجل';
+
+  @override
+  String get googleSignInSuccessMessage => 'تم تسجيل الدخول عبر جوجل بنجاح!';
+
+  @override
+  String get googleSignInFailedMessage => 'فشل تسجيل الدخول عبر جوجل.';
+
+  @override
+  String get noAccountSignUpPrompt => 'ليس لديك حساب؟ إنشاء حساب';
+
+  @override
+  String get commonOther => 'أخرى';
+
+  @override
+  String get phoneNumberLabel => 'رقم الهاتف';
+
+  @override
+  String get phoneNumberHint => 'أدخل رقم هاتفك';
+
+  @override
+  String get phoneRequiredError => 'رقم الهاتف مطلوب';
+
+  @override
+  String get invalidPhoneError => 'أدخل رقم هاتف صالح';
+
+  @override
+  String get invalidEmailError => 'أدخل عنوان بريد إلكتروني صالح';
+
+  @override
+  String get emailAlreadyExistsFieldError =>
+      'هذا البريد الإلكتروني موجود بالفعل.';
+
+  @override
+  String get countryLabel => 'الدولة';
+
+  @override
+  String get selectCountryHint => 'اختر دولتك';
+
+  @override
+  String get countryPakistan => 'باكستان';
+
+  @override
+  String get countryIndia => 'الهند';
+
+  @override
+  String get countryUnitedStates => 'الولايات المتحدة';
+
+  @override
+  String get countryUnitedKingdom => 'المملكة المتحدة';
+
+  @override
+  String get countryCanada => 'كندا';
+
+  @override
+  String get countryAustralia => 'أستراليا';
+
+  @override
+  String get confirmPasswordLabel => 'تأكيد كلمة المرور';
+
+  @override
+  String get confirmPasswordHint => 'أعد إدخال كلمة المرور';
+
+  @override
+  String get confirmPasswordRequiredError => 'تأكيد كلمة المرور مطلوب';
+
+  @override
+  String get passwordsDoNotMatchError => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get passwordTooShortError =>
+      'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
+
+  @override
+  String get userTypeLabel => 'أنا...';
+
+  @override
+  String get selectUserTypeHint => 'اختر نوع المستخدم';
+
+  @override
+  String get userTypeStudent => 'طالب';
+
+  @override
+  String get userTypeTeacher => 'معلم';
+
+  @override
+  String get userTypeProfessional => 'محترف';
+
+  @override
+  String get userTypeResearcher => 'باحث';
+
+  @override
+  String get signUpButton => 'إنشاء حساب';
+
+  @override
+  String get signUpSuccessMessage => 'تم إنشاء الحساب بنجاح!';
+
+  @override
+  String get alreadyHaveAccountSignInPrompt => 'لديك حساب بالفعل؟ تسجيل الدخول';
 }
