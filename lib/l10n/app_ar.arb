@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "يرجى إدخال عنوان بريد إلكتروني صالح",
   "pleaseEnterPhoneError": "يرجى إدخال رقم هاتفك",
   "updatingButtonLabel": "جارٍ التحديث...",
-  "updateProfileButtonLabel": "تحديث الملف الشخصي"
+  "updateProfileButtonLabel": "تحديث الملف الشخصي",
+
+  "downloadsTitle": "التنزيلات",
+  "noDownloadsFound": "لم يتم العثور على تنزيلات",
+  "errorLoadingDownloads": "خطأ أثناء تحميل التنزيلات: {error}",
+
+  "favouritesTitle": "المفضلة",
+  "listViewTooltip": "عرض القائمة",
+  "gridViewTooltip": "عرض الشبكة",
+  "noFavouriteBooksYet": "لا توجد كتب مفضلة بعد",
+  "addBooksToFavouritesHint": "أضف كتبًا إلى المفضلة من شاشة كتبي"
 }

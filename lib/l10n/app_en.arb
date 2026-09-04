@@ -153,5 +153,18 @@
   "pleaseEnterValidEmailError": "Please enter a valid email address",
   "pleaseEnterPhoneError": "Please enter your phone number",
   "updatingButtonLabel": "Updating...",
-  "updateProfileButtonLabel": "Update Profile"
+  "updateProfileButtonLabel": "Update Profile",
+
+  "downloadsTitle": "Downloads",
+  "noDownloadsFound": "No downloads found",
+  "errorLoadingDownloads": "Error loading downloads: {error}",
+  "@errorLoadingDownloads": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+
+  "favouritesTitle": "Favourites",
+  "listViewTooltip": "List View",
+  "gridViewTooltip": "Grid View",
+  "noFavouriteBooksYet": "No favourite books yet",
+  "addBooksToFavouritesHint": "Add books to favourites from the My Books screen"
 }

@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "कृपया एक मान्य ईमेल पता दर्ज करें",
   "pleaseEnterPhoneError": "कृपया अपना फ़ोन नंबर दर्ज करें",
   "updatingButtonLabel": "अपडेट हो रहा है...",
-  "updateProfileButtonLabel": "प्रोफ़ाइल अपडेट करें"
+  "updateProfileButtonLabel": "प्रोफ़ाइल अपडेट करें",
+
+  "downloadsTitle": "डाउनलोड्स",
+  "noDownloadsFound": "कोई डाउनलोड नहीं मिला",
+  "errorLoadingDownloads": "डाउनलोड लोड करने में त्रुटि: {error}",
+
+  "favouritesTitle": "पसंदीदा",
+  "listViewTooltip": "सूची दृश्य",
+  "gridViewTooltip": "ग्रिड दृश्य",
+  "noFavouriteBooksYet": "अभी तक कोई पसंदीदा किताब नहीं",
+  "addBooksToFavouritesHint": "मेरी किताबें स्क्रीन से किताबों को पसंदीदा में जोड़ें"
 }

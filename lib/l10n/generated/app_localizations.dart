@@ -867,6 +867,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Profile'**
   String get updateProfileButtonLabel;
+
+  /// No description provided for @downloadsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloads'**
+  String get downloadsTitle;
+
+  /// No description provided for @noDownloadsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No downloads found'**
+  String get noDownloadsFound;
+
+  /// No description provided for @errorLoadingDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading downloads: {error}'**
+  String errorLoadingDownloads(String error);
+
+  /// No description provided for @favouritesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Favourites'**
+  String get favouritesTitle;
+
+  /// No description provided for @listViewTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'List View'**
+  String get listViewTooltip;
+
+  /// No description provided for @gridViewTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Grid View'**
+  String get gridViewTooltip;
+
+  /// No description provided for @noFavouriteBooksYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No favourite books yet'**
+  String get noFavouriteBooksYet;
+
+  /// No description provided for @addBooksToFavouritesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add books to favourites from the My Books screen'**
+  String get addBooksToFavouritesHint;
 }
 
 class _AppLocalizationsDelegate

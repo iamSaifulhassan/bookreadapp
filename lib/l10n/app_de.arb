@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "Bitte gib eine gültige E-Mail-Adresse ein",
   "pleaseEnterPhoneError": "Bitte gib deine Telefonnummer ein",
   "updatingButtonLabel": "Wird aktualisiert...",
-  "updateProfileButtonLabel": "Profil aktualisieren"
+  "updateProfileButtonLabel": "Profil aktualisieren",
+
+  "downloadsTitle": "Downloads",
+  "noDownloadsFound": "Keine Downloads gefunden",
+  "errorLoadingDownloads": "Fehler beim Laden der Downloads: {error}",
+
+  "favouritesTitle": "Favoriten",
+  "listViewTooltip": "Listenansicht",
+  "gridViewTooltip": "Rasteransicht",
+  "noFavouriteBooksYet": "Noch keine Lieblingsbücher",
+  "addBooksToFavouritesHint": "Füge Bücher über den Bildschirm „Meine Bücher“ zu den Favoriten hinzu"
 }

@@ -394,4 +394,30 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => '更新资料';
+
+  @override
+  String get downloadsTitle => '下载';
+
+  @override
+  String get noDownloadsFound => '未找到下载内容';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return '加载下载内容时出错：$error';
+  }
+
+  @override
+  String get favouritesTitle => '收藏';
+
+  @override
+  String get listViewTooltip => '列表视图';
+
+  @override
+  String get gridViewTooltip => '网格视图';
+
+  @override
+  String get noFavouriteBooksYet => '还没有收藏的图书';
+
+  @override
+  String get addBooksToFavouritesHint => '从我的图书屏幕将图书添加到收藏';
 }

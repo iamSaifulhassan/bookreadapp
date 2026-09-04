@@ -396,4 +396,30 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => 'プロフィールを更新';
+
+  @override
+  String get downloadsTitle => 'ダウンロード';
+
+  @override
+  String get noDownloadsFound => 'ダウンロードが見つかりません';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return 'ダウンロードの読み込み中にエラーが発生しました: $error';
+  }
+
+  @override
+  String get favouritesTitle => 'お気に入り';
+
+  @override
+  String get listViewTooltip => 'リスト表示';
+
+  @override
+  String get gridViewTooltip => 'グリッド表示';
+
+  @override
+  String get noFavouriteBooksYet => 'お気に入りの本はまだありません';
+
+  @override
+  String get addBooksToFavouritesHint => 'マイブック画面から本をお気に入りに追加してください';
 }

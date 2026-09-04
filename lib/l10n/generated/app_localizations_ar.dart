@@ -405,4 +405,30 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => 'تحديث الملف الشخصي';
+
+  @override
+  String get downloadsTitle => 'التنزيلات';
+
+  @override
+  String get noDownloadsFound => 'لم يتم العثور على تنزيلات';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return 'خطأ أثناء تحميل التنزيلات: $error';
+  }
+
+  @override
+  String get favouritesTitle => 'المفضلة';
+
+  @override
+  String get listViewTooltip => 'عرض القائمة';
+
+  @override
+  String get gridViewTooltip => 'عرض الشبكة';
+
+  @override
+  String get noFavouriteBooksYet => 'لا توجد كتب مفضلة بعد';
+
+  @override
+  String get addBooksToFavouritesHint => 'أضف كتبًا إلى المفضلة من شاشة كتبي';
 }

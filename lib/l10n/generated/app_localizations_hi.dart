@@ -402,4 +402,31 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => 'प्रोफ़ाइल अपडेट करें';
+
+  @override
+  String get downloadsTitle => 'डाउनलोड्स';
+
+  @override
+  String get noDownloadsFound => 'कोई डाउनलोड नहीं मिला';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return 'डाउनलोड लोड करने में त्रुटि: $error';
+  }
+
+  @override
+  String get favouritesTitle => 'पसंदीदा';
+
+  @override
+  String get listViewTooltip => 'सूची दृश्य';
+
+  @override
+  String get gridViewTooltip => 'ग्रिड दृश्य';
+
+  @override
+  String get noFavouriteBooksYet => 'अभी तक कोई पसंदीदा किताब नहीं';
+
+  @override
+  String get addBooksToFavouritesHint =>
+      'मेरी किताबें स्क्रीन से किताबों को पसंदीदा में जोड़ें';
 }

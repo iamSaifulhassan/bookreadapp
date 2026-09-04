@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "有効なメールアドレスを入力してください",
   "pleaseEnterPhoneError": "電話番号を入力してください",
   "updatingButtonLabel": "更新中...",
-  "updateProfileButtonLabel": "プロフィールを更新"
+  "updateProfileButtonLabel": "プロフィールを更新",
+
+  "downloadsTitle": "ダウンロード",
+  "noDownloadsFound": "ダウンロードが見つかりません",
+  "errorLoadingDownloads": "ダウンロードの読み込み中にエラーが発生しました: {error}",
+
+  "favouritesTitle": "お気に入り",
+  "listViewTooltip": "リスト表示",
+  "gridViewTooltip": "グリッド表示",
+  "noFavouriteBooksYet": "お気に入りの本はまだありません",
+  "addBooksToFavouritesHint": "マイブック画面から本をお気に入りに追加してください"
 }

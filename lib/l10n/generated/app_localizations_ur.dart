@@ -404,4 +404,31 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => 'پروفائل اپ ڈیٹ کریں';
+
+  @override
+  String get downloadsTitle => 'ڈاؤن لوڈز';
+
+  @override
+  String get noDownloadsFound => 'کوئی ڈاؤن لوڈ نہیں ملا';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return 'ڈاؤن لوڈز لوڈ کرنے میں خرابی: $error';
+  }
+
+  @override
+  String get favouritesTitle => 'پسندیدہ';
+
+  @override
+  String get listViewTooltip => 'فہرست منظر';
+
+  @override
+  String get gridViewTooltip => 'گرڈ منظر';
+
+  @override
+  String get noFavouriteBooksYet => 'ابھی تک کوئی پسندیدہ کتاب نہیں';
+
+  @override
+  String get addBooksToFavouritesHint =>
+      'میری کتابیں اسکرین سے کتابیں پسندیدہ میں شامل کریں';
 }

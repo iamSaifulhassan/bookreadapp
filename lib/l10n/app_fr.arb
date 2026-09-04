@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "Veuillez entrer une adresse e-mail valide",
   "pleaseEnterPhoneError": "Veuillez entrer votre numéro de téléphone",
   "updatingButtonLabel": "Mise à jour...",
-  "updateProfileButtonLabel": "Mettre à jour le profil"
+  "updateProfileButtonLabel": "Mettre à jour le profil",
+
+  "downloadsTitle": "Téléchargements",
+  "noDownloadsFound": "Aucun téléchargement trouvé",
+  "errorLoadingDownloads": "Erreur lors du chargement des téléchargements : {error}",
+
+  "favouritesTitle": "Favoris",
+  "listViewTooltip": "Vue en Liste",
+  "gridViewTooltip": "Vue en Grille",
+  "noFavouriteBooksYet": "Aucun livre favori pour le moment",
+  "addBooksToFavouritesHint": "Ajoutez des livres aux favoris depuis l'écran Mes Livres"
 }

@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "请输入有效的电子邮箱地址",
   "pleaseEnterPhoneError": "请输入您的电话号码",
   "updatingButtonLabel": "正在更新...",
-  "updateProfileButtonLabel": "更新资料"
+  "updateProfileButtonLabel": "更新资料",
+
+  "downloadsTitle": "下载",
+  "noDownloadsFound": "未找到下载内容",
+  "errorLoadingDownloads": "加载下载内容时出错：{error}",
+
+  "favouritesTitle": "收藏",
+  "listViewTooltip": "列表视图",
+  "gridViewTooltip": "网格视图",
+  "noFavouriteBooksYet": "还没有收藏的图书",
+  "addBooksToFavouritesHint": "从我的图书屏幕将图书添加到收藏"
 }

@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import '../Bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class FavouritesScreen extends StatefulWidget {
   const FavouritesScreen({super.key});
@@ -113,7 +114,10 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   String _getFileDate(String path) {
     try {
       final file = File(path);
-      return 'Modified: ${DateFormat('yyyy-MM-dd HH:mm').format(file.statSync().modified)}';
+      final formatted = DateFormat(
+        'yyyy-MM-dd HH:mm',
+      ).format(file.statSync().modified);
+      return AppLocalizations.of(context)!.modifiedLabel(formatted);
     } catch (_) {
       return '';
     }
@@ -125,6 +129,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
   }
 
   Widget _buildFileCard(File file, {int? index}) {
+    final l10n = AppLocalizations.of(context)!;
     final fileName = file.path.split('/').last;
     final displayName =
         fileName.length > 25 ? '${fileName.substring(0, 22)}...' : fileName;
@@ -272,12 +277,12 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                               ? AppColors.secondary
                               : null,
                     ),
-                    tooltip: 'Read Later',
+                    tooltip: l10n.readLaterTooltip,
                     onPressed: () => _toggleReadLater(file.path),
                   ),
                   IconButton(
                     icon: const Icon(Icons.share, size: 20),
-                    tooltip: 'Share',
+                    tooltip: l10n.commonShare,
                     onPressed: () => _shareFile(file.path),
                   ),
                   IconButton(
@@ -293,8 +298,8 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                     ),
                     tooltip:
                         completedPaths.contains(file.path)
-                            ? 'Remove from Completed'
-                            : 'Mark as Completed',
+                            ? l10n.removeFromCompletedTooltip
+                            : l10n.markAsCompletedTooltip,
                     onPressed: () => _toggleCompleted(file.path),
                   ),
                   IconButton(
@@ -303,7 +308,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       size: 20,
                       color: AppColors.error,
                     ),
-                    tooltip: 'Remove from Favourites',
+                    tooltip: l10n.removeFromFavouritesTooltip,
                     onPressed: () => _removeFavourite(file.path),
                   ),
                 ],
@@ -455,17 +460,18 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
     if (_loading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favourites'),
+        title: Text(l10n.favouritesTitle),
         backgroundColor: AppColors.primary,
         foregroundColor: AppColors.onPrimary,
         actions: [
           IconButton(
             icon: Icon(_isGrid ? Icons.list : Icons.grid_view),
             onPressed: () => setState(() => _isGrid = !_isGrid),
-            tooltip: _isGrid ? 'List View' : 'Grid View',
+            tooltip: _isGrid ? l10n.listViewTooltip : l10n.gridViewTooltip,
           ),
         ],
       ),
@@ -482,18 +488,18 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       color: AppColors.textDisabled,
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'No favourite books yet',
-                      style: TextStyle(
+                    Text(
+                      l10n.noFavouriteBooksYet,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: AppColors.textDisabled,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Add books to favourites from the My Books screen',
-                      style: TextStyle(
+                    Text(
+                      l10n.addBooksToFavouritesHint,
+                      style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.textDisabled,
                       ),

@@ -131,5 +131,15 @@
   "pleaseEnterValidEmailError": "براہ کرم ایک درست ای میل ایڈریس درج کریں",
   "pleaseEnterPhoneError": "براہ کرم اپنا فون نمبر درج کریں",
   "updatingButtonLabel": "اپ ڈیٹ ہو رہا ہے...",
-  "updateProfileButtonLabel": "پروفائل اپ ڈیٹ کریں"
+  "updateProfileButtonLabel": "پروفائل اپ ڈیٹ کریں",
+
+  "downloadsTitle": "ڈاؤن لوڈز",
+  "noDownloadsFound": "کوئی ڈاؤن لوڈ نہیں ملا",
+  "errorLoadingDownloads": "ڈاؤن لوڈز لوڈ کرنے میں خرابی: {error}",
+
+  "favouritesTitle": "پسندیدہ",
+  "listViewTooltip": "فہرست منظر",
+  "gridViewTooltip": "گرڈ منظر",
+  "noFavouriteBooksYet": "ابھی تک کوئی پسندیدہ کتاب نہیں",
+  "addBooksToFavouritesHint": "میری کتابیں اسکرین سے کتابیں پسندیدہ میں شامل کریں"
 }

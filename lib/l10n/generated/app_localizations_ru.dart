@@ -409,4 +409,31 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => 'Обновить профиль';
+
+  @override
+  String get downloadsTitle => 'Загрузки';
+
+  @override
+  String get noDownloadsFound => 'Загрузки не найдены';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return 'Ошибка при загрузке загрузок: $error';
+  }
+
+  @override
+  String get favouritesTitle => 'Избранное';
+
+  @override
+  String get listViewTooltip => 'Вид списком';
+
+  @override
+  String get gridViewTooltip => 'Вид сеткой';
+
+  @override
+  String get noFavouriteBooksYet => 'Пока нет избранных книг';
+
+  @override
+  String get addBooksToFavouritesHint =>
+      'Добавьте книги в избранное на экране «Мои книги»';
 }

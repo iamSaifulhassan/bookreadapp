@@ -402,4 +402,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateProfileButtonLabel => 'Update Profile';
+
+  @override
+  String get downloadsTitle => 'Downloads';
+
+  @override
+  String get noDownloadsFound => 'No downloads found';
+
+  @override
+  String errorLoadingDownloads(String error) {
+    return 'Error loading downloads: $error';
+  }
+
+  @override
+  String get favouritesTitle => 'Favourites';
+
+  @override
+  String get listViewTooltip => 'List View';
+
+  @override
+  String get gridViewTooltip => 'Grid View';
+
+  @override
+  String get noFavouriteBooksYet => 'No favourite books yet';
+
+  @override
+  String get addBooksToFavouritesHint =>
+      'Add books to favourites from the My Books screen';
 }
