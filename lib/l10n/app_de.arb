@@ -1,0 +1,22 @@
+{
+  "@@locale": "de",
+  "settingsTitle": "Einstellungen",
+  "resetToDefaultsTooltip": "Auf Standard zurücksetzen",
+  "settingsResetSuccess": "Einstellungen auf Standard zurückgesetzt",
+  "settingsResetError": "Fehler beim Zurücksetzen der Einstellungen: {error}",
+  "settingsLoadError": "Fehler beim Laden der Einstellungen: {error}",
+  "textToSpeechSection": "Text-zu-Sprache",
+  "speechRateLabel": "Sprechgeschwindigkeit",
+  "speechRateSubtitle": "Wie schnell der Text vorgelesen wird",
+  "pitchLabel": "Tonhöhe",
+  "pitchSubtitle": "Tonhöhe der Stimme",
+  "volumeLabel": "Lautstärke",
+  "volumeSubtitle": "Wiedergabelautstärke",
+  "readingExperienceSection": "Leseerlebnis",
+  "fontSizeLabel": "Schriftgröße",
+  "fontSizeSubtitle": "Textgröße zum Lesen",
+  "lineHeightLabel": "Zeilenhöhe",
+  "lineHeightSubtitle": "Abstand zwischen den Textzeilen",
+  "languageSection": "Sprache",
+  "languageSubtitle": "Wählen Sie Ihre bevorzugte Sprache"
+}

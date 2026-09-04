@@ -1,0 +1,22 @@
+{
+  "@@locale": "zh",
+  "settingsTitle": "设置",
+  "resetToDefaultsTooltip": "恢复默认设置",
+  "settingsResetSuccess": "设置已恢复为默认值",
+  "settingsResetError": "恢复设置时出错：{error}",
+  "settingsLoadError": "加载设置时出错：{error}",
+  "textToSpeechSection": "文本转语音",
+  "speechRateLabel": "语速",
+  "speechRateSubtitle": "文本朗读的速度",
+  "pitchLabel": "音调",
+  "pitchSubtitle": "语音音调级别",
+  "volumeLabel": "音量",
+  "volumeSubtitle": "播放音量",
+  "readingExperienceSection": "阅读体验",
+  "fontSizeLabel": "字体大小",
+  "fontSizeSubtitle": "阅读文本的大小",
+  "lineHeightLabel": "行高",
+  "lineHeightSubtitle": "文本行之间的间距",
+  "languageSection": "语言",
+  "languageSubtitle": "选择您的首选语言"
+}

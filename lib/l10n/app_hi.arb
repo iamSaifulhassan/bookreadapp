@@ -1,0 +1,22 @@
+{
+  "@@locale": "hi",
+  "settingsTitle": "सेटिंग्स",
+  "resetToDefaultsTooltip": "डिफ़ॉल्ट पर रीसेट करें",
+  "settingsResetSuccess": "सेटिंग्स डिफ़ॉल्ट पर रीसेट कर दी गई हैं",
+  "settingsResetError": "सेटिंग्स रीसेट करने में त्रुटि: {error}",
+  "settingsLoadError": "सेटिंग्स लोड करने में त्रुटि: {error}",
+  "textToSpeechSection": "टेक्स्ट-टू-स्पीच",
+  "speechRateLabel": "बोलने की गति",
+  "speechRateSubtitle": "टेक्स्ट कितनी तेज़ी से बोला जाता है",
+  "pitchLabel": "पिच",
+  "pitchSubtitle": "आवाज़ की पिच का स्तर",
+  "volumeLabel": "वॉल्यूम",
+  "volumeSubtitle": "प्लेबैक वॉल्यूम",
+  "readingExperienceSection": "पठन अनुभव",
+  "fontSizeLabel": "फ़ॉन्ट आकार",
+  "fontSizeSubtitle": "पढ़ने के लिए टेक्स्ट का आकार",
+  "lineHeightLabel": "लाइन की ऊँचाई",
+  "lineHeightSubtitle": "टेक्स्ट की पंक्तियों के बीच की दूरी",
+  "languageSection": "भाषा",
+  "languageSubtitle": "अपनी पसंदीदा भाषा चुनें"
+}

@@ -1,0 +1,22 @@
+{
+  "@@locale": "fr",
+  "settingsTitle": "Paramètres",
+  "resetToDefaultsTooltip": "Réinitialiser les valeurs par défaut",
+  "settingsResetSuccess": "Paramètres réinitialisés aux valeurs par défaut",
+  "settingsResetError": "Erreur lors de la réinitialisation des paramètres : {error}",
+  "settingsLoadError": "Erreur lors du chargement des paramètres : {error}",
+  "textToSpeechSection": "Synthèse vocale",
+  "speechRateLabel": "Vitesse de la voix",
+  "speechRateSubtitle": "Vitesse à laquelle le texte est lu",
+  "pitchLabel": "Tonalité",
+  "pitchSubtitle": "Niveau de tonalité de la voix",
+  "volumeLabel": "Volume",
+  "volumeSubtitle": "Volume de lecture",
+  "readingExperienceSection": "Expérience de lecture",
+  "fontSizeLabel": "Taille de police",
+  "fontSizeSubtitle": "Taille du texte pour la lecture",
+  "lineHeightLabel": "Interligne",
+  "lineHeightSubtitle": "Espace entre les lignes de texte",
+  "languageSection": "Langue",
+  "languageSubtitle": "Choisissez votre langue préférée"
+}

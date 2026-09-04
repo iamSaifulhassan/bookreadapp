@@ -6,14 +6,25 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
-// import 'package:pdf_render/pdf_render_widgets.dart';
-import 'dart:typed_data';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../Bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
 import '../../widgets/streak_widget.dart';
+
+/// Lightweight value type for a book entry shown in the library — either a
+/// file discovered in the custom books folder or one picked via the file
+/// picker. Deliberately not file_picker's PlatformFile: that type only
+/// carries what the picker itself returns and (as of file_picker 12) can no
+/// longer be constructed or subclassed outside its own library.
+class BookFile {
+  final String name;
+  final String? path;
+  final String? extension;
+
+  const BookFile({required this.name, required this.path, this.extension});
+}
 
 class HomeScreen extends StatefulWidget {
   final String? defaultFolderPath;
@@ -26,7 +37,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<SliverAnimatedListState> _listKey =
       GlobalKey<SliverAnimatedListState>();
-  List<PlatformFile> pickedBookFiles = []; // New: holds files picked via +
+  List<BookFile> pickedBookFiles = []; // New: holds files picked via +
   Directory? customBooksDir;
   List<FileSystemEntity> customBooks = [];
   TextEditingController? _dirController;
@@ -276,7 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
           (context, animation) => SizeTransition(
             sizeFactor: animation,
             child: _buildFileCardWithExt(
-              _toPlatformFile(customBooks[i]),
+              _toBookFile(customBooks[i]),
               _getExt(customBooks[i]),
             ),
           ),
@@ -308,10 +319,9 @@ class _HomeScreenState extends State<HomeScreen> {
     pickedBookFiles =
         paths
             .map(
-              (p) => PlatformFile(
+              (p) => BookFile(
                 name: p.split(Platform.pathSeparator).last,
                 path: p,
-                size: File(p).existsSync() ? File(p).lengthSync() : 0,
               ),
             )
             .toList();
@@ -340,16 +350,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Helper to convert FileSystemEntity to PlatformFile
-  PlatformFile _toPlatformFile(FileSystemEntity file) {
+  // Helper to convert FileSystemEntity to BookFile
+  BookFile _toBookFile(FileSystemEntity file) {
     final fileName = file.path.split('/').last;
-    return PlatformFile(
-      name: fileName,
-      path: file.path,
-      size: File(file.path).lengthSync(),
-      bytes: null,
-      readStream: null,
-    );
+    return BookFile(name: fileName, path: file.path);
   }
 
   String _getExt(FileSystemEntity file) {
@@ -473,8 +477,8 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
     // Deduplicate displayedFiles by file name
-    final Map<String, PlatformFile> fileMap = {};
-    for (final f in customBooks.map(_toPlatformFile)) {
+    final Map<String, BookFile> fileMap = {};
+    for (final f in customBooks.map(_toBookFile)) {
       fileMap[f.name] = f;
     }
     for (final f in pickedBookFiles) {
@@ -592,9 +596,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             onPressed: () async {
                                               String? selectedDir;
                                               try {
-                                                selectedDir = await FilePicker
-                                                    .platform
-                                                    .getDirectoryPath(
+                                                selectedDir =
+                                                    await FilePicker.getDirectoryPath(
                                                       dialogTitle:
                                                           'Select Books Folder',
                                                     );
@@ -696,15 +699,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildFileCardWithExt(
-    PlatformFile file,
+    BookFile file,
     String ext, [
     int? index,
     bool isGrid = false,
   ]) {
-    return _buildFileCard(_PlatformFileWithExt(file, ext), index, isGrid);
+    return _buildFileCard(
+      BookFile(name: file.name, path: file.path, extension: ext),
+      index,
+      isGrid,
+    );
   }
 
-  Widget _buildFileCard(PlatformFile file, [int? index, bool isGrid = false]) {
+  Widget _buildFileCard(BookFile file, [int? index, bool isGrid = false]) {
     Widget cover;
     if (file.extension == 'pdf' && file.path != null) {
       cover = AnimatedSwitcher(
@@ -1031,7 +1038,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       (context, animation) => SizeTransition(
                                         sizeFactor: animation,
                                         child: _buildFileCardWithExt(
-                                          _toPlatformFile(removed),
+                                          _toBookFile(removed),
                                           _getExt(removed),
                                         ),
                                       ),
@@ -1092,19 +1099,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _pickFiles() async {
-    final result = await FilePicker.platform.pickFiles(
+    final files = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'epub', 'docx', 'txt'],
-      allowMultiple: true,
     );
-    if (result != null) {
-      for (final file in result.files) {
-        await _addPickedBookFile(file);
-      }
+    for (final file in files) {
+      await _addPickedBookFile(
+        BookFile(name: file.name, path: file.path, extension: file.extension),
+      );
     }
   }
 
-  Future<void> _addPickedBookFile(PlatformFile file) async {
+  Future<void> _addPickedBookFile(BookFile file) async {
     // Prevent duplicates by path (either in folder or already picked)
     final displayedPaths = <String>{
       ...customBooks.map((f) => f.path),
@@ -1115,7 +1121,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (file.path == null ||
         displayedPaths.contains(file.path) ||
         pickedBookFiles.any((f) => f.name == file.name) ||
-        customBooks.map(_toPlatformFile).any((f) => f.name == file.name)) {
+        customBooks.map(_toBookFile).any((f) => f.name == file.name)) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('File already exists')));
@@ -1131,24 +1137,4 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     await _savePickedBookFiles();
   }
-}
-
-class _PlatformFileWithExt implements PlatformFile {
-  final PlatformFile _file;
-  @override
-  final String? extension;
-  _PlatformFileWithExt(this._file, this.extension);
-  @override
-  noSuchMethod(Invocation invocation) => _file.noSuchMethod(invocation);
-  // Forward all PlatformFile properties
-  @override
-  String get name => _file.name;
-  @override
-  String? get path => _file.path;
-  @override
-  int get size => _file.size;
-  @override
-  Uint8List? get bytes => _file.bytes;
-  @override
-  Stream<List<int>>? get readStream => _file.readStream;
 }

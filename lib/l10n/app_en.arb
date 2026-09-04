@@ -1,0 +1,32 @@
+{
+  "@@locale": "en",
+
+  "settingsTitle": "Settings",
+  "resetToDefaultsTooltip": "Reset to defaults",
+  "settingsResetSuccess": "Settings reset to defaults",
+  "settingsResetError": "Error resetting settings: {error}",
+  "@settingsResetError": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+  "settingsLoadError": "Error loading settings: {error}",
+  "@settingsLoadError": {
+    "placeholders": { "error": { "type": "String" } }
+  },
+
+  "textToSpeechSection": "Text-to-Speech",
+  "speechRateLabel": "Speech Rate",
+  "speechRateSubtitle": "How fast the text is spoken",
+  "pitchLabel": "Pitch",
+  "pitchSubtitle": "Voice pitch level",
+  "volumeLabel": "Volume",
+  "volumeSubtitle": "Playback volume",
+
+  "readingExperienceSection": "Reading Experience",
+  "fontSizeLabel": "Font Size",
+  "fontSizeSubtitle": "Text size for reading",
+  "lineHeightLabel": "Line Height",
+  "lineHeightSubtitle": "Space between lines of text",
+
+  "languageSection": "Language",
+  "languageSubtitle": "Choose your preferred language"
+}

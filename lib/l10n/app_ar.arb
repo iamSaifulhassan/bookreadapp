@@ -1,0 +1,22 @@
+{
+  "@@locale": "ar",
+  "settingsTitle": "الإعدادات",
+  "resetToDefaultsTooltip": "إعادة التعيين إلى الافتراضي",
+  "settingsResetSuccess": "تمت إعادة تعيين الإعدادات إلى الوضع الافتراضي",
+  "settingsResetError": "خطأ أثناء إعادة تعيين الإعدادات: {error}",
+  "settingsLoadError": "خطأ أثناء تحميل الإعدادات: {error}",
+  "textToSpeechSection": "تحويل النص إلى كلام",
+  "speechRateLabel": "سرعة الكلام",
+  "speechRateSubtitle": "مدى سرعة نطق النص",
+  "pitchLabel": "طبقة الصوت",
+  "pitchSubtitle": "مستوى طبقة الصوت",
+  "volumeLabel": "مستوى الصوت",
+  "volumeSubtitle": "مستوى صوت التشغيل",
+  "readingExperienceSection": "تجربة القراءة",
+  "fontSizeLabel": "حجم الخط",
+  "fontSizeSubtitle": "حجم النص للقراءة",
+  "lineHeightLabel": "تباعد الأسطر",
+  "lineHeightSubtitle": "المسافة بين أسطر النص",
+  "languageSection": "اللغة",
+  "languageSubtitle": "اختر لغتك المفضلة"
+}

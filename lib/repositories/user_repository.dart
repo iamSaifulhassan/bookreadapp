@@ -12,13 +12,6 @@ class UserRepository {
   String _emailKey(String email) =>
       email.trim().toLowerCase().replaceAll('.', ',');
 
-  Future<bool> isEmailUnique(String email) async {
-    // Firebase does not provide direct email uniqueness check, so try to fetch sign-in methods
-    // ignore: deprecated_member_use
-    final methods = await _firebaseAuth.fetchSignInMethodsForEmail(email);
-    return methods.isEmpty;
-  }
-
   /// Maps a Firebase error code to a user-facing message.
   String _messageForAuthCode(String code) {
     switch (code) {

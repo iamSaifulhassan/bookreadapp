@@ -1,0 +1,22 @@
+{
+  "@@locale": "ja",
+  "settingsTitle": "設定",
+  "resetToDefaultsTooltip": "デフォルトにリセット",
+  "settingsResetSuccess": "設定をデフォルトにリセットしました",
+  "settingsResetError": "設定のリセット中にエラーが発生しました: {error}",
+  "settingsLoadError": "設定の読み込み中にエラーが発生しました: {error}",
+  "textToSpeechSection": "テキスト読み上げ",
+  "speechRateLabel": "読み上げ速度",
+  "speechRateSubtitle": "テキストが読み上げられる速さ",
+  "pitchLabel": "ピッチ",
+  "pitchSubtitle": "音声のピッチレベル",
+  "volumeLabel": "音量",
+  "volumeSubtitle": "再生音量",
+  "readingExperienceSection": "読書体験",
+  "fontSizeLabel": "フォントサイズ",
+  "fontSizeSubtitle": "読書用のテキストサイズ",
+  "lineHeightLabel": "行の高さ",
+  "lineHeightSubtitle": "テキスト行間の間隔",
+  "languageSection": "言語",
+  "languageSubtitle": "希望する言語を選択してください"
+}

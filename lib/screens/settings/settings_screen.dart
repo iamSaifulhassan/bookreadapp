@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../themes/AppColors.dart';
 import '../../widgets/custom_drawer.dart';
 import '../../services/settings_service.dart';
+import '../../services/locale_service.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -40,24 +42,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _readingFontSize = await _settingsService.getReadingFontSize();
       _readingLineHeight = await _settingsService.getReadingLineHeight();
 
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
       });
-      _showSnackBar('Error loading settings: $e');
+      _showSnackBar(AppLocalizations.of(context)!.settingsLoadError(e.toString()));
     }
   }
 
   Future<void> _resetSettings() async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       await _settingsService.resetToDefaults();
       await _loadSettings(); // Reload settings
-      _showSnackBar('Settings reset to defaults');
+      if (!mounted) return;
+      _showSnackBar(l10n.settingsResetSuccess);
     } catch (e) {
-      _showSnackBar('Error resetting settings: $e');
+      if (!mounted) return;
+      _showSnackBar(l10n.settingsResetError(e.toString()));
     }
   }
 
@@ -69,15 +76,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      appBar: AppBar(
-        title: const Text('Settings'),
+    final l10n = AppLocalizations.of(context)!;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.settingsTitle),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _resetSettings,
-            tooltip: 'Reset to defaults',
+            tooltip: l10n.resetToDefaultsTooltip,
           ),
         ],
       ),
@@ -88,22 +97,64 @@ class _SettingsScreenState extends State<SettingsScreen> {
               : ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
-                  _buildTTSSettings(),
+                  _buildLanguageSettings(l10n),
                   const SizedBox(height: 24),
-                  _buildReadingSettings(),
+                  _buildTTSSettings(l10n),
+                  const SizedBox(height: 24),
+                  _buildReadingSettings(l10n),
                 ],
               ),
     );
   }
 
-  Widget _buildTTSSettings() {
+  Widget _buildLanguageSettings(AppLocalizations l10n) {
     return _buildSettingsCard(
-      title: 'Text-to-Speech',
+      title: l10n.languageSection,
+      icon: Icons.language,
+      children: [
+        Text(
+          l10n.languageSubtitle,
+          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+        ),
+        const SizedBox(height: 12),
+        ValueListenableBuilder<Locale?>(
+          valueListenable: LocaleService().currentLocale,
+          builder: (context, currentLocale, _) {
+            final effectiveCode =
+                currentLocale?.languageCode ??
+                Localizations.localeOf(context).languageCode;
+            return DropdownButtonFormField<String>(
+              initialValue: effectiveCode,
+              decoration: const InputDecoration(border: OutlineInputBorder()),
+              items:
+                  kSupportedLocales
+                      .map(
+                        (sl) => DropdownMenuItem(
+                          value: sl.locale.languageCode,
+                          child: Text(sl.nativeName),
+                        ),
+                      )
+                      .toList(),
+              onChanged: (code) {
+                if (code != null) {
+                  LocaleService().setLocale(Locale(code));
+                }
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTTSSettings(AppLocalizations l10n) {
+    return _buildSettingsCard(
+      title: l10n.textToSpeechSection,
       icon: Icons.volume_up,
       children: [
         _buildSliderSetting(
-          title: 'Speech Rate',
-          subtitle: 'How fast the text is spoken',
+          title: l10n.speechRateLabel,
+          subtitle: l10n.speechRateSubtitle,
           value: _ttsSpeechRate,
           min: 0.1,
           max: 1.0,
@@ -114,8 +165,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           },
         ),
         _buildSliderSetting(
-          title: 'Pitch',
-          subtitle: 'Voice pitch level',
+          title: l10n.pitchLabel,
+          subtitle: l10n.pitchSubtitle,
           value: _ttsPitch,
           min: 0.5,
           max: 2.0,
@@ -126,8 +177,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           },
         ),
         _buildSliderSetting(
-          title: 'Volume',
-          subtitle: 'Playback volume',
+          title: l10n.volumeLabel,
+          subtitle: l10n.volumeSubtitle,
           value: _ttsVolume,
           min: 0.1,
           max: 1.0,
@@ -141,14 +192,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildReadingSettings() {
+  Widget _buildReadingSettings(AppLocalizations l10n) {
     return _buildSettingsCard(
-      title: 'Reading Experience',
+      title: l10n.readingExperienceSection,
       icon: Icons.text_fields,
       children: [
         _buildSliderSetting(
-          title: 'Font Size',
-          subtitle: 'Text size for reading',
+          title: l10n.fontSizeLabel,
+          subtitle: l10n.fontSizeSubtitle,
           value: _readingFontSize,
           min: 12.0,
           max: 24.0,
@@ -159,8 +210,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           },
         ),
         _buildSliderSetting(
-          title: 'Line Height',
-          subtitle: 'Space between lines of text',
+          title: l10n.lineHeightLabel,
+          subtitle: l10n.lineHeightSubtitle,
           value: _readingLineHeight,
           min: 1.0,
           max: 2.5,
@@ -186,7 +237,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(              children: [
+            Row(
+              children: [
                 Icon(icon, color: AppColors.primary),
                 const SizedBox(width: 8),
                 Text(

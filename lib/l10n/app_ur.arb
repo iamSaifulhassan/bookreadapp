@@ -1,0 +1,22 @@
+{
+  "@@locale": "ur",
+  "settingsTitle": "ترتیبات",
+  "resetToDefaultsTooltip": "ڈیفالٹ پر ری سیٹ کریں",
+  "settingsResetSuccess": "ترتیبات ڈیفالٹ پر ری سیٹ کر دی گئیں",
+  "settingsResetError": "ترتیبات ری سیٹ کرنے میں خرابی: {error}",
+  "settingsLoadError": "ترتیبات لوڈ کرنے میں خرابی: {error}",
+  "textToSpeechSection": "متن سے تقریر",
+  "speechRateLabel": "بولنے کی رفتار",
+  "speechRateSubtitle": "متن کتنی تیزی سے پڑھا جاتا ہے",
+  "pitchLabel": "پچ",
+  "pitchSubtitle": "آواز کی پچ کی سطح",
+  "volumeLabel": "والیوم",
+  "volumeSubtitle": "پلے بیک والیوم",
+  "readingExperienceSection": "پڑھنے کا تجربہ",
+  "fontSizeLabel": "فونٹ سائز",
+  "fontSizeSubtitle": "پڑھنے کے لیے متن کا سائز",
+  "lineHeightLabel": "لائن کی اونچائی",
+  "lineHeightSubtitle": "متن کی سطروں کے درمیان فاصلہ",
+  "languageSection": "زبان",
+  "languageSubtitle": "اپنی پسندیدہ زبان منتخب کریں"
+}

@@ -14,11 +14,6 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     Emitter<SignupState> emit,
   ) async {
     emit(SignupLoading());
-    final isUnique = await userRepository.isEmailUnique(event.email);
-    if (!isUnique) {
-      emit(SignupFailure('Email already exists.'));
-      return;
-    }
     final result = await userRepository.createUser(
       email: event.email,
       phone: event.phone,

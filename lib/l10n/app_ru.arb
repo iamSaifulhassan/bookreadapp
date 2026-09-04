@@ -1,0 +1,22 @@
+{
+  "@@locale": "ru",
+  "settingsTitle": "Настройки",
+  "resetToDefaultsTooltip": "Сбросить настройки",
+  "settingsResetSuccess": "Настройки сброшены до значений по умолчанию",
+  "settingsResetError": "Ошибка при сбросе настроек: {error}",
+  "settingsLoadError": "Ошибка при загрузке настроек: {error}",
+  "textToSpeechSection": "Синтез речи",
+  "speechRateLabel": "Скорость речи",
+  "speechRateSubtitle": "Насколько быстро читается текст",
+  "pitchLabel": "Высота тона",
+  "pitchSubtitle": "Уровень высоты голоса",
+  "volumeLabel": "Громкость",
+  "volumeSubtitle": "Громкость воспроизведения",
+  "readingExperienceSection": "Комфорт чтения",
+  "fontSizeLabel": "Размер шрифта",
+  "fontSizeSubtitle": "Размер текста для чтения",
+  "lineHeightLabel": "Межстрочный интервал",
+  "lineHeightSubtitle": "Расстояние между строками текста",
+  "languageSection": "Язык",
+  "languageSubtitle": "Выберите предпочитаемый язык"
+}
