@@ -1,13 +1,13 @@
 import '../services/app_logger.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../themes/AppColors.dart';
+import '../themes/app_colors.dart';
 import '../services/user_service.dart';
 import '../models/user_model.dart';
 import '../l10n/generated/app_localizations.dart';
 
 class CustomDrawer extends StatefulWidget {
-  CustomDrawer({super.key});
+  const CustomDrawer({super.key});
 
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
@@ -73,7 +73,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
       _DrawerEntry(
         icon: Icons.workspace_premium,
         title: l10n.premiumNav,
-        iconColor: Colors.amber.shade700,
+        iconColor: AppColors.premiumAccent,
         onTap: () => Navigator.pushNamed(context, '/subscription'),
       ),
       _DrawerEntry.divider(),
@@ -137,6 +137,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               : _userService.getUserDisplayName() ??
                                   _userService.userEmail?.split('@')[0] ??
                                   l10n.userLabel,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: AppColors.onPrimary,
                             fontSize: 18,
@@ -147,6 +149,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           _isLoading
                               ? l10n.pleaseWaitLabel
                               : _userModel?.userType ?? l10n.bookReaderLabel,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: AppColors.onPrimary.withValues(alpha: 0.8),
                             fontSize: 14,

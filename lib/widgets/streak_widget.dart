@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../themes/AppColors.dart';
+import '../themes/app_colors.dart';
 
 class StreakWidget extends StatelessWidget {
   final int streakCount;
@@ -57,9 +57,9 @@ class StreakWidget extends StatelessWidget {
     if (isCompleted) {
       return AppColors.success.withValues(alpha: 0.15);
     } else if (isAboutToExpire) {
-      return Colors.orange.withValues(alpha: 0.15);
+      return AppColors.warning.withValues(alpha: 0.15);
     } else {
-      return Colors.red.withValues(alpha: 0.15);
+      return AppColors.danger.withValues(alpha: 0.15);
     }
   }
 
@@ -67,9 +67,9 @@ class StreakWidget extends StatelessWidget {
     if (isCompleted) {
       return AppColors.success.withValues(alpha: 0.3);
     } else if (isAboutToExpire) {
-      return Colors.red.withValues(alpha: 0.3);
+      return AppColors.danger.withValues(alpha: 0.3);
     } else {
-      return Colors.orange.withValues(alpha: 0.3);
+      return AppColors.warning.withValues(alpha: 0.3);
     }
   }
 
@@ -77,9 +77,9 @@ class StreakWidget extends StatelessWidget {
     if (isCompleted) {
       return AppColors.success;
     } else if (isAboutToExpire) {
-      return Colors.red;
+      return AppColors.danger;
     } else {
-      return Colors.orange; // Changed from red to yellow for the flame icon
+      return AppColors.warning; // Changed from red to yellow for the flame icon
     }
   }
 
@@ -87,9 +87,9 @@ class StreakWidget extends StatelessWidget {
     if (isCompleted) {
       return AppColors.success;
     } else if (isAboutToExpire) {
-      return Colors.red.shade700;
+      return AppColors.danger.shade700;
     } else {
-      return Colors.orange.shade700;
+      return AppColors.warning.shade700;
     }
   }
 }

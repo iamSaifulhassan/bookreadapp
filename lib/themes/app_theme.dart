@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'AppColors.dart';
+import 'app_colors.dart';
 
 /// Consistent, slightly-springy page transition across platforms so
 /// navigation feels the same on Android/iOS/desktop/web instead of each

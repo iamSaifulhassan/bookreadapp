@@ -1,7 +1,7 @@
 import '../../services/app_logger.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../../themes/AppColors.dart';
+import '../../themes/app_colors.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/custom_drawer.dart';
@@ -187,6 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     } catch (e) {
       AppLogger.log('ProfileScreen: Error updating profile data: $e');
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
@@ -311,17 +312,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               margin: const EdgeInsets.only(bottom: 16),
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.orange.shade100,
+                                color: AppColors.warning.shade100,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: Colors.orange.shade300,
+                                  color: AppColors.warning.shade300,
                                 ),
                               ),
                               child: Row(
                                 children: [
                                   Icon(
                                     Icons.warning_amber_rounded,
-                                    color: Colors.orange.shade700,
+                                    color: AppColors.warning.shade700,
                                     size: 20,
                                   ),
                                   const SizedBox(width: 8),
@@ -329,7 +330,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     child: Text(
                                       _completionMessage,
                                       style: TextStyle(
-                                        color: Colors.orange.shade800,
+                                        color: AppColors.warning.shade800,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -450,7 +451,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             await _userService.signOut();
 
                                             // Navigate to login screen and clear navigation stack
-                                            if (mounted) {
+                                            if (context.mounted) {
                                               Navigator.of(
                                                 context,
                                               ).pushReplacementNamed('/');

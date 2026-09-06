@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../themes/AppColors.dart';
+import '../themes/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -27,7 +27,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final inputFillColor =
-        readOnly ? Colors.grey.shade100 : const Color(0xFFF3F6FA);
+        readOnly
+            ? colorScheme.surfaceContainerHighest
+            : AppColors.inputFill;
 
     return TextFormField(
       controller: controller,
@@ -62,7 +64,7 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
-            color: readOnly ? Colors.grey.shade300 : colorScheme.primary,
+            color: readOnly ? colorScheme.outlineVariant : colorScheme.primary,
           ),
         ),
         enabledBorder: OutlineInputBorder(
@@ -70,14 +72,14 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(
             color:
                 readOnly
-                    ? Colors.grey.shade300
+                    ? colorScheme.outlineVariant
                     : colorScheme.primary.withValues(alpha: 0.5),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
-            color: readOnly ? Colors.grey.shade300 : colorScheme.primary,
+            color: readOnly ? colorScheme.outlineVariant : colorScheme.primary,
             width: 2,
           ),
         ),

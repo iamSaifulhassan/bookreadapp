@@ -97,7 +97,24 @@ class UserRepository {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await _firebaseAuth.signInWithCredential(credential);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
+
+      // First-time Google sign-in: mirror the signup flow and create the
+      // user's Realtime Database record, since other screens (profile,
+      // etc.) key off users/{email} and assume it exists.
+      final email = userCredential.user?.email;
+      if (userCredential.additionalUserInfo?.isNewUser == true &&
+          email != null) {
+        await saveUserData(
+          email: email,
+          phone: '',
+          country: '',
+          userType: 'google',
+        );
+      }
+
       return const AuthResult.success();
     } on FirebaseAuthException catch (e) {
       return AuthResult.failure(e.code, _messageForAuthCode(e.code));

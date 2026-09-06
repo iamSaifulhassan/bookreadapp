@@ -1,4 +1,4 @@
-import 'package:bookread/themes/AppColors.dart';
+import 'package:bookread/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/signin/signin_bloc.dart';
@@ -34,7 +34,7 @@ class SignInScreen extends StatelessWidget {
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Card(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
@@ -87,7 +87,13 @@ class SignInScreen extends StatelessWidget {
                           );
                         } else if (state is SigninSuccess) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(l10n.signInSuccessMessage)),
+                            SnackBar(
+                              content: Text(
+                                state.viaGoogle
+                                    ? l10n.googleSignInSuccessMessage
+                                    : l10n.signInSuccessMessage,
+                              ),
+                            ),
                           );
                           Navigator.pushReplacementNamed(context, '/home');
                         }
@@ -122,32 +128,10 @@ class SignInScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(6.0),
                                 ),
                               ),
-                              onPressed: () async {
-                                final repo = UserRepository();
-                                final result = await repo.signInWithGoogle();
-                                if (!context.mounted) return;
-                                if (result.success) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        l10n.googleSignInSuccessMessage,
-                                      ),
-                                    ),
-                                  );
-                                  Navigator.pushReplacementNamed(
-                                    context,
-                                    '/home',
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        result.message ??
-                                            l10n.googleSignInFailedMessage,
-                                      ),
-                                    ),
-                                  );
-                                }
+                              onPressed: () {
+                                context.read<SigninBloc>().add(
+                                  SigninGoogleSubmitted(),
+                                );
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

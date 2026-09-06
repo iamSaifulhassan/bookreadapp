@@ -53,8 +53,10 @@ dependencies:
   share_plus: ^13.3.0
   flutter_tts: ^4.2.2
   syncfusion_flutter_pdfviewer: ^34.2.6
+  syncfusion_flutter_pdf: ^34.2.6
   url_launcher: ^6.3.0
   purchases_flutter: ^9.5.4
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../themes/AppColors.dart';
+import '../themes/app_colors.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
   final String label;
@@ -42,7 +42,7 @@ class CustomDropdown<T> extends StatelessWidget {
       dropdownColor: AppColors.surface,
       items: items,
       onChanged: onChanged,
-      value: value,
+      initialValue: value,
     );
   }
 }

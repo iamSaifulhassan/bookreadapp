@@ -44,6 +44,11 @@ class AppColors {
   static const Color success = Color(0xFF4CAF50); // Green for success
   static const Color onSuccess = Color(0xFFFFFFFF); // White text on success
 
+  // Status accents (fixed across themes, not tied to light/dark surfaces)
+  static const MaterialColor warning = Colors.orange;
+  static const MaterialColor danger = Colors.red;
+  static const Color premiumAccent = Color(0xFFFFA000); // "Go Premium" accent (amber.shade700)
+
   // Dark theme palette
   static const Color primaryDark = Color(0xFF3E6BD6); // Brighter navy-blue accent for dark backgrounds
   static const Color surfaceDark = Color(0xFF161B22);

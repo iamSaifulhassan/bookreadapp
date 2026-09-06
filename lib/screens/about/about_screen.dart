@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../l10n/generated/app_localizations.dart';
+import '../../themes/app_colors.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -18,11 +19,15 @@ class AboutScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
               child: CircleAvatar(
                 radius: 60,
-                backgroundColor: Colors.blue,
-                child: Icon(Icons.person, size: 80, color: Colors.white),
+                backgroundColor: AppColors.primary,
+                child: Icon(
+                  Icons.person,
+                  size: 80,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
             ),
             const SizedBox(height: 30),
@@ -35,11 +40,11 @@ class AboutScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Center(
-              child: const Text(
+              child: Text(
                 'Flutter Developer',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                   fontStyle: FontStyle.italic,
                 ),
                 textAlign: TextAlign.center,

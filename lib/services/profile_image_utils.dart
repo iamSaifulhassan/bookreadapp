@@ -1,6 +1,6 @@
 import 'app_logger.dart';
 import 'package:flutter/material.dart';
-import '../themes/AppColors.dart';
+import '../themes/app_colors.dart';
 
 class ProfileImageUtils {
   /// Generate initials from user's name or email
@@ -44,7 +44,7 @@ class ProfileImageUtils {
         style: TextStyle(
           fontSize: fontSize ?? radius * 0.5,
           fontWeight: FontWeight.bold,
-          color: textColor ?? Colors.white,
+          color: textColor ?? AppColors.onPrimary,
         ),
       ),
     );
@@ -127,7 +127,7 @@ class ProfileImageUtils {
                 style: TextStyle(
                   fontSize: radius * 0.5,
                   fontWeight: FontWeight.bold,
-                  color: textColor ?? Colors.white,
+                  color: textColor ?? AppColors.onPrimary,
                 ),
               );
             },

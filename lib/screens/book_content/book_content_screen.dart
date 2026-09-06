@@ -5,13 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../../themes/AppColors.dart';
+import '../../themes/app_colors.dart';
+import '../../themes/app_spacing.dart';
 import '../../services/streak_service.dart';
 import '../../services/settings_service.dart';
 import '../../services/locale_service.dart';
 import '../../l10n/generated/app_localizations.dart';
+import 'reading_text_utils.dart';
+import 'widgets/tts_controls_bar.dart';
+import 'widgets/bottom_document_controls.dart';
+import 'widgets/tts_settings_sheet.dart';
 
 class BookContentScreen extends StatefulWidget {
   final String filePath;
@@ -49,6 +55,7 @@ class _BookContentScreenState extends State<BookContentScreen>
   int _totalPages = 1;
 
   // Text & TTS State
+  String _currentTtsLocale = 'en-US';
   List<String> _sentences = [];
   int _currentSentenceIndex = 0;
   bool _isPlaying = false;
@@ -70,7 +77,9 @@ class _BookContentScreenState extends State<BookContentScreen>
   // Rolling TTS Buffer state
   List<String> _ttsBuffer = [];
   final int _bufferSize = 5; // Show 5 sentences at a time
-  final int _highlightedIndex = 2; // Middle position (0-indexed)  @override
+  final int _highlightedIndex = 2; // Middle position (0-indexed)
+
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
@@ -140,7 +149,13 @@ class _BookContentScreenState extends State<BookContentScreen>
       } else if (_isTxtFile) {
         await _loadTxtContent();
       } else {
-        throw Exception(AppLocalizations.of(context)!.unsupportedFileFormatMessage);
+        // Safe to touch context here (unlike at the top of this method):
+        // at least one await above has already yielded, so initState has
+        // long finished by the time this branch can run.
+        if (!mounted) return;
+        throw Exception(
+          AppLocalizations.of(context)!.unsupportedFileFormatMessage,
+        );
       }
       if (mounted) {
         setState(() {
@@ -156,30 +171,38 @@ class _BookContentScreenState extends State<BookContentScreen>
         });
       }
     }
-  }  /// Maps the app's current language to a TTS engine locale code, so
-  /// read-aloud follows whatever language the user picked in Settings
-  /// instead of always speaking English regardless of book language.
-  static const Map<String, String> _ttsLocaleByLanguage = {
-    'en': 'en-US',
-    'es': 'es-ES',
-    'fr': 'fr-FR',
-    'de': 'de-DE',
-    'pt': 'pt-BR',
-    'it': 'it-IT',
-    'ar': 'ar-SA',
-    'hi': 'hi-IN',
-    'ur': 'ur-PK',
-    'zh': 'zh-CN',
-    'ja': 'ja-JP',
-    'ru': 'ru-RU',
-  };
+  }
 
+  /// Fallback TTS locale when a book's language can't be confidently
+  /// detected from its text (e.g. the page is too short). Uses the app's
+  /// current UI language as a reasonable guess.
   String _ttsLocaleForApp() {
     final languageCode =
         LocaleService().currentLocale.value?.languageCode ??
         Localizations.localeOf(context).languageCode;
-    return _ttsLocaleByLanguage[languageCode] ?? 'en-US';
+    return ttsLocaleByLanguage[languageCode] ?? 'en-US';
   }
+
+  /// Detects the current page/document's language and repoints TTS at it,
+  /// if it differs from whatever locale TTS is currently using.
+  Future<void> _updateTtsLanguageFromText(String text) async {
+    if (_tts == null) return;
+    final detected = detectTtsLocale(text, fallbackLocale: _ttsLocaleForApp());
+    if (detected != _currentTtsLocale) {
+      _currentTtsLocale = detected;
+      await _tts!.setLanguage(detected);
+    }
+  }
+
+  /// Urdu is conventionally set in the Nastaliq calligraphic style, which
+  /// looks broken in a generic Naskh/Latin font. Noto Nastaliq Urdu is
+  /// Google's open-source (OFL) Nastaliq font, fetched and cached on demand
+  /// by the google_fonts package — applied to any page whose detected
+  /// language is Urdu.
+  TextStyle _readingTextStyle(TextStyle base) =>
+      _currentTtsLocale == 'ur-PK'
+          ? GoogleFonts.notoNastaliqUrdu(textStyle: base)
+          : base;
 
   Future<void> _initializeTTS() async {
     try {
@@ -194,7 +217,10 @@ class _BookContentScreenState extends State<BookContentScreen>
       _readingFontSize = await _settingsService.getReadingFontSize();
       _readingLineHeight = await _settingsService.getReadingLineHeight();
 
-      await _tts!.setLanguage(_ttsLocaleForApp());
+      // Starting guess only — _updateTtsLanguageFromText repoints this at
+      // the book's actual language once its text has been extracted.
+      _currentTtsLocale = _ttsLocaleForApp();
+      await _tts!.setLanguage(_currentTtsLocale);
       await _tts!.setSpeechRate(_speechRate);
       await _tts!.setPitch(_pitch);
       await _tts!.setVolume(_volume);
@@ -256,6 +282,7 @@ class _BookContentScreenState extends State<BookContentScreen>
     try {
       final file = File(widget.filePath);
       final content = await file.readAsString();
+      await _updateTtsLanguageFromText(content);
       _processSentences(content);
     } catch (e) {
       throw Exception('Failed to load text content: $e');
@@ -279,6 +306,7 @@ class _BookContentScreenState extends State<BookContentScreen>
           endPageIndex: _currentPage - 1,
         );
 
+        await _updateTtsLanguageFromText(pageText);
         _processSentences(pageText);
       }
 
@@ -297,43 +325,18 @@ class _BookContentScreenState extends State<BookContentScreen>
   }
 
   void _processSentences(String text) {
-    if (text.trim().isEmpty) {
-      if (mounted) {
-        setState(() {
-          _sentences = [AppLocalizations.of(context)!.noReadableTextMessage];
-          _currentSentenceIndex = 0;
-        });
-      }
-      return;
-    }
-
-    // Clean text
-    final cleanedText =
-        text
-            .replaceAll(RegExp(r'\s+'), ' ')
-            .replaceAll(RegExp(r'[^\w\s.,!?;:()-]'), '')
-            .trim(); // Enhanced sentence splitting with comprehensive abbreviation handling
-    final sentencePattern = RegExp(
-      r'(?<!\b(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|vs|etc|Inc|Corp|Ltd|Co|St|Ave|Blvd|Rd|U\.S|U\.K|Ph\.D|B\.A|M\.A|i\.e|e\.g|A\.M|P\.M|a\.m|p\.m|No|Vol|Fig|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|ft|in|lb|oz|min|hr|sec|mph|km|mi|kg|mg|cm|mm|yr|yrs|Mon|Tue|Wed|Thu|Fri|Sat|Sun)\.)(?<=[.!?])\s+(?=[A-Z0-9])|(?<=[.!?])\s*$',
-      multiLine: true,
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    final sentences = processSentencesFromText(
+      text,
+      emptyTextMessage: l10n.noReadableTextMessage,
+      noSentencesFoundMessage: l10n.noSentencesFoundMessage,
     );
-
-    final sentences =
-        cleanedText
-            .split(sentencePattern)
-            .map((s) => s.trim())
-            .where((s) => s.isNotEmpty && s.length > 5)
-            .toList();
-    if (mounted) {
-      setState(() {
-        _sentences =
-            sentences.isEmpty
-                ? [AppLocalizations.of(context)!.noSentencesFoundMessage]
-                : sentences;
-        _currentSentenceIndex = 0;
-        _updateTtsBuffer(); // Initialize rolling buffer
-      });
-    }
+    setState(() {
+      _sentences = sentences;
+      _currentSentenceIndex = 0;
+      _updateTtsBuffer(); // Initialize rolling buffer
+    });
   }
 
   // Rolling TTS Buffer Management
@@ -389,6 +392,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         await _speakCurrentSentence();
       }
     } catch (e) {
+      if (!mounted) return;
       _showSnackBar(
         AppLocalizations.of(context)!.ttsControlErrorMessage(e.toString()),
         isError: true,
@@ -406,6 +410,7 @@ class _BookContentScreenState extends State<BookContentScreen>
     try {
       await _tts!.speak(_sentences[_currentSentenceIndex]);
     } catch (e) {
+      if (!mounted) return;
       _showSnackBar(
         AppLocalizations.of(context)!.ttsSpeakErrorMessage(e.toString()),
         isError: true,
@@ -557,7 +562,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                     leading: Icon(Icons.bookmark, color: AppColors.primary),
                     title: Text(l10n.pageLabel(page)),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(Icons.delete, color: Theme.of(context).colorScheme.error),
                       onPressed: () {
                         if (mounted) {
                           setState(() {
@@ -604,6 +609,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         await _saveSnapshotToFile(byteData);
       }
     } catch (e) {
+      if (!mounted) return;
       _showSnackBar(
         AppLocalizations.of(context)!.snapshotFailedMessage(e.toString()),
         isError: true,
@@ -635,6 +641,7 @@ class _BookContentScreenState extends State<BookContentScreen>
       // Show success message with file location
       _showSnapshotSuccessDialog(snapshotFile.path);
     } catch (e) {
+      if (!mounted) return;
       _showSnackBar(
         AppLocalizations.of(context)!.snapshotSaveFailedMessage(e.toString()),
         isError: true,
@@ -650,7 +657,7 @@ class _BookContentScreenState extends State<BookContentScreen>
           (context) => AlertDialog(
             title: Row(
               children: [
-                Icon(Icons.check_circle, color: Colors.green, size: 24),
+                Icon(Icons.check_circle, color: AppColors.success, size: 24),
                 const SizedBox(width: 8),
                 Text(l10n.snapshotSavedTitle),
               ],
@@ -667,11 +674,11 @@ class _BookContentScreenState extends State<BookContentScreen>
                 ),
                 const SizedBox(height: 4),
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSpacing.sm),
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: Colors.grey[300]!),
+                    border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                   ),
                   child: Text(
                     filePath,
@@ -730,7 +737,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 ),
                 child: Text(l10n.goButton),
               ),
@@ -759,20 +766,58 @@ class _BookContentScreenState extends State<BookContentScreen>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isError ? Colors.red : AppColors.primary,
+        backgroundColor: isError ? Theme.of(context).colorScheme.error : AppColors.primary,
         behavior: SnackBarBehavior.floating,
         duration: Duration(seconds: isError ? 4 : 2),
       ),
     );
   }
   void _showTTSSettings() {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder: (context) => _buildTTSSettingsSheet(),
+      builder:
+          (context) => TtsSettingsSheet(
+            initialSpeechRate: _speechRate,
+            initialPitch: _pitch,
+            initialVolume: _volume,
+            title: l10n.ttsSettingsSheetTitle,
+            speechRateLabel: l10n.speechRateWithValue,
+            pitchLabel: l10n.pitchWithValue,
+            volumeLabel: l10n.volumeWithValue,
+            resetButtonLabel: l10n.resetToDefaultButton,
+            doneButtonLabel: l10n.doneButton,
+            onSpeechRateChanged: (value) {
+              _speechRate = value;
+              _tts?.setSpeechRate(value);
+              _settingsService.setTTSSpeechRate(value);
+            },
+            onPitchChanged: (value) {
+              _pitch = value;
+              _tts?.setPitch(value);
+              _settingsService.setTTSPitch(value);
+            },
+            onVolumeChanged: (value) {
+              _volume = value;
+              _tts?.setVolume(value);
+              _settingsService.setTTSVolume(value);
+            },
+            onReset: () {
+              _speechRate = 0.5;
+              _pitch = 1.0;
+              _volume = 0.8;
+              _tts?.setSpeechRate(_speechRate);
+              _tts?.setPitch(_pitch);
+              _tts?.setVolume(_volume);
+              _settingsService.setTTSSpeechRate(_speechRate);
+              _settingsService.setTTSPitch(_pitch);
+              _settingsService.setTTSVolume(_volume);
+            },
+          ),
     );
   }
 
@@ -804,11 +849,32 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
       appBar: _buildAppBar(),
       body: _buildBody(),
-      bottomNavigationBar: _buildBottomDocumentControls(),
+      bottomNavigationBar: BottomDocumentControls(
+        isPdfFile: _isPdfFile,
+        zoomLevel: _zoomLevel,
+        isBookmarked: _isBookmarked,
+        hasBookmarkedPages: _bookmarkedPages.isNotEmpty,
+        onZoomIn: _zoomIn,
+        onZoomOut: _zoomOut,
+        onResetZoom: _resetZoom,
+        onToggleBookmark: _toggleBookmark,
+        onShowBookmarks: _showBookmarks,
+        onTakeSnapshot: _takeSnapshot,
+        onGoToPage: _goToPage,
+        zoomInLabel: l10n.zoomInLabel,
+        zoomOutLabel: l10n.zoomOutLabel,
+        resetLabel: l10n.resetLabel,
+        bookmarkLabel: l10n.bookmarkLabel,
+        moreLabel: l10n.moreLabel,
+        bookmarksDialogTitle: l10n.bookmarksDialogTitle,
+        snapshotLabel: l10n.snapshotLabel,
+        goToPageLabel: l10n.goToPageLabel,
+      ),
     );
   }
 
@@ -830,7 +896,7 @@ class _BookContentScreenState extends State<BookContentScreen>
         ],
       ),
       backgroundColor: AppColors.primary,
-      foregroundColor: Colors.white,
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
       elevation: 0,
       actions: [
         if (_sentences.isNotEmpty)
@@ -937,8 +1003,30 @@ class _BookContentScreenState extends State<BookContentScreen>
         Expanded(child: _buildMainViewer()),
 
         // TTS Controls (always visible but disabled if no sentences)
-        _buildTTSControls(),
+        _buildTtsControlsBar(),
       ],
+    );
+  }
+
+  Widget _buildTtsControlsBar() {
+    final l10n = AppLocalizations.of(context)!;
+    return TtsControlsBar(
+      opacity: _controlsOpacity,
+      hasSentences: _sentences.isNotEmpty,
+      canGoPrevious: _currentSentenceIndex > 0,
+      canGoNext: _currentSentenceIndex < _sentences.length - 1,
+      isPlaying: _isPlaying,
+      isPaused: _isPaused,
+      previousTooltip: l10n.previousSentenceTooltip,
+      playTooltip: l10n.playTooltip,
+      pauseTooltip: l10n.pauseTooltip,
+      resumeTooltip: l10n.resumeTooltip,
+      stopTooltip: l10n.stopTooltip,
+      nextTooltip: l10n.nextSentenceTooltip,
+      onPrevious: _moveToPreviousSentence,
+      onTogglePlayPause: _togglePlayPause,
+      onStop: _stopReading,
+      onNext: _moveToNextSentence,
     );
   }
 
@@ -959,7 +1047,7 @@ class _BookContentScreenState extends State<BookContentScreen>
           const SizedBox(height: 8),
           Text(
             l10n.initializingViewerMessage,
-            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ],
       ),
@@ -970,11 +1058,15 @@ class _BookContentScreenState extends State<BookContentScreen>
     final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
+            Icon(
+              Icons.error_outline,
+              size: 64,
+              color: Theme.of(context).colorScheme.error,
+            ),
             const SizedBox(height: 16),
             Text(
               l10n.failedToLoadContentTitle,
@@ -984,7 +1076,7 @@ class _BookContentScreenState extends State<BookContentScreen>
             Text(
               _errorMessage ?? l10n.unknownErrorMessage,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
@@ -993,7 +1085,7 @@ class _BookContentScreenState extends State<BookContentScreen>
               label: Text(l10n.commonRetry),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ],
@@ -1004,9 +1096,9 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   Widget _buildMainViewer() {
     return Container(
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.all(AppSpacing.sm),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -1041,7 +1133,7 @@ class _BookContentScreenState extends State<BookContentScreen>
 
   Widget _buildTextViewer() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppSpacing.md),
       child: Column(
         children: [
           for (int i = 0; i < _sentences.length; i++)
@@ -1057,8 +1149,8 @@ class _BookContentScreenState extends State<BookContentScreen>
                 }
               },
               child: Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                padding: const EdgeInsets.all(AppSpacing.sm2),
                 decoration: BoxDecoration(
                   color:
                       i == _currentSentenceIndex
@@ -1073,17 +1165,19 @@ class _BookContentScreenState extends State<BookContentScreen>
                           : null,
                 ),                child: Text(
                   _sentences[i],
-                  style: TextStyle(
-                    fontSize: _readingFontSize,
-                    height: _readingLineHeight,
-                    color:
-                        i == _currentSentenceIndex
-                            ? AppColors.primary
-                            : Colors.black87,
-                    fontWeight:
-                        i == _currentSentenceIndex
-                            ? FontWeight.w600
-                            : FontWeight.normal,
+                  style: _readingTextStyle(
+                    TextStyle(
+                      fontSize: _readingFontSize,
+                      height: _readingLineHeight,
+                      color:
+                          i == _currentSentenceIndex
+                              ? AppColors.primary
+                              : Theme.of(context).colorScheme.onSurface,
+                      fontWeight:
+                          i == _currentSentenceIndex
+                              ? FontWeight.w600
+                              : FontWeight.normal,
+                    ),
                   ),
                 ),
               ),
@@ -1097,7 +1191,7 @@ class _BookContentScreenState extends State<BookContentScreen>
     final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.1),
@@ -1111,10 +1205,10 @@ class _BookContentScreenState extends State<BookContentScreen>
           // Header
           Container(
             height: 40,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.1),
-              border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
+              border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.outlineVariant)),
             ),
             child: Row(
               children: [
@@ -1130,7 +1224,7 @@ class _BookContentScreenState extends State<BookContentScreen>
                 const Spacer(),
                 Text(
                   '${_currentSentenceIndex + 1} / ${_sentences.length}',
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
               ],
             ),
@@ -1143,11 +1237,11 @@ class _BookContentScreenState extends State<BookContentScreen>
                     ? Center(
                       child: Text(
                         l10n.noSentencesAvailableMessage,
-                        style: const TextStyle(color: Colors.grey, fontSize: 14),
+                        style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, fontSize: 14),
                       ),
                     )
                     : ListView.builder(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(AppSpacing.sm2),
                       itemCount: _ttsBuffer.length,
                       itemBuilder: (context, index) {
                         final sentence = _ttsBuffer[index];
@@ -1166,7 +1260,7 @@ class _BookContentScreenState extends State<BookContentScreen>
 
                         if (isCompleted) {
                           label = l10n.sentenceStatusRead;
-                          color = Colors.green;
+                          color = AppColors.success;
                           statusIcon = Icons.check_circle;
                         } else if (isHighlighted) {
                           label = l10n.sentenceStatusCurrent;
@@ -1179,28 +1273,28 @@ class _BookContentScreenState extends State<BookContentScreen>
                                   : Icons.radio_button_unchecked;
                         } else {
                           label = l10n.sentenceStatusNext;
-                          color = Colors.grey;
+                          color = Theme.of(context).colorScheme.onSurfaceVariant;
                           statusIcon = Icons.radio_button_unchecked;
                         }
 
                         return Container(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          padding: const EdgeInsets.all(12),
+                          margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                          padding: const EdgeInsets.all(AppSpacing.sm2),
                           decoration: BoxDecoration(
                             color:
                                 isHighlighted
                                     ? color.withValues(alpha: 0.1)
                                     : isCompleted
-                                    ? Colors.green.withValues(alpha: 0.05)
-                                    : Colors.grey.withValues(alpha: 0.02),
+                                    ? AppColors.success.withValues(alpha: 0.05)
+                                    : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.02),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
                               color:
                                   isHighlighted
                                       ? color.withValues(alpha: 0.4)
                                       : isCompleted
-                                      ? Colors.green.withValues(alpha: 0.2)
-                                      : Colors.grey.withValues(alpha: 0.2),
+                                      ? AppColors.success.withValues(alpha: 0.2)
+                                      : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
                               width: isHighlighted ? 2 : 1,
                             ),
                           ),
@@ -1249,19 +1343,21 @@ class _BookContentScreenState extends State<BookContentScreen>
                               GestureDetector(
                                 onTap: isHighlighted ? _togglePlayPause : null,                                child: Text(
                                   sentence,
-                                  style: TextStyle(
-                                    fontSize: isHighlighted ? _readingFontSize + 1 : _readingFontSize - 1,
-                                    color:
-                                        isCompleted
-                                            ? Colors.green.shade700
-                                            : isHighlighted
-                                            ? color
-                                            : Colors.grey.shade600,
-                                    fontWeight:
-                                        isHighlighted
-                                            ? FontWeight.w500
-                                            : FontWeight.normal,
-                                    height: _readingLineHeight,
+                                  style: _readingTextStyle(
+                                    TextStyle(
+                                      fontSize: isHighlighted ? _readingFontSize + 1 : _readingFontSize - 1,
+                                      color:
+                                          isCompleted
+                                              ? AppColors.success
+                                              : isHighlighted
+                                              ? color
+                                              : Theme.of(context).colorScheme.onSurfaceVariant,
+                                      fontWeight:
+                                          isHighlighted
+                                              ? FontWeight.w500
+                                              : FontWeight.normal,
+                                      height: _readingLineHeight,
+                                    ),
                                   ),
                                   maxLines: isHighlighted ? null : 2,
                                   overflow:
@@ -1281,401 +1377,4 @@ class _BookContentScreenState extends State<BookContentScreen>
     );
   }
 
-  Widget _buildTTSControls() {
-    final l10n = AppLocalizations.of(context)!;
-    return FadeTransition(
-      opacity: _controlsOpacity,
-      child: Container(
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 4,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _buildTTSButton(
-              icon: Icons.skip_previous,
-              onPressed:
-                  _sentences.isNotEmpty && _currentSentenceIndex > 0
-                      ? _moveToPreviousSentence
-                      : null,
-              tooltip: l10n.previousSentenceTooltip,
-            ),
-            _buildTTSButton(
-              icon:
-                  _isPlaying
-                      ? (_isPaused ? Icons.play_arrow : Icons.pause)
-                      : Icons.play_arrow,
-              onPressed: _sentences.isNotEmpty ? _togglePlayPause : null,
-              tooltip:
-                  _isPlaying
-                      ? (_isPaused ? l10n.resumeTooltip : l10n.pauseTooltip)
-                      : l10n.playTooltip,
-              isPrimary: true,
-            ),
-            _buildTTSButton(
-              icon: Icons.stop,
-              onPressed: _isPlaying ? _stopReading : null,
-              tooltip: l10n.stopTooltip,
-            ),
-            _buildTTSButton(
-              icon: Icons.skip_next,
-              onPressed:
-                  _sentences.isNotEmpty &&
-                          _currentSentenceIndex < _sentences.length - 1
-                      ? _moveToNextSentence
-                      : null,
-              tooltip: l10n.nextSentenceTooltip,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTTSButton({
-    required IconData icon,
-    required VoidCallback? onPressed,
-    required String tooltip,
-    bool isPrimary = false,
-  }) {
-    return Tooltip(
-      message: tooltip,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(24),
-          child: Container(
-            width: isPrimary ? 56 : 48,
-            height: isPrimary ? 56 : 48,
-            decoration: BoxDecoration(
-              color:
-                  isPrimary
-                      ? AppColors.primary
-                      : (onPressed != null
-                          ? AppColors.primary.withValues(alpha: 0.1)
-                          : Colors.grey[200]),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              size: isPrimary ? 28 : 24,
-              color:
-                  isPrimary
-                      ? Colors.white
-                      : (onPressed != null
-                          ? AppColors.primary
-                          : Colors.grey[400]),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTTSSettingsSheet() {
-    final l10n = AppLocalizations.of(context)!;
-    return StatefulBuilder(
-      builder: (context, setModalState) {
-        return Container(
-          height: 400,
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.settings_voice, color: AppColors.primary),
-                  const SizedBox(width: 8),
-                  Center(
-                    child: Text(
-                      l10n.ttsSettingsSheetTitle,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              Text(l10n.speechRateWithValue(_speechRate.toStringAsFixed(1))),
-              Slider(
-                value: _speechRate,
-                min: 0.1,
-                max: 1.0,
-                divisions: 9,
-                activeColor: AppColors.primary,                onChanged: (value) {
-                  setModalState(() {
-                    _speechRate = value;
-                  });
-                  _tts?.setSpeechRate(value);
-                  _settingsService.setTTSSpeechRate(value);
-                },
-              ),
-
-              const SizedBox(height: 16),
-              Text(l10n.pitchWithValue(_pitch.toStringAsFixed(1))),
-              Slider(
-                value: _pitch,
-                min: 0.5,
-                max: 2.0,
-                divisions: 15,
-                activeColor: AppColors.primary,                onChanged: (value) {
-                  setModalState(() {
-                    _pitch = value;
-                  });
-                  _tts?.setPitch(value);
-                  _settingsService.setTTSPitch(value);
-                },
-              ),
-
-              const SizedBox(height: 16),
-              Text(l10n.volumeWithValue((_volume * 100).round().toString())),
-              Slider(
-                value: _volume,
-                min: 0.0,
-                max: 1.0,
-                divisions: 10,
-                activeColor: AppColors.primary,                onChanged: (value) {
-                  setModalState(() {
-                    _volume = value;
-                  });
-                  _tts?.setVolume(value);
-                  _settingsService.setTTSVolume(value);
-                },
-              ),
-
-              const Spacer(),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(                      onPressed: () {
-                        setModalState(() {
-                          _speechRate = 0.5;
-                          _pitch = 1.0;
-                          _volume = 0.8;
-                        });
-                        _tts?.setSpeechRate(_speechRate);
-                        _tts?.setPitch(_pitch);
-                        _tts?.setVolume(_volume);
-                        // Save settings
-                        _settingsService.setTTSSpeechRate(_speechRate);
-                        _settingsService.setTTSPitch(_pitch);
-                        _settingsService.setTTSVolume(_volume);
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: AppColors.primary, width: 1.5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        foregroundColor: AppColors.primary,
-                      ),
-                      child: Text(l10n.resetToDefaultButton),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: Colors.white,
-                      ),
-                      child: Text(l10n.doneButton),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildBottomDocumentControls() {
-    final l10n = AppLocalizations.of(context)!;
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            if (_isPdfFile) ...[
-              _buildBottomButton(
-                icon: Icons.zoom_in,
-                label: l10n.zoomInLabel,
-                onTap: _zoomLevel < 3.0 ? _zoomIn : null,
-              ),
-              _buildBottomButton(
-                icon: Icons.zoom_out,
-                label: l10n.zoomOutLabel,
-                onTap: _zoomLevel > 0.5 ? _zoomOut : null,
-              ),
-              _buildBottomButton(
-                icon: Icons.center_focus_strong,
-                label: l10n.resetLabel,
-                onTap: _zoomLevel != 1.0 ? _resetZoom : null,
-              ),
-            ],
-            _buildBottomButton(
-              icon: _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-              label: l10n.bookmarkLabel,
-              onTap: _toggleBookmark,
-              isActive: _isBookmarked,
-            ),
-            PopupMenuButton<String>(
-              onSelected: (value) {
-                switch (value) {
-                  case 'bookmarks':
-                    _showBookmarks();
-                    break;
-                  case 'snapshot':
-                    _takeSnapshot();
-                    break;
-                  case 'go_to_page':
-                    if (_isPdfFile) _goToPage();
-                    break;
-                }
-              },
-              offset: const Offset(0, -20), // Show above the button
-              constraints: const BoxConstraints(maxWidth: 150, minWidth: 120),
-              itemBuilder:
-                  (context) => [
-                    if (_bookmarkedPages.isNotEmpty)
-                      PopupMenuItem(
-                        value: 'bookmarks',
-                        height: 40,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.bookmarks, size: 18),
-                            SizedBox(width: 6),
-                            Flexible(
-                              child: Text(
-                                l10n.bookmarksDialogTitle,
-                                style: TextStyle(fontSize: 13),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    PopupMenuItem(
-                      value: 'snapshot',
-                      height: 40,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.camera_alt_outlined, size: 18),
-                          SizedBox(width: 6),
-                          Flexible(
-                            child: Text(
-                              l10n.snapshotLabel,
-                              style: TextStyle(fontSize: 13),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (_isPdfFile)
-                      PopupMenuItem(
-                        value: 'go_to_page',
-                        height: 40,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.my_location, size: 18),
-                            SizedBox(width: 6),
-                            Flexible(
-                              child: Text(
-                                l10n.goToPageLabel,
-                                style: TextStyle(fontSize: 13),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-              child: _buildBottomButton(
-                icon: Icons.more_vert,
-                label: l10n.moreLabel,
-                onTap: null, // Let PopupMenuButton handle the tap
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback? onTap,
-    bool isActive = false,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        decoration: BoxDecoration(
-          color: isActive ? AppColors.primary.withValues(alpha: 0.1) : null,
-          borderRadius: BorderRadius.circular(8),
-          border:
-              isActive
-                  ? Border.all(color: AppColors.primary.withValues(alpha: 0.3))
-                  : null,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: 20,
-              color:
-                  onTap != null
-                      ? (isActive ? AppColors.primary : Colors.grey[700])
-                      : Colors.grey[400],
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                color:
-                    onTap != null
-                        ? (isActive ? AppColors.primary : Colors.grey[700])
-                        : Colors.grey[400],
-                fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

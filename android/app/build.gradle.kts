@@ -23,7 +23,7 @@ if (hasReleaseSigning) {
 
 android {
     namespace = "com.example.thebookread"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = "27.0.12077973"
 
     compileOptions {

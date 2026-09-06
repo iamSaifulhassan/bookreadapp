@@ -81,7 +81,7 @@ class _SignupFormState extends State<SignupForm> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Card(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   elevation: 8,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
@@ -277,8 +277,8 @@ class _SignupFormState extends State<SignupForm> {
                               },
                               child: Text(
                                 l10n.alreadyHaveAccountSignInPrompt,
-                                style: const TextStyle(
-                                  color: Colors.blueAccent,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
                                   fontSize: 14.0,
                                   decoration: TextDecoration.underline,
                                 ),

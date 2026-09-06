@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import '../Bookcontentreading/book_content_screen.dart';
+import '../book_content/book_content_screen.dart';
 import '../../l10n/generated/app_localizations.dart';
 
 // BLoC State
@@ -149,7 +149,7 @@ class DownloadsScreen extends StatelessWidget {
         key: const ValueKey('error'),
         child: Text(
           l10n.errorLoadingDownloads(state.message),
-          style: const TextStyle(color: Colors.red),
+          style: TextStyle(color: Theme.of(context).colorScheme.error),
         ),
       );
     }

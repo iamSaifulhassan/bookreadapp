@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-import '../../themes/AppColors.dart';
+import '../../themes/app_colors.dart';
 import '../../services/subscription_service.dart';
 import '../../l10n/generated/app_localizations.dart';
 

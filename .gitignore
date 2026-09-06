@@ -48,3 +48,6 @@ app.*.map.json
 /android/key.properties
 *.jks
 *.keystore
+
+# Graphify-generated codebase knowledge graph (regenerate with `graphify update .`)
+/graphify-out/

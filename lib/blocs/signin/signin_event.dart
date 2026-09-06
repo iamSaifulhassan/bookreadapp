@@ -5,3 +5,5 @@ class SigninSubmitted extends SigninEvent {
   final String password;
   SigninSubmitted({required this.email, required this.password});
 }
+
+class SigninGoogleSubmitted extends SigninEvent {}

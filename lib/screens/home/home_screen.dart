@@ -1,7 +1,7 @@
 import '../../services/app_logger.dart';
 import 'package:bookread/widgets/custom_drawer.dart';
 import 'package:bookread/widgets/custom_text_field.dart';
-import 'package:bookread/themes/AppColors.dart';
+import 'package:bookread/themes/app_spacing.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,9 +9,9 @@ import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../Bookcontentreading/book_content_screen.dart';
 import '../../services/streak_service.dart';
-import '../../widgets/streak_widget.dart';
+import '../../services/storage_permission_service.dart';
+import 'widgets/book_file_card.dart';
 import '../../l10n/generated/app_localizations.dart';
 
 /// Lightweight value type for a book entry shown in the library — either a
@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Set<String> favouritePaths = {};
   Set<String> readLaterPaths = {};
   Set<String> completedPaths = {};
+  final _permissionService = StoragePermissionService();
   @override
   void initState() {
     super.initState();
@@ -68,8 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
       _permissionDenied = false;
     });
 
+    // A storage-permission request launches a new Android Activity (the
+    // "All files access" system settings screen). Firing that immediately
+    // after another activity-launching flow returns (e.g. the Google
+    // Sign-In account picker) can race the still-settling activity result
+    // and leave the permission callback stuck, hanging this screen on its
+    // loading spinner forever. Give the previous transition a moment to
+    // finish first.
+    await Future.delayed(const Duration(milliseconds: 400));
+
     // Request appropriate storage permissions based on Android version
-    bool hasPermission = await _requestStoragePermission();
+    bool hasPermission = await _permissionService.requestStoragePermission();
 
     if (!hasPermission) {
       setState(() {
@@ -84,36 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
     await _loadReadLater();
     await _loadCompleted();
     setState(() => _loading = false);
-  }
-
-  Future<bool> _requestStoragePermission() async {
-    // Check Android version and request appropriate permissions
-    try {
-      // For Android 11+ (API 30+), we need MANAGE_EXTERNAL_STORAGE
-      if (await Permission.manageExternalStorage.isDenied) {
-        final status = await Permission.manageExternalStorage.request();
-        if (status.isGranted) return true;
-      }
-
-      // For Android 13+ (API 33+), request media permissions
-      if (await Permission.photos.isDenied) {
-        await Permission.photos.request();
-      }
-
-      // Fallback to traditional storage permission
-      final storageStatus = await Permission.storage.request();
-      if (storageStatus.isGranted) return true;
-
-      // Check if any permission is granted
-      return await Permission.manageExternalStorage.isGranted ||
-          await Permission.storage.isGranted ||
-          await Permission.photos.isGranted;
-    } catch (e) {
-      AppLogger.log('Permission error: $e');
-      // Fallback to basic storage permission
-      final status = await Permission.storage.request();
-      return status.isGranted;
-    }
   }
 
   Future<void> _loadFavourites() async {
@@ -198,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _shareFile(String? path) async {
     if (path == null) return;
-    await Share.shareXFiles([XFile(path)]);
+    await SharePlus.instance.share(ShareParams(files: [XFile(path)]));
   }
 
   Future<void> _loadSavedFolderPath() async {
@@ -387,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               Text(
                 l10n.loadingYourBooks,
-                style: const TextStyle(fontSize: 16, color: Colors.grey),
+                style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onSurfaceVariant),
               ),
             ],
           ),
@@ -403,31 +383,31 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(AppSpacing.lg),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.folder_off_outlined,
                   size: 80,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
                 const SizedBox(height: 24),
                 Text(
                   l10n.storageAccessRequiredTitle,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 Text(
                   l10n.storageAccessRequiredBody,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
-                    color: Colors.grey,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                     height: 1.5,
                   ),
                   textAlign: TextAlign.center,
@@ -435,7 +415,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 12),
                 Text(
                   l10n.storageAccessRequiredHint,
-                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurfaceVariant),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -495,7 +475,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(l10n.myBooksTitle),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0),
+            padding: const EdgeInsets.only(right: AppSpacing.sm),
             child: IconButton(
               icon: Icon(_isGrid ? Icons.view_list : Icons.grid_view),
               tooltip:
@@ -518,7 +498,7 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(AppSpacing.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -530,7 +510,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
                           child: CustomTextField(
                             controller: _dirController!,
                             label: l10n.booksFolderPathLabel,
@@ -548,7 +528,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 56,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
                             alignment: Alignment.center,
                             textStyle: const TextStyle(fontSize: 15),
                           ),
@@ -582,9 +562,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       horizontal: 16,
                                                     ),
                                               ),
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 fontSize: 15,
-                                                color: Colors.blueGrey,
+                                                color: Theme.of(context).colorScheme.onSurfaceVariant,
                                               ),
                                               autofocus: true,
                                             ),
@@ -597,7 +577,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   Theme.of(
                                                     context,
                                                   ).iconTheme.color ??
-                                                  Colors.grey[700],
+                                                  Theme.of(context).colorScheme.onSurfaceVariant,
                                             ),
                                             tooltip: l10n.browseForFolderTooltip,
                                             onPressed: () async {
@@ -639,8 +619,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                             newPath != _dirController?.text) {
                                           _dirController?.text = newPath;
                                           await _onChangeDir();
+                                          if (!context.mounted) return;
                                           FocusScope.of(context).unfocus();
                                         }
+                                        if (!context.mounted) return;
                                         Navigator.of(context).pop();
                                       },
                                       child: Text(l10n.commonChange),
@@ -672,7 +654,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           else if (_isGrid)
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm2, vertical: AppSpacing.sm),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   final file = displayedFiles[index];
@@ -683,7 +665,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 2,
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
-                  childAspectRatio: 0.72,
+                  // Taller than 0.72: a 2-line book title plus the cover
+                  // image, extension label, and 3-icon action row no longer
+                  // fit at the old ratio, causing a bottom overflow.
+                  childAspectRatio: 0.62,
                 ),
               ),
             )
@@ -711,399 +696,56 @@ class _HomeScreenState extends State<HomeScreen> {
     int? index,
     bool isGrid = false,
   ]) {
-    return _buildFileCard(
-      BookFile(name: file.name, path: file.path, extension: ext),
-      index,
-      isGrid,
+    final bookFile = BookFile(name: file.name, path: file.path, extension: ext);
+    return BookFileCard(
+      file: bookFile,
+      index: index,
+      isGrid: isGrid,
+      isFavourite: favouritePaths.contains(bookFile.path),
+      isReadLater: readLaterPaths.contains(bookFile.path),
+      isCompleted: completedPaths.contains(bookFile.path),
+      fileDate: _getFileDate(bookFile.path),
+      onToggleFavourite: () => _toggleFavourite(bookFile.path),
+      onToggleReadLater: () => _toggleReadLater(bookFile.path),
+      onToggleCompleted: () => _toggleCompleted(bookFile.path),
+      onShare: () => _shareFile(bookFile.path),
+      onDelete:
+          (isGrid || index == null) ? null : () => _deleteFileAt(index),
     );
   }
 
-  Widget _buildFileCard(BookFile file, [int? index, bool isGrid = false]) {
-    final l10n = AppLocalizations.of(context)!;
-    Widget cover;
-    if (file.extension == 'pdf' && file.path != null) {
-      cover = AnimatedSwitcher(
-        duration: const Duration(milliseconds: 400),
-        child: Image.asset(
-          'assets/images/applogo.png',
-          key: ValueKey(file.path),
-          width: isGrid ? 80 : 48,
-          height: isGrid ? 110 : 64,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else if (file.extension == 'txt') {
-      cover = Icon(
-        Icons.description,
-        size: isGrid ? 60 : 48,
-        color: Colors.blueGrey,
-      );
+  Future<void> _deleteFileAt(int index) async {
+    if (index >= customBooks.length) {
+      // Remove from picked files list
+      setState(() {
+        final removed = pickedBookFiles.removeAt(index - customBooks.length);
+        _listKey.currentState?.removeItem(
+          index,
+          (context, animation) => SizeTransition(
+            sizeFactor: animation,
+            child: _buildFileCardWithExt(
+              removed,
+              removed.extension ?? _getExt(File(removed.path ?? '')),
+            ),
+          ),
+          duration: const Duration(milliseconds: 300),
+        );
+      });
+      await _savePickedBookFiles();
     } else {
-      cover = AnimatedSwitcher(
-        duration: const Duration(milliseconds: 400),
-        child: Image.asset(
-          'assets/images/applogo.png',
-          key: ValueKey(file.path),
-          width: isGrid ? 80 : 48,
-          height: isGrid ? 110 : 64,
-          fit: BoxFit.cover,
-        ),
-      );
+      // Remove from custom books list (don't delete physical file)
+      setState(() {
+        final removed = customBooks.removeAt(index);
+        _listKey.currentState?.removeItem(
+          index,
+          (context, animation) => SizeTransition(
+            sizeFactor: animation,
+            child: _buildFileCardWithExt(_toBookFile(removed), _getExt(removed)),
+          ),
+          duration: const Duration(milliseconds: 300),
+        );
+      });
     }
-    if (isGrid) {
-      return GestureDetector(
-        onTap: () {
-          if (file.path != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder:
-                    (context) => BookContentScreen(
-                      filePath: file.path!,
-                      fileName: file.name,
-                    ),
-              ),
-            );
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: AspectRatio(
-            aspectRatio: 0.68,
-            child: Card(
-              elevation: 2,
-              margin: EdgeInsets.zero,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 12,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: cover,
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (file.path != null)
-                          StreakWidget(
-                            streakCount: StreakService().getCurrentStreakCount(
-                              file.path!,
-                            ),
-                            isAboutToExpire: StreakService()
-                                .isStreakAboutToExpire(file.path!),
-                            isCompleted: completedPaths.contains(file.path),
-                            iconSize: 16,
-                            fontSize: 12,
-                          ),
-                        if (file.path != null &&
-                            StreakService().getCurrentStreakCount(file.path!) >
-                                0)
-                          const SizedBox(width: 4),
-                        Expanded(
-                          child: Text(
-                            file.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      file.extension?.toUpperCase() ?? '',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: AppColors.textDisabled,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () => _toggleFavourite(file.path),
-                          child: Icon(
-                            favouritePaths.contains(file.path)
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            size: 18,
-                            color:
-                                favouritePaths.contains(file.path)
-                                    ? AppColors.error
-                                    : AppColors.textDisabled,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => _toggleReadLater(file.path),
-                          child: Icon(
-                            readLaterPaths.contains(file.path)
-                                ? Icons.bookmark
-                                : Icons.bookmark_border,
-                            size: 18,
-                            color:
-                                readLaterPaths.contains(file.path)
-                                    ? AppColors.secondary
-                                    : AppColors.textDisabled,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => _toggleCompleted(file.path),
-                          child: Icon(
-                            completedPaths.contains(file.path)
-                                ? Icons.check_circle
-                                : Icons.check_circle_outline,
-                            size: 18,
-                            color:
-                                completedPaths.contains(file.path)
-                                    ? AppColors.success
-                                    : AppColors.textDisabled,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => _shareFile(file.path),
-                          child: Icon(
-                            Icons.share,
-                            size: 18,
-                            color: AppColors.textDisabled,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    } // <-- This closes the if (isGrid) block
-
-    // --- LIST MODE ---
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: Card(
-        elevation: 3,
-        margin: const EdgeInsets.only(bottom: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(14),
-          onTap: () {
-            if (file.path != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder:
-                      (context) => BookContentScreen(
-                        filePath: file.path!,
-                        fileName: file.name,
-                      ),
-                ),
-              );
-            }
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(borderRadius: BorderRadius.circular(8), child: cover),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          if (file.path != null)
-                            StreakWidget(
-                              streakCount: StreakService()
-                                  .getCurrentStreakCount(file.path!),
-                              isAboutToExpire: StreakService()
-                                  .isStreakAboutToExpire(file.path!),
-                              isCompleted: completedPaths.contains(file.path),
-                              iconSize: 18,
-                              fontSize: 14,
-                            ),
-                          if (file.path != null &&
-                              StreakService().getCurrentStreakCount(
-                                    file.path!,
-                                  ) >
-                                  0)
-                            const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              file.name,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.inputFill,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: AppColors.border),
-                            ),
-                            child: Text(
-                              file.extension?.toUpperCase() ?? '',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        _getFileDate(file.path),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.textDisabled,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              readLaterPaths.contains(file.path)
-                                  ? Icons.bookmark
-                                  : Icons.bookmark_border,
-                              size: 20,
-                              color:
-                                  readLaterPaths.contains(file.path)
-                                      ? AppColors.secondary
-                                      : null,
-                            ),
-                            tooltip: l10n.readLaterTooltip,
-                            onPressed: () => _toggleReadLater(file.path),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.share, size: 20),
-                            tooltip: l10n.commonShare,
-                            onPressed: () => _shareFile(file.path),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.delete_outline, size: 20),
-                            tooltip: l10n.removeFromListTooltip,
-                            onPressed: () async {
-                              if (file.path != null && index != null) {
-                                final isPicked = index >= (customBooks.length);
-                                if (isPicked) {
-                                  // Remove from picked files list
-                                  setState(() {
-                                    final removed = pickedBookFiles.removeAt(
-                                      index - customBooks.length,
-                                    );
-                                    _listKey.currentState?.removeItem(
-                                      index,
-                                      (context, animation) => SizeTransition(
-                                        sizeFactor: animation,
-                                        child: _buildFileCardWithExt(
-                                          removed,
-                                          removed.extension ??
-                                              _getExt(File(removed.path ?? '')),
-                                        ),
-                                      ),
-                                      duration: const Duration(
-                                        milliseconds: 300,
-                                      ),
-                                    );
-                                  });
-                                  await _savePickedBookFiles();
-                                } else {
-                                  // Remove from custom books list (don't delete physical file)
-                                  setState(() {
-                                    final removed = customBooks.removeAt(index);
-                                    _listKey.currentState?.removeItem(
-                                      index,
-                                      (context, animation) => SizeTransition(
-                                        sizeFactor: animation,
-                                        child: _buildFileCardWithExt(
-                                          _toBookFile(removed),
-                                          _getExt(removed),
-                                        ),
-                                      ),
-                                      duration: const Duration(
-                                        milliseconds: 300,
-                                      ),
-                                    );
-                                  });
-                                }
-                              }
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              favouritePaths.contains(file.path)
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              size: 20,
-                              color:
-                                  favouritePaths.contains(file.path)
-                                      ? AppColors.error
-                                      : null,
-                            ),
-                            tooltip:
-                                favouritePaths.contains(file.path)
-                                    ? l10n.removeFromFavouritesTooltip
-                                    : l10n.addToFavouritesTooltip,
-                            onPressed: () => _toggleFavourite(file.path),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              completedPaths.contains(file.path)
-                                  ? Icons.check_circle
-                                  : Icons.check_circle_outline,
-                              size: 20,
-                              color:
-                                  completedPaths.contains(file.path)
-                                      ? AppColors.success
-                                      : null,
-                            ),
-                            tooltip:
-                                completedPaths.contains(file.path)
-                                    ? l10n.removeFromCompletedTooltip
-                                    : l10n.markAsCompletedTooltip,
-                            onPressed: () => _toggleCompleted(file.path),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   Future<void> _pickFiles() async {
